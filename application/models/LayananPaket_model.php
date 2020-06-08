@@ -23,7 +23,7 @@ class LayananPaket_model extends CI_Model {
 	{
 		$dataUser = $this->mm->getDataUser();
 		$data = [
-			'layanan_paket' => ucwords(strtolower($this->input->post('layanan_paket', true))),
+			'layanan_paket' => $this->input->post('layanan_paket', true),
 			'harga_layanan_paket' => $this->input->post('harga_layanan_paket', true),
 			'durasi_pengiriman' => $this->input->post('durasi_pengiriman', true)
 		];
@@ -38,7 +38,7 @@ class LayananPaket_model extends CI_Model {
 	{
 		$dataUser = $this->mm->getDataUser();
 		$data = [
-			'layanan_paket' => ucwords(strtolower($this->input->post('layanan_paket', true))),
+			'layanan_paket' => $this->input->post('layanan_paket', true),
 			'harga_layanan_paket' => $this->input->post('harga_layanan_paket', true),
 			'durasi_pengiriman' => $this->input->post('durasi_pengiriman', true)
 		];

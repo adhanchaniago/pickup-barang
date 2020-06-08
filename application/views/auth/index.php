@@ -55,6 +55,18 @@
 		<div class="row py-5">
 			<div class="col-lg-6 text-white">
 				<h2>Buat Pesanan Anda</h2>
+				<div class="row my-2">
+			        <div class="col-lg-12">
+			          <?php if (validation_errors()): ?>
+			            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+			              <strong>Gagal!</strong> <?= validation_errors(); ?>
+			              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			                <span aria-hidden="true">&times;</span>
+			              </button>
+			            </div>
+			          <?php endif ?>
+			        </div>
+			      </div>
 				<form action="<?= base_url('auth/pesanan'); ?>" method="post">
 					<div class="row">
 						<div class="col-lg">

@@ -140,6 +140,15 @@
                     </li>
                   </ul>
                 </li>
+                <div class="dropdown-divider"></div>
+                <li class="nav-item">
+                  <a href="<?= base_url('log'); ?>" class="nav-link">
+                    <i class="nav-icon fas fa-shipping-fast"></i>
+                    <p>
+                      Log
+                    </p>
+                  </a>
+                </li>
               </ul>
             </nav>
             <!-- /.sidebar-menu -->
