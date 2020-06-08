@@ -7,9 +7,11 @@
         <div class="col-sm header-title">
           <h1 class="m-0 text-dark">Daftar Pengguna</h1>
         </div><!-- /.col -->
-        <div class="col-sm header-button">
-          <button type="button" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Pengguna</button>
-        </div>
+        <?php if ($dataUser['id_jabatan'] == '1'): ?>
+          <div class="col-sm header-button">
+            <button type="button" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Pengguna</button>
+          </div>
+        <?php endif ?>
       </div><!-- /.row -->
       <div class="row my-2">
         <div class="col-lg-6">
