@@ -102,14 +102,6 @@
                     </p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/widgets.html" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                      Widgets
-                    </p>
-                  </a>
-                </li>
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
@@ -120,15 +112,15 @@
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="pages/layout/top-nav.html" class="nav-link">
+                      <a href="<?= base_url('jabatan'); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Top Navigation</p>
+                        <p>Jabatan</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <a href="<?= base_url('user'); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Top Navigationar</p>
+                        <p>Pengguna</p>
                       </a>
                     </li>
                   </ul>

@@ -11,6 +11,7 @@ class Admin_model extends CI_Model {
 	public function editProfile()
 	{
 		$id_user = $this->session->userdata('id_user');
+		$dataUser = $this->mm->getDataUser();
 
 		$img_profile = $_FILES['img_profile']['name'];
 		if ($img_profile) {
@@ -28,14 +29,14 @@ class Admin_model extends CI_Model {
 		}
 		
 		$data = [
-			'nama_lengkap' => $this->input->post('nama_lengkap', true),
+			'nama_lengkap' => ucwords(strtolower($this->input->post('nama_lengkap', true))),
 			'id_jabatan' => $this->input->post('id_jabatan', true)
 		];
 
 		$this->db->where('user.id_user', $id_user);
 		$this->db->update('user', $data);
-		$this->session->set_flashdata('message-success', 'Pengguna ' . $user['username'] . ' berhasil diubah');
-		$this->mm->createLog('Pengguna ' . $user['username'] . ' berhasil diubah', $id_user);
+		$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil diubah');
+		$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil diubah', $id_user);
 		redirect('admin/profile');
 	}
 
