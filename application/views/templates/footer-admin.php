@@ -1,3 +1,14 @@
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2020 By Andri Firman Saputra.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+              <b>Version</b> 1.0.0
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
     <div class="flashdata" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
     <div class="flashdata-success" data-flashdata="<?= $this->session->flashdata('message-success'); ?>"></div>
     <div class="flashdata-failed" data-flashdata="<?= $this->session->flashdata('message-failed'); ?>"></div>
@@ -14,6 +25,9 @@
     <script src="<?= base_url('assets/vendor/fontawesome-free-5.13.0/js/all.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/select2-4.0.13/select2.full.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/sweetalert2-9.14.2/sweetalert2.all.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/vendor/overlayScrollbars-1.11.0/js/jquery.overlayScrollbars.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/vendor/adminlte-3.0.5/adminlte.min.js'); ?>"></script>
+
     
     <!-- My JS -->
     <script src="<?= base_url('assets/js/script.js'); ?>"></script>

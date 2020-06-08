@@ -26,7 +26,7 @@ class Auth_model extends CI_Model {
 				];
 				$this->mm->createLog('Pengguna ' . $data['username'] . ' berhasil login' , $data['id_user']);
 				$this->session->set_userdata($data);
-				redirect('auth');
+				redirect('admin');
 			} else {
 				$this->session->set_flashdata('message-failed', 'Password yang anda masukkan salah');
 				redirect('auth');

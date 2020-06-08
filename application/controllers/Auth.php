@@ -25,4 +25,18 @@ class Auth extends CI_Controller {
 			$this->am->login();
 		}
 	}
+
+	public function logout()
+	{
+		if ($this->session->userdata('id_user')) {
+			$this->mm->createLog('Pengguna ' . $this->session->userdata('username') . ' berhasil logout' , $this->session->userdata('id_user'));
+		}
+
+		$this->session->unset_userdata('id_user');
+		$this->session->unset_userdata('id_outlet');
+		$this->session->unset_userdata('id_jabatan');
+		$this->session->unset_userdata('username');
+		session_destroy();
+		redirect('auth');
+	}
 }
