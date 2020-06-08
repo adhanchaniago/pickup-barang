@@ -124,17 +124,17 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="password_old"><i class="fas fa-fw fa-lock"></i> Password Lama</label>
+            <label for="password_old">Password Lama</label>
             <input required type="password" name="password_old" id="password_old" class="form-control">
             <?= form_error('password_old', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
-            <label for="password_new"><i class="fas fa-fw fa-lock"></i> Password Baru</label>
+            <label for="password_new">Password Baru</label>
             <input required type="password" name="password_new" id="password_new" class="form-control">
             <?= form_error('password_new', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
-            <label for="password_verify"><i class="fas fa-fw fa-lock"></i> Password Verifikasi</label>
+            <label for="password_verify">Password Verifikasi</label>
             <input required type="password" name="password_verify" id="password_verify" class="form-control">
             <?= form_error('password_verify', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
