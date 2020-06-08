@@ -1,3 +1,9 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
 .img-profile {
 	width: 50%;
 }
@@ -30,3 +36,47 @@
 	}
 
 }
+
+.bg-blue {
+	background-color: #3d6cb9;
+}
+
+
+.bg-light-blue {
+	background-color: #cefff1;
+}
+
+.img-carousel {
+	height: 400px;
+}
+
+textarea {
+	min-height: 90px;
+	max-height: 120px;
+}
+
+hr {
+	background-color: #FB3D1F;
+	height: 2px;
+	width: 15%;
+
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+::-webkit-scrollbar-track {     
+    background: #39C4DA;    
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #0691A7;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #047085;
+}
+

@@ -73,8 +73,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
           <!-- Brand Logo -->
           <a href="<?= base_url('admin'); ?>" class="brand-link">
-            <img src="<?= base_url('assets/img/img_properties/icon.png'); ?>" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Pickup Barang</span>
+            <img src="<?= base_url('assets/img/img_properties/icon.png'); ?>" alt="Logo" class="brand-image">
+            <span class="brand-text font-weight-light">Pickup</span>
           </a>
 
           <!-- Sidebar -->
@@ -102,6 +102,15 @@
                     </p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="<?= base_url('pickupBarang'); ?>" class="nav-link">
+                    <i class="nav-icon fas fa-shipping-fast"></i>
+                    <p>
+                      Pickup Barang
+                      <span class="right badge badge-danger">New</span>
+                    </p>
+                  </a>
+                </li>
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
@@ -121,6 +130,12 @@
                       <a href="<?= base_url('user'); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pengguna</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?= base_url('layananPaket'); ?>" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Layanan Paket</p>
                       </a>
                     </li>
                   </ul>

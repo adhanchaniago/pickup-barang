@@ -29,11 +29,11 @@ class Auth_model extends CI_Model {
 				redirect('admin');
 			} else {
 				$this->session->set_flashdata('message-failed', 'Password yang anda masukkan salah');
-				redirect('auth');
+				redirect('auth/login');
 			}
 		} else {
 			$this->session->set_flashdata('message-failed', 'Username yang anda masukkan salah');
-			redirect('auth');
+			redirect('auth/login');
 		}
 	}
 }
