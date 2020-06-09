@@ -48,7 +48,8 @@
                   <th>Alamat Penerima</th>
                   <th>Tanggal Pemesanan</th>
                   <th>Layanan Paket</th>
-                  <?php if ($dataUser['id_jabatan'] == '1'): ?>
+                  <th>Status</th>
+                  <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
                     <th>Aksi</th>
                   <?php endif ?>
                 </tr>
@@ -73,9 +74,16 @@
                     <td><?= $dpb['alamat_penerima']; ?></td>
                     <td><?= $dpb['tanggal_pemesanan']; ?></td>
                     <td><?= $dpb['layanan_paket']; ?></td>
-                    <?php if ($dataUser['id_jabatan'] == '1'): ?>
+                    <?php if ($dpb['status'] == 'pending'): ?>
+                      <td><span class="btn btn-danger"><i class="fas fa-fw fa-stopwatch"></i> <?= ucwords($dpb['status']); ?></span></td>
+                    <?php elseif ($dpb['status'] == 'kurir menjemput'): ?>
+                      <td><span class="btn btn-warning"><i class="fas fa-fw fa-shipping-fast"></i> <?= ucwords($dpb['status']); ?></span></td>
+                    <?php else: ?>
+                      <td><span class="btn btn-success"><i class="fas fa-fw fa-pallet"></i> <?= ucwords($dpb['status']); ?></span></td>
+                    <?php endif ?>
+                    <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
                       <td>
-                          <a class="badge badge-success" data-toggle="modal" data-target="#editPickupBarangModal<?= $dpb['id_pickup_barang']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editPickupBarangModal<?= $dpb['id_pickup_barang']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
                           <!-- Edit PickupBarang Modal -->
                           <div class="modal fade" id="editPickupBarangModal<?= $dpb['id_pickup_barang']; ?>" tabindex="-1" role="dialog" aria-labelledby="editPickupBarangModalLabel<?= $dpb['id_pickup_barang']; ?>" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -88,6 +96,19 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
+                                    <div class="form-group">
+                                      <label for="status<?= $dpb['id_pickup_barang']; ?>">Status</label>
+                                      <select name="status" id="status<?= $dpb['id_pickup_barang']; ?>" class="form-control">
+                                        <option value="<?= $dpb['status']; ?>"><?= ucwords($dpb['status']); ?></option>
+                                        <option disabled>------</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="kurir menjemput">Kurir Menjemput</option>
+                                        <option value="barang sampai logistik">Barang Sampai Logistik</option>
+                                      </select>
+                                    </div>
+                                    <div class="form-group">
+                                      <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
+                                    </div>
                                     <div class="row">
                                       <div class="col-lg">
                                         <div class="form-group">
@@ -164,8 +185,9 @@
                               </form>
                             </div>
                           </div>
-
-                          <a class="badge badge-danger btn-delete" data-text="<?= $dpb['nama_pengirim']; ?> | <?= $dpb['nama_barang']; ?> | <?= $dpb['nama_penerima']; ?>" href="<?= base_url('pickupBarang/deletePickupBarang/') . $dpb['id_pickup_barang']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
+                          <?php if ($dataUser['id_jabatan'] == '1'): ?>
+                            <a class="m-1 btn btn-danger btn-delete" data-text="<?= $dpb['nama_pengirim']; ?> | <?= $dpb['nama_barang']; ?> | <?= $dpb['nama_penerima']; ?>" href="<?= base_url('pickupBarang/deletePickupBarang/') . $dpb['id_pickup_barang']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
+                          <?php endif ?>
                       </td>
                     <?php endif ?>
                   </tr>

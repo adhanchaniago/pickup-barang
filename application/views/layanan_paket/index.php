@@ -40,7 +40,7 @@
                   <th>Layanan Paket</th>
                   <th>Harga Layanan Paket (Rp)</th>
                   <th>Durasi Pengiriman (Jam)</th>
-                  <?php if ($dataUser['id_jabatan'] == '1'): ?>
+                  <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
                     <th>Aksi</th>
                   <?php endif ?>
                 </tr>
@@ -53,9 +53,9 @@
                     <td><?= $dlp['layanan_paket']; ?></td>
                     <td><?= number_format($dlp['harga_layanan_paket']); ?></td>
                     <td><?= $dlp['durasi_pengiriman']; ?></td>
-                    <?php if ($dataUser['id_jabatan'] == '1'): ?>
+                    <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
                       <td>
-                          <a class="badge badge-success" data-toggle="modal" data-target="#editLayananPaketModal<?= $dlp['id_layanan_paket']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editLayananPaketModal<?= $dlp['id_layanan_paket']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
                           <!-- Edit LayananPaket Modal -->
                           <div class="modal fade" id="editLayananPaketModal<?= $dlp['id_layanan_paket']; ?>" tabindex="-1" role="dialog" aria-labelledby="editLayananPaketModalLabel<?= $dlp['id_layanan_paket']; ?>" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -92,8 +92,9 @@
                               </form>
                             </div>
                           </div>
-
-                          <a class="badge badge-danger btn-delete" data-text="<?= $dlp['layanan_paket']; ?>" href="<?= base_url('layananPaket/deleteLayananPaket/') . $dlp['id_layanan_paket']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
+                          <?php if ($dataUser['id_jabatan'] == '1'): ?>
+                            <a class="m-1 btn btn-danger btn-delete" data-text="<?= $dlp['layanan_paket']; ?>" href="<?= base_url('layananPaket/deleteLayananPaket/') . $dlp['id_layanan_paket']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
+                          <?php endif ?>
                       </td>
                     <?php endif ?>
                   </tr>

@@ -46,8 +46,18 @@ body {
 	background-color: #cefff1;
 }
 
+.img-carousel:hover {
+	cursor: e-resize;
+}
+
 .img-carousel {
-	height: 400px;
+	height: 200px;
+}
+
+@media (min-width: 992px) {
+	.img-carousel {
+		height: 400px;
+	}
 }
 
 textarea {
@@ -60,6 +70,24 @@ hr {
 	height: 2px;
 	width: 15%;
 
+}
+
+.heading_2 {
+	font-size: 1.4em !important;
+}
+
+.heading_3 {
+	font-size: .92em !important;
+}
+
+@media(min-width: 992px) {
+	.heading_2 {
+		font-size: 1.5em !important;
+	}
+
+	.heading_3 {
+		font-size: 1.13em !important;
+	}
 }
 
 

@@ -7,9 +7,11 @@
         <div class="col-sm header-title">
           <h1 class="m-0 text-dark">Daftar Jabatan</h1>
         </div><!-- /.col -->
-        <div class="col-sm header-button">
-          <button type="button" data-toggle="modal" data-target="#addJabatanModal" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</button>
-        </div>
+        <?php if ($dataUser['id_jabatan'] == '1'): ?>
+          <div class="col-sm header-button">
+            <button type="button" data-toggle="modal" data-target="#addJabatanModal" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</button>
+          </div>
+        <?php endif ?>
       </div><!-- /.row -->
       <div class="row my-2">
         <div class="col-lg-6">
@@ -52,7 +54,7 @@
                     <?php if ($dataUser['id_jabatan'] == '1'): ?>
                       <td>
                         <?php if ($dj['id_jabatan'] !== '1'): ?>
-                          <a class="badge badge-success" data-toggle="modal" data-target="#editJabatanModal<?= $dj['id_jabatan']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editJabatanModal<?= $dj['id_jabatan']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
                           <!-- Edit Jabatan Modal -->
                           <div class="modal fade" id="editJabatanModal<?= $dj['id_jabatan']; ?>" tabindex="-1" role="dialog" aria-labelledby="editJabatanModalLabel<?= $dj['id_jabatan']; ?>" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -80,7 +82,7 @@
                             </div>
                           </div>
 
-                          <a class="badge badge-danger btn-delete" data-text="<?= $dj['nama_jabatan']; ?>" href="<?= base_url('jabatan/deleteJabatan/') . $dj['id_jabatan']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
+                          <a class="m-1 btn btn-danger btn-delete" data-text="<?= $dj['nama_jabatan']; ?>" href="<?= base_url('jabatan/deleteJabatan/') . $dj['id_jabatan']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
                         <?php endif ?>
                       </td>
                     <?php endif ?>

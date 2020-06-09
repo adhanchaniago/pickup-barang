@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <div class="container">
   	<a class="navbar-brand" href="<?= base_url('auth'); ?>">
   		<img src="<?= base_url('assets/img/img_properties/icon.png'); ?>" width="75" alt="logo">
@@ -17,6 +17,10 @@
 	</div>
   </div>
 </nav>
+
+<!-- divider nav -->
+<div class="container"><div class="row my-2"><div class="col my-3"></div></div></div>
+<!-- ./divider nav -->
 
 <section id="carousel" class="carousel bg-blue">
 	<div class="container">
@@ -72,35 +76,35 @@
 						<div class="col-lg">
 							<div class="form-group">
 								<label for="nama_pengirim"><i class="fas fa-fw fa-user"></i> Nama Pengirim</label>
-								<input value="<?= set_value('nama_pengirim'); ?>" type="text" name="nama_pengirim" id="nama_pengirim" class="form-control" required>
+								<input value="<?= set_value('nama_pengirim'); ?>" type="text" name="nama_pengirim" id="nama_pengirim" class="form-control" required placeholder="Masukkan Nama Pengirim">
 							</div>
 						</div>
 						<div class="col-lg">
 							<div class="form-group">
 								<label for="no_whatsapp_pengirim"><i class="fab fa-fw fa-whatsapp"></i> No. Whatsapp Pengirim</label>
-								<input value="<?= set_value('no_whatsapp_pengirim'); ?>" type="number" name="no_whatsapp_pengirim" id="no_whatsapp_pengirim" class="form-control" required>
+								<input value="<?= set_value('no_whatsapp_pengirim'); ?>" type="number" name="no_whatsapp_pengirim" id="no_whatsapp_pengirim" class="form-control" required placeholder="Masukkan No. Whatsapp Pengirim">
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="alamat_pengirim"><i class="fas fa-fw fa-map-marked-alt"></i> Alamat Pengirim</label>
-						<textarea name="alamat_pengirim" id="alamat_pengirim" class="form-control" required><?= set_value('alamat_pengirim'); ?></textarea>
+						<textarea name="alamat_pengirim" id="alamat_pengirim" class="form-control" required placeholder="Masukkan Alamat Pengirim"><?= set_value('alamat_pengirim'); ?></textarea>
 					</div>
 					<div class="form-group">
 						<label for="nama_barang"><i class="fas fa-fw fa-box"></i> Nama Barang</label>
-						<input value="<?= set_value('nama_barang'); ?>" type="text" name="nama_barang" id="nama_barang" class="form-control" required>
+						<input value="<?= set_value('nama_barang'); ?>" type="text" name="nama_barang" id="nama_barang" class="form-control" required placeholder="Masukkan Nama Barang">
 					</div>
 					<div class="row">
-						<div class="col">
+						<div class="col-sm">
 							<div class="form-group">
 								<label for="berat_barang"><i class="fas fa-fw fa-weight"></i> Berat Barang (Kg)</label>
-								<input value="<?= set_value('berat_barang'); ?>" type="number" step="0.001" name="berat_barang" id="berat_barang" class="form-control" required>
+								<input value="<?= set_value('berat_barang'); ?>" type="number" step="0.001" name="berat_barang" id="berat_barang" class="form-control" required placeholder="Masukkan Berat Barang">
 							</div>
 						</div>
-						<div class="col">
+						<div class="col-sm">
 							<div class="form-group">
 								<label for="jumlah_barang"><i class="fas fa-fw fa-boxes"></i> Jumlah Barang</label>
-								<input value="<?= set_value('jumlah_barang'); ?>" type="number" name="jumlah_barang" id="jumlah_barang" class="form-control" required min="1">
+								<input value="<?= set_value('jumlah_barang'); ?>" type="number" name="jumlah_barang" id="jumlah_barang" class="form-control" required min="1" placeholder="Masukkan Jumlah Barang">
 							</div>
 						</div>
 					</div>
@@ -108,7 +112,7 @@
 						<div class="col-lg">
 							<div class="form-group">
 								<label for="nama_penerima"><i class="fas fa-fw fa-user-tie"></i> Nama Penerima</label>
-								<input value="<?= set_value('nama_penerima'); ?>" type="text" name="nama_penerima" id="nama_penerima" class="form-control" required>
+								<input value="<?= set_value('nama_penerima'); ?>" type="text" name="nama_penerima" id="nama_penerima" class="form-control" required placeholder="Masukkan Nama Penerima">
 							</div>
 						</div>
 						<div class="col-lg">
@@ -120,7 +124,7 @@
 					</div>
 					<div class="form-group">
 						<label for="alamat_penerima"><i class="fas fa-fw fa-map-marked-alt"></i> Alamat Penerima</label>
-						<textarea name="alamat_penerima" id="alamat_penerima" class="form-control" required><?= set_value('alamat_penerima'); ?></textarea>
+						<textarea name="alamat_penerima" id="alamat_penerima" class="form-control" required placeholder="Masukkan Alamat Penerima"><?= set_value('alamat_penerima'); ?></textarea>
 					</div>
 					<div class="form-group">
 						<label for="id_layanan_paket"><i class="fas fa-fw fa-shipping-fast"></i> Layanan Paket</label>
@@ -149,35 +153,6 @@
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-lg-6 my-3">
-		    	<h3 class="oleo-font">JNE Tangsel BSD Nusaloka</h3>
-		    	<div class="row mt-2">
-		    		<div class="col-lg">
-						<span>&copy; Copyright <?= date('Y'); ?> All rights Reserved By Andri Firman Saputra.</span>
-		    		</div>
-		    	</div>
-				<div class="row mt-3">
-					<div class="col-lg">
-				        <h4 class="mb-3 font-weight-bold">Admin</h4>
-				        <div class="row my-2">
-				        	<div class="col-lg">
-						        <a class="text-white" target="_blank" href="<?= base_url('auth/login'); ?>">Pegawai Masuk</a>
-				        	</div>
-				        </div>
-				        <div class="row my-2">
-				        	<div class="col-lg">
-						        <a class="text-white" target="_blank" href="<?= base_url('assets/file/User Manual Andry Laundry.pdf'); ?>">Panduan Penggunaan</a>
-				        	</div>
-				        </div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="col-lg text-center">
-		        		<img class="img-fluid rounded" src="<?= base_url('assets/img/img_properties/footer.png'); ?>" alt="side-img">
-					</div>
-				</div>	    	
-			</div>
-
-			<div class="col-lg-6 my-3">
 		        <h4 class="mb-3 font-weight-bold">Kontak Kami</h4>
 		        <div class="row text-left my-2">
 		          <div class="col-lg-4"><i class="fab fa-fw fa-whatsapp"></i> Hub. WhatsApp</div>
@@ -197,7 +172,7 @@
 		          </div>
 		          <div class="col-lg-8">Jl. Kalimantan, Rw. Mekar Jaya, Kec. Serpong, Kota Tangerang Selatan, Banten 15310</div>
 		        </div>
-		        <div class="row px-3 my-4">
+		        <!-- <div class="row px-3 my-4">
 		        	<div class="col-lg bg-info px-4 py-3 rounded">
 		        		<form method="post">
 		        			<h4>Berlangganan Newsletter <span class="oleo-font">JNE Tangsel BSD Nusaloka</span></h4>
@@ -210,8 +185,36 @@
 							<small>Untuk mendapatkan info terbaru tentang kami</small>
 		        		</form>
 		        	</div>
-		        </div>
+		        </div> -->
       		</div>
+      		<div class="col-lg-6 my-3">
+		    	<h3 class="oleo-font">JNE Tangsel BSD Nusaloka</h3>
+		    	<div class="row mt-2">
+		    		<div class="col-lg">
+						<span>&copy; Copyright <?= date('Y'); ?> All rights Reserved By Andri Firman Saputra.</span>
+		    		</div>
+		    	</div>
+				<div class="row mt-3">
+					<div class="col-lg">
+				        <h4 class="mb-3 font-weight-bold">Admin</h4>
+				        <div class="row my-2">
+				        	<div class="col-lg">
+						        <a class="text-white" target="_blank" href="<?= base_url('auth/login'); ?>">Pegawai Masuk</a>
+				        	</div>
+				        </div>
+				        <div class="row my-2">
+				        	<div class="col-lg">
+						        <!-- <a class="text-white" target="_blank" href="<?= base_url('assets/file/User Manual Andry Laundry.pdf'); ?>">Panduan Penggunaan</a> -->
+				        	</div>
+				        </div>
+					</div>
+				</div>	
+				<!-- <div class="row">
+					<div class="col-lg text-center">
+		        		<img class="img-fluid rounded" src="<?= base_url('assets/img/img_properties/footer.png'); ?>" alt="side-img">
+					</div>
+				</div> -->	    	
+			</div>
 		</div>
 	</div>
 </footer>

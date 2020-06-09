@@ -8,8 +8,9 @@ $('.page-scroll').on('click', function(e){
 
     // pindahkan scroll
     $('html, body').animate({
-        scrollTop: elemenTujuan.offset().top - 65
+        scrollTop: elemenTujuan.offset().top - 45
     }, 1250, 'easeInOutExpo');
-
+    $('.navbar-collapse.collapse').removeClass('show');
     e.preventDefault();
 });
+

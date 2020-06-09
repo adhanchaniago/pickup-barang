@@ -23,9 +23,9 @@
 
 <div class="container">
 	<div class="row justify-content-center my-2">
-		<div class="col-lg-5 mx-5 shadow rounded bg-primary text-white p-5">
-			<h2 class="text-center">Pickup Barang</h2>
-			<h3>Masuk</h3>
+		<div class="col-lg-5 mx-3 shadow rounded bg-primary text-white p-4">
+			<h2 class="heading_2 text-center">Pickup Barang</h2>
+			<h3 class="heading_3">Masuk</h3>
 			<form method="post">
 			  <div class="form-group">
 			    <label for="username"><i class="fas fa-fw fa-user"></i> Nama Pengguna</label>
@@ -39,9 +39,9 @@
 			  </div>
 			  <div class="form-group">
 			  	<div class="row justify-content-center">
-			  		<div class="col text-left">
+			  		<!-- <div class="col text-left">
 			  			<a href="<?= base_url('assets/files/'); ?>" target="_blank" class="btn btn-danger rounded-pill"><i class="fas fa-fw fa-book"></i> Panduan</a>
-			  		</div>
+			  		</div> -->
 			  		<div class="col text-right">
 					    <button type="submit" name="login" class="btn btn-success rounded-pill"><i class="fas fa-fw fa-sign-in-alt"></i> Masuk</button>
 			  		</div>

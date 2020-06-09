@@ -143,7 +143,7 @@
                 <div class="dropdown-divider"></div>
                 <li class="nav-item">
                   <a href="<?= base_url('log'); ?>" class="nav-link">
-                    <i class="nav-icon fas fa-shipping-fast"></i>
+                    <i class="nav-icon fas fa-file"></i>
                     <p>
                       Log
                     </p>

@@ -56,7 +56,8 @@ class PickupBarang_model extends CI_Model {
 			'nama_penerima' => ucwords(strtolower($this->input->post('nama_penerima', true))),	
 			'no_whatsapp_penerima' => $this->input->post('no_whatsapp_penerima', true),	
 			'alamat_penerima' => $this->input->post('alamat_penerima', true),	
-			'id_layanan_paket' => $this->input->post('id_layanan_paket', true)
+			'id_layanan_paket' => $this->input->post('id_layanan_paket', true),
+			'status' => $this->input->post('status', true)
 		];
 		$this->db->where('id_pickup_barang', $id);
 		$this->db->update('pickup_barang', $data);

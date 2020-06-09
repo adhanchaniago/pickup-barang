@@ -11,7 +11,7 @@ class Auth extends CI_Controller {
 	
 	public function index()
 	{
-		$data['title'] = 'Landing Page';
+		$data['title'] = 'Selamat Datang di JNE Tangsel BSD Nusaloka';
 		$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
 		$this->load->view('templates/header-auth', $data);
 		$this->load->view('auth/index', $data);

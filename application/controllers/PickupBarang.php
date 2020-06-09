@@ -52,6 +52,7 @@ class PickupBarang extends CI_Controller {
 		$this->form_validation->set_rules('no_whatsapp_penerima', 'no whatsapp penerima', 'required|trim');
 		$this->form_validation->set_rules('alamat_penerima', 'alamat penerima', 'required|trim');
 		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
+		$this->form_validation->set_rules('status', 'Status', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->load->view('templates/header-admin', $data);
 			$this->load->view('pickup_barang/index', $data);
