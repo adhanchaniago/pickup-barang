@@ -12,8 +12,8 @@ class Auth extends CI_Controller {
 	
 	public function index()
 	{
-		$data['title'] = 'Selamat Datang di JNE Tangsel BSD Nusaloka';
-		$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
+		$data['title'] 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+		$data['layanan_paket'] 	= $this->lpm->getAllLayananPaket();
 		$this->layout->view_auth('auth/index', $data);
 	}
 
@@ -23,7 +23,8 @@ class Auth extends CI_Controller {
 			redirect('admin');
 		}
 
-		$data['title'] = 'Masuk - Pickup Barang';
+		$data['title'] 			= 'Masuk - Pickup Barang';
+
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		if ($this->form_validation->run() == FALSE) {
@@ -43,6 +44,7 @@ class Auth extends CI_Controller {
 		$this->session->unset_userdata('id_outlet');
 		$this->session->unset_userdata('id_jabatan');
 		$this->session->unset_userdata('username');
+		$this->session->sess_destroy();
 		session_destroy();
 		redirect('auth/login');
 	}

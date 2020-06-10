@@ -9,15 +9,16 @@ class PickupBarang extends CI_Controller {
 		$this->load->model('Layout_model','layout');
 		$this->load->model('PickupBarang_model', 'pbm');
 		$this->load->model('LayananPaket_model', 'lpm');
+		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
-		$data['pickup_barang'] = $this->pbm->getAllPickupBarang();
-		$data['title'] = 'Pickup Barang - ' . $data['dataUser']['username'];
+		$data['dataUser'] 			= $this->mm->getDataUser();
+		$data['layanan_paket'] 		= $this->lpm->getAllLayananPaket();
+		$data['pickup_barang'] 		= $this->pbm->getAllPickupBarang();
+		$data['title'] 				= 'Pickup Barang - ' . $data['dataUser']['username'];
+
 		$this->form_validation->set_rules('nama_pengirim', 'nama pengirim', 'required|trim');
 		$this->form_validation->set_rules('no_whatsapp_pengirim', 'no whatsapp pengirim', 'required|trim');
 		$this->form_validation->set_rules('alamat_pengirim', 'alamat pengirim', 'required|trim');
@@ -37,10 +38,10 @@ class PickupBarang extends CI_Controller {
 
 	public function editPickupBarang($id)
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['pickup_barang'] = $this->pbm->getAllPickupBarang();
-		$data['title'] = 'Pickup Barang - ' . $data['dataUser']['username'];
+		$data['dataUser'] 			= $this->mm->getDataUser();
+		$data['pickup_barang'] 		= $this->pbm->getAllPickupBarang();
+		$data['title'] 				= 'Pickup Barang - ' . $data['dataUser']['username'];
+
 		$this->form_validation->set_rules('nama_pengirim', 'nama pengirim', 'required|trim');
 		$this->form_validation->set_rules('no_whatsapp_pengirim', 'no whatsapp pengirim', 'required|trim');
 		$this->form_validation->set_rules('alamat_pengirim', 'alamat pengirim', 'required|trim');

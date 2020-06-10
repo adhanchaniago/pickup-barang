@@ -24,13 +24,13 @@ class User_model extends CI_Model {
 
 	public function addUser()
 	{
-		$dataUser = $this->mm->getDataUser();
+		$dataUser 		= $this->mm->getDataUser();
 		$this->db->set('img_profile', 'default.png');
 
-		$img_profile = $_FILES['img_profile']['name'];
+		$img_profile 	= $_FILES['img_profile']['name'];
 		if ($img_profile) {
-			$config['upload_path'] = './assets/img/img_profiles/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['upload_path'] 		= './assets/img/img_profiles/';
+			$config['allowed_types'] 	= 'gif|jpg|png|jpeg';
 		
 			$this->load->library('upload', $config);
 		
@@ -43,10 +43,10 @@ class User_model extends CI_Model {
 		}
 		
 		$data = [
-			'username' => strtolower($this->input->post('username', true)),
-			'nama_lengkap' => ucwords(strtolower($this->input->post('nama_lengkap', true))),
-			'password' => password_hash($this->input->post('password_new', true), PASSWORD_DEFAULT),
-			'id_jabatan' => $this->input->post('id_jabatan', true)
+			'username' 			=> strtolower($this->input->post('username', true)),
+			'nama_lengkap' 		=> ucwords(strtolower($this->input->post('nama_lengkap', true))),
+			'password' 			=> password_hash($this->input->post('password_new', true), PASSWORD_DEFAULT),
+			'id_jabatan' 		=> $this->input->post('id_jabatan', true)
 		];
 
 		$this->db->insert('user', $data);
@@ -57,13 +57,13 @@ class User_model extends CI_Model {
 
 	public function editUser($id)
 	{
-		$dataUser = $this->mm->getDataUser();
-		$data['user'] = $this->getUserById($id);
+		$dataUser 				= $this->mm->getDataUser();
+		$data['user'] 			= $this->getUserById($id);
 		$this->db->set('img_profile', $data['user']['img_profile']);
-		$img_profile = $_FILES['img_profile']['name'];
+		$img_profile 			= $_FILES['img_profile']['name'];
 		if ($img_profile) {
-			$config['upload_path'] = './assets/img/img_profiles/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['upload_path'] 		= './assets/img/img_profiles/';
+			$config['allowed_types'] 	= 'gif|jpg|png|jpeg';
 		
 			$this->load->library('upload', $config);
 		
@@ -76,8 +76,8 @@ class User_model extends CI_Model {
 		}
 		
 		$data = [
-			'nama_lengkap' => ucwords(strtolower($this->input->post('nama_lengkap', true))),
-			'id_jabatan' => $this->input->post('id_jabatan', true)
+			'nama_lengkap' 			=> ucwords(strtolower($this->input->post('nama_lengkap', true))),
+			'id_jabatan' 			=> $this->input->post('id_jabatan', true)
 		];
 
 		$this->db->where('id_user', $id);
@@ -89,9 +89,9 @@ class User_model extends CI_Model {
 
 	public function deleteUser($id)
 	{
-		$dataUser = $this->mm->getDataUser();
-		$data['user'] = $this->getUserById($id);
-		$username = $data['user']['username'];
+		$dataUser 			= $this->mm->getDataUser();
+		$data['user'] 		= $this->getUserById($id);
+		$username 			= $data['user']['username'];
 		if ($dataUser['id_jabatan'] !== '1') {
 			$this->session->set_flashdata('message-failed', 'Pengguna ' . $dataUser['username'] . ' tidak memiliki hak akses menghapus data Jabatan');
 			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mencoba menghapus data pengguna ' . $username, $dataUser['id_user']);

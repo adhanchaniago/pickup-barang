@@ -9,15 +9,16 @@ class User extends CI_Controller {
 		$this->load->model('Layout_model','layout');
 		$this->load->model('User_model', 'um');
 		$this->load->model('Jabatan_model', 'jm');
+		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['user'] = $this->um->getAllUser();
-		$data['jabatan'] = $this->jm->getAllJabatan();
-		$data['title'] = 'Daftar Pengguna';
+		$data['dataUser'] 			= $this->mm->getDataUser();
+		$data['user'] 				= $this->um->getAllUser();
+		$data['jabatan'] 			= $this->jm->getAllJabatan();
+		$data['title'] 				= 'Daftar Pengguna';
+
 		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]');
 		$this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
 		$this->form_validation->set_rules('id_jabatan', 'Nama Jabatan', 'required|trim');
@@ -32,11 +33,11 @@ class User extends CI_Controller {
 
 	public function editUser($id)
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['user'] = $this->um->getAllUser();
-		$data['jabatan'] = $this->jm->getAllJabatan();
-		$data['title'] = 'Daftar Pengguna';
+		$data['dataUser'] 			= $this->mm->getDataUser();
+		$data['user'] 				= $this->um->getAllUser();
+		$data['jabatan'] 			= $this->jm->getAllJabatan();
+		$data['title'] 				= 'Daftar Pengguna';
+		
 		$this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
 		$this->form_validation->set_rules('id_jabatan', 'Nama Jabatan', 'required|trim');
 		if ($this->form_validation->run() == false) {

@@ -8,14 +8,15 @@ class Jabatan extends CI_Controller {
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Layout_model','layout');
 		$this->load->model('Jabatan_model', 'jm');
+		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['jabatan'] = $this->jm->getAllJabatan();
-		$data['title'] = 'Jabatan - ' . $data['dataUser']['username'];
+		$data['dataUser'] 		= $this->mm->getDataUser();
+		$data['jabatan'] 		= $this->jm->getAllJabatan();
+		$data['title'] 			= 'Jabatan - ' . $data['dataUser']['username'];
+
 		$this->form_validation->set_rules('nama_jabatan', 'Nama Jabatan', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('jabatan/index', $data);
@@ -26,10 +27,10 @@ class Jabatan extends CI_Controller {
 
 	public function editJabatan($id)
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['jabatan'] = $this->jm->getAllJabatan();
-		$data['title'] = 'Jabatan - ' . $data['dataUser']['username'];
+		$data['dataUser'] 		= $this->mm->getDataUser();
+		$data['jabatan'] 		= $this->jm->getAllJabatan();
+		$data['title'] 			= 'Jabatan - ' . $data['dataUser']['username'];
+		
 		$this->form_validation->set_rules('nama_jabatan', 'Nama Jabatan', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('jabatan/index', $data);

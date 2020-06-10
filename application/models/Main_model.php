@@ -13,9 +13,9 @@ class Main_model extends CI_Model {
 	public function createLog($message, $id_user)
 	{
 		$data = [
-			'isi_log' => $message,
-			'tanggal_log' => date('Y-m-d H:i:s'),
-			'id_user' => $id_user
+			'isi_log' 			=> $message,
+			'tanggal_log' 		=> date('Y-m-d H:i:s'),
+			'id_user' 			=> $id_user
 		];
 		$this->db->insert('log', $data);
 	}

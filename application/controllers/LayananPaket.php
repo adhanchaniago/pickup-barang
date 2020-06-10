@@ -8,14 +8,15 @@ class LayananPaket extends CI_Controller {
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Layout_model','layout');
 		$this->load->model('LayananPaket_model', 'lpm');
+		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
-		$data['title'] = 'Layanan Paket - ' . $data['dataUser']['username'];
+		$data['dataUser'] 				= $this->mm->getDataUser();
+		$data['layanan_paket'] 			= $this->lpm->getAllLayananPaket();
+		$data['title'] 					= 'Layanan Paket - ' . $data['dataUser']['username'];
+
 		$this->form_validation->set_rules('layanan_paket', 'Layanan Paket', 'required|trim');
 		$this->form_validation->set_rules('harga_layanan_paket', 'Harga Layanan Paket', 'required|trim');
 		$this->form_validation->set_rules('durasi_pengiriman', 'Durasi Pengiriman', 'required|trim');
@@ -28,10 +29,11 @@ class LayananPaket extends CI_Controller {
 
 	public function editLayananPaket($id)
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
-		$data['title'] = 'Layanan Paket - ' . $data['dataUser']['username'];
+
+		$data['dataUser'] 				= $this->mm->getDataUser();
+		$data['layanan_paket'] 			= $this->lpm->getAllLayananPaket();
+		$data['title'] 					= 'Layanan Paket - ' . $data['dataUser']['username'];
+
 		$this->form_validation->set_rules('layanan_paket', 'Layanan Paket', 'required|trim');
 		$this->form_validation->set_rules('harga_layanan_paket', 'Harga Layanan Paket', 'required|trim');
 		$this->form_validation->set_rules('durasi_pengiriman', 'Durasi Pengiriman', 'required|trim');

@@ -8,13 +8,13 @@ class Log extends CI_Controller {
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Layout_model','layout');
 		$this->load->model('Log_model', 'lm');
+		$this->mm->check_status_login();
 	}
 	public function index()
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['log'] = $this->lm->getAllLog();
-		$data['title'] = 'Log - ' . $data['dataUser']['username'];
+		$data['dataUser'] 		= $this->mm->getDataUser();
+		$data['log'] 			= $this->lm->getAllLog();
+		$data['title'] 			= 'Log - ' . $data['dataUser']['username'];
 		$this->layout->view_admin('log/index', $data);
 	}
 }
