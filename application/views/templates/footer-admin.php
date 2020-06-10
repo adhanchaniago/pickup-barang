@@ -34,7 +34,7 @@
     <script src="<?= base_url('assets/js/admin.js'); ?>"></script>
 	
 	<!-- Config -->
-	<script src="<?= base_url('assets/js/datatables-config.js'); ?>"></script>
+	
 	<script src="<?= base_url('assets/js/fancybox-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/select2-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/sweetalert2-config.js'); ?>"></script>
