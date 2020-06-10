@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jun 2020 pada 14.09
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.3
+-- Waktu pembuatan: 10 Jun 2020 pada 17.51
+-- Versi server: 10.1.31-MariaDB
+-- Versi PHP: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -100,7 +100,18 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (20, 'Pengguna andri123 berhasil logout', '2020-06-09 17:32:28', 1),
 (21, 'Pengguna andri123 berhasil login', '2020-06-10 19:03:47', 1),
 (22, 'Pengguna andri123 berhasil logout', '2020-06-10 19:04:09', 1),
-(23, 'Pengguna andri123 berhasil login', '2020-06-10 19:04:56', 1);
+(23, 'Pengguna andri123 berhasil login', '2020-06-10 19:04:56', 1),
+(24, 'Pengguna andri123 berhasil login', '2020-06-10 19:27:43', 1),
+(25, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:49:23', 1),
+(26, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:49:59', 1),
+(27, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:51:37', 1),
+(28, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:51:50', 1),
+(29, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:55:48', 1),
+(30, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:57:02', 1),
+(31, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:17', 1),
+(32, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:37', 1),
+(33, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:48', 1),
+(34, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:58', 1);
 
 -- --------------------------------------------------------
 
@@ -120,7 +131,7 @@ CREATE TABLE `pickup_barang` (
   `no_whatsapp_penerima` varchar(25) NOT NULL,
   `alamat_penerima` text NOT NULL,
   `tanggal_pemesanan` datetime NOT NULL,
-  `status` enum('pending','kurir menjemput','barang sampai logistik') NOT NULL,
+  `status` int(11) NOT NULL,
   `id_layanan_paket` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -129,8 +140,8 @@ CREATE TABLE `pickup_barang` (
 --
 
 INSERT INTO `pickup_barang` (`id_pickup_barang`, `nama_pengirim`, `no_whatsapp_pengirim`, `alamat_pengirim`, `nama_barang`, `berat_barang`, `jumlah_barang`, `nama_penerima`, `no_whatsapp_penerima`, `alamat_penerima`, `tanggal_pemesanan`, `status`, `id_layanan_paket`) VALUES
-(5, 'Andri Firman Saputra', '087808675313', 'Jl. Amd Babakan Pocis No. 100 RT02/02', 'Buku Matematika SPM untuk SMK/MAK', 2, 1, 'Andre Farhan Saputra', '087878787878', 'Jl. Amd Babakan Pocis No. 69 RT02/02', '2020-06-09 02:54:20', 'barang sampai logistik', 2),
-(6, 'Andre', '08780834222', 'Pocis no. 32', 'Gunting', 5, 10, 'Andri', '08787878787', 'Pocis No. 33', '2020-06-09 03:00:36', 'kurir menjemput', 2);
+(5, 'Andri Firman Saputra', '087808675313', 'Jl. Amd Babakan Pocis No. 100 RT02/02', 'Buku Matematika SPM untuk SMK/MAK', 2, 1, 'Andre Farhan Saputra', '087878787878', 'Jl. Amd Babakan Pocis No. 69 RT02/02', '2020-06-09 02:54:20', 3, 2),
+(6, 'Andre', '08780834222', 'Pocis no. 32', 'Gunting', 5, 10, 'Andri', '08787878787', 'Pocis No. 33', '2020-06-09 03:00:36', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -212,7 +223,7 @@ ALTER TABLE `layanan_paket`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
