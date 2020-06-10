@@ -8,6 +8,75 @@ class PickupBarang_model extends CI_Model {
 		$this->load->model('Main_model', 'mm');
 	}
 
+	public function _setDatatable()
+	{
+		$this->db->select('*');
+		$this->db->from('pickup_barang');
+		$this->db->join('layanan_paket', 'pickup_barang.id_layanan_paket=layanan_paket.id_layanan_paket');
+	}
+	public function _filterDatatable()
+	{
+		$this->_setDatatable();
+		$column_order 		= [null,"nama_pengirim","no_whatsapp_pengirim","alamat_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","no_whatsapp_penerima","alamat_penerima","tanggal_pemesanan","layanan_paket","status"];
+		$column_search 		= ["nama_pengirim","no_whatsapp_pengirim","alamat_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","no_whatsapp_penerima","alamat_penerima","tanggal_pemesanan","layanan_paket","status"];
+		$default_order 		= ["tanggal_pemesanan"=>"ASC"];
+
+		$search 			= $this->input->post('search');
+		$i = 0;
+		foreach ($column_search as $item) { 
+			if($search["value"]) { 
+				if($i===0) {
+					$this->db->group_start();
+					$this->db->like($item, $search['value']);
+				} else {
+					$this->db->or_like($item, $search['value']);
+				}
+
+				if(count($column_search) - 1 == $i){
+					$this->db->group_end(); 
+				}
+			}
+			$i++;
+		}
+
+		$order 	= $this->input->post('order');
+		if(isset($order) && $order['0']['column']!=0) {
+			$this->db->order_by($column_order[$order['0']['column']], $order['0']['dir']);
+		}elseif(isset($first_order)) {
+			$this->db->order_by(key($first_order), $first_order[key($first_order)]);
+		}
+
+	}
+
+
+	public function getDatatable()
+	{
+		$this->_filterDatatable();
+		
+		$length 	= $this->input->post('length');
+		$start 		= $this->input->post('start');
+		if($length != -1){
+			$this->db->limit($length, $start);
+		}
+
+		$sql 	= $this->db->get();
+		return $sql->result();
+	}
+
+	public function countFilteredDatatable()
+	{
+		$this->_filterDatatable();
+		$sql 	= $this->db->get();
+		return $sql->num_rows();
+	}
+
+	public function countAllDatatable()
+	{
+		$this->_setDatatable();
+		$sql 	= $this->db->get();
+		return $sql->num_rows();
+	}
+
 	public function getAllPickupBarang()
 	{
 		$this->db->select('*');

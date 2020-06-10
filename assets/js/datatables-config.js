@@ -1,8 +1,23 @@
 
-$(document).ready(function () {
-    $('#table_id').DataTable({
-        "order": [],
-        "pageLength" : 10,
-        "lengthMenu" : [[10, 20, 50, -1], [10, 20, 50, 'All']]
-    });
+$(function () {
+
+	datatable();
+    function datatable() {
+        let link    = $('#table_id').data('link');
+        $('#table_id').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url     : link,
+                method  : 'post'
+            },
+            "columnDefs" :[
+            {
+                "targets"    : [-1],
+                "orderable" : false
+            }
+            ]
+        });
+    }
+
 });
