@@ -6,6 +6,7 @@ class PickupBarang extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Main_model', 'mm');
+		$this->load->model('Layout_model','layout');
 		$this->load->model('PickupBarang_model', 'pbm');
 		$this->load->model('LayananPaket_model', 'lpm');
 	}
@@ -28,9 +29,7 @@ class PickupBarang extends CI_Controller {
 		$this->form_validation->set_rules('alamat_penerima', 'alamat penerima', 'required|trim');
 		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$this->load->view('templates/header-admin', $data);
-			$this->load->view('pickup_barang/index', $data);
-			$this->load->view('templates/footer-admin', $data);
+			$this->layout->view_admin('pickup_barang/index', $data);
 		} else {
 		    $this->pbm->addPickupBarang();
 		}
@@ -54,9 +53,7 @@ class PickupBarang extends CI_Controller {
 		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
 		$this->form_validation->set_rules('status', 'Status', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$this->load->view('templates/header-admin', $data);
-			$this->load->view('pickup_barang/index', $data);
-			$this->load->view('templates/footer-admin', $data);
+			$this->layout->view_admin('pickup_barang/index', $data);
 		} else {
 		    $this->pbm->editPickupBarang($id);
 		}

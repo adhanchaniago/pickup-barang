@@ -6,6 +6,7 @@ class LayananPaket extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Main_model', 'mm');
+		$this->load->model('Layout_model','layout');
 		$this->load->model('LayananPaket_model', 'lpm');
 	}
 
@@ -19,9 +20,7 @@ class LayananPaket extends CI_Controller {
 		$this->form_validation->set_rules('harga_layanan_paket', 'Harga Layanan Paket', 'required|trim');
 		$this->form_validation->set_rules('durasi_pengiriman', 'Durasi Pengiriman', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$this->load->view('templates/header-admin', $data);
-			$this->load->view('layanan_paket/index', $data);
-			$this->load->view('templates/footer-admin', $data);
+			$this->layout->view_admin('layanan_paket/index', $data);
 		} else {
 		    $this->lpm->addLayananPaket();
 		}
@@ -37,9 +36,7 @@ class LayananPaket extends CI_Controller {
 		$this->form_validation->set_rules('harga_layanan_paket', 'Harga Layanan Paket', 'required|trim');
 		$this->form_validation->set_rules('durasi_pengiriman', 'Durasi Pengiriman', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$this->load->view('templates/header-admin', $data);
-			$this->load->view('layanan_paket/index', $data);
-			$this->load->view('templates/footer-admin', $data);
+			$this->layout->view_admin('layanan_paket/index', $data);
 		} else {
 		    $this->lpm->editLayananPaket($id);
 		}

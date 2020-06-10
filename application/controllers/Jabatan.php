@@ -6,6 +6,7 @@ class Jabatan extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Main_model', 'mm');
+		$this->load->model('Layout_model','layout');
 		$this->load->model('Jabatan_model', 'jm');
 	}
 
@@ -17,9 +18,7 @@ class Jabatan extends CI_Controller {
 		$data['title'] = 'Jabatan - ' . $data['dataUser']['username'];
 		$this->form_validation->set_rules('nama_jabatan', 'Nama Jabatan', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$this->load->view('templates/header-admin', $data);
-			$this->load->view('jabatan/index', $data);
-			$this->load->view('templates/footer-admin', $data);
+			$this->layout->view_admin('jabatan/index', $data);
 		} else {
 		    $this->jm->addJabatan();
 		}
@@ -33,9 +32,7 @@ class Jabatan extends CI_Controller {
 		$data['title'] = 'Jabatan - ' . $data['dataUser']['username'];
 		$this->form_validation->set_rules('nama_jabatan', 'Nama Jabatan', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$this->load->view('templates/header-admin', $data);
-			$this->load->view('jabatan/index', $data);
-			$this->load->view('templates/footer-admin', $data);
+			$this->layout->view_admin('jabatan/index', $data);
 		} else {
 		    $this->jm->editJabatan($id);
 		}

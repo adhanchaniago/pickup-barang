@@ -6,6 +6,7 @@ class Log extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Main_model', 'mm');
+		$this->load->model('Layout_model','layout');
 		$this->load->model('Log_model', 'lm');
 	}
 	public function index()
@@ -14,8 +15,6 @@ class Log extends CI_Controller {
 		$data['dataUser'] = $this->mm->getDataUser();
 		$data['log'] = $this->lm->getAllLog();
 		$data['title'] = 'Log - ' . $data['dataUser']['username'];
-		$this->load->view('templates/header-admin', $data);
-		$this->load->view('log/index', $data);
-		$this->load->view('templates/footer-admin', $data);
+		$this->layout->view_admin('log/index', $data);
 	}
 }
