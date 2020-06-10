@@ -54,7 +54,7 @@
                     <?php if ($dataUser['id_jabatan'] == '1'): ?>
                       <td>
                         <?php if ($dj['id_jabatan'] !== '1'): ?>
-                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editJabatanModal<?= $dj['id_jabatan']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editJabatanModal<?= $dj['id_jabatan']; ?>" href=""><i class="fas fa-fw fa-edit"></i></a>
                           <!-- Edit Jabatan Modal -->
                           <div class="modal fade" id="editJabatanModal<?= $dj['id_jabatan']; ?>" tabindex="-1" role="dialog" aria-labelledby="editJabatanModalLabel<?= $dj['id_jabatan']; ?>" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -82,7 +82,7 @@
                             </div>
                           </div>
 
-                          <a class="m-1 btn btn-danger btn-delete" data-text="<?= $dj['nama_jabatan']; ?>" href="<?= base_url('jabatan/deleteJabatan/') . $dj['id_jabatan']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
+                          <a class="m-1 btn btn-danger btn-delete" data-text="<?= $dj['nama_jabatan']; ?>" href="<?= base_url('jabatan/deleteJabatan/') . $dj['id_jabatan']; ?>"><i class="fas fa-fw fa-trash"></i></a>
                         <?php endif ?>
                       </td>
                     <?php endif ?>

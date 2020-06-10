@@ -64,7 +64,7 @@
                     <?php if ($dataUser['id_jabatan'] == '1'): ?>
                       <td>
                         <?php if ($du['id_jabatan'] !== '1'): ?>
-                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editUserModal<?= $du['id_user']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editUserModal<?= $du['id_user']; ?>" href=""><i class="fas fa-fw fa-edit"></i></a>
                           <!-- Edit User Modal -->
                           <div class="modal fade" id="editUserModal<?= $du['id_user']; ?>" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel<?= $du['id_user']; ?>" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -119,7 +119,7 @@
                             </div>
                           </div>
 
-                          <a class="m-1 btn btn-danger btn-delete" data-text="<?= $du['username']; ?>" href="<?= base_url('user/deleteUser/') . $du['id_user']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
+                          <a class="m-1 btn btn-danger btn-delete" data-text="<?= $du['username']; ?>" href="<?= base_url('user/deleteUser/') . $du['id_user']; ?>"><i class="fas fa-fw fa-trash"></i></a>
                         <?php endif ?>
                       </td>
                     <?php endif ?>
