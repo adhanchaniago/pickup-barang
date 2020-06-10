@@ -83,7 +83,7 @@
                     <?php endif ?>
                     <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
                       <td>
-                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editPickupBarangModal<?= $dpb['id_pickup_barang']; ?>" href=""><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editPickupBarangModal<?= $dpb['id_pickup_barang']; ?>" href=""><i class="fas fa-fw fa-edit"></i></a>
                           <!-- Edit PickupBarang Modal -->
                           <div class="modal fade" id="editPickupBarangModal<?= $dpb['id_pickup_barang']; ?>" tabindex="-1" role="dialog" aria-labelledby="editPickupBarangModalLabel<?= $dpb['id_pickup_barang']; ?>" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -186,7 +186,7 @@
                             </div>
                           </div>
                           <?php if ($dataUser['id_jabatan'] == '1'): ?>
-                            <a class="m-1 btn btn-danger btn-delete" data-text="<?= $dpb['nama_pengirim']; ?> | <?= $dpb['nama_barang']; ?> | <?= $dpb['nama_penerima']; ?>" href="<?= base_url('pickupBarang/deletePickupBarang/') . $dpb['id_pickup_barang']; ?>"><i class="fas fa-fw fa-trash"></i> hapus</a>
+                            <a class="m-1 btn btn-danger btn-delete" data-text="<?= $dpb['nama_pengirim']; ?> | <?= $dpb['nama_barang']; ?> | <?= $dpb['nama_penerima']; ?>" href="<?= base_url('pickupBarang/deletePickupBarang/') . $dpb['id_pickup_barang']; ?>"><i class="fas fa-fw fa-trash"></i></a>
                           <?php endif ?>
                       </td>
                     <?php endif ?>
