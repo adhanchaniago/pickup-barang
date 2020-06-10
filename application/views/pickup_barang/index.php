@@ -75,11 +75,11 @@
                     <td><?= $dpb['tanggal_pemesanan']; ?></td>
                     <td><?= $dpb['layanan_paket']; ?></td>
                     <?php if ($dpb['status'] == 'pending'): ?>
-                      <td><span class="btn btn-danger"><i class="fas fa-fw fa-stopwatch"></i> <?= ucwords($dpb['status']); ?></span></td>
+                      <td><span class="btn btn-danger"><i class="fas fa-fw fa-stopwatch"></i></span></td>
                     <?php elseif ($dpb['status'] == 'kurir menjemput'): ?>
-                      <td><span class="btn btn-warning"><i class="fas fa-fw fa-shipping-fast"></i> <?= ucwords($dpb['status']); ?></span></td>
+                      <td><span class="btn btn-warning"><i class="fas fa-fw fa-shipping-fast"></i></span></td>
                     <?php else: ?>
-                      <td><span class="btn btn-success"><i class="fas fa-fw fa-pallet"></i> <?= ucwords($dpb['status']); ?></span></td>
+                      <td><span class="btn btn-success"><i class="fas fa-fw fa-pallet"></i></span></td>
                     <?php endif ?>
                     <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
                       <td>
