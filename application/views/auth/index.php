@@ -8,11 +8,12 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav">
-	    	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="#home">Beranda</a>
-	      	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="#tentang">Tentang Kami</a>
+	    	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="#home"><i class="fas fa-fw fa-home"></i> Beranda</a>
+	      	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="#tentang"><i class="fas fa-fw fa-book"></i> Tentang Kami</a>
 	    </div>
 	    <div class="navbar-nav ml-auto">
-	      	<a class="nav-item nav-link text-white btn btn-success rounded-pill px-3 mx-2 my-1 page-scroll" href="#pesanan"><i class="fas fa-fw fa-shipping-fast"></i> Buat Pesanan</a>
+	      	<a class="nav-item nav-link text-white btn btn-danger rounded-pill px-3 mx-2 my-1 page-scroll" href="#pesanan"><i class="fas fa-fw fa-shipping-fast"></i><sup><i class="fas fa-1x fa-plus"></i></sup> Buat Pesanan</a>
+	      	<a class="nav-item nav-link text-white btn btn-success rounded-pill px-3 mx-2 my-1 page-scroll" href="#cek_status_pesanan"><i class="fas fa-fw fa-check"></i> Cek Status Pesanan</a>
 	    </div>
 	</div>
   </div>
@@ -144,6 +145,24 @@
 			<div class="col-lg-6 my-auto">
 				<img class="img-fluid rounded" src="<?= base_url('assets/img/img_properties/side-img.png'); ?>" alt="side-img">
 				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.7159220853064!2d106.68202441476954!3d-6.3010085954397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fad3a7082c6d%3A0xc71fb55b4d55efb7!2sJNE%20Tangsel%20BSD%20Nusaloka!5e0!3m2!1sid!2sid!4v1591638874359!5m2!1sid!2sid" height="300" frameborder="0" style="border:0; margin-top: 15px;width: 100%" allowfullscreen="" class="rounded"></iframe>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="cek_status_pesanan" class="cek_status_pesanan bg-light-blue">
+	<div class="container">
+		<div class="row py-5">
+			<div class="col-lg text-center">
+				<h2>Cek Status Pesanan</h2>
+				<hr>
+				<form action="<?= base_url('auth/cek_status_pesanan'); ?>" method="post">
+					<div class="form-group">
+						<label for="no_resi">No. Resi</label>
+						<input type="text" name="no_resi" class="form-control" required>
+					</div>
+					<button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-search"></i> Lacak</button>
+				</form>
 			</div>
 		</div>
 	</div>

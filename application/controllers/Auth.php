@@ -63,7 +63,7 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_rules('alamat_penerima', 'alamat penerima', 'required|trim');
 		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Landing Page';
+			$data['title'] = 'Selamat Datang di JNE Tangsel BSD Nusaloka';
 			$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
 			$this->load->view('templates/header-auth', $data);
 			$this->load->view('auth/index', $data);
@@ -86,6 +86,20 @@ class Auth extends CI_Controller {
 			$this->session->set_flashdata('message-success', 'Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'] . ' untuk kami kirim. Tunggu kurir kami untuk mengambil barang Anda. Terima Kasih :D');
 			$this->mm->createLog('Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'], NULL);
 			redirect('auth');
+		}
+	}
+
+	public function cek_status_pesanan()
+	{
+		$this->form_validation->set_rules('no_resi', 'No. Resi', 'required|trim');
+		if ($this->form_validation->run() == false) {
+			$data['title'] = 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+			$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
+			$this->load->view('templates/header-auth', $data);
+			$this->load->view('auth/index', $data);
+			$this->load->view('templates/footer-auth', $data);
+		} else {
+			
 		}
 	}
 }
