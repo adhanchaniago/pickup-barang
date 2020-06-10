@@ -1,3 +1,4 @@
+
 // event pada saat link diklik
 $('.page-scroll').on('click', function(e){
 

@@ -29,8 +29,9 @@
     <script src="<?= base_url('assets/vendor/adminlte-3.0.5/adminlte.min.js'); ?>"></script>
 
     
+    <div id="data-admin" data-link="<?= $def_link; ?>" data-url="<?= base_url() ?>"></div>
     <!-- My JS -->
-    <script src="<?= base_url('assets/js/script.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/admin.js'); ?>"></script>
 	
 	<!-- Config -->
 	<script src="<?= base_url('assets/js/datatables-config.js'); ?>"></script>
