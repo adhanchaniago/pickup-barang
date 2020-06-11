@@ -1,5 +1,9 @@
 $(document).ready(function() {
   $(".enlarge").fancybox();
+  $("#table_id").on('click','.enlarge',function(e) {
+    e.preventDefault();
+    $('.enlarge').fancybox();
+  })
 });
 
 $('.custom-file-input').on('change', function() {

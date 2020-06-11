@@ -38,7 +38,7 @@
             <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('jabatan/datatable') ?>">
               <thead>
                 <tr>
-                  <th>No</th>
+                  <th width="10">No</th>
                   <th>Nama Jabatan</th>
                   <?php if ($dataUser['id_jabatan'] == '1'): ?>
                     <th>Aksi</th>

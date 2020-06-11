@@ -2,6 +2,7 @@ $(function() {
 	let url 	= $('#data-admin').data('url');
     navbar_active();
     ubahJabatan();
+    ubahUser();
     ubahLayananPaket();
     ubahPickupBarang();
     datatable();
@@ -113,6 +114,29 @@ $(function() {
                     $('#editJabatanModal form').attr('action',url + 'jabatan/editJabatan/'+response.id_jabatan);
                     $('#editJabatanModalLabel').html('Ubah Layanan Paket - ' + response.nama_jabatan);
                     $('#edit_nama_jabatan').val(response.nama_jabatan);
+                    
+
+                }
+            })
+        });
+    }
+
+    function ubahUser() {
+        $('#table_id').on('click','.btn-edit-user',function(e){
+            e.preventDefault();
+            $('#editUserModal').modal('show');
+            let id_user   = $(this).data('id');
+            $.ajax({
+                url         : url + 'user/getUserById',
+                method      : 'post',
+                data        : {id_user : id_user},
+                dataType    : 'json',
+                success     : function(response) {
+                    $('#editUserModal form').attr('action',url + 'User/editUser/'+response.id_user);
+                    $('#editUserModalLabel').html('Ubah User - ' + response.username);
+                    $('#edit_username').val(response.username);
+                    $('#edit_nama_lengkap').val(response.nama_lengkap);
+                    $('#edit_id_jabatan').val(response.id_jabatan).select();
                     
 
                 }

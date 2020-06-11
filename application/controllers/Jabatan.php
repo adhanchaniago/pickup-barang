@@ -43,7 +43,7 @@ class Jabatan extends CI_Controller {
 
 			$row 	= array();
 
-			$row[] 	= "<div class='text-center'>".$no.".</div>";
+			$row[] 	= "<div class='text-center' >".$no.".</div>";
 			$row[] 	= $item->nama_jabatan;
 
 			if ($dataUser['id_jabatan'] == '1') {
