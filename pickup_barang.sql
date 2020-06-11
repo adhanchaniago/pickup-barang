@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Jun 2020 pada 20.09
+-- Waktu pembuatan: 11 Jun 2020 pada 20.25
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -142,7 +142,10 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (62, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:56:12', 1),
 (63, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 01:00:21', 1),
 (64, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 01:01:48', 1),
-(65, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 01:01:59', 1);
+(65, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 01:01:59', 1),
+(66, 'Pengguna andri123 berhasil logout', '2020-06-12 01:16:41', 1),
+(67, 'Pengguna andri123 berhasil login', '2020-06-12 01:22:18', 1),
+(68, 'Pelanggan Agung berhasil menambahkan pesanan Topi', '2020-06-12 01:24:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -174,7 +177,8 @@ CREATE TABLE `pickup_barang` (
 --
 
 INSERT INTO `pickup_barang` (`id_pickup_barang`, `nama_pengirim`, `no_whatsapp_pengirim`, `alamat_pengirim`, `nama_barang`, `berat_barang`, `jumlah_barang`, `nama_penerima`, `no_whatsapp_penerima`, `alamat_penerima`, `tanggal_pemesanan`, `tanggal_kurir_menjemput`, `tanggal_masuk_logistik`, `status`, `no_resi`, `id_layanan_paket`) VALUES
-(1, 'Andri Firman Saputra', '087808675313', 'Jl. Pocis No. 100', 'Buku SPM', 2, 1, 'Andre Farhan Saputra', '081212121212', 'Jl. Pocis No. 101', '2020-06-12 00:19:38', '2020-06-12 01:01:48', '2020-06-12 01:01:59', 3, '626451591895978', 1);
+(1, 'Andri Firman Saputra', '087808675313', 'Jl. Pocis No. 100', 'Buku SPM', 2, 1, 'Andre Farhan Saputra', '081212121212', 'Jl. Pocis No. 101', '2020-06-12 00:19:38', '2020-06-12 01:01:48', '2020-06-12 01:01:59', 3, '626451591895978', 1),
+(2, 'Agung', '0895454521212', 'Buaran no. 2', 'Topi', 2, 11, 'Andre Farhan Saputra', '081212121212', 'Pocis no. 100', '2020-06-12 01:24:29', NULL, NULL, 1, '896701591899869', 1);
 
 -- --------------------------------------------------------
 
@@ -257,13 +261,13 @@ ALTER TABLE `layanan_paket`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
 --
 ALTER TABLE `pickup_barang`
-  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

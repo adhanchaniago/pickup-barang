@@ -168,16 +168,16 @@
 					<section class="bg-light p-3 rounded border border-secondary">
 						<div class="row my-2">
 							<div class="col">
-								<span class="text-white rounded p-1 bg-danger">Pending</span>
+								<div class="text-white rounded p-1 bg-danger"><i class="fas fa-2x fa-stopwatch"></i></div>
 							</div>
 							<div class="col">
-								<span class="text-white rounded p-1 bg-warning">Kurir Menjemput</span>
+								<div class="text-white rounded p-1 bg-warning"><i class="fas fa-2x fa-shipping-fast"></i></div>
 							</div>
 							<div class="col">
-								<span class="text-white rounded p-1 bg-success">Barang Sampai Logistik</span>
+								<div class="text-white rounded p-1 bg-success"><i class="fas fa-2x fa-pallet"></i></div>
 							</div>
 						</div>
-						<div class="row text-center">
+						<div class="row text-center my-2">
 							<?php if ($no_resi['status'] == '1'): ?>
 								<div class="col">
 									<div class="progress">
@@ -198,7 +198,7 @@
 								</div>
 							<?php endif ?>
 						</div>
-						<div class="table-responsive">
+						<div class="table-responsive my-2">
 							<table class="table table-bordered table-hover table-striped text-center">
 								<thead>
 									<tr>
@@ -259,7 +259,7 @@
 			                      <td><?= $no_resi['nama_barang']; ?></td>
 			                    </tr>
 			                    <tr>
-			                      <td class="font-weight-bold">Berat Barang</td>
+			                      <td class="font-weight-bold">Berat Barang (Kg)</td>
 			                      <td class="px-1"> : </td>
 			                      <td><?= $no_resi['berat_barang']; ?></td>
 			                    </tr>
@@ -286,7 +286,7 @@
 			                    <tr>
 			                      <td class="font-weight-bold">Layanan Paket</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['layanan_paket']; ?> | <?= $no_resi['durasi_pengiriman']; ?> Jam</td>
+			                      <td><?= $no_resi['layanan_paket']; ?> | Rp. <?= number_format($no_resi['harga_layanan_paket']); ?> | <?= $no_resi['durasi_pengiriman']; ?> Jam</td>
 			                    </tr>
 			                </table>
 						</div>
