@@ -41,8 +41,8 @@ class LayananPaket_model extends CI_Model {
 		$order 	= $this->input->post('order');
 		if(isset($order) && $order['0']['column']!=0) {
 			$this->db->order_by($column_order[$order['0']['column']], $order['0']['dir']);
-		}elseif(isset($first_order)) {
-			$this->db->order_by(key($first_order), $first_order[key($first_order)]);
+		}elseif(isset($default_order)) {
+			$this->db->order_by(key($default_order), $default_order[key($default_order)]);
 		}
 
 	}
