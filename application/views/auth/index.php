@@ -153,16 +153,148 @@
 <section id="cek_status_pesanan" class="cek_status_pesanan bg-light-blue">
 	<div class="container">
 		<div class="row py-5">
-			<div class="col-lg text-center">
+			<div class="col-lg-12 text-center">
 				<h2>Cek Status Pesanan</h2>
 				<hr>
-				<form action="<?= base_url('auth/cek_status_pesanan'); ?>" method="post">
+				<form action="<?= base_url('auth/cek_status_pesanan#cek_status_pesanan'); ?>" method="post">
 					<div class="form-group">
-						<label for="no_resi">No. Resi</label>
-						<input type="text" name="no_resi" class="form-control" required>
+						<label for="no_resi">No. Resi (15 digit)</label>
+						<input style="font-size: 25px; text-align: center;" type="text" name="no_resi" class="form-control" required value="<?= set_value('no_resi'); ?>" maxlength="15" minlength="15">
 					</div>
 					<button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-search"></i> Lacak</button>
 				</form>
+				<br>
+				<?php if (isset($berhasil)): ?>
+					<section class="bg-light p-3 rounded border border-secondary">
+						<div class="row my-2">
+							<div class="col">
+								<span class="text-white rounded p-1 bg-danger">Pending</span>
+							</div>
+							<div class="col">
+								<span class="text-white rounded p-1 bg-warning">Kurir Menjemput</span>
+							</div>
+							<div class="col">
+								<span class="text-white rounded p-1 bg-success">Barang Sampai Logistik</span>
+							</div>
+						</div>
+						<div class="row text-center">
+							<?php if ($no_resi['status'] == '1'): ?>
+								<div class="col">
+									<div class="progress">
+				                  	  <div class="progress-bar bg-danger" role="progressbar" style="width: 16%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+				                    </div>
+								</div>
+							<?php elseif ($no_resi['status'] == '2'): ?>
+								<div class="col">
+									<div class="progress">
+				                  	  <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+				                    </div>
+								</div>
+							<?php elseif ($no_resi['status'] == '3'): ?>
+								<div class="col">
+									<div class="progress">
+				                  	  <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+				                    </div>
+								</div>
+							<?php endif ?>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover table-striped text-center">
+								<thead>
+									<tr>
+										<?php if ($no_resi['status'] == '1'): ?>
+										<th>Pending</th>
+										<?php elseif ($no_resi['status'] == '2'): ?>
+										<th>Pending</th>
+										<th>Kurir Menjemput</th>
+										<?php elseif ($no_resi['status'] == '3'): ?>
+										<th>Pending</th>
+										<th>Kurir Menjemput</th>
+										<th>Barang Sampai Logistik</th>
+										<?php endif ?>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<?php if ($no_resi['status'] == '1'): ?>
+											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
+										<?php elseif ($no_resi['status'] == '2'): ?>
+											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
+											<td><?= $no_resi['tanggal_kurir_menjemput']; ?></td>
+										<?php elseif ($no_resi['status'] == '3'): ?>
+											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
+											<td><?= $no_resi['tanggal_kurir_menjemput']; ?></td>
+											<td><?= $no_resi['tanggal_masuk_logistik']; ?></td>
+										<?php endif ?>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<br>
+						<div class="table-responsive">
+							<table class="table text-left">
+			                    <tr>
+			                      <td class="font-weight-bold">No. Resi</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['no_resi']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">Nama Pengirim</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['nama_pengirim']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">No. WhatsApp Pengirim</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['no_whatsapp_pengirim']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">Alamat Pengirim</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['alamat_pengirim']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">Nama Barang</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['nama_barang']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">Berat Barang</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['berat_barang']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">Jumlah Barang</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['jumlah_barang']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">Nama Penerima</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['nama_penerima']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">No. WhatsApp Penerima</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['no_whatsapp_penerima']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">Alamat Penerima</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['alamat_penerima']; ?></td>
+			                    </tr>
+			                    <tr>
+			                      <td class="font-weight-bold">Layanan Paket</td>
+			                      <td class="px-1"> : </td>
+			                      <td><?= $no_resi['layanan_paket']; ?> | <?= $no_resi['durasi_pengiriman']; ?> Jam</td>
+			                    </tr>
+			                </table>
+						</div>
+					</section>
+				<?php elseif (isset($error)): ?>
+					<h4>No. Resi tidak ditemukan!</h4>
+					<p>Silahkan periksa kembali No. Resi Anda</p>
+				<?php endif ?>
 			</div>
 		</div>
 	</div>

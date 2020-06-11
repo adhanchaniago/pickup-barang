@@ -75,6 +75,7 @@ class PickupBarang extends CI_Controller {
 			$row 	= array();
 
 			$row[] 	= "<div class='text-center'>".$no.".</div>";
+			$row[] 	= $item->no_resi;
 			$row[] 	= $item->nama_pengirim;
 			$row[] 	= $wa_pengirim;
 			$row[] 	= $item->alamat_pengirim;
@@ -85,6 +86,8 @@ class PickupBarang extends CI_Controller {
 			$row[] 	= $wa_penerima;
 			$row[] 	= $item->alamat_penerima;
 			$row[] 	= $item->tanggal_pemesanan;
+			$row[] 	= $item->tanggal_kurir_menjemput;
+			$row[] 	= $item->tanggal_masuk_logistik;
 			$row[] 	= $item->layanan_paket;
 			$row[] 	= $status;
 

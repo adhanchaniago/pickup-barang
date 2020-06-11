@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jun 2020 pada 17.51
--- Versi server: 10.1.31-MariaDB
--- Versi PHP: 7.2.4
+-- Waktu pembuatan: 11 Jun 2020 pada 20.09
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -111,7 +111,38 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (31, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:17', 1),
 (32, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:37', 1),
 (33, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:48', 1),
-(34, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:58', 1);
+(34, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-10 21:58:58', 1),
+(35, 'Pengguna  berhasil menambahkan pesanan Andri Firman Saputra', '2020-06-11 23:29:08', NULL),
+(36, 'Pengguna andri123 berhasil login', '2020-06-11 23:30:11', 1),
+(37, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-11 23:32:51', 1),
+(38, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-11 23:33:32', 1),
+(39, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-11 23:33:37', 1),
+(40, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-11 23:33:45', 1),
+(41, 'Pengguna andri123 berhasil menambahkan pesanan Andre', '2020-06-11 23:38:54', 1),
+(42, 'Pengguna andri123 berhasil logout', '2020-06-11 23:39:16', 1),
+(43, 'Pelanggan Agnes berhasil menambahkan pesanan gelas kaca', '2020-06-11 23:41:49', NULL),
+(44, 'Pelanggan Agnes berhasil menambahkan pesanan gelas kaca', '2020-06-11 23:42:10', NULL),
+(45, 'Pengguna andri123 berhasil login', '2020-06-11 23:42:25', 1),
+(46, 'Pengguna andri123 berhasil logout', '2020-06-11 23:47:33', 1),
+(47, 'Pelanggan Nadia berhasil menambahkan pesanan sisir', '2020-06-11 23:48:30', NULL),
+(48, 'Pengguna andri123 berhasil login', '2020-06-11 23:52:05', 1),
+(49, 'Pelanggan Andri Firman Saputra berhasil menambahkan pesanan Buku SPM', '2020-06-12 00:19:38', NULL),
+(50, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:22:46', 1),
+(51, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:28:28', 1),
+(52, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:28:33', 1),
+(53, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:28:39', 1),
+(54, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:28:44', 1),
+(55, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:28:50', 1),
+(56, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:30:12', 1),
+(57, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:30:20', 1),
+(58, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:30:51', 1),
+(59, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:30:59', 1),
+(60, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:55:19', 1),
+(61, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:56:01', 1),
+(62, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 00:56:12', 1),
+(63, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 01:00:21', 1),
+(64, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 01:01:48', 1),
+(65, 'Pengguna andri123 berhasil mengubah Pickup Barang ', '2020-06-12 01:01:59', 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +162,10 @@ CREATE TABLE `pickup_barang` (
   `no_whatsapp_penerima` varchar(25) NOT NULL,
   `alamat_penerima` text NOT NULL,
   `tanggal_pemesanan` datetime NOT NULL,
+  `tanggal_kurir_menjemput` datetime DEFAULT NULL,
+  `tanggal_masuk_logistik` datetime DEFAULT NULL,
   `status` int(11) NOT NULL,
+  `no_resi` char(15) NOT NULL,
   `id_layanan_paket` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -139,9 +173,8 @@ CREATE TABLE `pickup_barang` (
 -- Dumping data untuk tabel `pickup_barang`
 --
 
-INSERT INTO `pickup_barang` (`id_pickup_barang`, `nama_pengirim`, `no_whatsapp_pengirim`, `alamat_pengirim`, `nama_barang`, `berat_barang`, `jumlah_barang`, `nama_penerima`, `no_whatsapp_penerima`, `alamat_penerima`, `tanggal_pemesanan`, `status`, `id_layanan_paket`) VALUES
-(5, 'Andri Firman Saputra', '087808675313', 'Jl. Amd Babakan Pocis No. 100 RT02/02', 'Buku Matematika SPM untuk SMK/MAK', 2, 1, 'Andre Farhan Saputra', '087878787878', 'Jl. Amd Babakan Pocis No. 69 RT02/02', '2020-06-09 02:54:20', 3, 2),
-(6, 'Andre', '08780834222', 'Pocis no. 32', 'Gunting', 5, 10, 'Andri', '08787878787', 'Pocis No. 33', '2020-06-09 03:00:36', 2, 2);
+INSERT INTO `pickup_barang` (`id_pickup_barang`, `nama_pengirim`, `no_whatsapp_pengirim`, `alamat_pengirim`, `nama_barang`, `berat_barang`, `jumlah_barang`, `nama_penerima`, `no_whatsapp_penerima`, `alamat_penerima`, `tanggal_pemesanan`, `tanggal_kurir_menjemput`, `tanggal_masuk_logistik`, `status`, `no_resi`, `id_layanan_paket`) VALUES
+(1, 'Andri Firman Saputra', '087808675313', 'Jl. Pocis No. 100', 'Buku SPM', 2, 1, 'Andre Farhan Saputra', '081212121212', 'Jl. Pocis No. 101', '2020-06-12 00:19:38', '2020-06-12 01:01:48', '2020-06-12 01:01:59', 3, '626451591895978', 1);
 
 -- --------------------------------------------------------
 
@@ -194,6 +227,7 @@ ALTER TABLE `log`
 --
 ALTER TABLE `pickup_barang`
   ADD PRIMARY KEY (`id_pickup_barang`),
+  ADD UNIQUE KEY `no_resi` (`no_resi`),
   ADD KEY `id_layanan_paket` (`id_layanan_paket`);
 
 --
@@ -223,13 +257,13 @@ ALTER TABLE `layanan_paket`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
 --
 ALTER TABLE `pickup_barang`
-  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

@@ -8,6 +8,7 @@ class Auth extends CI_Controller {
 		$this->load->model('Auth_model', 'am');
 		$this->load->model('Layout_model','layout');
 		$this->load->model('LayananPaket_model', 'lpm');
+		$this->load->model('PickupBarang_model', 'pbm');
 	}
 	
 	public function index()
@@ -66,23 +67,8 @@ class Auth extends CI_Controller {
 			$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
 			$this->layout->view_auth('auth/index', $data);
 		} else {
-			$data = [
-				'nama_pengirim' 			=> ucwords(strtolower($this->input->post('nama_pengirim', true))),	
-				'no_whatsapp_pengirim' 		=> $this->input->post('no_whatsapp_pengirim', true),	
-				'alamat_pengirim' 			=> $this->input->post('alamat_pengirim', true),	
-				'nama_barang' 				=> $this->input->post('nama_barang', true),	
-				'berat_barang' 				=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 			=> $this->input->post('jumlah_barang', true),	
-				'nama_penerima' 			=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-				'no_whatsapp_penerima' 		=> $this->input->post('no_whatsapp_penerima', true),	
-				'alamat_penerima' 			=> $this->input->post('alamat_penerima', true),	
-				'tanggal_pemesanan' 		=> date('Y-m-d H:i:s'),
-				'id_layanan_paket' 			=> $this->input->post('id_layanan_paket', true)
-			];
-			$this->db->insert('pickup_barang', $data);
-			$this->session->set_flashdata('message-success', 'Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'] . ' untuk kami kirim. Tunggu kurir kami untuk mengambil barang Anda. Terima Kasih :D');
-			$this->mm->createLog('Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'], NULL);
-			redirect('auth');
+			$this->session->set_userdata(['pelanggan' => '1']);
+			$this->pbm->addPickupBarang();
 		}
 	}
 
@@ -96,7 +82,17 @@ class Auth extends CI_Controller {
 			$this->load->view('auth/index', $data);
 			$this->load->view('templates/footer-auth', $data);
 		} else {
-			
+			$data['no_resi'] = $this->pbm->cek_status_pesanan();
+			if ($data['no_resi'] > 0) {
+				$data['berhasil'] = true;
+			} else {
+				$data['error'] = true;
+			}
+			$data['title'] = 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+			$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
+			$this->load->view('templates/header-auth', $data);
+			$this->load->view('auth/index', $data);
+			$this->load->view('templates/footer-auth', $data);
 		}
 	}
 }
