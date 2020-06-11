@@ -18,12 +18,10 @@ if (flashDataFailed) {
 	});
 }
 
-
-$('.btn-delete').on('click', function(e){
+function hapus(e,text,href) {
 	e.preventDefault();
 
-	const text = $(this).data('text');
-	const href = $(this).attr('href');
+	
 
 	Swal.fire({
 	  title: 'Apakah anda yakin?',
@@ -39,6 +37,18 @@ $('.btn-delete').on('click', function(e){
 	    document.location.href = href;
 	  }
 	});
+}
+
+$('#table_id').on('click','.btn-delete', function(e){
+	const text = $(this).data('text');
+	const href = $(this).attr('href');
+	hapus(e,text,href);
+});
+
+$('.btn-delete').on('click', function(e){
+	const text = $(this).data('text');
+	const href = $(this).attr('href');
+	hapus(e,text,href);
 });
 
 

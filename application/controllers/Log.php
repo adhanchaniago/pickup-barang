@@ -6,16 +6,40 @@ class Log extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Main_model', 'mm');
+		$this->load->model('Layout_model','layout');
 		$this->load->model('Log_model', 'lm');
+		$this->mm->check_status_login();
 	}
 	public function index()
 	{
-		$this->mm->check_status_login();
-		$data['dataUser'] = $this->mm->getDataUser();
-		$data['log'] = $this->lm->getAllLog();
-		$data['title'] = 'Log - ' . $data['dataUser']['username'];
-		$this->load->view('templates/header-admin', $data);
-		$this->load->view('log/index', $data);
-		$this->load->view('templates/footer-admin', $data);
+		$data['dataUser'] 		= $this->mm->getDataUser();
+		$data['title'] 			= 'Log - ' . $data['dataUser']['username'];
+		$this->layout->view_admin('log/index', $data);
+	}
+	public function datatable()
+	{
+		$list 		= $this->lm->getDatatable();
+		$data 		= array();
+		$no 		= $this->input->post('start');
+		$dataUser	= $this->mm->getDataUser();
+		foreach ($list as $item) {
+			$no++;
+			$row 	= array();
+
+			$row[] 	= "<div class='text-center' >".$no.".</div>";
+			$row[] 	= $item->username;
+			$row[] 	= $item->isi_log;
+			$row[] 	= $item->tanggal_log;
+
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" 					=> $this->input->post('draw'),
+			"recordsTotal" 			=> $this->lm->countAllDatatable(),
+			"recordsFiltered" 		=> $this->lm->countFilteredDatatable(),
+			"data" 					=> $data
+		);
+
+		echo json_encode($output);
 	}
 }

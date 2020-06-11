@@ -10,13 +10,13 @@ class Admin_model extends CI_Model {
 
 	public function editProfile()
 	{
-		$id_user = $this->session->userdata('id_user');
-		$dataUser = $this->mm->getDataUser();
+		$id_user 		= $this->session->userdata('id_user');
+		$dataUser 		= $this->mm->getDataUser();
 
-		$img_profile = $_FILES['img_profile']['name'];
+		$img_profile 	= $_FILES['img_profile']['name'];
 		if ($img_profile) {
-			$config['upload_path'] = './assets/img/img_profiles/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['upload_path'] 		= './assets/img/img_profiles/';
+			$config['allowed_types'] 	= 'gif|jpg|png|jpeg';
 		
 			$this->load->library('upload', $config);
 		
@@ -29,8 +29,8 @@ class Admin_model extends CI_Model {
 		}
 		
 		$data = [
-			'nama_lengkap' => ucwords(strtolower($this->input->post('nama_lengkap', true))),
-			'id_jabatan' => $this->input->post('id_jabatan', true)
+			'nama_lengkap' 		=> ucwords(strtolower($this->input->post('nama_lengkap', true))),
+			'id_jabatan' 		=> $this->input->post('id_jabatan', true)
 		];
 
 		$this->db->where('user.id_user', $id_user);
@@ -42,15 +42,13 @@ class Admin_model extends CI_Model {
 
 	public function changePassword()
 	{
-		$dataUser = $this->mm->getDataUser();
-		$password_old = $this->input->post('password_old', true);
-		$password_new = $this->input->post('password_new', true);
+		$dataUser 			= $this->mm->getDataUser();
+		$password_old 		= $this->input->post('password_old', true);
+		$password_new 		= $this->input->post('password_new', true);
 		
 		if (password_verify($password_old, $dataUser['password'])) {
-			$password_hash = password_hash($password_new, PASSWORD_DEFAULT);
-			$data = [
-				'password' => $password_hash
-			];
+			$password_hash 		= password_hash($password_new, PASSWORD_DEFAULT);
+			$data["password"] 	= $password_hash;
 			
 			$this->db->where('user.id_user', $dataUser['id_user']);
 			$this->db->update('user', $data);

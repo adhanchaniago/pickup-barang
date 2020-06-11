@@ -18,7 +18,7 @@
       <div class="row my-2">
         <div class="col-lg">
           <div class="table-responsive">
-            <table class="table table-hover table-striped table-bordered" id="table_id">
+            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('log/datatable') ?>">
               <thead>
                 <tr>
                   <th>No</th>
@@ -27,17 +27,6 @@
                   <th>Tanggal Log</th>
                 </tr>
               </thead>
-              <tbody>
-                <?php $i = 1; ?>
-                <?php foreach ($log as $dl): ?>
-                  <tr>
-                    <td><?= $i++; ?></td>
-                    <td><?= $dl['username']; ?></td>
-                    <td><?= $dl['isi_log']; ?></td>
-                    <td><?= $dl['tanggal_log']; ?></td>
-                  </tr>
-                <?php endforeach ?>
-              </tbody>
             </table>
           </div>
         </div>
