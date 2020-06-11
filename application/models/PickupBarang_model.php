@@ -139,98 +139,44 @@ class PickupBarang_model extends CI_Model {
 		$pickup_barang 	= $this->getPickupBarangById($id);
 		$statusLama		= $pickup_barang['status'];
 		$status 		= $this->input->post('status', true);
-		if ($statusLama == '1' AND $status == '2') {
+		if ($status == '2') {
 			$data 			= [
-				'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),	
-				'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
-				'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-				'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
-				'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
 				'tanggal_kurir_menjemput'		=> date('Y-m-d H:i:s'),
-				'status' 						=> $status
+				'tanggal_masuk_logistik'		=> NULL
 			];
-		} elseif ($statusLama == '1' AND $status == '3') {
+		} elseif ($status == '1') {
 			$data 			= [
-				'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),	
-				'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
-				'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-				'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
-				'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-				'tanggal_kurir_menjemput'		=> date('Y-m-d H:i:s'),
-				'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s'),
-				'status' 						=> $status
-			];
-		} elseif ($statusLama == '2' AND $status == '3') {
-			$data 			= [
-				'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),	
-				'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
-				'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-				'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
-				'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-				'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s'),
-				'status' 						=> $status
-			];
-		} elseif ($statusLama == '3' AND $status == '2') {
-			$data 			= [
-				'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),	
-				'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
-				'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-				'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
-				'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-				'tanggal_masuk_logistik'		=> NULL,
-				'status' 						=> $status
-			];
-		} elseif (($statusLama == '3' AND $status == '1') || ($statusLama == '2' AND $status == '1')) {
-			$data 			= [
-				'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),	
-				'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
-				'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-				'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
-				'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
 				'tanggal_kurir_menjemput'		=> NULL,
-				'tanggal_masuk_logistik'		=> NULL,
-				'status' 						=> $status
+				'tanggal_masuk_logistik'		=> NULL
 			];
-		} else {
+		} elseif ($status == '3') {
+			if ($statusLama == '1') {
+				$data 			= [
+					'tanggal_kurir_menjemput'		=> date('Y-m-d H:i:s')
+				];
+			}
 			$data 			= [
-				'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),	
-				'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
-				'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-				'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
-				'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-				'status' 						=> $status
+				'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s')
 			];
 		}
+
+		$data 			= [
+			'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),
+			'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
+			'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
+
+			'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
+			'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
+
+			'nama_barang' 					=> $this->input->post('nama_barang', true),	
+			'berat_barang' 					=> $this->input->post('berat_barang', true),	
+			'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
+			'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
+			'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
+			'status' 						=> $status
+		];
+
+
 
 		$this->db->where('id_pickup_barang', $id);
 		$this->db->update('pickup_barang', $data);
