@@ -15,7 +15,6 @@ class User extends CI_Controller {
 	public function index()
 	{
 		$data['dataUser'] 			= $this->mm->getDataUser();
-		$data['user'] 				= $this->um->getAllUser();
 		$data['jabatan'] 			= $this->jm->getAllJabatan();
 		$data['title'] 				= 'Daftar Pengguna';
 
@@ -87,7 +86,6 @@ class User extends CI_Controller {
 	public function editUser($id)
 	{
 		$data['dataUser'] 			= $this->mm->getDataUser();
-		$data['user'] 				= $this->um->getAllUser();
 		$data['jabatan'] 			= $this->jm->getAllJabatan();
 		$data['title'] 				= 'Daftar Pengguna';
 		

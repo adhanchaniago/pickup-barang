@@ -13,8 +13,33 @@ class Log extends CI_Controller {
 	public function index()
 	{
 		$data['dataUser'] 		= $this->mm->getDataUser();
-		$data['log'] 			= $this->lm->getAllLog();
 		$data['title'] 			= 'Log - ' . $data['dataUser']['username'];
 		$this->layout->view_admin('log/index', $data);
+	}
+	public function datatable()
+	{
+		$list 		= $this->lm->getDatatable();
+		$data 		= array();
+		$no 		= $this->input->post('start');
+		$dataUser	= $this->mm->getDataUser();
+		foreach ($list as $item) {
+			$no++;
+			$row 	= array();
+
+			$row[] 	= "<div class='text-center' >".$no.".</div>";
+			$row[] 	= $item->username;
+			$row[] 	= $item->isi_log;
+			$row[] 	= $item->tanggal_log;
+
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" 					=> $this->input->post('draw'),
+			"recordsTotal" 			=> $this->lm->countAllDatatable(),
+			"recordsFiltered" 		=> $this->lm->countFilteredDatatable(),
+			"data" 					=> $data
+		);
+
+		echo json_encode($output);
 	}
 }
