@@ -17,8 +17,8 @@ class PickupBarang_model extends CI_Model {
 	public function _filterDatatable()
 	{
 		$this->_setDatatable();
-		$column_order 		= [null,"nama_pengirim","no_whatsapp_pengirim","alamat_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","no_whatsapp_penerima","alamat_penerima","tanggal_pemesanan","layanan_paket","status"];
-		$column_search 		= ["nama_pengirim","no_whatsapp_pengirim","alamat_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","no_whatsapp_penerima","alamat_penerima","tanggal_pemesanan","layanan_paket","status"];
+		$column_order 		= [null,"no_resi","nama_pengirim","no_whatsapp_pengirim","alamat_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","no_whatsapp_penerima","alamat_penerima","tanggal_pemesanan","tanggal_masuk_logistik","layanan_paket","status"];
+		$column_search 		= ["no_resi","nama_pengirim","no_whatsapp_pengirim","alamat_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","no_whatsapp_penerima","alamat_penerima","tanggal_pemesanan","tanggal_masuk_logistik","layanan_paket","status"];
 		$default_order 		= ["tanggal_pemesanan"=>"DESC"];
 
 		$search 			= $this->input->post('search');
