@@ -1,9 +1,9 @@
 $(function() {
 	let url 	= $('#data-admin').data('url');
     navbar_active();
+    ubahLayananPaket();
     ubahPickupBarang();
     datatable();
-    
 
 
     function datatable() {
@@ -46,7 +46,6 @@ $(function() {
         });
     }
     function ubahPickupBarang() {
-
         $('#table_id').on('click','.btn-edit-pickupBarang',function(e){
             e.preventDefault();
             $('#editPickupBarangModal').modal('show');
@@ -70,6 +69,29 @@ $(function() {
                     $('#edit_no_whatsapp_penerima').val(response.no_whatsapp_penerima);
                     $('#edit_alamat_penerima').val(response.alamat_penerima);
                     $('#edit_id_layanan_paket').val(response.id_layanan_paket).select();
+
+                }
+            })
+        });
+    }
+
+    function ubahLayananPaket() {
+        $('#table_id').on('click','.btn-edit-layananPaket',function(e){
+            e.preventDefault();
+            $('#editLayananPaketModal').modal('show');
+            let id_layanan_paket   = $(this).data('id');
+            $.ajax({
+                url         : url + 'layananPaket/getLayananPaketById',
+                method      : 'post',
+                data        : {id_layanan_paket : id_layanan_paket},
+                dataType    : 'json',
+                success     : function(response) {
+                    $('#editLayananPaketModal form').attr('action',url + 'layananPaket/editLayananPaket/'+response.id_layanan_paket);
+                    $('#editLayananPaketModalLabel').html('Ubah Layanan Paket - ' + response.layanan_paket);
+                    $('#edit_layanan_paket').val(response.layanan_paket);
+                    $('#edit_harga_layanan_paket').val(response.harga_layanan_paket);
+                    $('#edit_durasi_pengiriman').val(response.durasi_pengiriman);
+                    
 
                 }
             })

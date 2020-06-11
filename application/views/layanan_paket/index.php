@@ -33,7 +33,7 @@
       <div class="row my-2">
         <div class="col-lg">
           <div class="table-responsive">
-            <table class="table table-hover table-striped table-bordered" id="table_id">
+            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('layananPaket/datatable') ?>">
               <thead>
                 <tr>
                   <th>No</th>
@@ -45,61 +45,6 @@
                   <?php endif ?>
                 </tr>
               </thead>
-              <tbody>
-                <?php $i = 1; ?>
-                <?php foreach ($layanan_paket as $dlp): ?>
-                  <tr>
-                    <td><?= $i++; ?></td>
-                    <td><?= $dlp['layanan_paket']; ?></td>
-                    <td><?= number_format($dlp['harga_layanan_paket']); ?></td>
-                    <td><?= $dlp['durasi_pengiriman']; ?></td>
-                    <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
-                      <td>
-                          <a class="m-1 btn btn-success" data-toggle="modal" data-target="#editLayananPaketModal<?= $dlp['id_layanan_paket']; ?>" href=""><i class="fas fa-fw fa-edit"></i></a>
-                          <!-- Edit LayananPaket Modal -->
-                          <div class="modal fade" id="editLayananPaketModal<?= $dlp['id_layanan_paket']; ?>" tabindex="-1" role="dialog" aria-labelledby="editLayananPaketModalLabel<?= $dlp['id_layanan_paket']; ?>" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                              <form method="post" action="<?= base_url('layananPaket/editLayananPaket/' . $dlp['id_layanan_paket']); ?>">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="editLayananPaketModalLabel<?= $dlp['id_layanan_paket']; ?>">Ubah Layanan Paket - <?= $dlp['layanan_paket']; ?></h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div class="form-group">
-                                      <label for="layanan_paket<?= $dlp['id_layanan_paket']; ?>">Layanan Paket</label>
-                                      <input type="text" name="layanan_paket" id="layanan_paket<?= $dlp['id_layanan_paket']; ?>" class="form-control" required value="<?= $dlp['layanan_paket']; ?>">
-                                      <?= form_error('layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="harga_layanan_paket<?= $dlp['id_layanan_paket'] ?>">Harga Layanan Paket (Rp)</label>
-                                      <input type="number" name="harga_layanan_paket" id="harga_layanan_paket<?= $dlp['id_layanan_paket'] ?>" required class="form-control" value="<?= $dlp['harga_layanan_paket']; ?>">
-                                      <?= form_error('harga_layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="durasi_pengiriman<?= $dlp['id_layanan_paket'] ?>">Durasi Pengiriman (Jam)</label>
-                                      <input type="number" name="durasi_pengiriman" id="durasi_pengiriman<?= $dlp['id_layanan_paket'] ?>" required class="form-control" value="<?= $dlp['durasi_pengiriman']; ?>">
-                                      <?= form_error('durasi_pengiriman', '<small class="form-text text-danger">', '</small>'); ?>
-                                    </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                          <?php if ($dataUser['id_jabatan'] == '1'): ?>
-                            <a class="m-1 btn btn-danger btn-delete" data-text="<?= $dlp['layanan_paket']; ?>" href="<?= base_url('layananPaket/deleteLayananPaket/') . $dlp['id_layanan_paket']; ?>"><i class="fas fa-fw fa-trash"></i></a>
-                          <?php endif ?>
-                      </td>
-                    <?php endif ?>
-                  </tr>
-                <?php endforeach ?>
-              </tbody>
             </table>
           </div>
         </div>
@@ -107,6 +52,43 @@
     </div>
   </section>
   <!-- /.content -->
+</div>
+
+<!-- Edit LayananPaket Modal -->
+<div class="modal fade" id="editLayananPaketModal" tabindex="-1" role="dialog" aria-labelledby="editLayananPaketModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="post" action="<?= base_url('layananPaket/editLayananPaket'); ?>">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editLayananPaketModalLabel"> </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="layanan_paket">Layanan Paket</label>
+            <input type="text" name="layanan_paket" id="edit_layanan_paket" class="form-control" required>
+            <?= form_error('layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+          <div class="form-group">
+            <label for="edit_harga_layanan_paket">Harga Layanan Paket (Rp)</label>
+            <input type="number" name="harga_layanan_paket" id="edit_harga_layanan_paket" required class="form-control">
+            <?= form_error('harga_layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+          <div class="form-group">
+            <label for="edit_durasi_pengiriman">Durasi Pengiriman (Jam)</label>
+            <input type="number" name="durasi_pengiriman" id="edit_durasi_pengiriman" required class="form-control">
+            <?= form_error('durasi_pengiriman', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 <!-- Add Layanan Paket Modal -->
