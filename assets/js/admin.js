@@ -1,6 +1,7 @@
 $(function() {
 	let url 	= $('#data-admin').data('url');
     navbar_active();
+    ubahJabatan();
     ubahLayananPaket();
     ubahPickupBarang();
     datatable();
@@ -91,6 +92,27 @@ $(function() {
                     $('#edit_layanan_paket').val(response.layanan_paket);
                     $('#edit_harga_layanan_paket').val(response.harga_layanan_paket);
                     $('#edit_durasi_pengiriman').val(response.durasi_pengiriman);
+                    
+
+                }
+            })
+        });
+    }
+
+    function ubahJabatan() {
+        $('#table_id').on('click','.btn-edit-jabatan',function(e){
+            e.preventDefault();
+            $('#editJabatanModal').modal('show');
+            let id_jabatan   = $(this).data('id');
+            $.ajax({
+                url         : url + 'Jabatan/getJabatanById',
+                method      : 'post',
+                data        : {id_jabatan : id_jabatan},
+                dataType    : 'json',
+                success     : function(response) {
+                    $('#editJabatanModal form').attr('action',url + 'jabatan/editJabatan/'+response.id_jabatan);
+                    $('#editJabatanModalLabel').html('Ubah Layanan Paket - ' + response.nama_jabatan);
+                    $('#edit_nama_jabatan').val(response.nama_jabatan);
                     
 
                 }
