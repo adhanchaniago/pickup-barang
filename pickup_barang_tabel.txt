@@ -1,0 +1,61 @@
+tabel : pickup barang
+- id
+- resi
+- id_pengirim
+- id_penerima
+- id_layanan
+- nama_barang
+- berat_barang
+- jumlah_barang
+- tanggal_pemesanan
+- tanggal_penjemputan
+- tanggal_diterima/tanggal_masuk_logistik
+- status
+
+tabel : pengirim
+- id
+- nama
+- no_wa
+- alamat
+- id_kecamatan
+
+tabel : penerima
+- id
+- nama
+- no_wa
+- alamat
+- id_kecamatan
+
+tabel : jenis_layanan
+- id
+- nama
+
+tabel : layanan_paket
+- id
+- id_jenis_layanan
+- id_kecamatan_asal
+- id_kecamatan_tujuan
+- harga
+- durasi_pengiriman
+
+tabel : kecamatan
+- id
+- nama
+- id_kabupaten/kota
+
+tabel : kabupaten/kota
+- id
+- nama
+- id_provinsi
+
+tabel : provinsi
+
+- id
+- nama_provinsi
+- negara
+
+
+tabel : log 
+tabel : user
+tabel : jabatan
+
