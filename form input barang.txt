@@ -1,0 +1,20 @@
+form 1 (pengirim)
+
+- nama pengirim
+- no wa pengirim
+- alamat pengirim
+- provinsi pengirim
+- kab/kota pengirim
+- kecamatan pengirim
+
+form 2 (bisa plus minus)
+- nama penerima
+- no wa penerima
+- alamat penerima
+- provinsi penerima
+- kab/kota penerima
+- kecamatan penerima
+- layanan
+- nama barang
+- berat
+- jumlah

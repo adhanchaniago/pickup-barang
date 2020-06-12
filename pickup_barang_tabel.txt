@@ -30,13 +30,20 @@ tabel : jenis_layanan
 - id
 - nama
 
+tabel : jenis_paket
+- id
+- nama // contoh : kg,volume
+
 tabel : layanan_paket
 - id
 - id_jenis_layanan
 - id_kecamatan_asal
 - id_kecamatan_tujuan
+- id_jenis_paket
 - harga
 - durasi_pengiriman
+
+
 
 tabel : kecamatan
 - id
