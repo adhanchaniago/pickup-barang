@@ -18,7 +18,7 @@ class Jabatan_model extends CI_Model {
 		$this->_setDatatable();
 		$column_order 		= [null,"nama_jabatan"];
 		$column_search 		= ["nama_jabatan"];
-		$default_order 		= ["nama_jabatan"=>"DESC"];
+		$default_order 		= ["nama_jabatan"=>"ASC"];
 
 		$search 			= $this->input->post('search');
 		$i = 0;

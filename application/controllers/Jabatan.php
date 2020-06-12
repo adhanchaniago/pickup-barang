@@ -36,7 +36,7 @@ class Jabatan extends CI_Controller {
 			if ($item->id_jabatan != 1) {
 				$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-jabatan' data-id='".$item->id_jabatan."'><i class='fas fa-fw fa-edit'></i></a>";
 
-				$button 	.= "<a href='".base_url('jabatan/deleteJabatan/'.$item->id_jabatan) ."'' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->nama_jabatan."'><i class='fas fa-fw fa-trash'></i></a>";
+				$button 	.= "<a href='".base_url('jabatan/deleteJabatan/'.$item->id_jabatan) ."' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->nama_jabatan."'><i class='fas fa-fw fa-trash'></i></a>";
 			}
 
 			$button 	.= "</div>";

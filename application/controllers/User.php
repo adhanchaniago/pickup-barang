@@ -47,7 +47,7 @@ class User extends CI_Controller {
 			if ($item->id_jabatan != 1) {
 				$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-user' data-id='".$item->id_user."'><i class='fas fa-fw fa-edit'></i></a>";
 
-				$button 	.= "<a href='".base_url('user/deleteUser/'.$item->id_user) ."'' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->username."'><i class='fas fa-fw fa-trash'></i></a>";
+				$button 	.= "<a href='".base_url('user/deleteUser/'.$item->id_user) ."' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->username."'><i class='fas fa-fw fa-trash'></i></a>";
 			}
 
 			$button 	.= "</div>";

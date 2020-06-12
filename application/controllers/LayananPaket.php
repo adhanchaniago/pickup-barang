@@ -39,7 +39,7 @@ class LayananPaket extends CI_Controller {
 			$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-layananPaket' data-id='".$item->id_layanan_paket."'><i class='fas fa-fw fa-edit'></i></a>";
 
 			if ($dataUser['id_jabatan'] == 1) {
-				$button 	.= "<a href='".base_url('layananPaket/deleteLayananPaket/'.$item->id_layanan_paket) ."'' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->layanan_paket."'><i class='fas fa-fw fa-trash'></i></a>";
+				$button 	.= "<a href='".base_url('layananPaket/deleteLayananPaket/'.$item->id_layanan_paket) ."' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->layanan_paket."'><i class='fas fa-fw fa-trash'></i></a>";
 			}
 
 			$button 	.= "</div>";
