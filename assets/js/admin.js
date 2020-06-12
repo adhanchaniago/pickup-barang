@@ -112,7 +112,7 @@ $(function() {
                 dataType    : 'json',
                 success     : function(response) {
                     $('#editJabatanModal form').attr('action',url + 'jabatan/editJabatan/'+response.id_jabatan);
-                    $('#editJabatanModalLabel').html('Ubah Layanan Paket - ' + response.nama_jabatan);
+                    $('#editJabatanModalLabel').html('Ubah Jabatan - ' + response.nama_jabatan);
                     $('#edit_nama_jabatan').val(response.nama_jabatan);
                     
 
