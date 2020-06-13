@@ -91,7 +91,7 @@ class LayananPaket_model extends CI_Model {
 
 	public function getAllLayananPaket()
 	{
-		$this->db->order_by('harga_layanan_paket', 'desc');
+		$this->db->order_by('harga', 'desc');
 		return $this->db->get('layanan_paket')->result_array();
 	}
 
@@ -104,7 +104,9 @@ class LayananPaket_model extends CI_Model {
 	{
 		$dataUser 						= $this->mm->getDataUser();
 		$data["layanan_paket"] 			= $this->input->post('layanan_paket',true);
-		$data["harga_layanan_paket"] 	= $this->input->post('harga_layanan_paket',true);
+		$data["id_kecamatan_asal"] 		= $this->input->post('id_kecamatan_asal',true);
+		$data["id_kecamatan_tujuan"] 	= $this->input->post('id_kecamatan_tujuan',true);
+		$data["harga"] 					= $this->input->post('harga',true);
 		$data["durasi_pengiriman"] 		= $this->input->post('durasi_pengiriman',true);
 		$this->db->insert('layanan_paket', $data);
 
@@ -117,7 +119,9 @@ class LayananPaket_model extends CI_Model {
 	{
 		$dataUser 						= $this->mm->getDataUser();
 		$data["layanan_paket"] 			= $this->input->post('layanan_paket',true);
-		$data["harga_layanan_paket"] 	= $this->input->post('harga_layanan_paket',true);
+		$data["id_kecamatan_asal"] 		= $this->input->post('id_kecamatan_asal',true);
+		$data["id_kecamatan_tujuan"] 	= $this->input->post('id_kecamatan_tujuan',true);
+		$data["harga"] 					= $this->input->post('harga',true);
 		$data["durasi_pengiriman"] 		= $this->input->post('durasi_pengiriman',true);
 
 		$this->db->where('id_layanan_paket', $id);

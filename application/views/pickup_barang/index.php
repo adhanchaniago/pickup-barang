@@ -39,18 +39,14 @@
                   <th>No</th>
                   <th>No. Resi</th>
                   <th>Nama Pengirim</th>
-                  <th>No. WA Pengirim</th>
-                  <th>Alamat Pengirim</th>
                   <th>Nama Barang</th>
                   <th>Berat Barang</th>
                   <th>Jumlah Barang</th>
                   <th>Nama Penerima</th>
-                  <th>No. WA Penerima</th>
-                  <th>Alamat Penerima</th>
                   <th>Tanggal Pemesanan</th>
                   <th>Tanggal Kurir Menjemput</th>
                   <th>Tanggal Masuk Logistik</th>
-                  <th>Layanan Paket</th>
+                  <th>Jenis Layanan</th>
                   <th>Status</th>
                   <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
                     <th>Aksi</th>
