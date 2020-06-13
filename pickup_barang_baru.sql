@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Jun 2020 pada 03.21
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.3
+-- Waktu pembuatan: 13 Jun 2020 pada 15.33
+-- Versi server: 10.1.31-MariaDB
+-- Versi PHP: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pickup_barang_baru`
+-- Database: `pickup_barang`
 --
 
 -- --------------------------------------------------------
@@ -32,6 +32,13 @@ CREATE TABLE `jabatan` (
   `id_jabatan` int(11) NOT NULL,
   `nama_jabatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `jabatan`
+--
+
+INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
+(1, 'Administrator\r\n');
 
 -- --------------------------------------------------------
 
@@ -105,8 +112,15 @@ CREATE TABLE `log` (
   `id_log` int(11) NOT NULL,
   `isi_log` text NOT NULL,
   `tanggal_log` datetime NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `log`
+--
+
+INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
+(2, 'Pengguna admin berhasil login', '2020-06-13 20:19:11', 1);
 
 -- --------------------------------------------------------
 
@@ -184,6 +198,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`id_user`, `img_profile`, `nama_lengkap`, `username`, `password`, `id_jabatan`) VALUES
+(1, 'avatar3.png', 'administrator', 'admin', '$2y$10$KA3SCUd9qcZ5K9UPGAwY0OKzRmziXlqKts5bzKtNE3WtLUJchwyH6', 1);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -210,7 +231,8 @@ ALTER TABLE `jenis_paket`
 --
 ALTER TABLE `kabupaten`
   ADD PRIMARY KEY (`id_kabupaten`),
-  ADD KEY `id_provinsi` (`id_provinsi`);
+  ADD KEY `id_provinsi` (`id_provinsi`),
+  ADD KEY `id_provinsi_2` (`id_provinsi`);
 
 --
 -- Indeks untuk tabel `kecamatan`
@@ -234,7 +256,8 @@ ALTER TABLE `layanan_paket`
 --
 ALTER TABLE `log`
   ADD PRIMARY KEY (`id_log`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_user_2` (`id_user`);
 
 --
 -- Indeks untuk tabel `penerima`
@@ -280,7 +303,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenis_layanan`
@@ -316,7 +339,7 @@ ALTER TABLE `layanan_paket`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
@@ -346,7 +369,64 @@ ALTER TABLE `provinsi`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `kabupaten`
+--
+ALTER TABLE `kabupaten`
+  ADD CONSTRAINT `kabupaten_ibfk_1` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id_provinsi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `kecamatan`
+--
+ALTER TABLE `kecamatan`
+  ADD CONSTRAINT `kecamatan_ibfk_1` FOREIGN KEY (`id_kabupaten`) REFERENCES `kabupaten` (`id_kabupaten`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `layanan_paket`
+--
+ALTER TABLE `layanan_paket`
+  ADD CONSTRAINT `layanan_paket_ibfk_1` FOREIGN KEY (`id_jenis_paket`) REFERENCES `jenis_paket` (`id_jenis_paket`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `layanan_paket_ibfk_2` FOREIGN KEY (`id_kecamatan_asal`) REFERENCES `kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `layanan_paket_ibfk_3` FOREIGN KEY (`id_kecamatan_tujuan`) REFERENCES `kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `layanan_paket_ibfk_4` FOREIGN KEY (`id_jenis_layanan`) REFERENCES `jenis_layanan` (`id_jenis_layanan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `log`
+--
+ALTER TABLE `log`
+  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `penerima`
+--
+ALTER TABLE `penerima`
+  ADD CONSTRAINT `penerima_ibfk_1` FOREIGN KEY (`id_kecamatan`) REFERENCES `kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `pengirim`
+--
+ALTER TABLE `pengirim`
+  ADD CONSTRAINT `pengirim_ibfk_1` FOREIGN KEY (`id_kecamatan`) REFERENCES `kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `pickup_barang`
+--
+ALTER TABLE `pickup_barang`
+  ADD CONSTRAINT `pickup_barang_ibfk_1` FOREIGN KEY (`id_layanan`) REFERENCES `layanan_paket` (`id_layanan_paket`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pickup_barang_ibfk_2` FOREIGN KEY (`id_penerima`) REFERENCES `penerima` (`id_penerima`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pickup_barang_ibfk_3` FOREIGN KEY (`id_pengirim`) REFERENCES `pengirim` (`id_pengirim`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
