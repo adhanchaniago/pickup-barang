@@ -10,15 +10,28 @@ class LayananPaket_model extends CI_Model {
 
 	public function _setDatatable()
 	{
-		$this->db->select('*');
+		$this->db->select('*,kec_asal.nama_kecamatan as kec_asal, kec_tujuan.nama_kecamatan as kab_tujuan,
+			kec_asal.nama_kecamatan as kec_asal, kec_tujuan.nama_kecamatan as kec_tujuan,
+			kab_asal.nama_kabupaten as kab_asal, kab_tujuan.nama_kabupaten as kab_tujuan,
+			prov_asal.nama_provinsi as prov_asal, prov_tujuan.nama_provinsi as prov_tujuan,
+			prov_asal.negara as negara_asal, prov_tujuan.negara as negara_tujuan,
+			');
 		$this->db->from('layanan_paket');
+		$this->db->join('jenis_layanan', 'jenis_layanan.id_jenis_layanan = layanan_paket.id_jenis_layanan');
+		$this->db->join('jenis_paket', 'jenis_paket.id_jenis_paket = layanan_paket.id_jenis_paket');
+		$this->db->join('kecamatan kec_asal', 'kec_asal.id_kecamatan = layanan_paket.id_kecamatan_asal');
+		$this->db->join('kecamatan kec_tujuan', 'kec_tujuan.id_kecamatan = layanan_paket.id_kecamatan_tujuan');
+		$this->db->join('kabupaten kab_asal', 'kec_asal.id_kabupaten = kab_asal.id_kabupaten');
+		$this->db->join('provinsi prov_asal', 'kab_asal.id_provinsi = prov_asal.id_provinsi');
+		$this->db->join('kabupaten kab_tujuan', 'kec_tujuan.id_kabupaten = kab_tujuan.id_kabupaten');
+		$this->db->join('provinsi prov_tujuan', 'kab_tujuan.id_provinsi = prov_tujuan.id_provinsi');
 	}
 	public function _filterDatatable()
 	{
 		$this->_setDatatable();
-		$column_order 		= [null,"layanan_paket","harga_layanan_paket","durasi_pengiriman"];
-		$column_search 		= ["layanan_paket","harga_layanan_paket","durasi_pengiriman"];
-		$default_order 		= ["harga_layanan_paket"=>"DESC"];
+		$column_order 		= [null,"jenis_layanan","kec_asal.nama_kecamatan","kec_tujuan.nama_kecamatan","durasi_pengiriman"];
+		$column_search 		= ["jenis_layanan","kec_asal.nama_kecamatan","kec_tujuan.nama_kecamatan","durasi_pengiriman","jenis_paket","nama_kabupaten","nama_provinsi","negara"];
+		$default_order 		= ["harga"=>"DESC"];
 
 		$search 			= $this->input->post('search');
 		$i = 0;

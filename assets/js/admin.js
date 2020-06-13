@@ -26,8 +26,31 @@ $(function() {
         });
     }
 
+    $('select[name=id_provinsi]').on('change',function() {
+        let id_provinsi     = $(this).val();
+        kabupaten(id_provinsi,'select[name=id_kabupaten]');
+    });
+    $('select[name=id_provinsi_asal]').on('change',function() {
+        let id_provinsi     = $(this).val();
+        kabupaten(id_provinsi,'select[name=id_kabupaten_asal]');
+    });
+    $('select[name=id_provinsi_tujuan]').on('change',function() {
+        let id_provinsi     = $(this).val();
+        kabupaten(id_provinsi,'select[name=id_kabupaten_tujuan]');
+    });
 
-
+    $('select[name=id_kabupaten]').on('change',function() {
+        let id_kabupaten     = $(this).val();
+        kecamatan(id_kabupaten,'select[name=id_kecamatan]');
+    });
+    $('select[name=id_kabupaten_asal]').on('change',function() {
+        let id_kabupaten     = $(this).val();
+        kecamatan(id_kabupaten,'select[name=id_kecamatan_asal]');
+    });
+    $('select[name=id_kabupaten_tujuan]').on('change',function() {
+        let id_kabupaten     = $(this).val();
+        kecamatan(id_kabupaten,'select[name=id_kecamatan_tujuan]');
+    });
     
 
     function navbar_active() {
@@ -145,3 +168,41 @@ $(function() {
     }
     
 })
+
+
+function kabupaten(id_provinsi,el,value = '') {
+    if (id_provinsi) {
+        $.ajax({
+            url         : url + 'kabupaten/getKecamatanByProvinsi',
+            data        : {id_provinsi : id_provinsi},
+            method      : 'post',
+            dataType    : 'json',
+            success     : function(response) {
+                let html    = '';
+                for (var i = 0; i < response.length; i++) {
+                    html    += `<option value="${response[i].id_kabupaten}">${response[i].nama_kabupaten}</option>`
+                }
+                $(el).html(html);
+                $(el).val(value).select();
+            }
+        })
+    }
+}
+function kecamatan(id_kabupaten,el,value = '') {
+    if (id_kabupaten) {
+        $.ajax({
+            url         : url + 'kabupaten/getKecamatanByKabupaten',
+            data        : {id_kabupaten : id_kabupaten},
+            method      : 'post',
+            dataType    : 'json',
+            success     : function(response) {
+                let html    = '';
+                for (var i = 0; i < response.length; i++) {
+                    html    += `<option value="${response[i].id_kecamatan}">${response[i].nama_kecamatan}</option>`
+                }
+                $(el).html(html);
+                $(el).val(value).select();
+            }
+        })
+    }
+}

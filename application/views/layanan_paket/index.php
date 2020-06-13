@@ -38,7 +38,10 @@
                 <tr>
                   <th>No</th>
                   <th>Layanan Paket</th>
-                  <th>Harga Layanan Paket (Rp)</th>
+                  <th>Asal</th>
+                  <th>Tujuan</th>
+                  <th>Jenis Paket</th>
+                  <th>Harga(Rp)</th>
                   <th>Durasi Pengiriman (Jam)</th>
                   <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
                     <th>Aksi</th>
@@ -71,10 +74,49 @@
             <input type="text" name="layanan_paket" id="edit_layanan_paket" class="form-control" required>
             <?= form_error('layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
+
           <div class="form-group">
-            <label for="edit_harga_layanan_paket">Harga Layanan Paket (Rp)</label>
-            <input type="number" name="harga_layanan_paket" id="edit_harga_layanan_paket" required class="form-control">
-            <?= form_error('harga_layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
+            <label for="edit_id_provinsi_asal">Provinsi Asal</label>
+            <select name="id_provinsi_asal" id="edit_id_provinsi_asal" class="form-control">
+              <option value="">Pilih</option>
+              <?php foreach ($provinsi as $key): ?>
+                <option value="<?= $key->id_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="edit_id_kabupaten_asal">Kabupaten Asal</label>
+            <select name="id_kabupaten_asal" id="edit_id_kabupaten_asal" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label for="edit_id_kecamatan_asal">Kecamatan Asal</label>
+            <select name="id_kecamatan_asal" id="edit_id_kecamatan_asal" class="form-control" required></select>
+            <?= form_error('id_kecamatan_asal', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+
+          <div class="form-group">
+            <label for="edit_id_provinsi_tujuan">Provinsi Tujuan</label>
+            <select name="id_provinsi_tujuan" id="edit_id_provinsi_tujuan" class="form-control">
+              <option value="">Pilih</option>
+              <?php foreach ($provinsi as $key): ?>
+                <option value="<?= $key->id_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="edit_id_kabupaten_tujuan">Kabupaten Tujuan</label>
+            <select name="id_kabupaten_tujuan" id="edit_id_kabupaten_tujuan" class="form-control" ></select>
+          </div>
+          <div class="form-group">
+            <label for="edit_id_kecamatan_tujuan">Kecamatan Tujuan</label>
+            <select name="id_kecamatan_tujuan" id="edit_id_kecamatan_tujuan" class="form-control" required></select>
+            <?= form_error('id_kecamatan_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+
+          <div class="form-group">
+            <label for="edit_harga">Harga (Rp)</label>
+            <input type="number" name="harga" id="edit_harga" required class="form-control">
+            <?= form_error('harga', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="edit_durasi_pengiriman">Durasi Pengiriman (Jam)</label>
@@ -108,10 +150,57 @@
             <input type="text" name="layanan_paket" id="layanan_paket" required class="form-control" value="<?= set_value('layanan_paket'); ?>">
             <?= form_error('layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
+
           <div class="form-group">
-            <label for="harga_layanan_paket">Harga Layanan Paket (Rp)</label>
-            <input type="number" name="harga_layanan_paket" id="harga_layanan_paket" required class="form-control" value="<?= set_value('harga_layanan_paket'); ?>">
-            <?= form_error('harga_layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
+            <label for="id_provinsi_asal">Provinsi Asal</label>
+            <select name="id_provinsi_asal" id="id_provinsi_asal" class="form-control">
+              <option value="">Pilih</option>
+              <?php foreach ($provinsi as $key): ?>
+                <?php if (set_value("id_provinsi_asal") == $key->id): ?>
+                <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
+                <?php else: ?>
+                <option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
+                <?php endif ?>
+              <?php endforeach ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="id_kabupaten_asal">Kabupaten Asal</label>
+            <select name="id_kabupaten_asal" id="id_kabupaten_asal" class="form-control" onload="kabupaten(<?= set_value('id_provinsi_asal') ?>,'#id_kabupaten_asal','<?= set_value('id_kabupaten_asal') ?>')"></select>
+          </div>
+          <div class="form-group">
+            <label for="id_kecamatan_asal">Kecamatan Asal</label>
+            <select name="id_kecamatan_asal" id="id_kecamatan_asal" class="form-control" onload="kecamatan(<?= set_value('id_kabupaten_asal') ?>,'#id_kecamatan_asal','<?= set_value('id_kecamatan_asal') ?>')" required></select>
+            <?= form_error('id_kecamatan_asal', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+
+          <div class="form-group">
+            <label for="id_provinsi_tujuan">Provinsi Tujuan</label>
+            <select name="id_provinsi_tujuan" id="id_provinsi_tujuan" class="form-control">
+              <option value="">Pilih</option>
+              <?php foreach ($provinsi as $key): ?>
+                <?php if (set_value("id_provinsi_tujuan") == $key->id): ?>
+                <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
+                <?php else: ?>
+                <option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
+                <?php endif ?>
+              <?php endforeach ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="id_kabupaten_tujuan">Kabupaten Tujuan</label>
+            <select name="id_kabupaten_tujuan" id="id_kabupaten_tujuan" class="form-control" onload="kabupaten(<?= set_value('id_provinsi_tujuan') ?>,'#id_kabupaten_tujuan','<?= set_value('id_kabupaten_tujuan') ?>')"></select>
+          </div>
+          <div class="form-group">
+            <label for="id_kecamatan_tujuan">Kecamatan Tujuan</label>
+            <select name="id_kecamatan_tujuan" id="id_kecamatan_tujuan" class="form-control"  onload="kabupaten(<?= set_value('id_kabupaten_tujuan') ?>,'#id_kecamatan_tujuan','<?= set_value('id_kecamatan_tujuan') ?>')" required></select>
+            <?= form_error('id_kecamatan_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+
+          <div class="form-group">
+            <label for="harga">Harga (Rp)</label>
+            <input type="number" name="harga" id="harga" required class="form-control" value="<?= set_value('harga'); ?>">
+            <?= form_error('harga', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="durasi_pengiriman">Durasi Pengiriman (Jam)</label>

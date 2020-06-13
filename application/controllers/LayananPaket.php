@@ -8,6 +8,7 @@ class LayananPaket extends CI_Controller {
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Layout_model','layout');
 		$this->load->model('LayananPaket_model', 'lpm');
+		$this->load->model('Provinsi_model', 'provinsi');
 		$this->mm->check_status_login();
 	}
 
@@ -15,6 +16,7 @@ class LayananPaket extends CI_Controller {
 	{
 		$data['dataUser'] 				= $this->mm->getDataUser();
 		$data['title'] 					= 'Layanan Paket - ' . $data['dataUser']['username'];
+		$data['provinsi']				= $this->provinsi->getAllProvinsi();
 
 		$this->form_validation->set_rules('layanan_paket', 'Layanan Paket', 'required|trim');
 		$this->form_validation->set_rules('harga_layanan_paket', 'Harga Layanan Paket', 'required|trim');
@@ -44,11 +46,15 @@ class LayananPaket extends CI_Controller {
 
 			$button 	.= "</div>";
 
+
 			$row 	= array();
 
 			$row[] 	= "<div class='text-center'>".$no.".</div>";
 			$row[] 	= $item->layanan_paket;
-			$row[] 	= number_format($item->harga_layanan_paket);
+			$row[] 	= $item->kec_asal.','.$item->kab_asal.','.$item->prov_asal.','.$item->negara_asal;
+			$row[] 	= $item->kec_tujuan.','.$item->kab_tujuan.','.$item->prov_tujuan.','.$item->negara_tujuan;
+			$row[] 	= $item->jenis_paket;
+			$row[] 	= number_format($item->harga);
 			$row[] 	= $item->durasi_pengiriman;
 
 			if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2') {
