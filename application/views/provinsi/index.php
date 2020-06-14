@@ -5,11 +5,11 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm header-title">
-          <h1 class="m-0 text-dark">Daftar Jabatan</h1>
+          <h1 class="m-0 text-dark">Daftar Provinsi</h1>
         </div><!-- /.col -->
         <?php if ($dataUser['id_jabatan'] == '1'): ?>
           <div class="col-sm header-button">
-            <button type="button" class="btn btn-primary btn-tambah-jabatan"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</button>
+            <button type="button" class="btn btn-primary btn-tambah-provinsi"><i class="fas fa-fw fa-plus"></i> Tambah Provinsi</button>
           </div>
         <?php endif ?>
       </div><!-- /.row -->
@@ -35,11 +35,12 @@
       <div class="row my-2">
         <div class="col-lg">
           <div class="table-responsive">
-            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('jabatan/datatable') ?>">
+            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('provinsi/datatable') ?>">
               <thead>
                 <tr>
                   <th width="10">No</th>
-                  <th>Nama Jabatan</th>
+                  <th>Nama Provinsi</th>
+                  <th>Negara</th>
                   <?php if ($dataUser['id_jabatan'] == '1'): ?>
                     <th>Aksi</th>
                   <?php endif ?>
@@ -54,8 +55,8 @@
   <!-- /.content -->
 </div>
 
-<!-- Edit Jabatan Modal -->
-<div class="modal fade" id="jabatanModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+<!-- Provinsi Modal -->
+<div class="modal fade" id="provinsiModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form method="post">
       <div class="modal-content">
@@ -66,11 +67,16 @@
           </button>
         </div>
         <div class="modal-body">
-            <input type="hidden" name="id_jabatan" id="id_jabatan">
+          <input type="hidden" name="id_provinsi" id="id_provinsi">
           <div class="form-group">
-            <label for="nama_jabatan">Nama Jabatan</label>
-            <input type="text" name="nama_jabatan" id="nama_jabatan" class="form-control" required value="<?= set_value('nama_jabatan'); ?>" placeholder="Nama Jabatan">
-            <?= form_error('nama_jabatan', '<small class="form-text text-danger">', '</small>'); ?>
+            <label for="nama_provinsi">Nama Provinsi</label>
+            <input type="text" name="nama_provinsi" id="nama_provinsi" class="form-control" required placeholder="Nama Provinsi" value="<?= set_value('nama_provinsi'); ?>">
+            <?= form_error('nama_provinsi', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+           <div class="form-group">
+            <label for="negara">Negara</label>
+            <input type="text" name="negara" id="negara" class="form-control" required placeholder="Negara" value="<?= set_value('negara'); ?>">
+            <?= form_error('negara', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
         </div>
         <div class="modal-footer">

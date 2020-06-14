@@ -5,11 +5,11 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm header-title">
-          <h1 class="m-0 text-dark">Daftar Jabatan</h1>
+          <h1 class="m-0 text-dark">Daftar Kecamatan</h1>
         </div><!-- /.col -->
         <?php if ($dataUser['id_jabatan'] == '1'): ?>
           <div class="col-sm header-button">
-            <button type="button" class="btn btn-primary btn-tambah-jabatan"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</button>
+            <button type="button" class="btn btn-primary btn-tambah-kecamatan"><i class="fas fa-fw fa-plus"></i> Tambah Kecamatan</button>
           </div>
         <?php endif ?>
       </div><!-- /.row -->
@@ -35,11 +35,14 @@
       <div class="row my-2">
         <div class="col-lg">
           <div class="table-responsive">
-            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('jabatan/datatable') ?>">
+            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('kecamatan/datatable') ?>">
               <thead>
                 <tr>
                   <th width="10">No</th>
-                  <th>Nama Jabatan</th>
+                  <th>Nama Kecamatan</th>
+                  <th>Nama Kabupaten</th>
+                  <th>Nama Provinsi</th>
+                  <th>Negara</th>
                   <?php if ($dataUser['id_jabatan'] == '1'): ?>
                     <th>Aksi</th>
                   <?php endif ?>
@@ -54,8 +57,8 @@
   <!-- /.content -->
 </div>
 
-<!-- Edit Jabatan Modal -->
-<div class="modal fade" id="jabatanModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+<!-- Kecamatan Modal -->
+<div class="modal fade" id="kecamatanModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form method="post">
       <div class="modal-content">
@@ -66,11 +69,30 @@
           </button>
         </div>
         <div class="modal-body">
-            <input type="hidden" name="id_jabatan" id="id_jabatan">
+          <input type="hidden" name="id_kecamatan" id="id_kecamatan">
           <div class="form-group">
-            <label for="nama_jabatan">Nama Jabatan</label>
-            <input type="text" name="nama_jabatan" id="nama_jabatan" class="form-control" required value="<?= set_value('nama_jabatan'); ?>" placeholder="Nama Jabatan">
-            <?= form_error('nama_jabatan', '<small class="form-text text-danger">', '</small>'); ?>
+            <label for="nama_kecamatan">Nama Kecamatan</label>
+            <input type="text" name="nama_kecamatan" id="nama_kecamatan" class="form-control" required placeholder="Nama Kecamatan" value="<?= set_value('nama_kecamatan'); ?>">
+            <?= form_error('nama_kecamatan', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+          <div class="form-group">
+            <label for="id_provinsi">Provinsi</label>
+            <select name="id_provinsi" id="id_provinsi" class="form-control" required>
+              <option value="">-- Pilih --</option>
+              <?php foreach ($provinsi as $key): ?>
+                <?php if (set_value('id_provinsi') == $key["id_provinsi"]): ?>
+                  <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
+                <?php else: ?>
+                  <option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
+                <?php endif ?>
+              <?php endforeach ?>
+            </select>
+            <?= form_error('id_provinsi', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+           <div class="form-group">
+            <label for="id_kabupaten">Kabupaten</label>
+            <select name="id_kabupaten" id="id_kabupaten" class="form-control" required></select>
+            <?= form_error('id_kabupaten', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
         </div>
         <div class="modal-footer">

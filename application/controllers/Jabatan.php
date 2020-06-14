@@ -20,7 +20,12 @@ class Jabatan extends CI_Controller {
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('jabatan/index', $data);
 		} else {
-		    $this->jm->addJabatan();
+			if ($this->input->post('id_jabatan')) {
+				$id_jabatan 	= $this->input->post('id_jabatan');
+		    	$this->jm->editJabatan($id_jabatan);
+			}else{
+		    	$this->jm->addJabatan();
+			}
 		}
 	}
 	public function datatable()
@@ -69,18 +74,6 @@ class Jabatan extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function editJabatan($id)
-	{
-		$data['dataUser'] 		= $this->mm->getDataUser();
-		$data['title'] 			= 'Jabatan - ' . $data['dataUser']['username'];
-		
-		$this->form_validation->set_rules('nama_jabatan', 'Nama Jabatan', 'required|trim');
-		if ($this->form_validation->run() == false) {
-			$this->layout->view_admin('jabatan/index', $data);
-		} else {
-		    $this->jm->editJabatan($id);
-		}
-	}
 
 	public function deleteJabatan($id)
 	{

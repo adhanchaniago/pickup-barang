@@ -9,7 +9,7 @@
         </div><!-- /.col -->
         <?php if ($dataUser['id_jabatan'] == '1'): ?>
           <div class="col-sm header-button">
-            <button type="button" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Pengguna</button>
+            <button type="button" class="btn btn-primary btn-tambah-user"><i class="fas fa-fw fa-plus"></i> Tambah Pengguna</button>
           </div>
         <?php endif ?>
       </div><!-- /.row -->
@@ -56,76 +56,22 @@
   </section>
   <!-- /.content -->
 </div>
-
-<!-- Edit User Modal -->
-<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <form method="post" action="<?= base_url('user/editUser/')  ?>" enctype="multipart/form-data">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editUserModalLabel"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <div class="text-center">
-              <a href="<?= base_url('assets/img/img_profiles/default.png'); ?>" class="enlarge check_enlarge_photo">
-                <img style="width: 50%" src="<?= base_url('assets/img/img_profiles/default.png'); ?>" class="img-thumbnail rounded-circle img-fluid check_photo" alt="Photo">
-              </a>
-            </div>
-            <div><small>Ketuk gambar untuk memperbesar</small></div>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input photo" id="img_profile" name="img_profile">
-              <label for="img_profile" class="custom-file-label">Pilih Foto</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Username</label>
-            <input style="cursor: not-allowed;" class="form-control" id="edit_username" disabled type="text">
-          </div>
-          <div class="form-group">
-            <label for="nama_lengkap">Nama Lengkap</label>
-            <input type="text" name="nama_lengkap" id="edit_nama_lengkap" required class="form-control">
-            <?= form_error('nama_lengkap', '<small class="form-text text-danger">', '</small>'); ?>
-          </div>
-          <div class="form-group">
-            <label for="id_jabatan">Nama jabatan</label>
-            <select name="id_jabatan" id="edit_id_jabatan" class="form-control">
-              <?php foreach ($jabatan as $dj): ?>
-                <?php if ($dj['id_jabatan'] !== '1'): ?>
-                  <option value="<?= $dj['id_jabatan']; ?>"><?= $dj['nama_jabatan']; ?></option>
-                <?php endif ?>
-              <?php endforeach ?>
-            </select>
-            <?= form_error('username', '<small class="form-text text-danger">', '</small>'); ?>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
-          <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Add User Modal -->
-<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+<!-- User Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="addUserModalLabel">Tambah Pengguna</h5>
+          <h5 class="modal-title" id="label">Tambah Pengguna</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+          <input type="hidden" name="id_user" id="id_user">
           <div class="form-group">
             <div class="text-center">
-              <a href="<?= base_url('assets/img/img_profiles/default.png'); ?>" class="enlarge check_enlarge_photo">
+              <a href="<?= base_url('assets/img/img_profiles/default.png'); ?>" class="enlarge check_enlarge_photo" id="photo">
                 <img style="width: 50%" src="<?= base_url('assets/img/img_profiles/default.png'); ?>" class="img-thumbnail rounded-circle img-fluid check_photo" alt="Photo">
               </a>
             </div>
@@ -137,12 +83,12 @@
           </div>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" required class="form-control" value="<?= set_value('username'); ?>">
+            <input type="text" name="username" id="username" required class="form-control" value="<?= set_value('username'); ?>" placeholder="Username">
             <?= form_error('username', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="nama_lengkap">Nama Lengkap</label>
-            <input type="text" name="nama_lengkap" id="nama_lengkap" required class="form-control" value="<?= set_value('nama_lengkap'); ?>">
+            <input type="text" name="nama_lengkap" id="nama_lengkap" required class="form-control" value="<?= set_value('nama_lengkap'); ?>"  placeholder="Nama Lengkap">
             <?= form_error('nama_lengkap', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
@@ -158,17 +104,18 @@
           </div>
           <div class="form-group">
             <label for="password_new">Password Baru</label>
-            <input required type="password" name="password_new" id="password_new" class="form-control">
+            <input type="password" name="password_new" id="password_new" class="form-control"  placeholder="Password Baru">
             <?= form_error('password_new', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="password_verify">Password Verifikasi</label>
-            <input required type="password" name="password_verify" id="password_verify" class="form-control">
+            <input type="password" name="password_verify" id="password_verify" class="form-control"   placeholder="Password Verifikasi">
             <?= form_error('password_verify', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
+          <button type="reset" class="d-none" id="reset"></button>
           <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
         </div>
       </div>

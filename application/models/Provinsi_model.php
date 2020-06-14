@@ -115,14 +115,14 @@ class Provinsi_model extends CI_Model {
 	public function deleteProvinsi($id)
 	{
 		$dataUser 						= $this->mm->getDataUser();
-		if ($dataUser['id_provinsi'] !== '1') {
+		if ($dataUser['id_jabatan'] !== '1') {
 			$this->session->set_flashdata('message-failed', 'Pengguna ' . $dataUser['username'] . ' tidak memiliki hak akses menghapus data provinsi');
 			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mencoba menghapus data Provinsi', $dataUser['id_user']);
 			redirect('provinsi');
 		}
 
 		$data['provinsi']		= $this->getProvinsiById($id);
-		$provinsi 				= $data['provinsi']['provinsi'];
+		$provinsi 				= $data['provinsi']['nama_provinsi'];
 		
 		$this->db->delete('provinsi', ['id_provinsi' => $id]);
 		$this->session->set_flashdata('message-success', 'Provinsi ' . $provinsi . ' berhasil dihapus');
