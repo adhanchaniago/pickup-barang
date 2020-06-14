@@ -94,7 +94,6 @@ $(function() {
                 data        : {id_layanan_paket : id_layanan_paket},
                 dataType    : 'json',
                 success     : function(response) {
-                    console.log(response);
                     $(modal + ' #label').html('Ubah Layanan Paket - ' + response.layanan_paket);
                     $(modal + ' #id_layanan_paket').val(response.id_layanan_paket);
                     $(modal + ' #harga').val(response.harga);
@@ -102,11 +101,11 @@ $(function() {
                     $(modal + ' #id_jenis_paket').val(response.id_jenis_paket).select();
                     $(modal + ' #id_jenis_layanan').val(response.id_jenis_layanan).select();
                     $(modal + ' #id_provinsi_asal').val(response.prov_asal).select();
-                    $(modal + ' #id_provinsi_tujuan').val(response.prov_asal).select();
+                    $(modal + ' #id_provinsi_tujuan').val(response.prov_tujuan).select();
                     selectKabupaten(response.prov_asal,modal + ' #id_kabupaten_asal',response.kab_asal);
                     selectKecamatan(response.kab_asal,modal + ' #id_kecamatan_asal',response.kec_asal);
-                    selectKabupaten(response.prov_asal,modal + ' #id_kabupaten_tujuan',response.kab_asal);
-                    selectKecamatan(response.kab_asal,modal + ' #id_kecamatan_tujuan',response.kec_tujuan);
+                    selectKabupaten(response.prov_tujuan,modal + ' #id_kabupaten_tujuan',response.kab_tujuan);
+                    selectKecamatan(response.kab_tujuan,modal + ' #id_kecamatan_tujuan',response.kec_tujuan);
                 }
             })
         });
