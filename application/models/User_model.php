@@ -20,7 +20,7 @@ class User_model extends CI_Model {
 		$this->_setDatatable();
 		$column_order 		= [null,"username","nama_lengkap","nama_jabatan"];
 		$column_search 		= ["username","nama_lengkap","nama_jabatan"];
-		$default_order 		= ["username"=>"DESC"];
+		$default_order 		= ["username"=>"ASC"];
 
 		$search 			= $this->input->post('search');
 		$i = 0;

@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $('.js-member-basic-single').select2();
+    $('.js-basic-single').select2();
 });

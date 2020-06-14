@@ -54,7 +54,7 @@
   <!-- /.content -->
 </div>
 
-<!-- Edit Jabatan Modal -->
+<!-- Jabatan Modal -->
 <div class="modal fade" id="jabatanModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form method="post">

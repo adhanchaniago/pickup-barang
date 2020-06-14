@@ -78,6 +78,7 @@ class Provinsi_model extends CI_Model {
 
 	public function getAllProvinsi()
 	{
+		$this->db->order_by('nama_provinsi', 'asc');
 		return $this->db->get('provinsi')->result_array();
 	}
 

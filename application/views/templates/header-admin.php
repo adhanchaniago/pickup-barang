@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/vendor/adminlte-3.0.5/adminlte.min.css'); ?>">
     <!-- overlayScrollbars CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/vendor/overlayScrollbars-1.11.0/css/OverlayScrollbars.min.css'); ?>">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/select2-4.0.13/select2.min.css'); ?>">
     
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">  

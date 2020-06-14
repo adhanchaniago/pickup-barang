@@ -78,6 +78,7 @@ class JenisPaket_model extends CI_Model {
 
 	public function getAllJenisPaket()
 	{
+		$this->db->order_by('jenis_paket', 'asc');
 		return $this->db->get('jenis_paket')->result_array();
 	}
 

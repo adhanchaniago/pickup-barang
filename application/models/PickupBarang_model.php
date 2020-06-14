@@ -12,7 +12,7 @@ class PickupBarang_model extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('pickup_barang');
-		$this->db->join('layanan_paket', 'pickup_barang.id_layanan=layanan_paket.id_layanan_paket');
+		$this->db->join('layanan_paket', 'pickup_barang.id_layanan_paket=layanan_paket.id_layanan_paket');
 	}
 	public function _filterDatatable()
 	{
@@ -80,7 +80,7 @@ class PickupBarang_model extends CI_Model {
 	public function getAllPickupBarang()
 	{
 		$this->db->select('*');
-		$this->db->join('layanan_paket', 'pickup_barang.id_layanan=layanan_paket.id_layanan_paket');
+		$this->db->join('layanan_paket', 'pickup_barang.id_layanan_paket=layanan_paket.id_layanan_paket');
 		$this->db->order_by('tanggal_pemesanan', 'desc');
 		return $this->db->get('pickup_barang')->result_array();
 	}
