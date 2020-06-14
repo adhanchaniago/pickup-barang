@@ -47,9 +47,9 @@
 			<div class="col-lg text-center px-5">
 				<h2>Tenang Kami</h2>
 				<hr>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit fugiat, quis a optio? Vero sapiente ab suscipit consequuntur iure nam obcaecati fugit numquam adipisci excepturi reiciendis reprehenderit, ut minima, sit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit commodi, provident asperiores ullam, inventore sit alias accusamus saepe mollitia voluptas eos deleniti consectetur tempora hic porro molestiae fuga temporibus voluptatem!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse magnam debitis neque quos eos obcaecati perspiciatis sit quibusdam. Ipsa, odio illo animi consequatur voluptate natus officiis magni fugit quisquam dolore dolorum et iusto itaque, quasi amet architecto aliquam esse. Autem expedita velit, deserunt assumenda sequi facilis corporis recusandae hic ipsam.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam ipsa laudantium minima natus doloribus at maxime ab, delectus, saepe sed debitis, id in voluptatibus, officiis optio accusantium magni nisi. Consequuntur voluptate dolores, maiores quod, eos sit expedita ipsum quisquam recusandae corrupti veritatis nam placeat voluptatem quasi! Ipsam cum totam aut, commodi quo perspiciatis eveniet amet aspernatur fuga reprehenderit, nesciunt, ipsa dolorum aliquid temporibus nam. Itaque nesciunt totam, soluta ex enim. Nisi eum adipisci libero sint, suscipit? Molestias laudantium nesciunt hic optio, fugiat, numquam delectus quia totam temporibus!</p>
+				<p>JNE merupakan perusahaan yang bergerak dalam bidang pengiriman dan logistik yang bermarkas di Jakarta, Indonesia. Nama resminya adalah Tiki Jalur Nugraha Ekakurir (Tiki JNE).</p>
+				<p>JNE Tangsel BSD Nusaloka merupakan salah satu cabang JNE untuk memperluas jangkauan para pelanggan yang ingin mengirimkan barangnya kepada kerabat, teman, pembeli, dan lain-lain. Pada JNE ini kami memiliki fitur <i>special</i> yaitu, dapat memesan kurir untuk menjemput barangnya supaya tidak repot-repot datang ke cabang terdekat.</p>
+				<p>Caranya cukup mudah yaitu, tekan tombol Buat Pesanan pada bagian navbar, atau scroll kebawah hingga menemukan formulir mengisi pesanan Anda.</p>
 			</div>
 		</div>
 	</div>
