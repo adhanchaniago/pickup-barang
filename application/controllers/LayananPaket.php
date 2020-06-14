@@ -9,6 +9,8 @@ class LayananPaket extends CI_Controller {
 		$this->load->model('Layout_model','layout');
 		$this->load->model('LayananPaket_model', 'lpm');
 		$this->load->model('Provinsi_model', 'provinsi');
+		$this->load->model('JenisLayanan_model','jenisLayanan');
+		$this->load->model('JenisPaket_model','jenisPaket');
 		$this->mm->check_status_login();
 	}
 
@@ -17,14 +19,28 @@ class LayananPaket extends CI_Controller {
 		$data['dataUser'] 				= $this->mm->getDataUser();
 		$data['title'] 					= 'Layanan Paket - ' . $data['dataUser']['username'];
 		$data['provinsi']				= $this->provinsi->getAllProvinsi();
+		$data['jenis_paket']			= $this->jenisPaket->getAllJenisPaket();
+		$data['jenis_layanan']			= $this->jenisLayanan->getAllJenisLayanan();
 
-		$this->form_validation->set_rules('layanan_paket', 'Layanan Paket', 'required|trim');
-		$this->form_validation->set_rules('harga_layanan_paket', 'Harga Layanan Paket', 'required|trim');
+		$this->form_validation->set_rules('harga', 'Harga', 'required|trim');
 		$this->form_validation->set_rules('durasi_pengiriman', 'Durasi Pengiriman', 'required|trim');
+		$this->form_validation->set_rules('id_jenis_paket', 'Jenis Paket', 'required|trim');
+		$this->form_validation->set_rules('id_jenis_layanan', 'Jenis Layanan', 'required|trim');
+		$this->form_validation->set_rules('id_kecamatan_asal', 'Kecamatan Asal', 'required|trim');
+		$this->form_validation->set_rules('id_kecamatan_tujuan', 'Kecamatan Tujuan', 'required|trim');
+		$this->form_validation->set_rules('id_kabupaten_asal', 'Kabupaten Asal', 'required|trim');
+		$this->form_validation->set_rules('id_kabupaten_tujuan', 'Kabupaten Tujuan', 'required|trim');
+		$this->form_validation->set_rules('id_provinsi_asal', 'Provinsi Asal', 'required|trim');
+		$this->form_validation->set_rules('id_provinsi_tujuan', 'Provinsi Tujuan', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('layanan_paket/index', $data);
 		} else {
-		    $this->lpm->addLayananPaket();
+			if ($this->input->post('id_layanan_paket')) {
+				$id_layanan_paket 	= $this->input->post('id_layanan_paket');
+		    	$this->lpm->editLayananPaket($id_layanan_paket);
+			}else{
+		    	$this->lpm->addLayananPaket();
+			}
 		}
 	}
 
@@ -41,7 +57,7 @@ class LayananPaket extends CI_Controller {
 			$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-layananPaket' data-id='".$item->id_layanan_paket."'><i class='fas fa-fw fa-edit'></i></a>";
 
 			if ($dataUser['id_jabatan'] == 1) {
-				$button 	.= "<a href='".base_url('layananPaket/deleteLayananPaket/'.$item->id_layanan_paket) ."' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->layanan_paket."'><i class='fas fa-fw fa-trash'></i></a>";
+				$button 	.= "<a href='".base_url('layananPaket/deleteLayananPaket/'.$item->id_layanan_paket) ."' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->jenis_layanan."'><i class='fas fa-fw fa-trash'></i></a>";
 			}
 
 			$button 	.= "</div>";
@@ -50,7 +66,7 @@ class LayananPaket extends CI_Controller {
 			$row 	= array();
 
 			$row[] 	= "<div class='text-center'>".$no.".</div>";
-			$row[] 	= $item->layanan_paket;
+			$row[] 	= $item->jenis_layanan;
 			$row[] 	= $item->kec_asal.','.$item->kab_asal.','.$item->prov_asal.','.$item->negara_asal;
 			$row[] 	= $item->kec_tujuan.','.$item->kab_tujuan.','.$item->prov_tujuan.','.$item->negara_tujuan;
 			$row[] 	= $item->jenis_paket;
@@ -78,22 +94,6 @@ class LayananPaket extends CI_Controller {
 		$result 			= $this->lpm->getLayananPaketById($id_layanan_paket);
 
 		echo json_encode($result);
-	}
-
-	public function editLayananPaket($id)
-	{
-
-		$data['dataUser'] 				= $this->mm->getDataUser();
-		$data['title'] 					= 'Layanan Paket - ' . $data['dataUser']['username'];
-
-		$this->form_validation->set_rules('layanan_paket', 'Layanan Paket', 'required|trim');
-		$this->form_validation->set_rules('harga_layanan_paket', 'Harga Layanan Paket', 'required|trim');
-		$this->form_validation->set_rules('durasi_pengiriman', 'Durasi Pengiriman', 'required|trim');
-		if ($this->form_validation->run() == false) {
-			$this->layout->view_admin('layanan_paket/index', $data);
-		} else {
-		    $this->lpm->editLayananPaket($id);
-		}
 	}
 
 	public function deleteLayananPaket($id)

@@ -80,8 +80,8 @@ class Kecamatan extends CI_Controller {
 	}
 	public function getKecamatanByKabupaten()
 	{
-		$id_kecamatan 		= $this->input->post('id_kecamatan');
-		$result 			= $this->kecamatan->getKecamatanByKabupaten($id_kecamatan);
+		$id_kabupaten 		= $this->input->post('id_kabupaten');
+		$result 			= $this->kecamatan->getKecamatanByKabupaten($id_kabupaten);
 
 		echo json_encode($result);
 	}

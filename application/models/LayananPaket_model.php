@@ -10,11 +10,11 @@ class LayananPaket_model extends CI_Model {
 
 	public function _setDatatable()
 	{
-		$this->db->select('*,kec_asal.nama_kecamatan as kec_asal, kec_tujuan.nama_kecamatan as kab_tujuan,
+		$this->db->select('*,
 			kec_asal.nama_kecamatan as kec_asal, kec_tujuan.nama_kecamatan as kec_tujuan,
 			kab_asal.nama_kabupaten as kab_asal, kab_tujuan.nama_kabupaten as kab_tujuan,
 			prov_asal.nama_provinsi as prov_asal, prov_tujuan.nama_provinsi as prov_tujuan,
-			prov_asal.negara as negara_asal, prov_tujuan.negara as negara_tujuan,
+			prov_asal.negara as negara_asal, prov_tujuan.negara as negara_tujuan
 			');
 		$this->db->from('layanan_paket');
 		$this->db->join('jenis_layanan', 'jenis_layanan.id_jenis_layanan = layanan_paket.id_jenis_layanan');
@@ -29,8 +29,8 @@ class LayananPaket_model extends CI_Model {
 	public function _filterDatatable()
 	{
 		$this->_setDatatable();
-		$column_order 		= [null,"jenis_layanan","kec_asal.nama_kecamatan","kec_tujuan.nama_kecamatan","durasi_pengiriman"];
-		$column_search 		= ["jenis_layanan","kec_asal.nama_kecamatan","kec_tujuan.nama_kecamatan","durasi_pengiriman","jenis_paket","nama_kabupaten","nama_provinsi","negara"];
+		$column_order 		= [null,"jenis_layanan","kec_asal","kec_tujuan","durasi_pengiriman"];
+		$column_search 		= ["jenis_layanan","kec_asal","kec_tujuan","durasi_pengiriman","jenis_paket","kab_asal","kab_tujuan","prov_asal","prov_tujuan","negara"];
 		$default_order 		= ["harga"=>"DESC"];
 
 		$search 			= $this->input->post('search');
@@ -97,13 +97,25 @@ class LayananPaket_model extends CI_Model {
 
 	public function getLayananPaketById($id)
 	{
+		$this->db->select('*,
+			kec_asal.id_kecamatan as kec_asal, kec_tujuan.id_kecamatan as kec_tujuan,
+			kab_asal.id_kabupaten as kab_asal, kab_tujuan.id_kabupaten as kab_tujuan,
+			prov_asal.id_provinsi as prov_asal, prov_tujuan.id_provinsi as prov_tujuan
+			');
+		$this->db->join('kecamatan kec_asal', 'kec_asal.id_kecamatan = layanan_paket.id_kecamatan_asal');
+		$this->db->join('kecamatan kec_tujuan', 'kec_tujuan.id_kecamatan = layanan_paket.id_kecamatan_tujuan');
+		$this->db->join('kabupaten kab_asal', 'kec_asal.id_kabupaten = kab_asal.id_kabupaten');
+		$this->db->join('provinsi prov_asal', 'kab_asal.id_provinsi = prov_asal.id_provinsi');
+		$this->db->join('kabupaten kab_tujuan', 'kec_tujuan.id_kabupaten = kab_tujuan.id_kabupaten');
+		$this->db->join('provinsi prov_tujuan', 'kab_tujuan.id_provinsi = prov_tujuan.id_provinsi');
 		return $this->db->get_where('layanan_paket', ['id_layanan_paket' => $id])->row_array();
 	}
 
 	public function addLayananPaket()
 	{
 		$dataUser 						= $this->mm->getDataUser();
-		$data["layanan_paket"] 			= $this->input->post('layanan_paket',true);
+		$data["id_jenis_paket"] 		= $this->input->post('id_jenis_paket',true);
+		$data["id_jenis_layanan"] 		= $this->input->post('id_jenis_layanan',true);
 		$data["id_kecamatan_asal"] 		= $this->input->post('id_kecamatan_asal',true);
 		$data["id_kecamatan_tujuan"] 	= $this->input->post('id_kecamatan_tujuan',true);
 		$data["harga"] 					= $this->input->post('harga',true);
@@ -118,7 +130,8 @@ class LayananPaket_model extends CI_Model {
 	public function editLayananPaket($id)
 	{
 		$dataUser 						= $this->mm->getDataUser();
-		$data["layanan_paket"] 			= $this->input->post('layanan_paket',true);
+		$data["id_jenis_paket"] 		= $this->input->post('id_jenis_paket',true);
+		$data["id_jenis_layanan"] 		= $this->input->post('id_jenis_layanan',true);
 		$data["id_kecamatan_asal"] 		= $this->input->post('id_kecamatan_asal',true);
 		$data["id_kecamatan_tujuan"] 	= $this->input->post('id_kecamatan_tujuan',true);
 		$data["harga"] 					= $this->input->post('harga',true);

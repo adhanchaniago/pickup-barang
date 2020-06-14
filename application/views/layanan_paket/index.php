@@ -8,7 +8,7 @@
           <h1 class="m-0 text-dark">Daftar Layanan Paket</h1>
         </div><!-- /.col -->
         <div class="col-sm header-button">
-          <button type="button" data-toggle="modal" data-target="#addLayananPaketModal" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Layanan Paket</button>
+          <button type="button" class="btn btn-primary btn-tambah-layananPaket"><i class="fas fa-fw fa-plus"></i> Tambah Layanan Paket</button>
         </div>
       </div><!-- /.row -->
       <div class="row my-2">
@@ -30,6 +30,7 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
+
       <div class="row my-2">
         <div class="col-lg">
           <div class="table-responsive">
@@ -37,7 +38,7 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Layanan Paket</th>
+                  <th>Jenis Layanan</th>
                   <th>Asal</th>
                   <th>Tujuan</th>
                   <th>Jenis Paket</th>
@@ -57,98 +58,46 @@
   <!-- /.content -->
 </div>
 
-<!-- Edit LayananPaket Modal -->
-<div class="modal fade" id="editLayananPaketModal" tabindex="-1" role="dialog" aria-labelledby="editLayananPaketModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <form method="post" action="<?= base_url('layananPaket/editLayananPaket'); ?>">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editLayananPaketModalLabel"> </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="layanan_paket">Layanan Paket</label>
-            <input type="text" name="layanan_paket" id="edit_layanan_paket" class="form-control" required>
-            <?= form_error('layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
-          </div>
-
-          <div class="form-group">
-            <label for="edit_id_provinsi_asal">Provinsi Asal</label>
-            <select name="id_provinsi_asal" id="edit_id_provinsi_asal" class="form-control">
-              <option value="">Pilih</option>
-              <?php foreach ($provinsi as $key): ?>
-                <option value="<?= $key->id_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
-              <?php endforeach ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="edit_id_kabupaten_asal">Kabupaten Asal</label>
-            <select name="id_kabupaten_asal" id="edit_id_kabupaten_asal" class="form-control"></select>
-          </div>
-          <div class="form-group">
-            <label for="edit_id_kecamatan_asal">Kecamatan Asal</label>
-            <select name="id_kecamatan_asal" id="edit_id_kecamatan_asal" class="form-control" required></select>
-            <?= form_error('id_kecamatan_asal', '<small class="form-text text-danger">', '</small>'); ?>
-          </div>
-
-          <div class="form-group">
-            <label for="edit_id_provinsi_tujuan">Provinsi Tujuan</label>
-            <select name="id_provinsi_tujuan" id="edit_id_provinsi_tujuan" class="form-control">
-              <option value="">Pilih</option>
-              <?php foreach ($provinsi as $key): ?>
-                <option value="<?= $key->id_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
-              <?php endforeach ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="edit_id_kabupaten_tujuan">Kabupaten Tujuan</label>
-            <select name="id_kabupaten_tujuan" id="edit_id_kabupaten_tujuan" class="form-control" ></select>
-          </div>
-          <div class="form-group">
-            <label for="edit_id_kecamatan_tujuan">Kecamatan Tujuan</label>
-            <select name="id_kecamatan_tujuan" id="edit_id_kecamatan_tujuan" class="form-control" required></select>
-            <?= form_error('id_kecamatan_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
-          </div>
-
-          <div class="form-group">
-            <label for="edit_harga">Harga (Rp)</label>
-            <input type="number" name="harga" id="edit_harga" required class="form-control">
-            <?= form_error('harga', '<small class="form-text text-danger">', '</small>'); ?>
-          </div>
-          <div class="form-group">
-            <label for="edit_durasi_pengiriman">Durasi Pengiriman (Jam)</label>
-            <input type="number" name="durasi_pengiriman" id="edit_durasi_pengiriman" required class="form-control">
-            <?= form_error('durasi_pengiriman', '<small class="form-text text-danger">', '</small>'); ?>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
-          <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Add Layanan Paket Modal -->
-<div class="modal fade" id="addLayananPaketModal" tabindex="-1" role="dialog" aria-labelledby="addLayananPaketModalLabel" aria-hidden="true">
+<!-- Layanan Paket Modal -->
+<div class="modal fade" id="layananPaketModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form method="post">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="addLayananPaketModalLabel">Tambah Layanan Paket</h5>
+          <h5 class="modal-title" id="label">Tambah Layanan Paket</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+          <input type="hidden" name="id_layanan_paket" id="id_layanan_paket">
+
           <div class="form-group">
-            <label for="layanan_paket">Layanan Paket</label>
-            <input type="text" name="layanan_paket" id="layanan_paket" required class="form-control" value="<?= set_value('layanan_paket'); ?>">
-            <?= form_error('layanan_paket', '<small class="form-text text-danger">', '</small>'); ?>
+            <label for="id_jenis_paket">Jenis Paket</label>
+            <select name="id_jenis_paket" id="id_jenis_paket" class="form-control">
+              <option value="">Pilih</option>
+              <?php foreach ($jenis_paket as $key): ?>
+                <?php if (set_value("id_jenis_paket") == $key["id_jenis_paket"]): ?>
+                <option value="<?= $key["id_jenis_paket"]; ?>" selected><?= $key["jenis_paket"]; ?></option>
+                <?php else: ?>
+                <option value="<?= $key["id_jenis_paket"]; ?>"><?= $key["jenis_paket"]; ?></option>
+                <?php endif ?>
+              <?php endforeach ?>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="id_jenis_layanan">Jenis Layanan</label>
+            <select name="id_jenis_layanan" id="id_jenis_layanan" class="form-control">
+              <option value="">Pilih</option>
+              <?php foreach ($jenis_layanan as $key): ?>
+                <?php if (set_value("id_jenis_layanan") == $key["id_jenis_layanan"]): ?>
+                <option value="<?= $key["id_jenis_layanan"]; ?>" selected><?= $key["jenis_layanan"]; ?></option>
+                <?php else: ?>
+                <option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>
+                <?php endif ?>
+              <?php endforeach ?>
+            </select>
           </div>
 
           <div class="form-group">
@@ -156,17 +105,19 @@
             <select name="id_provinsi_asal" id="id_provinsi_asal" class="form-control">
               <option value="">Pilih</option>
               <?php foreach ($provinsi as $key): ?>
-                <?php if (set_value("id_provinsi_asal") == $key->id): ?>
+                <?php if (set_value("id_provinsi_asal") == $key["id_provinsi"]): ?>
                 <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
                 <?php else: ?>
                 <option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
                 <?php endif ?>
               <?php endforeach ?>
             </select>
+            <?= form_error('id_provinsi_asal', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="id_kabupaten_asal">Kabupaten Asal</label>
             <select name="id_kabupaten_asal" id="id_kabupaten_asal" class="form-control" onload="kabupaten(<?= set_value('id_provinsi_asal') ?>,'#id_kabupaten_asal','<?= set_value('id_kabupaten_asal') ?>')"></select>
+            <?= form_error('id_kabupaten_asal', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="id_kecamatan_asal">Kecamatan Asal</label>
@@ -179,17 +130,19 @@
             <select name="id_provinsi_tujuan" id="id_provinsi_tujuan" class="form-control">
               <option value="">Pilih</option>
               <?php foreach ($provinsi as $key): ?>
-                <?php if (set_value("id_provinsi_tujuan") == $key->id): ?>
+                <?php if (set_value("id_provinsi_tujuan") == $key["id_provinsi"]): ?>
                 <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
                 <?php else: ?>
                 <option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
                 <?php endif ?>
               <?php endforeach ?>
             </select>
+            <?= form_error('id_provinsi_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="id_kabupaten_tujuan">Kabupaten Tujuan</label>
             <select name="id_kabupaten_tujuan" id="id_kabupaten_tujuan" class="form-control" onload="kabupaten(<?= set_value('id_provinsi_tujuan') ?>,'#id_kabupaten_tujuan','<?= set_value('id_kabupaten_tujuan') ?>')"></select>
+            <?= form_error('id_kabupaten_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="id_kecamatan_tujuan">Kecamatan Tujuan</label>
@@ -199,17 +152,18 @@
 
           <div class="form-group">
             <label for="harga">Harga (Rp)</label>
-            <input type="number" name="harga" id="harga" required class="form-control" value="<?= set_value('harga'); ?>">
+            <input type="number" name="harga" id="harga" required class="form-control" value="<?= set_value('harga'); ?>" placeholder="Harga (Rp)">
             <?= form_error('harga', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="durasi_pengiriman">Durasi Pengiriman (Jam)</label>
-            <input type="number" name="durasi_pengiriman" id="durasi_pengiriman" required class="form-control" value="<?= set_value('durasi_pengiriman'); ?>">
+            <input type="number" name="durasi_pengiriman" id="durasi_pengiriman" required class="form-control" value="<?= set_value('durasi_pengiriman'); ?>" placeholder="Durasi Pengiriman (Jam)">
             <?= form_error('durasi_pengiriman', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
+          <button type="reset" class="d-none" id="reset"></button>
           <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
         </div>
       </div>

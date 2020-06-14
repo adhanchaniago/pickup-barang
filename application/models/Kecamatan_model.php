@@ -95,7 +95,7 @@ class Kecamatan_model extends CI_Model {
 	{
 		$this->db->join('kabupaten', 'kabupaten.id_kabupaten = kecamatan.id_kabupaten');
 		$this->db->join('provinsi', 'provinsi.id_provinsi = kabupaten.id_provinsi');
-		return $this->db->get_where('kecamatan', ['kecamatan.id_kecamatan' => $id])->result_array();
+		return $this->db->get_where('kecamatan', ['kecamatan.id_kabupaten' => $id])->result_array();
 	}
 
 	public function addKecamatan()
