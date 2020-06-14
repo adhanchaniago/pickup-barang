@@ -119,8 +119,8 @@ class Penerima_model extends CI_Model {
 		$this->db->where('id_penerima', $id);
 		$this->db->update('penerima', $data);
 
-		$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil mengubah penerima ' . $data['nama_penerima']);
-		$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil mengubah penerima ' . $data['nama_penerima'], $dataUser['id_user']);
+		$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil mengubah Penerima ' . $data['nama_penerima']);
+		$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil mengubah Penerima ' . $data['nama_penerima'], $dataUser['id_user']);
 		redirect('penerima');
 	}
 
@@ -128,8 +128,8 @@ class Penerima_model extends CI_Model {
 	{
 		$dataUser 					= $this->mm->getDataUser();
 		if ($dataUser['id_jabatan'] !== '1') {
-			$this->session->set_flashdata('message-failed', 'Pengguna ' . $dataUser['username'] . ' tidak memiliki hak akses menghapus data penerima');
-			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mencoba menghapus data penerima', $dataUser['id_user']);
+			$this->session->set_flashdata('message-failed', 'Pengguna ' . $dataUser['username'] . ' tidak memiliki hak akses menghapus data Penerima');
+			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mencoba menghapus data Penerima', $dataUser['id_user']);
 			redirect('penerima');
 		}
 
