@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jun 2020 pada 19.19
+-- Waktu pembuatan: 14 Jun 2020 pada 23.29
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -656,7 +656,13 @@ INSERT INTO `kecamatan` (`id_kecamatan`, `nama_kecamatan`, `id_kabupaten`) VALUE
 (25, 'Pondok Aren', 421),
 (26, 'Serpong', 421),
 (27, 'Serpong Utara', 421),
-(28, 'Setu', 421);
+(28, 'Setu', 421),
+(29, 'Abiansemal', 515),
+(30, 'Kuta', 515),
+(31, 'Kuta Selatan', 515),
+(32, 'Kuta Utara', 515),
+(33, 'Mengwi', 515),
+(34, 'Petang', 515);
 
 -- --------------------------------------------------------
 
@@ -679,7 +685,7 @@ CREATE TABLE `layanan_paket` (
 --
 
 INSERT INTO `layanan_paket` (`id_layanan_paket`, `id_jenis_layanan`, `id_kecamatan_asal`, `id_kecamatan_tujuan`, `id_jenis_paket`, `harga`, `durasi_pengiriman`) VALUES
-(1, 2, 28, 25, 1, 10000, 48);
+(1, 2, 28, 27, 1, 10000, 48);
 
 -- --------------------------------------------------------
 
@@ -849,7 +855,67 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (149, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-15 00:09:14', 1),
 (150, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-15 00:09:54', 1),
 (151, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-15 00:12:36', 1),
-(152, 'kabupaten Kota Sungai Penuh berhasil dihapus', '2020-06-15 00:19:04', 1);
+(152, 'kabupaten Kota Sungai Penuh berhasil dihapus', '2020-06-15 00:19:04', 1),
+(153, 'Pengguna admin berhasil login', '2020-06-15 00:23:33', 1),
+(154, 'Pengguna admin berhasil login', '2020-06-15 00:58:18', 1),
+(155, 'Pengguna admin berhasil login', '2020-06-15 00:59:09', 1),
+(156, 'Pengguna admin berhasil mengubah Layanan Paket ', '2020-06-15 01:04:40', 1),
+(157, 'Pengguna admin berhasil mengubah Layanan Paket ', '2020-06-15 01:12:53', 1),
+(158, 'Pengguna admin berhasil mengubah Layanan Paket ', '2020-06-15 01:26:48', 1),
+(159, 'Pengguna admin berhasil mengubah Layanan Paket ', '2020-06-15 01:29:30', 1),
+(160, 'Pengguna admin berhasil mengubah Layanan Paket ', '2020-06-15 01:29:36', 1),
+(161, 'Pengguna admin berhasil logout', '2020-06-15 01:40:56', 1),
+(162, 'Pengguna andri975 berhasil login', '2020-06-15 01:40:59', 2),
+(163, 'Pengguna andri975 berhasil logout', '2020-06-15 01:41:05', 2),
+(164, 'Pengguna admin berhasil login', '2020-06-15 01:41:09', 1),
+(165, 'Pengguna admin berhasil logout', '2020-06-15 01:41:12', 1),
+(166, 'Pengguna andri975 berhasil login', '2020-06-15 01:41:24', 2),
+(167, 'Pengguna andri975 berhasil mengubah Password', '2020-06-15 01:41:34', 2),
+(168, 'Pengguna andri975 berhasil logout', '2020-06-15 01:41:36', 2),
+(169, 'Pengguna admin berhasil login', '2020-06-15 01:41:42', 1),
+(170, 'Pengguna admin berhasil logout', '2020-06-15 01:46:38', 1),
+(171, 'Pengguna admin berhasil login', '2020-06-15 01:46:40', 1),
+(172, 'Pengguna admin berhasil login', '2020-06-15 01:46:54', 1),
+(173, 'Pengguna admin berhasil logout', '2020-06-15 01:47:55', 1),
+(174, 'Pengguna andri975 berhasil login', '2020-06-15 01:48:00', 2),
+(175, 'Pengguna andri975 berhasil logout', '2020-06-15 01:48:11', 2),
+(176, 'Pengguna admin berhasil login', '2020-06-15 01:48:15', 1),
+(177, 'Pengguna admin berhasil mengubah penerima Andri Firman Saputra', '2020-06-15 02:03:57', 1),
+(178, 'Pengguna admin berhasil mengubah penerima Andri Firman Saputra', '2020-06-15 02:13:13', 1),
+(179, 'Pengguna admin berhasil mengubah penerima Andri Firman Saputra', '2020-06-15 02:13:20', 1),
+(180, 'Penerima Andri Firman Saputra berhasil dihapus', '2020-06-15 02:13:23', 1),
+(181, 'Pengguna admin berhasil menambahkan penerima Andri Firman Saputra', '2020-06-15 02:20:26', 1),
+(182, 'Pengguna admin berhasil login', '2020-06-15 02:22:28', 1),
+(183, 'Pengguna admin berhasil login', '2020-06-15 02:26:54', 1),
+(184, 'Pengguna admin berhasil login', '2020-06-15 02:27:39', 1),
+(185, 'Pengguna admin berhasil menambahkan pengirim Andri Firman Saputra', '2020-06-15 02:42:42', 1),
+(186, 'Pengguna admin berhasil mengubah pengirim Andri Firman Saputra', '2020-06-15 02:42:54', 1),
+(187, 'pengirim Andri Firman Saputra berhasil dihapus', '2020-06-15 02:43:03', 1),
+(188, 'Pengguna admin berhasil menambahkan pengirim Andri Firman Saputra', '2020-06-15 02:43:26', 1),
+(189, 'Pengguna admin berhasil mengubah Penerima Andre Farhan Saputra', '2020-06-15 02:43:52', 1),
+(190, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-15 02:55:43', 1),
+(191, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-15 03:15:41', 1),
+(192, 'Pengguna admin mencoba menghapus data Pickup Barang', '2020-06-15 03:16:00', 1),
+(193, 'Pengguna admin mencoba menghapus data Pickup Barang', '2020-06-15 03:16:05', 1),
+(194, 'Pengguna admin mencoba menghapus data Pickup Barang', '2020-06-15 03:18:48', 1),
+(195, 'Pengguna admin mencoba menghapus data Pickup Barang', '2020-06-15 03:18:53', 1),
+(196, 'Jabatan  berhasil dihapus', '2020-06-15 03:19:06', 1),
+(197, 'Jabatan  berhasil dihapus', '2020-06-15 03:19:10', 1),
+(198, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-15 03:20:46', 1),
+(199, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:23:31', 1),
+(200, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:23:38', 1),
+(201, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:25:30', 1),
+(202, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:25:34', 1),
+(203, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:25:40', 1),
+(204, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:25:46', 1),
+(205, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:25:50', 1),
+(206, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:25:54', 1),
+(207, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:26:40', 1),
+(208, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:26:45', 1),
+(209, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-15 03:27:18', 1),
+(210, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:27:24', 1),
+(211, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:30:26', 1),
+(212, 'Pengguna admin berhasil login', '2020-06-15 04:17:18', 1);
 
 -- --------------------------------------------------------
 
@@ -865,6 +931,13 @@ CREATE TABLE `penerima` (
   `id_kecamatan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `penerima`
+--
+
+INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `no_wa_penerima`, `alamat_penerima`, `id_kecamatan`) VALUES
+(2, 'Andre Farhan Saputra', '081314213758', 'Jl. Amd Babakan Pocis No. 69 Rt02/02', 28);
+
 -- --------------------------------------------------------
 
 --
@@ -878,6 +951,13 @@ CREATE TABLE `pengirim` (
   `alamat_pengirim` text NOT NULL,
   `id_kecamatan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pengirim`
+--
+
+INSERT INTO `pengirim` (`id_pengirim`, `nama_pengirim`, `no_wa_pengirim`, `alamat_pengirim`, `id_kecamatan`) VALUES
+(2, 'Andri Firman Saputra', '087808675313', 'Jl. Amd Babakn Pocis No. 100 Rt02/02', 28);
 
 -- --------------------------------------------------------
 
@@ -896,8 +976,17 @@ CREATE TABLE `pickup_barang` (
   `jumlah_barang` int(11) NOT NULL,
   `tanggal_pemesanan` datetime DEFAULT NULL,
   `tanggal_penjemputan` datetime DEFAULT NULL,
-  `tanggal_masuk_logistik` datetime DEFAULT NULL
+  `tanggal_masuk_logistik` datetime DEFAULT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pickup_barang`
+--
+
+INSERT INTO `pickup_barang` (`id_pickup_barang`, `no_resi`, `id_pengirim`, `id_penerima`, `id_layanan_paket`, `nama_barang`, `berat_barang`, `jumlah_barang`, `tanggal_pemesanan`, `tanggal_penjemputan`, `tanggal_masuk_logistik`, `status`) VALUES
+(3, '999191592166046', 2, 2, 1, 'Kemeja Panjang', 0.4, 1, '2020-06-15 03:20:46', '2020-06-15 03:26:40', '2020-06-15 03:26:45', 3),
+(4, '992251592166438', 2, 2, 1, 'Kemeja Pendek', 0.4, 1, '2020-06-15 03:27:18', '2020-06-15 03:27:24', '2020-06-15 03:30:26', 3);
 
 -- --------------------------------------------------------
 
@@ -972,7 +1061,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `img_profile`, `nama_lengkap`, `username`, `password`, `id_jabatan`) VALUES
 (1, 'avatar31.png', 'Administrator', 'admin', '$2y$10$9RYtJdUQAdduDpy0kOpfOey5qdIp1tvB1WLDexgaWQ83Rez4ubxxe', 1),
-(2, 'default.png', 'Andri Firman Saputra', 'andri975', '$2y$10$7LRJrY13eGlWXUwLTh5YCe1PZuQe80v0y8e.52r9hCpRNe.JMIPVO', 3);
+(2, 'default.png', 'Andri Firman Saputra', 'andri975', '$2y$10$B8CG0imMpSNlopfeBKBGBOQPUALR/LCpacCb5cXaWY9IrRuYtEg4a', 3);
 
 --
 -- Indexes for dumped tables
@@ -1097,7 +1186,7 @@ ALTER TABLE `kabupaten`
 -- AUTO_INCREMENT untuk tabel `kecamatan`
 --
 ALTER TABLE `kecamatan`
-  MODIFY `id_kecamatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_kecamatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `layanan_paket`
@@ -1109,25 +1198,25 @@ ALTER TABLE `layanan_paket`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
 --
 ALTER TABLE `penerima`
-  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengirim`
 --
 ALTER TABLE `pengirim`
-  MODIFY `id_pengirim` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
 --
 ALTER TABLE `pickup_barang`
-  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `provinsi`
