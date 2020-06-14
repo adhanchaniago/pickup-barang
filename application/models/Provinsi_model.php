@@ -90,8 +90,8 @@ class Provinsi_model extends CI_Model {
 	public function addProvinsi()
 	{
 		$dataUser 					= $this->mm->getDataUser();
-		$data["nama_provinsi"] 		= $this->input->post('nama_provinsi',true);
-		$data["negara"] 			= $this->input->post('negara',true);
+		$data["nama_provinsi"] 		= ucwords(strtolower($this->input->post('nama_provinsi',true)));
+		$data["negara"] 			= ucwords(strtolower($this->input->post('negara',true)));
 		$this->db->insert('provinsi', $data);
 
 		$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil menambahkan Provinsi ' . $data['provinsi']);
@@ -102,8 +102,8 @@ class Provinsi_model extends CI_Model {
 	public function editProvinsi($id)
 	{
 		$dataUser 						= $this->mm->getDataUser();
-		$data["nama_provinsi"] 			= $this->input->post('nama_provinsi',true);
-		$data["negara"] 				= $this->input->post('negara',true);
+		$data["nama_provinsi"] 			= ucwords(strtolower($this->input->post('nama_provinsi',true)));
+		$data["negara"] 				= ucwords(strtolower($this->input->post('negara',true)));
 
 		$this->db->where('id_provinsi', $id);
 		$this->db->update('provinsi', $data);

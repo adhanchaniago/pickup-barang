@@ -142,7 +142,7 @@
           </div>
           <div class="form-group">
             <label for="id_kecamatan_tujuan">Kecamatan Tujuan</label>
-            <select name="id_kecamatan_tujuan" id="id_kecamatan_tujuan" class="form-control js-basic-single select2"  onload="kabupaten(<?= set_value('id_kabupaten_tujuan') ?>,'#id_kecamatan_tujuan','<?= set_value('id_kecamatan_tujuan') ?>')" required></select>
+            <select name="id_kecamatan_tujuan" id="id_kecamatan_tujuan" class="form-control js-basic-single select2"  onload="kecamatan(<?= set_value('id_kabupaten_tujuan') ?>,'#id_kecamatan_tujuan','<?= set_value('id_kecamatan_tujuan') ?>')" required></select>
             <?= form_error('id_kecamatan_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
 

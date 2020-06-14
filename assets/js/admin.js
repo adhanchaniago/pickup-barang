@@ -11,6 +11,7 @@ $(function() {
     kecamatan();
     jenisLayanan();
     jenisPaket();
+    penerima();
     datatable();
 
 
@@ -109,11 +110,11 @@ $(function() {
                     $(modal + ' #id_jenis_paket').val(response.id_jenis_paket).select();
                     $(modal + ' #id_jenis_layanan').val(response.id_jenis_layanan).select();
                     $(modal + ' #id_provinsi_asal').val(response.prov_asal).select();
-                    $(modal + ' #id_provinsi_tujuan').val(response.prov_asal).select();
+                    $(modal + ' #id_provinsi_tujuan').val(response.prov_tujuan).select();
                     selectKabupaten(response.prov_asal,modal + ' #id_kabupaten_asal',response.kab_asal);
                     selectKecamatan(response.kab_asal,modal + ' #id_kecamatan_asal',response.kec_asal);
-                    selectKabupaten(response.prov_asal,modal + ' #id_kabupaten_tujuan',response.kab_asal);
-                    selectKecamatan(response.kab_asal,modal + ' #id_kecamatan_tujuan',response.kec_tujuan);
+                    selectKabupaten(response.prov_tujuan,modal + ' #id_kabupaten_tujuan',response.kab_tujuan);
+                    selectKecamatan(response.kab_tujuan,modal + ' #id_kecamatan_tujuan',response.kec_tujuan);
                 }
             })
         });
@@ -349,6 +350,53 @@ $(function() {
             e.preventDefault();
             $(modal).modal('show');
             $(modal+ ' #label').html('Tambah Kecamatan');
+            $(modal+ ' #reset').click();
+        })
+    }
+
+    function penerima() {
+        let modal       = '#penerimaModal';
+        $('#table_id').on('click','.btn-edit-penerima',function(e){
+            e.preventDefault();
+            $(modal).modal('show');
+
+            let id_penerima   = $(this).data('id');
+            $.ajax({
+                url         : url + 'penerima/getPenerimaById',
+                method      : 'post',
+                data        : {id_penerima : id_penerima},
+                dataType    : 'json',
+                success     : function(response) {
+                    $(modal + ' #label').html('Ubah Penerima - ' + response.nama_penerima);
+                    $(modal + ' #nama_penerima').val(response.nama_penerima);
+                    $(modal + ' #no_wa_penerima').val(response.no_wa_penerima);
+                    $(modal + ' #alamat_penerima').val(response.alamat_penerima);
+                    $(modal + ' #id_penerima').val(response.id_penerima);
+                    $(modal + ' #id_provinsi').val(response.prov).select();
+                    selectKabupaten(response.prov,modal + ' #id_kabupaten',response.kab);
+                    selectKecamatan(response.kab,modal + ' #id_kecamatan',response.kec);
+                }
+            });
+        });
+        
+        $(modal + ' #id_provinsi').on('change',function() {
+            let id_provinsi     = $(this).val();
+            selectKabupaten(id_provinsi,modal + ' #id_kabupaten');
+            setTimeout(function() {
+                let id_kabupaten     = $(modal + ' #id_kabupaten').val();
+                selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
+            },1000);
+        });
+        
+        $(modal + ' #id_kabupaten').on('change',function() {
+            let id_kabupaten     = $(this).val();
+            selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
+        });
+
+        $('.btn-tambah-penerima').on('click',function(e) {
+            e.preventDefault();
+            $(modal).modal('show');
+            $(modal+ ' #label').html('Tambah Penerima');
             $(modal+ ' #reset').click();
         })
     }

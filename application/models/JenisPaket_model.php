@@ -90,7 +90,7 @@ class JenisPaket_model extends CI_Model {
 	public function addJenisPaket()
 	{
 		$dataUser 					= $this->mm->getDataUser();
-		$data["jenis_paket"] 		= $this->input->post('jenis_paket',true);
+		$data["jenis_paket"] 		= ucwords(strtolower($this->input->post('jenis_paket',true)));
 		$this->db->insert('jenis_paket', $data);
 
 		$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil menambahkan Jenis Paket ' . $data['jenis_paket']);
@@ -101,7 +101,7 @@ class JenisPaket_model extends CI_Model {
 	public function editJenisPaket($id)
 	{
 		$dataUser 						= $this->mm->getDataUser();
-		$data["jenis_paket"] 			= $this->input->post('jenis_paket',true);
+		$data["jenis_paket"] 			= ucwords(strtolower($this->input->post('jenis_paket',true)));
 
 		$this->db->where('id_jenis_paket', $id);
 		$this->db->update('jenis_paket', $data);

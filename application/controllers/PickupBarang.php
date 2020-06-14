@@ -56,12 +56,12 @@ class PickupBarang extends CI_Controller {
 			$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->nama_pengirim." | ".$item->nama_barang." |  ".$item->nama_penerima."'><i class='fas fa-fw fa-trash'></i></a>";
 			$button 	.= "</div>";
 
-			$wa_pengirim 	= "<a href='https://api.whatsapp.com/send?phone=". $item->no_whatsapp_pengirim."'>".$item->no_whatsapp_pengirim."</a>";
+			$wa_pengirim 	= "<a target='_blank' href='https://api.whatsapp.com/send?phone=". $item->no_whatsapp_pengirim."'>".$item->no_whatsapp_pengirim."</a>";
 
 			if ($item->no_whatsapp_penerima == '') {
 				$wa_penerima 	= "No. WA tidak diisi";
 			}else{
-				$wa_penerima 	= "<a href='https://api.whatsapp.com/send?phone=". $item->no_whatsapp_penerima."'>".$item->no_whatsapp_penerima."</a>";
+				$wa_penerima 	= "<a target='_blank' href='https://api.whatsapp.com/send?phone=". $item->no_whatsapp_penerima."'>".$item->no_whatsapp_penerima."</a>";
 			}
 
 			if ($item->status == 1) {
