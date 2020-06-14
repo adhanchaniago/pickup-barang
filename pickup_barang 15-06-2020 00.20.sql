@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jun 2020 pada 17.33
+-- Waktu pembuatan: 14 Jun 2020 pada 19.19
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -39,8 +39,7 @@ CREATE TABLE `jabatan` (
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 (1, 'Administrator\r\n'),
-(3, 'Operator'),
-(4, 'Kurir');
+(3, 'Operator');
 
 -- --------------------------------------------------------
 
@@ -116,14 +115,6 @@ INSERT INTO `kabupaten` (`id_kabupaten`, `nama_kabupaten`, `id_provinsi`) VALUES
 (16, 'Kabupaten Pidie Jaya', 1),
 (17, 'Kabupaten Pidie', 1),
 (18, 'Kabupaten Simeulue', 1),
-(19, 'Kabupaten Aceh Barat Daya', 17),
-(20, 'Kabupaten Aceh Barat', 17),
-(21, 'Kabupaten Aceh Besar', 17),
-(22, 'Kabupaten Aceh Jaya', 17),
-(23, 'Kabupaten Aceh Selatan', 17),
-(24, 'Kabupaten Aceh Singkil', 17),
-(25, 'Kabupaten Aceh Tamiang', 17),
-(26, 'Kabupaten Aceh Tengah', 17),
 (27, 'Kabupaten Lebak', 11),
 (28, 'Kabupaten Pandeglang', 11),
 (29, 'Kabupaten Serang', 11),
@@ -513,7 +504,113 @@ INSERT INTO `kabupaten` (`id_kabupaten`, `nama_kabupaten`, `id_provinsi`) VALUES
 (413, 'Kabupaten Bantul', 15),
 (414, 'Kabupaten Gunung Kidul', 15),
 (415, 'Kabupaten Kulon Progo', 15),
-(416, 'Kabupaten Sleman', 15);
+(416, 'Kabupaten Sleman', 15),
+(419, 'Kota Serang', 11),
+(420, 'Kota Tangerang', 11),
+(421, 'Kota Tangerang Selatan', 11),
+(423, 'Kota Gorontalo', 25),
+(425, 'Kota Administrasi Jakarta Pusat', 13),
+(426, 'Kota Administrasi Jakarta Selatan', 13),
+(427, 'Kota Administrasi Jakarta Timur', 13),
+(428, 'Kota Administrasi Jakarta Utara', 13),
+(429, 'Kota Jambi', 6),
+(430, 'Kota Sungai Penuh', 6),
+(431, 'Kota Bandung', 12),
+(432, 'Kota Banjar', 12),
+(433, 'Kota Bekasi', 12),
+(434, 'Kota Bogor', 12),
+(435, 'Kota Cimahi', 12),
+(436, 'Kota Cirebon', 12),
+(437, 'Kota Depok', 12),
+(438, 'Kota Sukabumi', 12),
+(439, 'Kota Tasikmalaya', 12),
+(440, 'Kota Magelang', 14),
+(441, 'Kota Pekalongan', 14),
+(442, 'Kota Salatiga', 14),
+(443, 'Kota Semarang', 14),
+(444, 'Kota Surakarta', 14),
+(445, 'Kota Tegal', 14),
+(446, 'Kota Batu', 16),
+(447, 'Kota Blitar', 16),
+(448, 'Kota Kediri', 16),
+(449, 'Kota Madiun', 16),
+(450, 'Kota Malang', 16),
+(451, 'Kota Mojokerto', 16),
+(452, 'Kota Pasuruan', 16),
+(453, 'Kota Probolinggo', 16),
+(454, 'Kota Surabaya', 16),
+(455, 'Kota Pontianak', 20),
+(456, 'Kota Singkawang', 20),
+(458, 'Kota Banjarmasin', 21),
+(459, 'Kota Palangka Raya', 22),
+(460, 'Kota Balikpapan', 23),
+(461, 'Kota Bontang', 23),
+(462, 'Kota Samarinda', 23),
+(463, 'Kota Tarakan', 24),
+(464, 'Kota Pangkal Pinang', 9),
+(465, 'Kota Batam', 5),
+(466, 'Kota Tanjung Pinang', 5),
+(467, 'Kota Bandar Lampung', 10),
+(468, 'Kota Metro', 10),
+(469, 'Kota Ambon', 31),
+(470, 'Kota Tual', 31),
+(471, 'Kota Ternate', 32),
+(472, 'Kota Tidore Kepulauan', 32),
+(473, 'Kota Banda Aceh', 1),
+(474, 'Kota Langsa', 1),
+(475, 'Kota Lhoksumawe', 1),
+(476, 'Kota Sabang', 1),
+(477, 'Kota Subulussalam', 1),
+(478, 'Kota Bima', 18),
+(479, 'Kota Mataram', 18),
+(480, 'Kota Kupang', 19),
+(481, 'kota Jayapura', 34),
+(482, 'Kota Sorong', 33),
+(483, 'Kota Dumai', 4),
+(484, 'Kota Pekanbaru', 4),
+(485, 'Kota Makassar', 27),
+(486, 'Kota Palopo', 27),
+(487, 'Kota Parepare', 27),
+(488, 'Kota Palu', 28),
+(489, 'Kota Baubau', 29),
+(490, 'Kota Kendari', 29),
+(491, 'Kota Bitung', 30),
+(492, 'Kota Kotamobagu', 30),
+(493, 'Kota Manado', 30),
+(494, 'Kota Tomohon', 30),
+(495, 'Kota Bukittinggi', 3),
+(496, 'Kota Padang', 3),
+(497, 'Kota Padangpanjang', 3),
+(498, 'Kota Pariaman', 3),
+(499, 'Kota Payakumbuh', 3),
+(500, 'Kota Sawahlunto', 3),
+(501, 'Kota Solok', 3),
+(502, 'Kota Lubuklinggau', 8),
+(503, 'Kota Pagar Alam', 8),
+(504, 'Kota Palembang', 8),
+(505, 'Kota Prabumulih', 8),
+(506, 'Kota Binjai', 2),
+(507, 'Kota Gunungsitoli', 2),
+(508, 'Kota Medan', 2),
+(509, 'Kota Padangsidempuan', 2),
+(510, 'Kota Pematangsiantar', 2),
+(511, 'Kota Sibolga', 2),
+(512, 'Kota Tanjungbalai', 2),
+(513, 'Kota Tebing Tinggi', 2),
+(514, 'Kota Yogyakarta', 15),
+(515, 'Kabupaten Badung', 17),
+(516, 'Kabupaten Bangli', 17),
+(517, 'Kabupaten Buleleng', 17),
+(518, 'Kabupaten Gianyar', 17),
+(519, 'Kabupaten Jembrana', 17),
+(520, 'Kabupaten Karangasem', 17),
+(521, 'Kabupaten Klungkung', 17),
+(522, 'Kabupaten Tabanan', 17),
+(523, 'Kota Denpasar', 17),
+(524, 'Kota Cilegon', 11),
+(525, 'Kota Bengkulu', 7),
+(526, 'Kota Administrasi Jakarta Barat', 13),
+(528, 'Kota Banjarbaru', 21);
 
 -- --------------------------------------------------------
 
@@ -540,7 +637,26 @@ INSERT INTO `kecamatan` (`id_kecamatan`, `nama_kecamatan`, `id_kabupaten`) VALUE
 (6, 'Babah Rot', 1),
 (7, 'Setia', 1),
 (8, 'Jeumpa', 1),
-(9, 'Lembah Sabil', 1);
+(9, 'Lembah Sabil', 1),
+(10, 'Johan Pahlawan', 2),
+(11, 'Samatiga', 2),
+(12, 'Bubon', 2),
+(13, 'Arongan Lambalek', 2),
+(14, 'Woyla', 2),
+(15, 'Woyla Barat', 2),
+(16, 'Woyla Timur', 2),
+(17, 'Kaway XVI', 2),
+(18, 'Meureubo', 2),
+(19, 'Pante Ceureumen', 2),
+(20, 'Panton Reu', 2),
+(21, 'Sungai Mas', 2),
+(22, 'Ciputat', 421),
+(23, 'Ciputat Timur', 421),
+(24, 'Pamulang', 421),
+(25, 'Pondok Aren', 421),
+(26, 'Serpong', 421),
+(27, 'Serpong Utara', 421),
+(28, 'Setu', 421);
 
 -- --------------------------------------------------------
 
@@ -557,6 +673,13 @@ CREATE TABLE `layanan_paket` (
   `harga` int(11) NOT NULL,
   `durasi_pengiriman` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `layanan_paket`
+--
+
+INSERT INTO `layanan_paket` (`id_layanan_paket`, `id_jenis_layanan`, `id_kecamatan_asal`, `id_kecamatan_tujuan`, `id_jenis_paket`, `harga`, `durasi_pengiriman`) VALUES
+(1, 2, 28, 25, 1, 10000, 48);
 
 -- --------------------------------------------------------
 
@@ -654,7 +777,79 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (77, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 21:40:07', 1),
 (78, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 21:47:12', 1),
 (79, 'Pengguna admin berhasil logout', '2020-06-14 22:20:25', 1),
-(80, 'Pengguna admin berhasil login', '2020-06-14 22:21:29', 1);
+(80, 'Pengguna admin berhasil login', '2020-06-14 22:21:29', 1),
+(81, 'Pengguna admin berhasil login', '2020-06-14 22:45:59', 1),
+(82, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 22:56:25', 1),
+(83, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 22:57:16', 1),
+(84, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 22:57:28', 1),
+(85, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 22:57:51', 1),
+(86, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 22:58:02', 1),
+(87, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 22:58:49', 1),
+(88, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 22:59:09', 1),
+(89, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:00:21', 1),
+(90, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:00:32', 1),
+(91, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:00:42', 1),
+(92, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:00:55', 1),
+(93, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:01:06', 1),
+(94, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:01:32', 1),
+(95, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:01:45', 1),
+(96, 'Pengguna admin berhasil mengubah kabupaten ', '2020-06-14 23:02:02', 1),
+(97, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:02:51', 1),
+(98, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:03:04', 1),
+(99, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:03:15', 1),
+(100, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:03:28', 1),
+(101, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:03:41', 1),
+(102, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:03:52', 1),
+(103, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:04:02', 1),
+(104, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:04:21', 1),
+(105, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:04:38', 1),
+(106, 'Pengguna admin berhasil mengubah kabupaten ', '2020-06-14 23:05:29', 1),
+(107, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:06:17', 1),
+(108, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:06:32', 1),
+(109, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:07:31', 1),
+(110, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:07:43', 1),
+(111, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:08:00', 1),
+(112, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:08:23', 1),
+(113, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:11:43', 1),
+(114, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:11:54', 1),
+(115, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:12:52', 1),
+(116, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:13:06', 1),
+(117, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:13:34', 1),
+(118, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:14:06', 1),
+(119, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:14:24', 1),
+(120, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:14:39', 1),
+(121, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:15:02', 1),
+(122, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:15:56', 1),
+(123, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:16:18', 1),
+(124, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:16:38', 1),
+(125, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:17:19', 1),
+(126, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:17:29', 1),
+(127, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:18:24', 1),
+(128, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:18:38', 1),
+(129, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:18:59', 1),
+(130, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:19:25', 1),
+(131, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:21:47', 1),
+(132, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:21:58', 1),
+(133, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:22:13', 1),
+(134, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:22:46', 1),
+(135, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:23:02', 1),
+(136, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:23:23', 1),
+(137, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:23:39', 1),
+(138, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:25:19', 1),
+(139, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:25:46', 1),
+(140, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:26:02', 1),
+(141, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-14 23:32:11', 1),
+(142, 'Jabatan Kurir berhasil dihapus', '2020-06-14 23:41:38', 1),
+(143, 'Pengguna admin berhasil menambahkan Layanan Paket ', '2020-06-14 23:47:44', 1),
+(144, 'Pengguna admin berhasil mengubah Layanan Paket ', '2020-06-14 23:57:22', 1),
+(145, 'Pengguna admin berhasil mengubah Layanan Paket ', '2020-06-14 23:57:32', 1),
+(146, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-15 00:06:26', 1),
+(147, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-15 00:07:39', 1),
+(148, 'Pengguna admin berhasil mengubah kabupaten ', '2020-06-15 00:07:52', 1),
+(149, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-15 00:09:14', 1),
+(150, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-15 00:09:54', 1),
+(151, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-15 00:12:36', 1),
+(152, 'kabupaten Kota Sungai Penuh berhasil dihapus', '2020-06-15 00:19:04', 1);
 
 -- --------------------------------------------------------
 
@@ -699,9 +894,9 @@ CREATE TABLE `pickup_barang` (
   `nama_barang` varchar(200) NOT NULL,
   `berat_barang` float NOT NULL,
   `jumlah_barang` int(11) NOT NULL,
-  `tanggal_pemesanan` datetime NOT NULL,
-  `tanggal_penjemputan` datetime NOT NULL,
-  `tanggal_masuk_logistik` datetime NOT NULL
+  `tanggal_pemesanan` datetime DEFAULT NULL,
+  `tanggal_penjemputan` datetime DEFAULT NULL,
+  `tanggal_masuk_logistik` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -896,25 +1091,25 @@ ALTER TABLE `jenis_paket`
 -- AUTO_INCREMENT untuk tabel `kabupaten`
 --
 ALTER TABLE `kabupaten`
-  MODIFY `id_kabupaten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=417;
+  MODIFY `id_kabupaten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=529;
 
 --
 -- AUTO_INCREMENT untuk tabel `kecamatan`
 --
 ALTER TABLE `kecamatan`
-  MODIFY `id_kecamatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_kecamatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `layanan_paket`
 --
 ALTER TABLE `layanan_paket`
-  MODIFY `id_layanan_paket` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_layanan_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`

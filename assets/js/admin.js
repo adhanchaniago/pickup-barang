@@ -52,10 +52,13 @@ $(function() {
 
         });
     }
+
     function pickupBarang() {
+        let modal       = '#pickupBarangModal';
         $('#table_id').on('click','.btn-edit-pickupBarang',function(e){
             e.preventDefault();
-            $('#editPickupBarangModal').modal('show');
+            $(modal).modal('show');
+
             let id_pickup_barang   = $(this).data('id');
             $.ajax({
                 url         : url + 'pickupBarang/getPickupBarangById',
@@ -63,23 +66,27 @@ $(function() {
                 data        : {id_pickup_barang : id_pickup_barang},
                 dataType    : 'json',
                 success     : function(response) {
-                    $('#editPickupBarangModal form').attr('action',url + 'pickupBarang/editPickupBarang/'+response.id_pickup_barang);
-                    $('#editPickupBarangModalLabel').html('Ubah Pickup Barang - ' + response.nama_pengirim);
-                    $('#edit_status').val(response.status).select();
-                    $('#edit_nama_pengirim').val(response.nama_pengirim);
-                    $('#edit_no_whatsapp_pengirim').val(response.no_whatsapp_pengirim);
-                    $('#edit_alamat_pengirim').val(response.alamat_pengirim);
-                    $('#edit_nama_barang').val(response.nama_barang);
-                    $('#edit_berat_barang').val(response.berat_barang);
-                    $('#edit_jumlah_barang').val(response.jumlah_barang);
-                    $('#edit_nama_penerima').val(response.nama_penerima);
-                    $('#edit_no_whatsapp_penerima').val(response.no_whatsapp_penerima);
-                    $('#edit_alamat_penerima').val(response.alamat_penerima);
-                    $('#edit_id_layanan_paket').val(response.id_layanan_paket).select();
-
+                    $(modal + ' #label').html('Ubah Pickup Barang - ' + response.no_resi);
+                    $(modal + ' #no_resi').val(response.no_resi);
+                    $(modal + ' #id_pengirim').val(response.id_pengirim);
+                    $(modal + ' #id_penerima').val(response.id_penerima);
+                    $(modal + ' #id_layanan_paket').val(response.id_layanan_paket);
+                    $(modal + ' #nama_barang').val(response.nama_barang);
+                    $(modal + ' #berat_barang').val(response.berat_barang);
+                    $(modal + ' #jumlah_barang').val(response.jumlah_barang);
+                    $(modal + ' #tanggal_pemesanan').val(response.tanggal_pemesanan);
+                    $(modal + ' #tanggal_penjemputan').val(response.tanggal_penjemputan);
+                    $(modal + ' #tanggal_masuk_logistik').val(response.tanggal_masuk_logistik);
+                    $(modal + ' #id_pickup_barang').val(response.id_pickup_barang);
                 }
             })
         });
+        $('.btn-tambah-pickupBarang').on('click',function(e) {
+            e.preventDefault();
+            $(modal).modal('show');
+            $(modal+ ' #label').html('Tambah Pickup Barang');
+            $(modal+ ' #reset').click();
+        })
     }
 
     function layanan() {

@@ -67,8 +67,8 @@ class LayananPaket extends CI_Controller {
 
 			$row[] 	= "<div class='text-center'>".$no.".</div>";
 			$row[] 	= $item->jenis_layanan;
-			$row[] 	= $item->kec_asal.','.$item->kab_asal.','.$item->prov_asal.','.$item->negara_asal;
-			$row[] 	= $item->kec_tujuan.','.$item->kab_tujuan.','.$item->prov_tujuan.','.$item->negara_tujuan;
+			$row[] 	= 'Kec. '.$item->kec_asal.', Kab / Kota. '.$item->kab_asal.', Prov. '.$item->prov_asal.', '.$item->negara_asal;
+			$row[] 	= 'Kec. '.$item->kec_tujuan.', Kab / Kota. '.$item->kab_tujuan.', Prov. '.$item->prov_tujuan.', '.$item->negara_tujuan;
 			$row[] 	= $item->jenis_paket;
 			$row[] 	= number_format($item->harga);
 			$row[] 	= $item->durasi_pengiriman;
