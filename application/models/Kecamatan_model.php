@@ -101,8 +101,8 @@ class Kecamatan_model extends CI_Model {
 	public function addKecamatan()
 	{
 		$dataUser 					= $this->mm->getDataUser();
-		$data["nama_kecamatan"]		= $this->input->post('nama_kecamatan',true);
-		$data["id_kabupaten"]		= $this->input->post('id_kabupaten',true);
+		$data["nama_kecamatan"]		= ucwords(strtolower($this->input->post('nama_kecamatan',true)));
+		$data["id_kabupaten"]		= ucwords(strtolower($this->input->post('id_kabupaten',true)));
 		$this->db->insert('kecamatan', $data);
 
 		$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil menambahkan kecamatan ' . $data['kecamatan']);
@@ -113,8 +113,8 @@ class Kecamatan_model extends CI_Model {
 	public function editKecamatan($id)
 	{
 		$dataUser 						= $this->mm->getDataUser();
-		$data["nama_kecamatan"]			= $this->input->post('nama_kecamatan',true);
-		$data["id_kabupaten"]			= $this->input->post('id_kabupaten',true);
+		$data["nama_kecamatan"]			= ucwords(strtolower($this->input->post('nama_kecamatan',true)));
+		$data["id_kabupaten"]			= ucwords(strtolower($this->input->post('id_kabupaten',true)));
 
 		$this->db->where('id_kecamatan', $id);
 		$this->db->update('kecamatan', $data);

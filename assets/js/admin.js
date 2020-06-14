@@ -11,6 +11,8 @@ $(function() {
     kecamatan();
     jenisLayanan();
     jenisPaket();
+    pengirim();
+    penerima();
     datatable();
 
 
@@ -52,10 +54,13 @@ $(function() {
 
         });
     }
+
     function pickupBarang() {
+        let modal       = '#pickupBarangModal';
         $('#table_id').on('click','.btn-edit-pickupBarang',function(e){
             e.preventDefault();
-            $('#editPickupBarangModal').modal('show');
+            $(modal).modal('show');
+
             let id_pickup_barang   = $(this).data('id');
             $.ajax({
                 url         : url + 'pickupBarang/getPickupBarangById',
@@ -63,23 +68,28 @@ $(function() {
                 data        : {id_pickup_barang : id_pickup_barang},
                 dataType    : 'json',
                 success     : function(response) {
-                    $('#editPickupBarangModal form').attr('action',url + 'pickupBarang/editPickupBarang/'+response.id_pickup_barang);
-                    $('#editPickupBarangModalLabel').html('Ubah Pickup Barang - ' + response.nama_pengirim);
-                    $('#edit_status').val(response.status).select();
-                    $('#edit_nama_pengirim').val(response.nama_pengirim);
-                    $('#edit_no_whatsapp_pengirim').val(response.no_whatsapp_pengirim);
-                    $('#edit_alamat_pengirim').val(response.alamat_pengirim);
-                    $('#edit_nama_barang').val(response.nama_barang);
-                    $('#edit_berat_barang').val(response.berat_barang);
-                    $('#edit_jumlah_barang').val(response.jumlah_barang);
-                    $('#edit_nama_penerima').val(response.nama_penerima);
-                    $('#edit_no_whatsapp_penerima').val(response.no_whatsapp_penerima);
-                    $('#edit_alamat_penerima').val(response.alamat_penerima);
-                    $('#edit_id_layanan_paket').val(response.id_layanan_paket).select();
-
+                    $(modal + ' #label').html('Ubah Pickup Barang - ' + response.no_resi);
+                    $(modal + ' #no_resi').val(response.no_resi);
+                    $(modal + ' #id_pengirim').val(response.id_pengirim);
+                    $(modal + ' #id_penerima').val(response.id_penerima);
+                    $(modal + ' #id_layanan_paket').val(response.id_layanan_paket);
+                    $(modal + ' #nama_barang').val(response.nama_barang);
+                    $(modal + ' #berat_barang').val(response.berat_barang);
+                    $(modal + ' #jumlah_barang').val(response.jumlah_barang);
+                    $(modal + ' #tanggal_pemesanan').val(response.tanggal_pemesanan);
+                    $(modal + ' #tanggal_penjemputan').val(response.tanggal_penjemputan);
+                    $(modal + ' #tanggal_masuk_logistik').val(response.tanggal_masuk_logistik);
+                    $(modal + ' #id_pickup_barang').val(response.id_pickup_barang);
+                    $(modal + ' #status').val(response.status);
                 }
             })
         });
+        $('.btn-tambah-pickupBarang').on('click',function(e) {
+            e.preventDefault();
+            $(modal).modal('show');
+            $(modal+ ' #label').html('Tambah Pickup Barang');
+            $(modal+ ' #reset').click();
+        })
     }
 
     function layanan() {
@@ -143,6 +153,7 @@ $(function() {
             $(modal + ' #label').html('Tambah Layanan Paket');
         })
     }
+
 
     function jabatan() {
         let modal       = '#jabatanModal';
@@ -341,6 +352,100 @@ $(function() {
             e.preventDefault();
             $(modal).modal('show');
             $(modal+ ' #label').html('Tambah Kecamatan');
+            $(modal+ ' #reset').click();
+        })
+    }
+
+    function penerima() {
+        let modal       = '#penerimaModal';
+        $('#table_id').on('click','.btn-edit-penerima',function(e){
+            e.preventDefault();
+            $(modal).modal('show');
+
+            let id_penerima   = $(this).data('id');
+            $.ajax({
+                url         : url + 'penerima/getPenerimaById',
+                method      : 'post',
+                data        : {id_penerima : id_penerima},
+                dataType    : 'json',
+                success     : function(response) {
+                    $(modal + ' #label').html('Ubah Penerima - ' + response.nama_penerima);
+                    $(modal + ' #nama_penerima').val(response.nama_penerima);
+                    $(modal + ' #no_wa_penerima').val(response.no_wa_penerima);
+                    $(modal + ' #alamat_penerima').val(response.alamat_penerima);
+                    $(modal + ' #id_penerima').val(response.id_penerima);
+                    $(modal + ' #id_provinsi').val(response.prov).select();
+                    selectKabupaten(response.prov,modal + ' #id_kabupaten',response.kab);
+                    selectKecamatan(response.kab,modal + ' #id_kecamatan',response.kec);
+                }
+            });
+        });
+        
+        $(modal + ' #id_provinsi').on('change',function() {
+            let id_provinsi     = $(this).val();
+            selectKabupaten(id_provinsi,modal + ' #id_kabupaten');
+            setTimeout(function() {
+                let id_kabupaten     = $(modal + ' #id_kabupaten').val();
+                selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
+            },1000);
+        });
+        
+        $(modal + ' #id_kabupaten').on('change',function() {
+            let id_kabupaten     = $(this).val();
+            selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
+        });
+
+        $('.btn-tambah-penerima').on('click',function(e) {
+            e.preventDefault();
+            $(modal).modal('show');
+            $(modal+ ' #label').html('Tambah Penerima');
+            $(modal+ ' #reset').click();
+        })
+    }
+
+    function pengirim() {
+        let modal       = '#pengirimModal';
+        $('#table_id').on('click','.btn-edit-pengirim',function(e){
+            e.preventDefault();
+            $(modal).modal('show');
+
+            let id_pengirim   = $(this).data('id');
+            $.ajax({
+                url         : url + 'pengirim/getPengirimById',
+                method      : 'post',
+                data        : {id_pengirim : id_pengirim},
+                dataType    : 'json',
+                success     : function(response) {
+                    $(modal + ' #label').html('Ubah Pengirim - ' + response.nama_pengirim);
+                    $(modal + ' #nama_pengirim').val(response.nama_pengirim);
+                    $(modal + ' #no_wa_pengirim').val(response.no_wa_pengirim);
+                    $(modal + ' #alamat_pengirim').val(response.alamat_pengirim);
+                    $(modal + ' #id_pengirim').val(response.id_pengirim);
+                    $(modal + ' #id_provinsi').val(response.prov).select();
+                    selectKabupaten(response.prov,modal + ' #id_kabupaten',response.kab);
+                    selectKecamatan(response.kab,modal + ' #id_kecamatan',response.kec);
+                }
+            });
+        });
+        
+        $(modal + ' #id_provinsi').on('change',function() {
+            let id_provinsi     = $(this).val();
+            selectKabupaten(id_provinsi,modal + ' #id_kabupaten');
+            setTimeout(function() {
+                let id_kabupaten     = $(modal + ' #id_kabupaten').val();
+                selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
+            },1000);
+        });
+        
+        $(modal + ' #id_kabupaten').on('change',function() {
+            let id_kabupaten     = $(this).val();
+            selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
+        });
+
+        $('.btn-tambah-pengirim').on('click',function(e) {
+            e.preventDefault();
+            $(modal).modal('show');
+            $(modal+ ' #label').html('Tambah Pengirim');
             $(modal+ ' #reset').click();
         })
     }

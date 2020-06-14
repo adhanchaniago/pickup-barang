@@ -78,6 +78,7 @@ class JenisLayanan_model extends CI_Model {
 
 	public function getAllJenisLayanan()
 	{
+		$this->db->order_by('jenis_layanan', 'asc');
 		return $this->db->get('jenis_layanan')->result_array();
 	}
 

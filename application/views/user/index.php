@@ -93,7 +93,8 @@
           </div>
           <div class="form-group">
             <label for="id_jabatan">Nama jabatan</label>
-            <select name="id_jabatan" id="id_jabatan" class="form-control">
+            <select name="id_jabatan" id="id_jabatan" class="form-control js-basic-single select2">
+              <option value="">-- Pilih --</option>
               <?php foreach ($jabatan as $dj): ?>
                 <?php if ($dj['id_jabatan'] !== '1'): ?>
                   <option value="<?= $dj['id_jabatan']; ?>"><?= $dj['nama_jabatan']; ?></option>

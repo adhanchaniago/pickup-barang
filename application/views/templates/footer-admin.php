@@ -23,18 +23,16 @@
     <script src="<?= base_url('assets/vendor/datatables-1.10.21/js/dataTables.bootstrap4.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/fancybox-3.5.7/jquery.fancybox.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/fontawesome-free-5.13.0/js/all.min.js'); ?>"></script>
-    <script src="<?= base_url('assets/vendor/select2-4.0.13/select2.full.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/sweetalert2-9.14.2/sweetalert2.all.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/overlayScrollbars-1.11.0/js/jquery.overlayScrollbars.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/adminlte-3.0.5/adminlte.min.js'); ?>"></script>
-
+    <script src="<?= base_url('assets/vendor/select2-4.0.13/select2.min.js'); ?>"></script>
     
     <div id="data-admin" data-link="<?= $def_link; ?>" data-url="<?= base_url() ?>"></div>
     <!-- My JS -->
     <script src="<?= base_url('assets/js/admin.js'); ?>"></script>
 	
 	<!-- Config -->
-	
 	<script src="<?= base_url('assets/js/fancybox-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/select2-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/sweetalert2-config.js'); ?>"></script>

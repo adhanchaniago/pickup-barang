@@ -16,7 +16,7 @@ class User extends CI_Controller {
 	{
 		$data['dataUser'] 			= $this->mm->getDataUser();
 		$data['jabatan'] 			= $this->jm->getAllJabatan();
-		$data['title'] 				= 'Daftar Pengguna';
+		$data['title'] 				= 'Pengguna - ' . $data['dataUser']['username'];
 
 		if ($this->input->post('id_user') == '') {
 			$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]');

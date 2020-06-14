@@ -10,35 +10,39 @@ class PickupBarang extends CI_Controller {
 		$this->load->model('Layout_model','layout');
 		$this->load->model('PickupBarang_model', 'pbm');
 		$this->load->model('LayananPaket_model', 'lpm');
+		$this->load->model('Pengirim_model', 'pengm');
+		$this->load->model('Penerima_model', 'pm');
 		$this->mm->check_status_login();
 		$this->status[1] 			= "Pending";
 		$this->status[2] 			= "Kurir Menjemput";
-		$this->status[3] 			= "Barang Sampai Logistik";
+		$this->status[3] 			= "Barang Masuk Logistik";
 	}
 
 	public function index()
 	{
-		
 		$data['status']				= $this->status;
 		$data['dataUser'] 			= $this->mm->getDataUser();
 		$data['layanan_paket'] 		= $this->lpm->getAllLayananPaket();
+		$data['penerima']			= $this->pm->getAllPenerima();
+		$data['pengirim']			= $this->pengm->getAllPengirim();
 		$data['pickup_barang'] 		= $this->pbm->getAllPickupBarang();
 		$data['title'] 				= 'Pickup Barang - ' . $data['dataUser']['username'];
 
-		$this->form_validation->set_rules('nama_pengirim', 'nama pengirim', 'required|trim');
-		$this->form_validation->set_rules('no_whatsapp_pengirim', 'no whatsapp pengirim', 'required|trim');
-		$this->form_validation->set_rules('alamat_pengirim', 'alamat pengirim', 'required|trim');
+		$this->form_validation->set_rules('id_pengirim', 'nama pengirim', 'required|trim');
+		$this->form_validation->set_rules('id_penerima', 'nama penerima', 'required|trim');
 		$this->form_validation->set_rules('nama_barang', 'nama barang', 'required|trim');
 		$this->form_validation->set_rules('berat_barang', 'berat barang', 'required|trim');
 		$this->form_validation->set_rules('jumlah_barang', 'jumlah barang', 'required|trim');
-		$this->form_validation->set_rules('nama_penerima', 'nama penerima', 'required|trim');
-		$this->form_validation->set_rules('no_whatsapp_penerima', 'no whatsapp penerima', 'required|trim');
-		$this->form_validation->set_rules('alamat_penerima', 'alamat penerima', 'required|trim');
 		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('pickup_barang/index', $data);
 		} else {
-		    $this->pbm->addPickupBarang();
+			if ($this->input->post('id_pickup_barang')) {
+				$id_pickup_barang 	= $this->input->post('id_pickup_barang');
+			    $this->pbm->editPickupBarang($id_pickup_barang);
+			}else{
+			    $this->pbm->addPickupBarang();
+			}
 		}
 	}
 
@@ -51,17 +55,11 @@ class PickupBarang extends CI_Controller {
 		foreach ($list as $item) {
 			$no++;
 
-			$button 	= "<div class='text-center'>";
-			$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-pickupBarang' data-id='".$item->id_pickup_barang."'><i class='fas fa-fw fa-edit'></i></a>";
-			$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->nama_pengirim." | ".$item->nama_barang." |  ".$item->nama_penerima."'><i class='fas fa-fw fa-trash'></i></a>";
-			$button 	.= "</div>";
-
-			$wa_pengirim 	= "<a href='https://api.whatsapp.com/send?phone=". $item->no_whatsapp_pengirim."'>".$item->no_whatsapp_pengirim."</a>";
-
-			if ($item->no_whatsapp_penerima == '') {
-				$wa_penerima 	= "No. WA tidak diisi";
-			}else{
-				$wa_penerima 	= "<a href='https://api.whatsapp.com/send?phone=". $item->no_whatsapp_penerima."'>".$item->no_whatsapp_penerima."</a>";
+			if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2') {
+				$button 	= "<div class='text-center'>";
+					$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-pickupBarang' data-id='".$item->id_pickup_barang."'><i class='fas fa-fw fa-edit'></i></a>";
+					$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete' data-text=' ".$item->nama_pengirim." | ".$item->nama_barang." |  ".$item->nama_penerima."'><i class='fas fa-fw fa-trash'></i></a>";
+				$button 	.= "</div>";
 			}
 
 			if ($item->status == 1) {
@@ -77,18 +75,14 @@ class PickupBarang extends CI_Controller {
 			$row[] 	= "<div class='text-center'>".$no.".</div>";
 			$row[] 	= $item->no_resi;
 			$row[] 	= $item->nama_pengirim;
-			$row[] 	= $wa_pengirim;
-			$row[] 	= $item->alamat_pengirim;
 			$row[] 	= $item->nama_barang;
 			$row[] 	= $item->berat_barang;
 			$row[] 	= $item->jumlah_barang;
 			$row[] 	= $item->nama_penerima;
-			$row[] 	= $wa_penerima;
-			$row[] 	= $item->alamat_penerima;
 			$row[] 	= $item->tanggal_pemesanan;
-			$row[] 	= $item->tanggal_kurir_menjemput;
+			$row[] 	= $item->tanggal_penjemputan;
 			$row[] 	= $item->tanggal_masuk_logistik;
-			$row[] 	= $item->layanan_paket;
+			$row[] 	= $item->jenis_layanan;
 			$row[] 	= $status;
 
 			if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2') {
@@ -115,32 +109,7 @@ class PickupBarang extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function editPickupBarang($id)
-	{
-		$data['status']				= $this->status;
-		$data['dataUser'] 			= $this->mm->getDataUser();
-		$data['layanan_paket'] 		= $this->lpm->getAllLayananPaket();
-		$data['pickup_barang'] 		= $this->pbm->getAllPickupBarang();
-		$data['title'] 				= 'Pickup Barang - ' . $data['dataUser']['username'];
-
-		$this->form_validation->set_rules('nama_pengirim', 'nama pengirim', 'required|trim');
-		$this->form_validation->set_rules('no_whatsapp_pengirim', 'no whatsapp pengirim', 'required|trim');
-		$this->form_validation->set_rules('alamat_pengirim', 'alamat pengirim', 'required|trim');
-		$this->form_validation->set_rules('nama_barang', 'nama barang', 'required|trim');
-		$this->form_validation->set_rules('berat_barang', 'berat barang', 'required|trim');
-		$this->form_validation->set_rules('jumlah_barang', 'jumlah barang', 'required|trim');
-		$this->form_validation->set_rules('nama_penerima', 'nama penerima', 'required|trim');
-		$this->form_validation->set_rules('no_whatsapp_penerima', 'no whatsapp penerima', 'required|trim');
-		$this->form_validation->set_rules('alamat_penerima', 'alamat penerima', 'required|trim');
-		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
-		$this->form_validation->set_rules('status', 'Status', 'required|trim');
-		if ($this->form_validation->run() == false) {
-			$this->layout->view_admin('pickup_barang/index', $data);
-		} else {
-		    $this->pbm->editPickupBarang($id);
-		}
-	}
-
+	
 	public function deletePickupBarang($id)
 	{
 		$this->pbm->deletePickupBarang($id);

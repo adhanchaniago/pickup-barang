@@ -76,7 +76,7 @@
           </div>
            <div class="form-group">
             <label for="id_provinsi">Provinsi</label>
-            <select name="id_provinsi" id="id_provinsi" class="form-control" required>
+            <select name="id_provinsi" id="id_provinsi" class="form-control js-basic-single select2" required>
               <option value="">-- Pilih --</option>
               <?php foreach ($provinsi as $key): ?>
                 <?php if (set_value('id_provinsi') == $key["id_provinsi"]): ?>

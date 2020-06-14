@@ -47,9 +47,9 @@
 			<div class="col-lg text-center px-5">
 				<h2>Tenang Kami</h2>
 				<hr>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit fugiat, quis a optio? Vero sapiente ab suscipit consequuntur iure nam obcaecati fugit numquam adipisci excepturi reiciendis reprehenderit, ut minima, sit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit commodi, provident asperiores ullam, inventore sit alias accusamus saepe mollitia voluptas eos deleniti consectetur tempora hic porro molestiae fuga temporibus voluptatem!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse magnam debitis neque quos eos obcaecati perspiciatis sit quibusdam. Ipsa, odio illo animi consequatur voluptate natus officiis magni fugit quisquam dolore dolorum et iusto itaque, quasi amet architecto aliquam esse. Autem expedita velit, deserunt assumenda sequi facilis corporis recusandae hic ipsam.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam ipsa laudantium minima natus doloribus at maxime ab, delectus, saepe sed debitis, id in voluptatibus, officiis optio accusantium magni nisi. Consequuntur voluptate dolores, maiores quod, eos sit expedita ipsum quisquam recusandae corrupti veritatis nam placeat voluptatem quasi! Ipsam cum totam aut, commodi quo perspiciatis eveniet amet aspernatur fuga reprehenderit, nesciunt, ipsa dolorum aliquid temporibus nam. Itaque nesciunt totam, soluta ex enim. Nisi eum adipisci libero sint, suscipit? Molestias laudantium nesciunt hic optio, fugiat, numquam delectus quia totam temporibus!</p>
+				<p>JNE merupakan perusahaan yang bergerak dalam bidang pengiriman dan logistik yang bermarkas di Jakarta, Indonesia. Nama resminya adalah Tiki Jalur Nugraha Ekakurir (Tiki JNE).</p>
+				<p>JNE Tangsel BSD Nusaloka merupakan salah satu cabang JNE untuk memperluas jangkauan para pelanggan yang ingin mengirimkan barangnya kepada kerabat, teman, pembeli, dan lain-lain. Pada JNE ini kami memiliki fitur <i>special</i> yaitu, dapat memesan kurir untuk menjemput barangnya supaya tidak repot-repot datang ke cabang terdekat.</p>
+				<p>Caranya cukup mudah yaitu, tekan tombol Buat Pesanan pada bagian navbar, atau scroll kebawah hingga menemukan formulir mengisi pesanan Anda.</p>
 			</div>
 		</div>
 	</div>
@@ -72,25 +72,66 @@
 			          <?php endif ?>
 			        </div>
 			      </div>
-				<form action="<?= base_url('auth/pesanan'); ?>" method="post">
+				<form class="form_input_pesanan" action="<?= base_url('auth/pesanan'); ?>" method="post">
 					<div class="row">
 						<div class="col-lg">
 							<div class="form-group">
-								<label for="nama_pengirim"><i class="fas fa-fw fa-user"></i> Nama Pengirim</label>
-								<input value="<?= set_value('nama_pengirim'); ?>" type="text" name="nama_pengirim" id="nama_pengirim" class="form-control" required placeholder="Masukkan Nama Pengirim">
-							</div>
+					            <label for="nama_pengirim">Nama Pengirim</label>
+					            <input type="text" name="nama_pengirim" id="nama_pengirim" class="form-control" required value="<?= set_value('nama_pengirim'); ?>" placeholder="Nama Pengirim">
+					            <?= form_error('nama_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
 						</div>
 						<div class="col-lg">
 							<div class="form-group">
-								<label for="no_whatsapp_pengirim"><i class="fab fa-fw fa-whatsapp"></i> No. Whatsapp Pengirim</label>
-								<input value="<?= set_value('no_whatsapp_pengirim'); ?>" type="number" name="no_whatsapp_pengirim" id="no_whatsapp_pengirim" class="form-control" required placeholder="Masukkan No. Whatsapp Pengirim">
-							</div>
+					            <label for="no_wa_pengirim">No. WhatsApp Pengirim</label>
+					            <input type="text" name="no_wa_pengirim" id="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>" placeholder="No. WhatsApp Pengirim">
+					            <?= form_error('no_wa_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="alamat_pengirim"><i class="fas fa-fw fa-map-marked-alt"></i> Alamat Pengirim</label>
-						<textarea name="alamat_pengirim" id="alamat_pengirim" class="form-control" required placeholder="Masukkan Alamat Pengirim"><?= set_value('alamat_pengirim'); ?></textarea>
-					</div>
+			            <label for="alamat_pengirim">Alamat Pengirim</label>
+			            <textarea name="alamat_pengirim" id="alamat_pengirim" class="form-control" required placeholder="Alamat Pengirim"><?= set_value('alamat_pengirim'); ?></textarea>
+			            <?= form_error('alamat_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
+			        </div>
+
+			        <div class="row">
+			        	<div class="col-lg">
+			        		<div class="form-group">
+					            <label for="id_provinsi_asal">Provinsi Asal</label>
+					            <select name="id_provinsi_asal" id="id_provinsi_asal" class="form-control js-basic-single select2">
+					            	<option value="">-- Pilih --</option>
+					              <?php foreach ($provinsi as $key): ?>
+					                <?php if (set_value("id_provinsi_asal") == $key["id_provinsi"]): ?>
+					                <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
+					                <?php else: ?>
+					                <option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
+					                <?php endif ?>
+					              <?php endforeach ?>
+					            </select>
+					            <?= form_error('id_provinsi_asal', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
+			        	</div>
+			        	<div class="col-lg">
+			        		<div class="form-group">
+					            <label for="id_kabupaten_asal">Kabupaten Asal</label>
+					            <select name="id_kabupaten_asal" id="id_kabupaten_asal" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi_asal') ?>,'#id_kabupaten_asal','<?= set_value('id_kabupaten_asal') ?>')">
+					            	<option value="">-- Pilih --</option>
+					            </select>
+					            <?= form_error('id_kabupaten_asal', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
+			        	</div>
+			        	<div class="col-lg">
+			        		<div class="form-group">
+					            <label for="id_kecamatan_asal">Kecamatan Asal</label>
+					            <select name="id_kecamatan_asal" id="id_kecamatan_asal" class="form-control js-basic-single select2" onload="kecamatan(<?= set_value('id_kabupaten_asal') ?>,'#id_kecamatan_asal','<?= set_value('id_kecamatan_asal') ?>')" required>
+					            	<option value="">-- Pilih --</option>
+					            </select>
+					            <?= form_error('id_kecamatan_asal', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
+			        	</div>
+			        </div>
+
 					<div class="form-group">
 						<label for="nama_barang"><i class="fas fa-fw fa-box"></i> Nama Barang</label>
 						<input value="<?= set_value('nama_barang'); ?>" type="text" name="nama_barang" id="nama_barang" class="form-control" required placeholder="Masukkan Nama Barang">
@@ -109,30 +150,74 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="row">
 						<div class="col-lg">
 							<div class="form-group">
-								<label for="nama_penerima"><i class="fas fa-fw fa-user-tie"></i> Nama Penerima</label>
-								<input value="<?= set_value('nama_penerima'); ?>" type="text" name="nama_penerima" id="nama_penerima" class="form-control" required placeholder="Masukkan Nama Penerima">
-							</div>
+					            <label for="nama_penerima">Nama Penerima</label>
+					            <input type="text" name="nama_penerima" id="nama_penerima" class="form-control" required value="<?= set_value('nama_penerima'); ?>" placeholder="Nama Penerima">
+					            <?= form_error('nama_penerima', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
 						</div>
 						<div class="col-lg">
 							<div class="form-group">
-								<label for="no_whatsapp_penerima"><i class="fab fa-fw fa-whatsapp"></i> No. Whatsapp Penerima</label>
-								<input value="<?= set_value('no_whatsapp_penerima'); ?>" type="number" name="no_whatsapp_penerima" id="no_whatsapp_pengirim" class="form-control" placeholder="(Optional)">
-							</div>
+					            <label for="no_wa_penerima">No. WhatsApp Penerima</label>
+					            <input type="text" name="no_wa_penerima" id="no_wa_penerima" class="form-control" required value="<?= set_value('no_wa_penerima'); ?>" placeholder="No. WhatsApp Penerima">
+					            <?= form_error('no_wa_penerima', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="alamat_penerima"><i class="fas fa-fw fa-map-marked-alt"></i> Alamat Penerima</label>
-						<textarea name="alamat_penerima" id="alamat_penerima" class="form-control" required placeholder="Masukkan Alamat Penerima"><?= set_value('alamat_penerima'); ?></textarea>
+			        <div class="form-group">
+			            <label for="alamat_penerima">Alamat Penerima</label>
+			            <textarea name="alamat_penerima" id="alamat_penerima" class="form-control" required placeholder="Alamat Penerima"><?= set_value('alamat_penerima'); ?></textarea>
+			            <?= form_error('alamat_penerima', '<small class="form-text text-danger">', '</small>'); ?>
+			        </div>
+					
+					<div class="row">
+						<div class="col-lg">
+							<div class="form-group">
+					            <label for="id_provinsi_tujuan">Provinsi Tujuan</label>
+					            <select name="id_provinsi_tujuan" id="id_provinsi_tujuan" class="form-control js-basic-single select2">
+					            	<option value="">-- Pilih --</option>
+					              <?php foreach ($provinsi as $key): ?>
+					                <?php if (set_value("id_provinsi_tujuan") == $key["id_provinsi"]): ?>
+					                <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
+					                <?php else: ?>
+					                <option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
+					                <?php endif ?>
+					              <?php endforeach ?>
+					            </select>
+					            <?= form_error('id_provinsi_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
+					        
+						</div>
+						<div class="col-lg">
+							<div class="form-group">
+					            <label for="id_kabupaten_tujuan">Kabupaten Tujuan</label>
+					            <select name="id_kabupaten_tujuan" id="id_kabupaten_tujuan" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi_tujuan') ?>,'#id_kabupaten_tujuan','<?= set_value('id_kabupaten_tujuan') ?>')">
+					            	<option value="">-- Pilih --</option>
+					            </select>
+					            <?= form_error('id_kabupaten_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
+						</div>
+						<div class="col-lg">
+					        <div class="form-group">
+					            <label for="id_kecamatan_tujuan">Kecamatan Tujuan</label>
+					            <select name="id_kecamatan_tujuan" id="id_kecamatan_tujuan" class="form-control js-basic-single select2"  onload="kecamatan(<?= set_value('id_kabupaten_tujuan') ?>,'#id_kecamatan_tujuan','<?= set_value('id_kecamatan_tujuan') ?>')" required>
+					            	<option value="">-- Pilih --</option>
+					            </select>
+					            <?= form_error('id_kecamatan_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
+					        </div>
+						</div>
 					</div>
+
 					<div class="form-group">
 						<label for="id_layanan_paket"><i class="fas fa-fw fa-shipping-fast"></i> Layanan Paket</label>
-						<select name="id_layanan_paket" id="id_layanan_paket" class="form-control">
+						<select name="id_layanan_paket" id="id_layanan_paket" class="form-control js-basic-single select2">
+					        <option value="">-- Pilih --</option>
 							<?php foreach ($layanan_paket as $dlp): ?>
-								<?php if ($dlp['harga_layanan_paket'] !== '0'): ?>
-									<option value="<?= $dlp['id_layanan_paket']; ?>"><?= $dlp['layanan_paket']; ?> | Rp. <?= number_format($dlp['harga_layanan_paket']); ?> | <?= $dlp['durasi_pengiriman']; ?> Jam</option>
+								<?php if ($dlp['harga'] !== '0'): ?>
+									<option value="<?= $dlp['id_layanan_paket']; ?>"><?= $dlp['jenis_layanan']; ?> | Rp. <?= number_format($dlp['harga']); ?> | <?= $dlp['durasi_pengiriman']; ?> Jam</option>
 								<?php endif ?>
 							<?php endforeach ?>
 						</select>
@@ -220,10 +305,10 @@
 											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
 										<?php elseif ($no_resi['status'] == '2'): ?>
 											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
-											<td><?= $no_resi['tanggal_kurir_menjemput']; ?></td>
+											<td><?= $no_resi['tanggal_penjemputan']; ?></td>
 										<?php elseif ($no_resi['status'] == '3'): ?>
 											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
-											<td><?= $no_resi['tanggal_kurir_menjemput']; ?></td>
+											<td><?= $no_resi['tanggal_penjemputan']; ?></td>
 											<td><?= $no_resi['tanggal_masuk_logistik']; ?></td>
 										<?php endif ?>
 									</tr>
@@ -246,7 +331,7 @@
 			                    <tr>
 			                      <td class="font-weight-bold">No. WhatsApp Pengirim</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['no_whatsapp_pengirim']; ?></td>
+			                      <td><?= $no_resi['no_wa_pengirim']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">Alamat Pengirim</td>
@@ -276,7 +361,7 @@
 			                    <tr>
 			                      <td class="font-weight-bold">No. WhatsApp Penerima</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['no_whatsapp_penerima']; ?></td>
+			                      <td><?= $no_resi['no_wa_penerima']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">Alamat Penerima</td>
@@ -286,7 +371,7 @@
 			                    <tr>
 			                      <td class="font-weight-bold">Layanan Paket</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['layanan_paket']; ?> | Rp. <?= number_format($no_resi['harga_layanan_paket']); ?> | <?= $no_resi['durasi_pengiriman']; ?> Jam</td>
+			                      <td><?= $no_resi['jenis_layanan']; ?> | Rp. <?= number_format($no_resi['harga']); ?> | <?= $no_resi['durasi_pengiriman']; ?> Jam</td>
 			                    </tr>
 			                </table>
 						</div>

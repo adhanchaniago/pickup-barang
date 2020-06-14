@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/vendor/adminlte-3.0.5/adminlte.min.css'); ?>">
     <!-- overlayScrollbars CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/vendor/overlayScrollbars-1.11.0/css/OverlayScrollbars.min.css'); ?>">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/select2-4.0.13/select2.min.css'); ?>">
     
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">  
@@ -72,9 +74,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
           <!-- Brand Logo -->
-          <a href="<?= base_url('admin'); ?>" class="brand-link">
+          <a href="<?= base_url('admin'); ?>" class="brand-link px-0">
             <img src="<?= base_url('assets/img/img_properties/icon.png'); ?>" alt="Logo" class="brand-image">
-            <span class="brand-text font-weight-light">Pickup</span>
+            <span class="brand-text font-weight-light">Pickup Barang</span>
           </a>
 
           <!-- Sidebar -->
@@ -166,6 +168,18 @@
                       <a href="<?= base_url('kecamatan'); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Kecamatan</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?= base_url('pengirim'); ?>" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pengirim</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?= base_url('penerima'); ?>" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Penerima</p>
                       </a>
                     </li>
                   </ul>
