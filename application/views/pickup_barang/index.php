@@ -76,6 +76,17 @@
         <div class="modal-body">
           <input type="hidden" name="id_pickup_barang" id="id_pickup_barang">
           <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" id="status" class="form-control">
+              <?php foreach ($status as $key => $value): ?>
+                <option value="<?= $key; ?>"><?= $value; ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
+          </div>
+          <div class="form-group">
             <label for="id_pengirim">Nama Pengirim</label>
             <select name="id_pengirim" id="id_pengirim" class="form-control js-basic-single select2">
               <?php foreach ($pengirim as $key): ?>

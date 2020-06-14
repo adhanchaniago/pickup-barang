@@ -6,6 +6,7 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Auth_model', 'am');
+		$this->load->model('Provinsi_model', 'provinsi');
 		$this->load->model('Layout_model','layout');
 		$this->load->model('LayananPaket_model', 'lpm');
 		$this->load->model('PickupBarang_model', 'pbm');
@@ -14,6 +15,7 @@ class Auth extends CI_Controller {
 	public function index()
 	{
 		$data['title'] 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+		$data['provinsi']		= $this->provinsi->getAllProvinsi();
 		$data['layanan_paket'] 	= $this->lpm->getAllLayananPaket();
 		$this->layout->view_auth('auth/index', $data);
 	}
@@ -63,8 +65,9 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_rules('alamat_penerima', 'alamat penerima', 'required|trim');
 		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Selamat Datang di JNE Tangsel BSD Nusaloka';
-			$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
+			$data['title'] 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+			$data['provinsi']		= $this->provinsi->getAllProvinsi();
+			$data['layanan_paket']	= $this->lpm->getAllLayananPaket();
 			$this->layout->view_auth('auth/index', $data);
 		} else {
 			$this->session->set_userdata(['pelanggan' => '1']);
@@ -76,8 +79,9 @@ class Auth extends CI_Controller {
 	{
 		$this->form_validation->set_rules('no_resi', 'No. Resi', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Selamat Datang di JNE Tangsel BSD Nusaloka';
-			$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
+			$data['title'] 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+			$data['provinsi']		= $this->provinsi->getAllProvinsi();
+			$data['layanan_paket']	= $this->lpm->getAllLayananPaket();
 			$this->load->view('templates/header-auth', $data);
 			$this->load->view('auth/index', $data);
 			$this->load->view('templates/footer-auth', $data);
@@ -88,8 +92,9 @@ class Auth extends CI_Controller {
 			} else {
 				$data['error'] = true;
 			}
-			$data['title'] = 'Selamat Datang di JNE Tangsel BSD Nusaloka';
-			$data['layanan_paket'] = $this->lpm->getAllLayananPaket();
+			$data['title'] 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+			$data['provinsi']		= $this->provinsi->getAllProvinsi();
+			$data['layanan_paket']  = $this->lpm->getAllLayananPaket();
 			$this->load->view('templates/header-auth', $data);
 			$this->load->view('auth/index', $data);
 			$this->load->view('templates/footer-auth', $data);

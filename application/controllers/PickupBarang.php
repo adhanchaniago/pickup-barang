@@ -15,12 +15,11 @@ class PickupBarang extends CI_Controller {
 		$this->mm->check_status_login();
 		$this->status[1] 			= "Pending";
 		$this->status[2] 			= "Kurir Menjemput";
-		$this->status[3] 			= "Barang Sampai Logistik";
+		$this->status[3] 			= "Barang Masuk Logistik";
 	}
 
 	public function index()
 	{
-		
 		$data['status']				= $this->status;
 		$data['dataUser'] 			= $this->mm->getDataUser();
 		$data['layanan_paket'] 		= $this->lpm->getAllLayananPaket();
@@ -38,7 +37,12 @@ class PickupBarang extends CI_Controller {
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('pickup_barang/index', $data);
 		} else {
-		    $this->pbm->addPickupBarang();
+			if ($this->input->post('id_pickup_barang')) {
+				$id_pickup_barang 	= $this->input->post('id_pickup_barang');
+			    $this->pbm->editPickupBarang($id_pickup_barang);
+			}else{
+			    $this->pbm->addPickupBarang();
+			}
 		}
 	}
 
@@ -105,27 +109,7 @@ class PickupBarang extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function editPickupBarang($id)
-	{
-		$data['status']				= $this->status;
-		$data['dataUser'] 			= $this->mm->getDataUser();
-		$data['layanan_paket'] 		= $this->lpm->getAllLayananPaket();
-		$data['pickup_barang'] 		= $this->pbm->getAllPickupBarang();
-		$data['title'] 				= 'Pickup Barang - ' . $data['dataUser']['username'];
-
-		$this->form_validation->set_rules('id_pengirim', 'nama pengirim', 'required|trim');
-		$this->form_validation->set_rules('id_penerima', 'nama penerima', 'required|trim');
-		$this->form_validation->set_rules('nama_barang', 'nama barang', 'required|trim');
-		$this->form_validation->set_rules('berat_barang', 'berat barang', 'required|trim');
-		$this->form_validation->set_rules('jumlah_barang', 'jumlah barang', 'required|trim');
-		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
-		if ($this->form_validation->run() == false) {
-			$this->layout->view_admin('pickup_barang/index', $data);
-		} else {
-		    $this->pbm->editPickupBarang($id);
-		}
-	}
-
+	
 	public function deletePickupBarang($id)
 	{
 		$this->pbm->deletePickupBarang($id);

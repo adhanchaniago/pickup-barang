@@ -147,37 +147,64 @@ class PickupBarang_model extends CI_Model {
 		$status 		= $this->input->post('status', true);
 		if ($status == '2') {
 			$data 			= [
+				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+				'id_penerima' 					=> $this->input->post('id_penerima', true),	
+				'nama_barang' 					=> $this->input->post('nama_barang', true),	
+				'berat_barang' 					=> $this->input->post('berat_barang', true),	
+				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
+				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
+				'status' 						=> $status,
 				'tanggal_penjemputan'			=> date('Y-m-d H:i:s'),
 				'tanggal_masuk_logistik'		=> NULL
 			];
 		} elseif ($status == '1') {
 			$data 			= [
+				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+				'id_penerima' 					=> $this->input->post('id_penerima', true),	
+				'nama_barang' 					=> $this->input->post('nama_barang', true),	
+				'berat_barang' 					=> $this->input->post('berat_barang', true),	
+				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
+				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
+				'status' 						=> $status,
 				'tanggal_penjemputan'			=> NULL,
 				'tanggal_masuk_logistik'		=> NULL
 			];
 		} elseif ($status == '3') {
 			if ($statusLama == '1') {
 				$data 			= [
-					'tanggal_penjemputan'		=> date('Y-m-d H:i:s')
+					'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+					'id_penerima' 					=> $this->input->post('id_penerima', true),	
+					'nama_barang' 					=> $this->input->post('nama_barang', true),	
+					'berat_barang' 					=> $this->input->post('berat_barang', true),	
+					'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
+					'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
+					'status' 						=> $status,
+					'tanggal_penjemputan'			=> date('Y-m-d H:i:s')
+				];
+			} else {
+				$data 			= [
+					'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+					'id_penerima' 					=> $this->input->post('id_penerima', true),	
+					'nama_barang' 					=> $this->input->post('nama_barang', true),	
+					'berat_barang' 					=> $this->input->post('berat_barang', true),	
+					'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
+					'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
+					'status' 						=> $status,
+					'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s')
 				];
 			}
+
+		} else {
 			$data 			= [
-				'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s')
+				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+				'id_penerima' 					=> $this->input->post('id_penerima', true),	
+				'nama_barang' 					=> $this->input->post('nama_barang', true),	
+				'berat_barang' 					=> $this->input->post('berat_barang', true),	
+				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
+				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
+				'status' 						=> $status
 			];
 		}
-
-		$data 			= [
-			'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-			'id_penerima' 					=> $this->input->post('id_penerima', true),	
-			'nama_barang' 					=> $this->input->post('nama_barang', true),	
-			'berat_barang' 					=> $this->input->post('berat_barang', true),	
-			'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-			'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-			'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-			'status' 						=> $status
-		];
-
-
 
 		$this->db->where('id_pickup_barang', $id);
 		$this->db->update('pickup_barang', $data);
@@ -190,17 +217,17 @@ class PickupBarang_model extends CI_Model {
 	public function deletePickupBarang($id)
 	{
 		$dataUser 						= $this->mm->getDataUser();
-		if ($dataUser['id_pickup_barang'] !== '1') {
-			$this->session->set_flashdata('message-failed', 'Pengguna ' . $dataUser['username'] . ' tidak memiliki hak akses menghapus data pickup_barang');
+		if ($dataUser['id_jabatan'] !== '1') {
+			$this->session->set_flashdata('message-failed', 'Pengguna ' . $dataUser['username'] . ' tidak memiliki hak akses menghapus data pickup barang');
 			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mencoba menghapus data Pickup Barang', $dataUser['id_user']);
 			redirect('pickupBarang');
 		}
 
 		$data['pickup_barang'] 			= $this->getPickupBarangById($id);
-		$pickup_barang 					= $data['pickup_barang']['pickup_barang'];
+		$pickup_barang 					= $data['pickup_barang']['nama_pengirim'] . ' | ' . $data['pickup_barang']['nama_barang'] . ' | ' . $data['pickup_barang']['nama_penerima'];
 		
 		$this->db->delete('pickup_barang', ['id_pickup_barang' => $id]);
-		$this->session->set_flashdata('message-success', 'Jabatan ' . $pickup_barang . ' berhasil dihapus');
+		$this->session->set_flashdata('message-success', 'Pickup Barang ' . $pickup_barang . ' berhasil dihapus');
 		$this->mm->createLog('Jabatan ' . $pickup_barang . ' berhasil dihapus', $dataUser['id_user']);
 		redirect('pickupBarang');
 	}
@@ -208,7 +235,10 @@ class PickupBarang_model extends CI_Model {
 	public function cek_status_pesanan()
 	{
 		$this->db->select('*');
+		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
+		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
 		$this->db->join('layanan_paket', 'pickup_barang.id_layanan_paket=layanan_paket.id_layanan_paket');
+		$this->db->join('jenis_layanan', 'layanan_paket.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
 		return $this->db->get_where('pickup_barang', ['no_resi' => $this->input->post('no_resi', true)])->row_array();
 	}
 }
