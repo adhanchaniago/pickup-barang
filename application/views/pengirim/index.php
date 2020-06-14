@@ -5,11 +5,11 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm header-title">
-          <h1 class="m-0 text-dark">Daftar Penerima</h1>
+          <h1 class="m-0 text-dark">Daftar Pengirim</h1>
         </div><!-- /.col -->
         <?php if ($dataUser['id_jabatan'] == '1'): ?>
           <div class="col-sm header-button">
-            <button type="button" class="btn btn-primary btn-tambah-penerima"><i class="fas fa-fw fa-plus"></i> Tambah Penerima</button>
+            <button type="button" class="btn btn-primary btn-tambah-pengirim"><i class="fas fa-fw fa-plus"></i> Tambah Pengirim</button>
           </div>
         <?php endif ?>
       </div><!-- /.row -->
@@ -35,14 +35,14 @@
       <div class="row my-2">
         <div class="col-lg">
           <div class="table-responsive">
-            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('penerima/datatable') ?>">
+            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('pengirim/datatable') ?>">
               <thead>
                 <tr>
                   <th width="10">No</th>
-                  <th>Nama Penerima</th>
-                  <th>No. WA Penerima</th>
-                  <th>Alamat Penerima</th>
-                  <th>Kec/Kab/Prov. Penerima</th>
+                  <th>Nama Pengirim</th>
+                  <th>No. WA Pengirim</th>
+                  <th>Alamat Pengirim</th>
+                  <th>Kec/Kab/Prov. Pengirim</th>
                   <?php if ($dataUser['id_jabatan'] == '1'): ?>
                     <th>Aksi</th>
                   <?php endif ?>
@@ -57,8 +57,8 @@
   <!-- /.content -->
 </div>
 
-<!-- Penerima Modal -->
-<div class="modal fade" id="penerimaModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+<!-- pengirim Modal -->
+<div class="modal fade" id="pengirimModal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form method="post">
       <div class="modal-content">
@@ -69,21 +69,21 @@
           </button>
         </div>
         <div class="modal-body">
-            <input type="hidden" name="id_penerima" id="id_penerima">
+            <input type="hidden" name="id_pengirim" id="id_pengirim">
           <div class="form-group">
-            <label for="nama_penerima">Nama Penerima</label>
-            <input type="text" name="nama_penerima" id="nama_penerima" class="form-control" required value="<?= set_value('nama_penerima'); ?>" placeholder="Nama Penerima">
-            <?= form_error('nama_penerima', '<small class="form-text text-danger">', '</small>'); ?>
+            <label for="nama_pengirim">Nama Pengirim</label>
+            <input type="text" name="nama_pengirim" id="nama_pengirim" class="form-control" required value="<?= set_value('nama_pengirim'); ?>" placeholder="Nama Pengirim">
+            <?= form_error('nama_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
-            <label for="no_wa_penerima">No. WhatsApp Penerima</label>
-            <input type="text" name="no_wa_penerima" id="no_wa_penerima" class="form-control" required value="<?= set_value('no_wa_penerima'); ?>" placeholder="No. WhatsApp Penerima">
-            <?= form_error('no_wa_penerima', '<small class="form-text text-danger">', '</small>'); ?>
+            <label for="no_wa_pengirim">No. WhatsApp Pengirim</label>
+            <input type="text" name="no_wa_pengirim" id="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>" placeholder="No. WhatsApp Pengirim">
+            <?= form_error('no_wa_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
-            <label for="alamat_penerima">Alamat Penerima</label>
-            <textarea name="alamat_penerima" id="alamat_penerima" class="form-control" required placeholder="Alamat Penerima"><?= set_value('alamat_penerima'); ?></textarea>
-            <?= form_error('alamat_penerima', '<small class="form-text text-danger">', '</small>'); ?>
+            <label for="alamat_pengirim">Alamat Pengirim</label>
+            <textarea name="alamat_pengirim" id="alamat_pengirim" class="form-control" required placeholder="Alamat Pengirim"><?= set_value('alamat_pengirim'); ?></textarea>
+            <?= form_error('alamat_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
 
           <div class="form-group">

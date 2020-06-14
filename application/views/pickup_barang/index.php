@@ -40,11 +40,11 @@
                   <th>No. Resi</th>
                   <th>Nama Pengirim</th>
                   <th>Nama Barang</th>
-                  <th>Berat Barang</th>
+                  <th>Berat Barang (Kg)</th>
                   <th>Jumlah Barang</th>
                   <th>Nama Penerima</th>
                   <th>Tanggal Pemesanan</th>
-                  <th>Tanggal Kurir Menjemput</th>
+                  <th>Tanggal Penjemputan</th>
                   <th>Tanggal Masuk Logistik</th>
                   <th>Jenis Layanan</th>
                   <th>Status</th>
@@ -78,11 +78,11 @@
           <div class="form-group">
             <label for="id_pengirim">Nama Pengirim</label>
             <select name="id_pengirim" id="id_pengirim" class="form-control js-basic-single select2">
-              <?php foreach ($jenis_paket as $key): ?>
+              <?php foreach ($pengirim as $key): ?>
                 <?php if (set_value("id_pengirim") == $key["id_pengirim"]): ?>
-                <option value="<?= $key["id_pengirim"]; ?>" selected><?= $key["jenis_paket"]; ?></option>
+                <option value="<?= $key["id_pengirim"]; ?>" selected><?= $key["nama_pengirim"]; ?></option>
                 <?php else: ?>
-                <option value="<?= $key["id_pengirim"]; ?>"><?= $key["jenis_paket"]; ?></option>
+                <option value="<?= $key["id_pengirim"]; ?>"><?= $key["nama_pengirim"]; ?></option>
                 <?php endif ?>
               <?php endforeach ?>
             </select>
@@ -90,11 +90,11 @@
           <div class="form-group">
             <label for="id_penerima">Nama Penerima</label>
             <select name="id_penerima" id="id_penerima" class="form-control js-basic-single select2">
-              <?php foreach ($jenis_paket as $key): ?>
+              <?php foreach ($penerima as $key): ?>
                 <?php if (set_value("id_penerima") == $key["id_penerima"]): ?>
-                <option value="<?= $key["id_penerima"]; ?>" selected><?= $key["jenis_paket"]; ?></option>
+                <option value="<?= $key["id_penerima"]; ?>" selected><?= $key["nama_penerima"]; ?></option>
                 <?php else: ?>
-                <option value="<?= $key["id_penerima"]; ?>"><?= $key["jenis_paket"]; ?></option>
+                <option value="<?= $key["id_penerima"]; ?>"><?= $key["nama_penerima"]; ?></option>
                 <?php endif ?>
               <?php endforeach ?>
             </select>
@@ -102,11 +102,11 @@
           <div class="form-group">
             <label for="id_layanan_paket">Layanan Paket</label>
             <select name="id_layanan_paket" id="id_layanan_paket" class="form-control js-basic-single select2">
-              <?php foreach ($jenis_paket as $key): ?>
+              <?php foreach ($layanan_paket as $key): ?>
                 <?php if (set_value("id_layanan_paket") == $key["id_layanan_paket"]): ?>
-                <option value="<?= $key["id_layanan_paket"]; ?>" selected><?= $key["jenis_paket"]; ?></option>
+                <option value="<?= $key["id_layanan_paket"]; ?>" selected><?= $key["jenis_layanan"]; ?> Dari <?= $key["kec_asal"]; ?> Sampai <?= $key["kec_tujuan"]; ?> | <?= $key['jenis_paket']; ?> | Rp. <?= number_format($key['harga']); ?> | <?= $key['durasi_pengiriman']; ?> Jam</option>
                 <?php else: ?>
-                <option value="<?= $key["id_layanan_paket"]; ?>"><?= $key["jenis_paket"]; ?></option>
+                <option value="<?= $key["id_layanan_paket"]; ?>"><?= $key["jenis_layanan"]; ?> Dari <?= $key["kec_asal"]; ?> Sampai <?= $key["kec_tujuan"]; ?> | <?= $key['jenis_paket']; ?> | Rp. <?= number_format($key['harga']); ?> | <?= $key['durasi_pengiriman']; ?> Jam</option>
                 <?php endif ?>
               <?php endforeach ?>
             </select>

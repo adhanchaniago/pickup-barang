@@ -12,13 +12,16 @@ class PickupBarang_model extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('pickup_barang');
+		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
+		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
 		$this->db->join('layanan_paket', 'pickup_barang.id_layanan_paket=layanan_paket.id_layanan_paket');
+		$this->db->join('jenis_layanan', 'jenis_layanan.id_jenis_layanan = layanan_paket.id_jenis_layanan');
 	}
 	public function _filterDatatable()
 	{
 		$this->_setDatatable();
 		$column_order 		= [null,"no_resi","nama_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","tanggal_pemesanan","tanggal_masuk_logistik","jenis_layanan","status"];
-		$column_search 		= ["no_resi","nama_pengirim","no_whatsapp_pengirim","alamat_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","no_whatsapp_penerima","alamat_penerima","tanggal_pemesanan","tanggal_masuk_logistik","layanan_paket","jenis_layanan","jenis_paket","status"];
+		$column_search 		= ["no_resi","nama_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","tanggal_pemesanan","tanggal_masuk_logistik","jenis_layanan","status"];
 		$default_order 		= ["tanggal_pemesanan"=>"DESC"];
 
 		$search 			= $this->input->post('search');
@@ -81,12 +84,19 @@ class PickupBarang_model extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->join('layanan_paket', 'pickup_barang.id_layanan_paket=layanan_paket.id_layanan_paket');
+		$this->db->join('jenis_layanan', 'jenis_layanan.id_jenis_layanan = layanan_paket.id_jenis_layanan');
+		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
+		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
 		$this->db->order_by('tanggal_pemesanan', 'desc');
 		return $this->db->get('pickup_barang')->result_array();
 	}
 
 	public function getPickupBarangById($id)
 	{
+		$this->db->join('layanan_paket', 'pickup_barang.id_layanan_paket=layanan_paket.id_layanan_paket');
+		$this->db->join('jenis_layanan', 'jenis_layanan.id_jenis_layanan = layanan_paket.id_jenis_layanan');
+		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
+		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
 		return $this->db->get_where('pickup_barang', ['id_pickup_barang' => $id])->row_array();
 	}
 
@@ -104,19 +114,15 @@ class PickupBarang_model extends CI_Model {
 		// ---- ./random number generator ----
 
 		$data 			= [
-			'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),	
-			'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
-			'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
+			'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+			'id_penerima' 					=> $this->input->post('id_penerima', true),	
+			'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),	
 			'nama_barang' 					=> $this->input->post('nama_barang', true),	
 			'berat_barang' 					=> $this->input->post('berat_barang', true),	
 			'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-			'nama_penerima' 				=> ucwords(strtolower($this->input->post('nama_penerima', true))),	
-			'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
-			'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
 			'tanggal_pemesanan' 			=> date('Y-m-d H:i:s'),
 			'status'						=> '1',
-			'no_resi'						=> $randNum,
-			'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true)
+			'no_resi'						=> $randNum
 		];
 
 		if ($this->session->userdata('pelanggan') == '1') {
@@ -141,18 +147,18 @@ class PickupBarang_model extends CI_Model {
 		$status 		= $this->input->post('status', true);
 		if ($status == '2') {
 			$data 			= [
-				'tanggal_kurir_menjemput'		=> date('Y-m-d H:i:s'),
+				'tanggal_penjemputan'			=> date('Y-m-d H:i:s'),
 				'tanggal_masuk_logistik'		=> NULL
 			];
 		} elseif ($status == '1') {
 			$data 			= [
-				'tanggal_kurir_menjemput'		=> NULL,
+				'tanggal_penjemputan'			=> NULL,
 				'tanggal_masuk_logistik'		=> NULL
 			];
 		} elseif ($status == '3') {
 			if ($statusLama == '1') {
 				$data 			= [
-					'tanggal_kurir_menjemput'		=> date('Y-m-d H:i:s')
+					'tanggal_penjemputan'		=> date('Y-m-d H:i:s')
 				];
 			}
 			$data 			= [
@@ -161,13 +167,8 @@ class PickupBarang_model extends CI_Model {
 		}
 
 		$data 			= [
-			'nama_pengirim' 				=> ucwords(strtolower($this->input->post('nama_pengirim', true))),
-			'no_whatsapp_pengirim' 			=> $this->input->post('no_whatsapp_pengirim', true),	
-			'alamat_pengirim' 				=> $this->input->post('alamat_pengirim', true),	
-
-			'no_whatsapp_penerima' 			=> $this->input->post('no_whatsapp_penerima', true),	
-			'alamat_penerima' 				=> $this->input->post('alamat_penerima', true),	
-
+			'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+			'id_penerima' 					=> $this->input->post('id_penerima', true),	
 			'nama_barang' 					=> $this->input->post('nama_barang', true),	
 			'berat_barang' 					=> $this->input->post('berat_barang', true),	
 			'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	

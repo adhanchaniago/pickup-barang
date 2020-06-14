@@ -11,6 +11,7 @@ $(function() {
     kecamatan();
     jenisLayanan();
     jenisPaket();
+    pengirim();
     penerima();
     datatable();
 
@@ -397,6 +398,53 @@ $(function() {
             e.preventDefault();
             $(modal).modal('show');
             $(modal+ ' #label').html('Tambah Penerima');
+            $(modal+ ' #reset').click();
+        })
+    }
+
+    function pengirim() {
+        let modal       = '#pengirimModal';
+        $('#table_id').on('click','.btn-edit-pengirim',function(e){
+            e.preventDefault();
+            $(modal).modal('show');
+
+            let id_pengirim   = $(this).data('id');
+            $.ajax({
+                url         : url + 'pengirim/getPengirimById',
+                method      : 'post',
+                data        : {id_pengirim : id_pengirim},
+                dataType    : 'json',
+                success     : function(response) {
+                    $(modal + ' #label').html('Ubah Pengirim - ' + response.nama_pengirim);
+                    $(modal + ' #nama_pengirim').val(response.nama_pengirim);
+                    $(modal + ' #no_wa_pengirim').val(response.no_wa_pengirim);
+                    $(modal + ' #alamat_pengirim').val(response.alamat_pengirim);
+                    $(modal + ' #id_pengirim').val(response.id_pengirim);
+                    $(modal + ' #id_provinsi').val(response.prov).select();
+                    selectKabupaten(response.prov,modal + ' #id_kabupaten',response.kab);
+                    selectKecamatan(response.kab,modal + ' #id_kecamatan',response.kec);
+                }
+            });
+        });
+        
+        $(modal + ' #id_provinsi').on('change',function() {
+            let id_provinsi     = $(this).val();
+            selectKabupaten(id_provinsi,modal + ' #id_kabupaten');
+            setTimeout(function() {
+                let id_kabupaten     = $(modal + ' #id_kabupaten').val();
+                selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
+            },1000);
+        });
+        
+        $(modal + ' #id_kabupaten').on('change',function() {
+            let id_kabupaten     = $(this).val();
+            selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
+        });
+
+        $('.btn-tambah-pengirim').on('click',function(e) {
+            e.preventDefault();
+            $(modal).modal('show');
+            $(modal+ ' #label').html('Tambah Pengirim');
             $(modal+ ' #reset').click();
         })
     }
