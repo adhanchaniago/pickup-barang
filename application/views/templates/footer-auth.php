@@ -13,10 +13,8 @@
     <script src="<?= base_url('assets/vendor/owlCarousel2-2.3.4/js/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/select2-4.0.13/select2.min.js'); ?>"></script>
 
-    <div id="data-admin" data-link="<?= $def_link; ?>" data-url="<?= base_url() ?>"></div>
     
     <!-- My JS -->
-    <script src="<?= base_url('assets/js/admin.js'); ?>"></script>
     <script src="<?= base_url('assets/js/script.js'); ?>"></script>
 	
 	<!-- Config -->

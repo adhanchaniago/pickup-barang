@@ -13,7 +13,6 @@ $(function() {
     jenisPaket();
     pengirim();
     penerima();
-    pesananBarang();
     datatable();
 
 
@@ -156,34 +155,6 @@ $(function() {
         })
     }
 
-    function pesananBarang() {
-        $(' .form_input_pesanan#id_provinsi_asal').on('change',function() {
-            let id_provinsi     = $(this).val();
-            selectKabupaten(id_provinsi,' .form_input_pesanan#id_kabupaten_asal');
-            setTimeout(function() {
-                let id_kabupaten     = $(' .form_input_pesanan#id_kabupaten_asal').val();
-                selectKecamatan(id_kabupaten,' .form_input_pesanan#id_kecamatan_asal');
-            },1000);
-        });
-        
-        $(' .form_input_pesanan#id_provinsi_tujuan').on('change',function() {
-            let id_provinsi     = $(this).val();
-            selectKabupaten(id_provinsi,' .form_input_pesanan#id_kabupaten_tujuan');
-            setTimeout(function() {
-                let id_kabupaten     = $(' .form_input_pesanan#id_kabupaten_tujuan').val();
-                selectKecamatan(id_kabupaten,' .form_input_pesanan#id_kecamatan_tujuan');
-            },1000);
-        });
-
-        $(' .form_input_pesanan#id_kabupaten_asal').on('change',function() {
-            let id_kabupaten     = $(this).val();
-            selectKecamatan(id_kabupaten,' .form_input_pesanan#id_kecamatan_asal');
-        });
-        $(' .form_input_pesanan#id_kabupaten_tujuan').on('change',function() {
-            let id_kabupaten     = $(this).val();
-            selectKecamatan(id_kabupaten,' .form_input_pesanan#id_kecamatan_tujuan');
-        });
-    }
 
     function jabatan() {
         let modal       = '#jabatanModal';
