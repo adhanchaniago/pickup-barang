@@ -100,6 +100,7 @@
 			        		<div class="form-group">
 					            <label for="id_provinsi_asal">Provinsi Asal</label>
 					            <select name="id_provinsi_asal" id="id_provinsi_asal" class="form-control js-basic-single select2">
+					            	<option value="">-- Pilih --</option>
 					              <?php foreach ($provinsi as $key): ?>
 					                <?php if (set_value("id_provinsi_asal") == $key["id_provinsi"]): ?>
 					                <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
@@ -114,14 +115,18 @@
 			        	<div class="col-lg">
 			        		<div class="form-group">
 					            <label for="id_kabupaten_asal">Kabupaten Asal</label>
-					            <select name="id_kabupaten_asal" id="id_kabupaten_asal" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi_asal') ?>,'#id_kabupaten_asal','<?= set_value('id_kabupaten_asal') ?>')"></select>
+					            <select name="id_kabupaten_asal" id="id_kabupaten_asal" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi_asal') ?>,'#id_kabupaten_asal','<?= set_value('id_kabupaten_asal') ?>')">
+					            	<option value="">-- Pilih --</option>
+					            </select>
 					            <?= form_error('id_kabupaten_asal', '<small class="form-text text-danger">', '</small>'); ?>
 					        </div>
 			        	</div>
 			        	<div class="col-lg">
 			        		<div class="form-group">
 					            <label for="id_kecamatan_asal">Kecamatan Asal</label>
-					            <select name="id_kecamatan_asal" id="id_kecamatan_asal" class="form-control js-basic-single select2" onload="kecamatan(<?= set_value('id_kabupaten_asal') ?>,'#id_kecamatan_asal','<?= set_value('id_kecamatan_asal') ?>')" required></select>
+					            <select name="id_kecamatan_asal" id="id_kecamatan_asal" class="form-control js-basic-single select2" onload="kecamatan(<?= set_value('id_kabupaten_asal') ?>,'#id_kecamatan_asal','<?= set_value('id_kecamatan_asal') ?>')" required>
+					            	<option value="">-- Pilih --</option>
+					            </select>
 					            <?= form_error('id_kecamatan_asal', '<small class="form-text text-danger">', '</small>'); ?>
 					        </div>
 			        	</div>
@@ -173,6 +178,7 @@
 							<div class="form-group">
 					            <label for="id_provinsi_tujuan">Provinsi Tujuan</label>
 					            <select name="id_provinsi_tujuan" id="id_provinsi_tujuan" class="form-control js-basic-single select2">
+					            	<option value="">-- Pilih --</option>
 					              <?php foreach ($provinsi as $key): ?>
 					                <?php if (set_value("id_provinsi_tujuan") == $key["id_provinsi"]): ?>
 					                <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
@@ -188,14 +194,18 @@
 						<div class="col-lg">
 							<div class="form-group">
 					            <label for="id_kabupaten_tujuan">Kabupaten Tujuan</label>
-					            <select name="id_kabupaten_tujuan" id="id_kabupaten_tujuan" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi_tujuan') ?>,'#id_kabupaten_tujuan','<?= set_value('id_kabupaten_tujuan') ?>')"></select>
+					            <select name="id_kabupaten_tujuan" id="id_kabupaten_tujuan" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi_tujuan') ?>,'#id_kabupaten_tujuan','<?= set_value('id_kabupaten_tujuan') ?>')">
+					            	<option value="">-- Pilih --</option>
+					            </select>
 					            <?= form_error('id_kabupaten_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
 					        </div>
 						</div>
 						<div class="col-lg">
 					        <div class="form-group">
 					            <label for="id_kecamatan_tujuan">Kecamatan Tujuan</label>
-					            <select name="id_kecamatan_tujuan" id="id_kecamatan_tujuan" class="form-control js-basic-single select2"  onload="kecamatan(<?= set_value('id_kabupaten_tujuan') ?>,'#id_kecamatan_tujuan','<?= set_value('id_kecamatan_tujuan') ?>')" required></select>
+					            <select name="id_kecamatan_tujuan" id="id_kecamatan_tujuan" class="form-control js-basic-single select2"  onload="kecamatan(<?= set_value('id_kabupaten_tujuan') ?>,'#id_kecamatan_tujuan','<?= set_value('id_kecamatan_tujuan') ?>')" required>
+					            	<option value="">-- Pilih --</option>
+					            </select>
 					            <?= form_error('id_kecamatan_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
 					        </div>
 						</div>
@@ -203,7 +213,8 @@
 
 					<div class="form-group">
 						<label for="id_layanan_paket"><i class="fas fa-fw fa-shipping-fast"></i> Layanan Paket</label>
-						<select name="id_layanan_paket" id="id_layanan_paket" class="form-control">
+						<select name="id_layanan_paket" id="id_layanan_paket" class="form-control js-basic-single select2">
+					        <option value="">-- Pilih --</option>
 							<?php foreach ($layanan_paket as $dlp): ?>
 								<?php if ($dlp['harga'] !== '0'): ?>
 									<option value="<?= $dlp['id_layanan_paket']; ?>"><?= $dlp['jenis_layanan']; ?> | Rp. <?= number_format($dlp['harga']); ?> | <?= $dlp['durasi_pengiriman']; ?> Jam</option>

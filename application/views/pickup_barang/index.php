@@ -89,6 +89,7 @@
           <div class="form-group">
             <label for="id_pengirim">Nama Pengirim</label>
             <select name="id_pengirim" id="id_pengirim" class="form-control js-basic-single select2">
+              <option value="">-- Pilih --</option>
               <?php foreach ($pengirim as $key): ?>
                 <?php if (set_value("id_pengirim") == $key["id_pengirim"]): ?>
                 <option value="<?= $key["id_pengirim"]; ?>" selected><?= $key["nama_pengirim"]; ?></option>
@@ -101,6 +102,7 @@
           <div class="form-group">
             <label for="id_penerima">Nama Penerima</label>
             <select name="id_penerima" id="id_penerima" class="form-control js-basic-single select2">
+              <option value="">-- Pilih --</option>
               <?php foreach ($penerima as $key): ?>
                 <?php if (set_value("id_penerima") == $key["id_penerima"]): ?>
                 <option value="<?= $key["id_penerima"]; ?>" selected><?= $key["nama_penerima"]; ?></option>
@@ -113,6 +115,7 @@
           <div class="form-group">
             <label for="id_layanan_paket">Layanan Paket</label>
             <select name="id_layanan_paket" id="id_layanan_paket" class="form-control js-basic-single select2">
+              <option value="">-- Pilih --</option>
               <?php foreach ($layanan_paket as $key): ?>
                 <?php if (set_value("id_layanan_paket") == $key["id_layanan_paket"]): ?>
                 <option value="<?= $key["id_layanan_paket"]; ?>" selected><?= $key["jenis_layanan"]; ?> Dari <?= $key["kec_asal"]; ?> Sampai <?= $key["kec_tujuan"]; ?> | <?= $key['jenis_paket']; ?> | Rp. <?= number_format($key['harga']); ?> | <?= $key['durasi_pengiriman']; ?> Jam</option>

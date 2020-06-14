@@ -89,6 +89,7 @@
           <div class="form-group">
             <label for="id_provinsi">Provinsi</label>
             <select name="id_provinsi" id="id_provinsi" class="form-control js-basic-single select2">
+              <option value="">-- Pilih --</option>
               <?php foreach ($provinsi as $key): ?>
                 <?php if (set_value("id_provinsi") == $key["id_provinsi"]): ?>
                 <option value="<?= $key["id_provinsi"]; ?>" selected><?= $key["nama_provinsi"]; ?></option>
@@ -101,12 +102,16 @@
           </div>
           <div class="form-group">
             <label for="id_kabupaten">Kabupaten</label>
-            <select name="id_kabupaten" id="id_kabupaten" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi') ?>,'#id_kabupaten','<?= set_value('id_kabupaten') ?>')"></select>
+            <select name="id_kabupaten" id="id_kabupaten" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi') ?>,'#id_kabupaten','<?= set_value('id_kabupaten') ?>')">
+              <option value="">-- Pilih --</option>
+            </select>
             <?= form_error('id_kabupaten', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
             <label for="id_kecamatan">Kecamatan</label>
-            <select name="id_kecamatan" id="id_kecamatan" class="form-control js-basic-single select2" onload="kecamatan(<?= set_value('id_kabupaten') ?>,'#id_kecamatan','<?= set_value('id_kecamatan') ?>')" required></select>
+            <select name="id_kecamatan" id="id_kecamatan" class="form-control js-basic-single select2" onload="kecamatan(<?= set_value('id_kabupaten') ?>,'#id_kecamatan','<?= set_value('id_kecamatan') ?>')" required>
+              <option value="">-- Pilih --</option>
+            </select>
             <?= form_error('id_kecamatan', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
         </div>
