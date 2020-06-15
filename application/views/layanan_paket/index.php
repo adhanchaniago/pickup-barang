@@ -114,6 +114,7 @@
             </select>
             <?= form_error('id_provinsi_asal', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
+          
           <div class="form-group">
             <label for="id_kabupaten_asal">Kabupaten Asal</label>
             <select name="id_kabupaten_asal" id="id_kabupaten_asal" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi_asal') ?>,'#id_kabupaten_asal','<?= set_value('id_kabupaten_asal') ?>')">
@@ -121,6 +122,7 @@
             </select>
             <?= form_error('id_kabupaten_asal', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
+
           <div class="form-group">
             <label for="id_kecamatan_asal">Kecamatan Asal</label>
             <select name="id_kecamatan_asal" id="id_kecamatan_asal" class="form-control js-basic-single select2" onload="kecamatan(<?= set_value('id_kabupaten_asal') ?>,'#id_kecamatan_asal','<?= set_value('id_kecamatan_asal') ?>')" required>
@@ -143,6 +145,7 @@
             </select>
             <?= form_error('id_provinsi_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
+
           <div class="form-group">
             <label for="id_kabupaten_tujuan">Kabupaten Tujuan</label>
             <select name="id_kabupaten_tujuan" id="id_kabupaten_tujuan" class="form-control js-basic-single select2" onload="kabupaten(<?= set_value('id_provinsi_tujuan') ?>,'#id_kabupaten_tujuan','<?= set_value('id_kabupaten_tujuan') ?>')">
@@ -150,6 +153,7 @@
             </select>
             <?= form_error('id_kabupaten_tujuan', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
+
           <div class="form-group">
             <label for="id_kecamatan_tujuan">Kecamatan Tujuan</label>
             <select name="id_kecamatan_tujuan" id="id_kecamatan_tujuan" class="form-control js-basic-single select2"  onload="kecamatan(<?= set_value('id_kabupaten_tujuan') ?>,'#id_kecamatan_tujuan','<?= set_value('id_kecamatan_tujuan') ?>')" required>

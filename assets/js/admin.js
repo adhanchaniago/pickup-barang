@@ -97,6 +97,7 @@ $(function() {
         $('#table_id').on('click','.btn-edit-layananPaket',function(e){
             e.preventDefault();
             $(modal).modal('show');
+            $(modal + ' #label').html('Ubah Layanan Paket');
             let id_layanan_paket   = $(this).data('id');
             $.ajax({
                 url         : url + 'layananPaket/getLayananPaketById',
@@ -104,23 +105,36 @@ $(function() {
                 data        : {id_layanan_paket : id_layanan_paket},
                 dataType    : 'json',
                 success     : function(response) {
-                    $(modal + ' #label').html('Ubah Layanan Paket - ' + response.layanan_paket);
                     $(modal + ' #id_layanan_paket').val(response.id_layanan_paket);
                     $(modal + ' #harga').val(response.harga);
                     $(modal + ' #durasi_pengiriman').val(response.durasi_pengiriman);
-                    $(modal + ' #id_jenis_paket').val(response.id_jenis_paket).select();
-                    $(modal + ' #id_jenis_layanan').val(response.id_jenis_layanan).select();
-                    $(modal + ' #id_provinsi_asal').val(response.prov_asal).select();
-                    $(modal + ' #id_provinsi_tujuan').val(response.prov_tujuan).select();
-                    selectKabupaten(response.prov_asal,modal + ' #id_kabupaten_asal',response.kab_asal);
-                    selectKecamatan(response.kab_asal,modal + ' #id_kecamatan_asal',response.kec_asal);
-                    selectKabupaten(response.prov_tujuan,modal + ' #id_kabupaten_tujuan',response.kab_tujuan);
-                    selectKecamatan(response.kab_tujuan,modal + ' #id_kecamatan_tujuan',response.kec_tujuan);
+                    $(modal + ' #id_jenis_paket').val(response.id_jenis_paket).trigger('change');
+                    $(modal + ' #id_jenis_layanan').val(response.id_jenis_layanan).trigger('change');
+                    $(modal + ' #id_provinsi_asal').val(response.prov_asal).trigger('change');
+                    $(modal + ' #id_provinsi_tujuan').val(response.prov_tujuan).trigger('change');
+                    let intKab  = setInterval(function() {
+                        let kab_asal    = $(modal + ' #id_kabupaten_asal');
+                        let kab_tujuan  = $(modal + ' #id_kabupaten_tujuan');
+                        console.log(kab_asal.length);
+                        if (kab_asal.length < 2 && kab_tujuan.length < 2) {
+                            $(modal + ' #id_kabupaten_asal').val(response.kab_asal).trigger('change');
+                            $(modal + ' #id_kabupaten_tujuan').val(response.kab_tujuan).trigger('change');
+                            let intKec  = setInterval(function() {
+                                let kec_asal    = $(modal + ' #id_kecamatan_asal');
+                                let kec_tujuan  = $(modal + ' #id_kecamatan_tujuan');
+                                if (kec_asal.length < 2 && kec_tujuan.length < 2) {
+                                    clearInterval(intKec);
+                                    $(modal + ' #id_kecamatan_asal').val(response.kec_asal).trigger('change');
+                                    $(modal + ' #id_kecamatan_tujuan').val(response.kec_tujuan).trigger('change');
+                                }
+                            },1000);
+                        }
+                    },500);
                 }
             })
         });
 
-        $(modal + ' #id_provinsi_asal').on('change',function() {
+        $(modal).on('change','#id_provinsi_asal',function() {
             let id_provinsi     = $(this).val();
             selectKabupaten(id_provinsi,modal + ' #id_kabupaten_asal');
             setTimeout(function() {
@@ -128,7 +142,8 @@ $(function() {
                 selectKecamatan(id_kabupaten,modal + ' #id_kecamatan_asal');
             },1000);
         });
-        $(modal + ' #id_provinsi_tujuan').on('change',function() {
+
+        $(modal).on('change','#id_provinsi_tujuan',function() {
             let id_provinsi     = $(this).val();
             selectKabupaten(id_provinsi,modal + ' #id_kabupaten_tujuan');
             setTimeout(function() {
@@ -137,11 +152,12 @@ $(function() {
             },1000);
         });
 
-        $(modal + ' #id_kabupaten_asal').on('change',function() {
+        $(modal).on('change','#id_kabupaten_asal',function() {
             let id_kabupaten     = $(this).val();
             selectKecamatan(id_kabupaten,modal + ' #id_kecamatan_asal');
         });
-        $(modal + ' #id_kabupaten_tujuan').on('change',function() {
+
+        $(modal).on('change','#id_kabupaten_tujuan',function() {
             let id_kabupaten     = $(this).val();
             selectKecamatan(id_kabupaten,modal + ' #id_kecamatan_tujuan');
         });
@@ -151,6 +167,11 @@ $(function() {
             $(modal).modal('show');
             $(modal+ ' #reset').click();
             $(modal + ' #label').html('Tambah Layanan Paket');
+            $(modal + ' select').val('').trigger('change');
+            $(modal + ' #id_kabupaten_asal').html('');
+            $(modal + ' #id_kabupaten_tujuan').html('');
+            $(modal + ' #id_kecamatan_asal').html('');
+            $(modal + ' #id_kecamatan_tujuan').html('');
         })
     }
 
