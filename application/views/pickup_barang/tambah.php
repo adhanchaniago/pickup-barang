@@ -24,7 +24,7 @@
 					</div>
 					<div class="form-group">
 						<label for="">Provinsi</label>
-						<select name="provinsi_pengirim" id="provinsi_pengirim" class="form-control">
+						<select name="provinsi_pengirim" id="provinsi_pengirim" class="form-control js-basic-single">
 							<option value="">-- Pilih --</option>
 							<?php foreach ($provinsi as $key): ?>
 								<option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
@@ -33,11 +33,11 @@
 					</div>
 					<div class="form-group">
 						<label for="">Kabupaten/Kota</label>
-						<select name="kabupaten_pengirim" id="kabupaten_pengirim" class="form-control"></select>
+						<select name="kabupaten_pengirim" id="kabupaten_pengirim" class="form-control js-basic-single"></select>
 					</div>
 					<div class="form-group">
 						<label for="">Kecamatan</label>
-						<select name="kecamatan_pengirim" id="kecamatan_pengirim" class="form-control"></select>
+						<select name="kecamatan_pengirim" id="kecamatan_pengirim" class="form-control js-basic-single"></select>
 					</div>
 				</td>
 			</tr>
@@ -69,7 +69,7 @@
 						</div>
 						<div class="form-group">
 							<label for="">Provinsi</label>
-							<select name="provinsi_penerima[]" class="form-control provinsi_penerima">
+							<select name="provinsi_penerima[]" class="form-control js-basic-single provinsi_penerima">
 								<option value="">-- Pilih --</option>
 								<?php foreach ($provinsi as $key): ?>
 									<option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
@@ -78,11 +78,11 @@
 						</div>
 						<div class="form-group">
 							<label for="">Kabupaten/Kota</label>
-							<select name="kabupaten_penerima[]" class="form-control kabupaten_penerima"></select>
+							<select name="kabupaten_penerima[]" class="form-control js-basic-single kabupaten_penerima"></select>
 						</div>
 						<div class="form-group">
 							<label for="">Kecamatan</label>
-							<select name="kecamatan_penerima[]" class="form-control kecamatan_penerima"></select>
+							<select name="kecamatan_penerima[]" class="form-control js-basic-single kecamatan_penerima"></select>
 						</div>
 					</td>
 				</tr>
@@ -107,7 +107,7 @@
 				<tr>
 					<td>Layanan</td>
 					<td>
-						<select name="jenis_layanan[]" class="form-control">
+						<select name="jenis_layanan[]" class="form-control js-basic-single">
 							<option value="">-- Pilih --</option>
 							<?php foreach ($jenis_layanan as $key): ?>
 								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>
