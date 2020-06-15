@@ -10,9 +10,10 @@ class PickupBarang extends CI_Controller {
 		$this->load->model('Layout_model','layout');
 		$this->load->model('PickupBarang_model', 'pbm');
 		$this->load->model('LayananPaket_model', 'lpm');
+		$this->load->model('Provinsi_model', 'provinsi');
+		$this->load->model('JenisLayanan_model', 'jenis_layanan');
 		$this->load->model('Pengirim_model', 'pengm');
 		$this->load->model('Penerima_model', 'pm');
-		$this->mm->check_status_login();
 		$this->status[1] 			= "Pending";
 		$this->status[2] 			= "Kurir Menjemput";
 		$this->status[3] 			= "Barang Masuk Logistik";
@@ -20,6 +21,7 @@ class PickupBarang extends CI_Controller {
 
 	public function index()
 	{
+		$this->mm->check_status_login();
 		$data['status']				= $this->status;
 		$data['dataUser'] 			= $this->mm->getDataUser();
 		$data['layanan_paket'] 		= $this->lpm->getAllLayananPaket();
@@ -113,5 +115,13 @@ class PickupBarang extends CI_Controller {
 	public function deletePickupBarang($id)
 	{
 		$this->pbm->deletePickupBarang($id);
+	}
+
+	public function daftar()
+	{
+		$data["title"] 				= "Daftar Pickup Barang";
+		$data["provinsi"]			= $this->provinsi->getAllProvinsi();
+		$data["jenis_layanan"]		= $this->jenis_layanan->getAllJenisLayanan();
+		$this->layout->view_auth('pickup_barang/tambah',$data);
 	}
 }

@@ -9,11 +9,11 @@ class Kabupaten extends CI_Controller {
 		$this->load->model('Layout_model','layout');
 		$this->load->model('Provinsi_model', 'provinsi');
 		$this->load->model('Kabupaten_model', 'kabupaten');
-		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
+		$this->mm->check_status_login();
 		$data['dataUser'] 		= $this->mm->getDataUser();
 		$data['title'] 			= 'Kabupaten - ' . $data['dataUser']['username'];
 		$data['provinsi']		= $this->provinsi->getAllProvinsi();

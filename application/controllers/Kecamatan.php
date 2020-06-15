@@ -10,11 +10,11 @@ class Kecamatan extends CI_Controller {
 		$this->load->model('Provinsi_model', 'provinsi');
 		$this->load->model('Kabupaten_model', 'kabupaten');
 		$this->load->model('Kecamatan_model', 'kecamatan');
-		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
+		$this->mm->check_status_login();
 		$data['dataUser'] 		= $this->mm->getDataUser();
 		$data['title'] 			= 'Kecamatan - ' . $data['dataUser']['username'];
 		$data['provinsi']		= $this->provinsi->getAllProvinsi();
