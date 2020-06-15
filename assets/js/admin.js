@@ -113,19 +113,19 @@ $(function() {
                     $(modal + ' #id_provinsi_asal').val(response.prov_asal).trigger('change');
                     $(modal + ' #id_provinsi_tujuan').val(response.prov_tujuan).trigger('change');
                     let intKab  = setInterval(function() {
-                        let kab_asal    = $(modal + ' #id_kabupaten_asal');
-                        let kab_tujuan  = $(modal + ' #id_kabupaten_tujuan');
-                        console.log(kab_asal.length);
-                        if (kab_asal.length < 2 && kab_tujuan.length < 2) {
+                        let kab_asal    = $(modal + ' #id_kabupaten_asal')[0];
+                        let kab_tujuan  = $(modal + ' #id_kabupaten_tujuan')[0];
+                        if (kab_asal.length > 2 && kab_tujuan.length > 2) {
+                            clearInterval(intKab);
                             $(modal + ' #id_kabupaten_asal').val(response.kab_asal).trigger('change');
                             $(modal + ' #id_kabupaten_tujuan').val(response.kab_tujuan).trigger('change');
                             let intKec  = setInterval(function() {
-                                let kec_asal    = $(modal + ' #id_kecamatan_asal');
-                                let kec_tujuan  = $(modal + ' #id_kecamatan_tujuan');
-                                if (kec_asal.length < 2 && kec_tujuan.length < 2) {
-                                    clearInterval(intKec);
+                                let kec_asal    = $(modal + ' #id_kecamatan_asal')[0];
+                                let kec_tujuan  = $(modal + ' #id_kecamatan_tujuan')[0];
+                                if (kec_asal.length > 2 && kec_tujuan.length > 2) {
                                     $(modal + ' #id_kecamatan_asal').val(response.kec_asal).trigger('change');
                                     $(modal + ' #id_kecamatan_tujuan').val(response.kec_tujuan).trigger('change');
+                                    clearInterval(intKec);
                                 }
                             },1000);
                         }
