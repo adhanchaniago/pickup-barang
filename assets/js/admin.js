@@ -1,19 +1,44 @@
-let url 	= $('#data-admin').data('url');
-
+let url 	        = $('#data-admin').data('url');
+let halaman_ini     = $('#data-admin').data('link');
 $(function() {
     navbar_active();
-    jabatan();
-    user();
-    layanan();
-    pickupBarang();
-    provinsi();
-    kabupaten();
-    kecamatan();
-    jenisLayanan();
-    jenisPaket();
-    pengirim();
-    penerima();
     datatable();
+    switch(halaman_ini){
+        case 'jabatan':
+            jabatan();
+        break;
+        case 'user':
+            user();
+        break;
+        case 'pickupBarang':
+            pickupBarang();
+        break;
+        case 'provinsi':
+            provinsi();
+        break;
+        case 'kabupaten':
+            kabupaten();
+        break;
+        case 'kecamatan':
+            kecamatan();
+        break;
+        case 'jenisLayanan':
+            jenisLayanan();
+        break;
+        case 'jenisPaket':
+            jenisPaket();
+        break;
+        case 'pengirim':
+            pengirim();
+        break;
+        case 'penerima':
+            penerima();
+        break;
+        case 'layananPaket':
+            layananPaket();
+        break;
+        
+    }
 
 
     function datatable() {
@@ -92,7 +117,7 @@ $(function() {
         })
     }
 
-    function layanan() {
+    function layananPaket() {
         let modal   = '#layananPaketModal';
         $('#table_id').on('click','.btn-edit-layananPaket',function(e){
             e.preventDefault();
