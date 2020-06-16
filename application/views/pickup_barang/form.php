@@ -22,8 +22,13 @@
 						<input type="text" class="form-control" name="alamat_pengirim" placeholder="Alamat Pengirim" required="required">
 					</div>
 					<div class="form-group">
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 						<label>Provinsi</label>
 						<select name="provinsi_pengirim" id="provinsi_pengirim" class="form-control">
+=======
+						<label for="">Provinsi</label>
+						<select name="provinsi_pengirim" id="provinsi_pengirim" class="form-control js-basic-single">
+>>>>>>> origin/master:application/views/pickup_barang/tambah.php
 							<option value="">-- Pilih --</option>
 							<?php foreach ($provinsi as $key): ?>
 								<option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
@@ -31,6 +36,7 @@
 						</select>
 					</div>
 					<div class="form-group">
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 						<label>Kabupaten/Kota</label>
 						<select name="kabupaten_pengirim" id="kabupaten_pengirim" class="form-control">
 							<option value="">-- Pilih --</option>
@@ -41,6 +47,14 @@
 						<select name="kecamatan_pengirim" id="kecamatan_pengirim" class="form-control">
 							<option value="">-- Pilih --</option>
 						</select>
+=======
+						<label for="">Kabupaten/Kota</label>
+						<select name="kabupaten_pengirim" id="kabupaten_pengirim" class="form-control js-basic-single"></select>
+					</div>
+					<div class="form-group">
+						<label for="">Kecamatan</label>
+						<select name="kecamatan_pengirim" id="kecamatan_pengirim" class="form-control js-basic-single"></select>
+>>>>>>> origin/master:application/views/pickup_barang/tambah.php
 					</div>
 				</td>
 			</tr>
@@ -71,8 +85,13 @@
 							<input type="text" name="alamat_penerima[]" class="form-control" placeholder="Alamat Penerima">
 						</div>
 						<div class="form-group">
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 							<label>Provinsi</label>
 							<select name="provinsi_penerima[]" class="form-control provinsi_penerima">
+=======
+							<label for="">Provinsi</label>
+							<select name="provinsi_penerima[]" class="form-control js-basic-single provinsi_penerima">
+>>>>>>> origin/master:application/views/pickup_barang/tambah.php
 								<option value="">-- Pilih --</option>
 								<?php foreach ($provinsi as $key): ?>
 									<option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
@@ -80,6 +99,7 @@
 							</select>
 						</div>
 						<div class="form-group">
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 							<label>Kabupaten/Kota</label>
 							<select name="kabupaten_penerima[]" class="form-control kabupaten_penerima">
 								<option value="">-- Pilih --</option>
@@ -90,6 +110,14 @@
 							<select name="kecamatan_penerima[]" class="form-control kecamatan_penerima">
 								<option value="">-- Pilih --</option>
 							</select>
+=======
+							<label for="">Kabupaten/Kota</label>
+							<select name="kabupaten_penerima[]" class="form-control js-basic-single kabupaten_penerima"></select>
+						</div>
+						<div class="form-group">
+							<label for="">Kecamatan</label>
+							<select name="kecamatan_penerima[]" class="form-control js-basic-single kecamatan_penerima"></select>
+>>>>>>> origin/master:application/views/pickup_barang/tambah.php
 						</div>
 					</td>
 				</tr>
@@ -114,7 +142,11 @@
 				<tr>
 					<td>Layanan</td>
 					<td>
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 						<select name="id_jenis_layanan[]" class="form-control">
+=======
+						<select name="jenis_layanan[]" class="form-control js-basic-single">
+>>>>>>> origin/master:application/views/pickup_barang/tambah.php
 							<option value="">-- Pilih --</option>
 							<?php foreach ($jenis_layanan as $key): ?>
 								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>

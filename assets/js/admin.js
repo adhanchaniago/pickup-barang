@@ -95,16 +95,16 @@ $(function() {
                 success     : function(response) {
                     $(modal + ' #label').html('Ubah Pickup Barang - ' + response.no_resi);
                     $(modal + ' #no_resi').val(response.no_resi);
-                    $(modal + ' #id_pengirim').val(response.id_pengirim);
-                    $(modal + ' #id_penerima').val(response.id_penerima);
-                    $(modal + ' #id_layanan_paket').val(response.id_layanan_paket);
+                    $(modal + ' #id_pengirim').val(response.id_pengirim).trigger('change');
+                    $(modal + ' #id_penerima').val(response.id_penerima).trigger('change');
+                    $(modal + ' #id_layanan_paket').val(response.id_layanan_paket).trigger('change');
                     $(modal + ' #nama_barang').val(response.nama_barang);
                     $(modal + ' #berat_barang').val(response.berat_barang);
                     $(modal + ' #jumlah_barang').val(response.jumlah_barang);
                     $(modal + ' #tanggal_pemesanan').val(response.tanggal_pemesanan);
                     $(modal + ' #tanggal_penjemputan').val(response.tanggal_penjemputan);
                     $(modal + ' #tanggal_masuk_logistik').val(response.tanggal_masuk_logistik);
-                    $(modal + ' #id_pickup_barang').val(response.id_pickup_barang);
+                    $(modal + ' #id_pickup_barang').val(response.id_pickup_barang).trigger('change');
                     $(modal + ' #status').val(response.status);
                 }
             })
@@ -356,8 +356,8 @@ $(function() {
                 data        : {id_kabupaten : id_kabupaten},
                 success     : function(response) {
                     $(modal+ ' #label').html('Edit Kabupaten - '+response.nama_kabupaten);
-                    $(modal+' #id_provinsi').val(response.id_provinsi).select();
-                    $(modal+' #id_kabupaten').val(response.id_kabupaten);
+                    $(modal+' #id_provinsi').val(response.id_provinsi).select().trigger('change');
+                    $(modal+' #id_kabupaten').val(response.id_kabupaten).trigger('change');
                     $(modal+' #nama_kabupaten').val(response.nama_kabupaten);
                 }
             })
@@ -383,8 +383,8 @@ $(function() {
                 success     : function(response) {
                     $(modal+ ' #label').html('Edit Kecamatan - '+response.nama_kecamatan);
                     selectKabupaten(response.id_provinsi,modal+' #id_kabupaten',response.id_kabupaten);
-                    $(modal+' #id_provinsi').val(response.id_provinsi).select();
-                    $(modal+' #id_kecamatan').val(response.id_kecamatan);
+                    $(modal+' #id_provinsi').val(response.id_provinsi).select().trigger('change');
+                    $(modal+' #id_kecamatan').val(response.id_kecamatan).trigger('change');
                     $(modal+' #nama_kecamatan').val(response.nama_kecamatan);
                 }
             })
@@ -420,9 +420,21 @@ $(function() {
                     $(modal + ' #no_wa_penerima').val(response.no_wa_penerima);
                     $(modal + ' #alamat_penerima').val(response.alamat_penerima);
                     $(modal + ' #id_penerima').val(response.id_penerima);
-                    $(modal + ' #id_provinsi').val(response.prov).select();
-                    selectKabupaten(response.prov,modal + ' #id_kabupaten',response.kab);
-                    selectKecamatan(response.kab,modal + ' #id_kecamatan',response.kec);
+                    $(modal + ' #id_provinsi').val(response.prov).trigger('change');
+                    let intKab  = setInterval(function() {
+                        let kab    = $(modal + ' #id_kabupaten')[0];
+                        if (kab.length > 2) {
+                            clearInterval(intKab);
+                            $(modal + ' #id_kabupaten').val(response.kab).trigger('change');
+                            let intKec  = setInterval(function() {
+                                let kec    = $(modal + ' #id_kecamatan')[0];
+                                if (kec.length > 2) {
+                                    $(modal + ' #id_kecamatan').val(response.kec).trigger('change');
+                                    clearInterval(intKec);
+                                }
+                            },1000);
+                        }
+                    },500);
                 }
             });
         });
@@ -449,6 +461,7 @@ $(function() {
         })
     }
 
+
     function pengirim() {
         let modal       = '#pengirimModal';
         $('#table_id').on('click','.btn-edit-pengirim',function(e){
@@ -467,9 +480,21 @@ $(function() {
                     $(modal + ' #no_wa_pengirim').val(response.no_wa_pengirim);
                     $(modal + ' #alamat_pengirim').val(response.alamat_pengirim);
                     $(modal + ' #id_pengirim').val(response.id_pengirim);
-                    $(modal + ' #id_provinsi').val(response.prov).select();
-                    selectKabupaten(response.prov,modal + ' #id_kabupaten',response.kab);
-                    selectKecamatan(response.kab,modal + ' #id_kecamatan',response.kec);
+                    $(modal + ' #id_provinsi').val(response.prov).trigger('change');
+                    let intKab  = setInterval(function() {
+                        let kab    = $(modal + ' #id_kabupaten')[0];
+                        if (kab.length > 2) {
+                            clearInterval(intKab);
+                            $(modal + ' #id_kabupaten').val(response.kab).trigger('change');
+                            let intKec  = setInterval(function() {
+                                let kec    = $(modal + ' #id_kecamatan')[0];
+                                if (kec.length > 2) {
+                                    $(modal + ' #id_kecamatan').val(response.kec).trigger('change');
+                                    clearInterval(intKec);
+                                }
+                            },1000);
+                        }
+                    },500);
                 }
             });
         });

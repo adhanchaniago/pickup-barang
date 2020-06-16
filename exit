@@ -1,0 +1,69 @@
+* [33me545de1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m bikin layout pickup barang buat kurir dan bikin backend form pickup
+[31m|[m * [33m8cebfce[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m tambah sedikit fitur select2
+[31m|[m * [33mcbfd804[m memperbaiki semua dropbox
+[31m|[m[31m/[m  
+* [33m13d463a[m relayout modal layanan paket
+* [33m3cd03b6[m benerin dropdown layanan paket
+* [33m2374b5a[m bikin front end tambah pickup barang 2
+* [33meb75979[m bikin front end tambah pickup barang
+* [33me3c08ae[m menghapus text kab/kota
+*   [33m66fe8bf[m Merge branch 'master' of https://github.com/hako-975/pickup-barang
+[33m|[m[34m\[m  
+[33m|[m * [33m8616cee[m mengubah kata-kata pada landing page
+[33m|[m * [33m470d93b[m memperbaharui database
+[33m|[m * [33m6b15b7d[m benerin dikit dropbox,oyy SALLgit status! masih ada bug di semua dropbox provinsi
+[33m|[m * [33m10b120e[m mengubah file admin.js dan footer-auth semula
+[33m|[m * [33m06d378a[m memperbaiki pickup barang, memperbarui form tapi belom jalan karena provinsi kabupaten kecamatannya kgk jalan sama tinggal multiple insert
+[33m|[m * [33md41f6da[m menambahkan crud penerima dan membetulkan table pickup_barang
+[33m|[m * [33m6212f10[m oy sal, masih ada bug di semua dropdown provinsi
+[33m|[m * [33m89c01bc[m menambahkan crud penerima dan membetulkan table layananPaket
+[33m|[m * [33m13b327d[m benerin judul di user, benerin sedikit bug di layanan paket, bikin crud pickup barang, benerin admin js, melengkapi database
+[33m|[m * [33m6069afc[m pasang plugin select2, isi provinsi, kabupaten, kotanya belom, kecamatannya dikit bener, backup database satu aja biar g bingung perbaikan di database itu kolom foreign key id_layanan di table pickup barang udah diganti jadi id_layanan_paket + codingannya juga udah :D
+* [34m|[m [33m7d84a0b[m benerin dropdown provinsi ubah layanan paket
+[34m|[m[34m/[m  
+* [33macc6fe7[m perbaikan layanan paket
+* [33m4ce4ef5[m buat master data jenis paket dan jenis layanan
+* [33mac4bb0b[m perbaiki master data user dan jabatan serta buat master data provinsi,kabupaten dan kecamatan
+* [33m3e78eee[m benerin pickup part 1
+* [33m2e5811d[m Penyesuaian dengan database baru
+* [33m51988b4[m buat relasi dan bikin user admin
+* [33m3e5bc9b[m mengubah sedikit tulisan pada file admin.js pada function jabatan
+* [33m994defd[m benerin sedikit penyakit di button hapus
+* [33m496be22[m database baru
+* [33md924ca0[m edit rancangan tabel baru (pickup_barang_tabel.txt) dan rancangan form input pickup barang
+* [33m665930b[m rancangan tabel baru (pickup_barang_tabel.txt)
+* [33mfda1df3[m menyederhanakan edit pickup barang model
+* [33m38e5683[m benerin order column pickup barang
+* [33m5735bde[m benerin default order
+* [33m9609b0d[m update database + sentuhan design pada cek status
+* [33m2cf7fd2[m membuat resi dan cek status
+*   [33m406b525[m Merge branch 'master' of https://github.com/hako-975/pickup-barang into cek_status_pesanan
+[35m|[m[36m\[m  
+[35m|[m * [33m3b221ae[m set datatable log
+[35m|[m * [33m04cc489[m ubah modal edit dan set datatable user
+[35m|[m * [33mc8d6698[m ubah modal edit dan set datatable jabatan
+[35m|[m * [33m6ea0d53[m ubah modal edit layanan paket dan set datatable layanan paket
+[35m|[m * [33m22ac571[m perbaikan datatable bagian js
+[35m|[m * [33m998b2d2[m ubah format penulisan status pickup barang di database
+[35m|[m * [33m4ef95b0[m ubah edit pickup dan set datatable serverside pickup
+[35m|[m * [33mb385f72[m menghapus tulisan ubah dan hapus di pickup
+[35m|[m * [33m12ee0d0[m hapus tulisan status pickup
+[35m|[m * [33m8fe2488[m buang tulisan ubah dan hapus
+[35m|[m * [33m8e3fe44[m masukin admin.js
+[35m|[m * [33m1f16388[m active navbar
+[35m|[m * [33mba9b1f4[m update database sql
+[35m|[m * [33m5e63734[m rapihin code controller dan model
+[35m|[m * [33m8b7517c[m Ubah Format Layout
+* [36m|[m [33m7dcf92a[m menambahkan fitur cek status pesanan
+[36m|[m[36m/[m  
+* [33m9a61f8a[m perbaikan auth, perbaikan  landing page, perbaikan layanan paket dan perbaikan pada tb pickup barang dan lain-lain
+* [33m0988ce5[m update database
+* [33m480d9ad[m menambahkan fitur log dan sedikit perbaikan auth
+* [33mefd4fcb[m menambahkan landing page, menambahkan fitur pesan jasa, menambahkan fitur layanan jasa dan lain-lain
+* [33m7c4cc32[m little edit user/index.php
+* [33m014ede4[m crud user
+* [33m84b97ef[m menambahkan crud jabatan dan r user
+* [33m2132cff[m menambahkan ubah profile dan ganti password serta login logout
+* [33md2e6a57[m menambahkan vendor
+* [33md0e4708[m Configuration dan menambahkan controller auth
+* [33m8b093c0[m Initial Commit
