@@ -23,12 +23,17 @@
 					</div>
 					<div class="form-group">
 <<<<<<< HEAD:application/views/pickup_barang/form.php
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 						<label>Provinsi</label>
 						<select name="provinsi_pengirim" id="provinsi_pengirim" class="form-control">
 =======
 						<label for="">Provinsi</label>
 						<select name="provinsi_pengirim" id="provinsi_pengirim" class="form-control js-basic-single">
 >>>>>>> origin/master:application/views/pickup_barang/tambah.php
+=======
+						<label for="">Provinsi</label>
+						<select name="provinsi_pengirim" id="provinsi_pengirim" class="form-control js-basic-single">
+>>>>>>> 8cebfce231e99b64f321470cfa6fd8c396931739:application/views/pickup_barang/tambah.php
 							<option value="">-- Pilih --</option>
 							<?php foreach ($provinsi as $key): ?>
 								<option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
@@ -54,7 +59,10 @@
 					<div class="form-group">
 						<label for="">Kecamatan</label>
 						<select name="kecamatan_pengirim" id="kecamatan_pengirim" class="form-control js-basic-single"></select>
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 >>>>>>> origin/master:application/views/pickup_barang/tambah.php
+=======
+>>>>>>> 8cebfce231e99b64f321470cfa6fd8c396931739:application/views/pickup_barang/tambah.php
 					</div>
 				</td>
 			</tr>
@@ -86,12 +94,17 @@
 						</div>
 						<div class="form-group">
 <<<<<<< HEAD:application/views/pickup_barang/form.php
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 							<label>Provinsi</label>
 							<select name="provinsi_penerima[]" class="form-control provinsi_penerima">
 =======
 							<label for="">Provinsi</label>
 							<select name="provinsi_penerima[]" class="form-control js-basic-single provinsi_penerima">
 >>>>>>> origin/master:application/views/pickup_barang/tambah.php
+=======
+							<label for="">Provinsi</label>
+							<select name="provinsi_penerima[]" class="form-control js-basic-single provinsi_penerima">
+>>>>>>> 8cebfce231e99b64f321470cfa6fd8c396931739:application/views/pickup_barang/tambah.php
 								<option value="">-- Pilih --</option>
 								<?php foreach ($provinsi as $key): ?>
 									<option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
@@ -117,7 +130,10 @@
 						<div class="form-group">
 							<label for="">Kecamatan</label>
 							<select name="kecamatan_penerima[]" class="form-control js-basic-single kecamatan_penerima"></select>
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 >>>>>>> origin/master:application/views/pickup_barang/tambah.php
+=======
+>>>>>>> 8cebfce231e99b64f321470cfa6fd8c396931739:application/views/pickup_barang/tambah.php
 						</div>
 					</td>
 				</tr>
@@ -143,10 +159,14 @@
 					<td>Layanan</td>
 					<td>
 <<<<<<< HEAD:application/views/pickup_barang/form.php
+<<<<<<< HEAD:application/views/pickup_barang/form.php
 						<select name="id_jenis_layanan[]" class="form-control">
 =======
 						<select name="jenis_layanan[]" class="form-control js-basic-single">
 >>>>>>> origin/master:application/views/pickup_barang/tambah.php
+=======
+						<select name="jenis_layanan[]" class="form-control js-basic-single">
+>>>>>>> 8cebfce231e99b64f321470cfa6fd8c396931739:application/views/pickup_barang/tambah.php
 							<option value="">-- Pilih --</option>
 							<?php foreach ($jenis_layanan as $key): ?>
 								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>
