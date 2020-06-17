@@ -152,7 +152,7 @@
               <div class="card-header bg-secondary">Pesanan Hari Ini</div>
             <?php endif ?>
             <ul class="list-group list-group-flush">
-              <?php if ($jml_status !== ''): ?>
+              <?php if ($jml_status !== NULL): ?>
                 <li class="list-group-item">Jumlah Status Pending: <?= $jml_status['pending']; ?></li>
                 <li class="list-group-item">Jumlah Status Kurir Menjemput: <?= $jml_status['kurir_menjemput']; ?></li>
                 <li class="list-group-item">Jumlah Status Barang Masuk Logistik: <?= $jml_status['barang_masuk_logistik']; ?></li>
