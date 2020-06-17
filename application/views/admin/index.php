@@ -4,8 +4,12 @@
   <div class="content-header my-0 pb-0 pt-1">
     <div class="container-fluid my-0 py-0">
       <div class="row my-0 py-0">
-        <div class="col-sm-4 my-0 py-0">
-          <h2 class="text-dark my-0 py-0">Dasbor - Hari Ini</h2>
+        <div class="col-sm-5 my-auto py-1">
+          <?php if (isset($_POST['dari_tanggal'])): ?>
+            <h4 class="text-dark my-auto">Dasbor - <?= $_POST['dari_tanggal']; ?> s/d <?= $_POST['sampai_tanggal']; ?></h4>
+          <?php else: ?>
+            <h3 class="text-dark my-0 py-0">Dasbor - Hari Ini</h3>
+          <?php endif ?>
         </div><!-- /.col -->
         <div class="col-sm my-0 py-0">
           <form method="post">
@@ -25,7 +29,7 @@
                 <?php endif ?>
               </div>
               <div class="col-2">
-                <button type="submit" class="btn btn-primary"> <i class="fas fa-fw fa-filter"></i> Sorting</button>
+                <button type="submit" class="btn btn-primary"> <i class="fas fa-fw fa-filter"></i></button>
               </div>
             </div>
           </form>
