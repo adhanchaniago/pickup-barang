@@ -87,6 +87,16 @@ class JenisLayanan_model extends CI_Model {
 		return $this->db->get_where('jenis_layanan', ['id_jenis_layanan' => $id])->row_array();
 	}
 
+	public function getJenisLayananByKecAndBerat()
+	{
+		$this->db->join('layanan_paket', 'layanan_paket.id_jenis_layanan = jenis_layanan.id_jenis_layanan');
+		$this->db->where('layanan_paket.id_kecamatan_asal', $this->input->post('kec_asal'));
+		$this->db->where('layanan_paket.id_kecamatan_tujuan', $this->input->post('kec_tujuan'));
+		$this->db->where('layanan_paket.id_jenis_paket', $this->input->post('id_jenis_paket'));
+		$this->db->group_by('jenis_layanan.id_jenis_layanan');
+		return $this->db->get('jenis_layanan')->result_array();
+	}
+
 	public function addJenisLayanan()
 	{
 		$dataUser 					= $this->mm->getDataUser();

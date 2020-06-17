@@ -8,11 +8,11 @@ class JenisLayanan extends CI_Controller {
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Layout_model','layout');
 		$this->load->model('JenisLayanan_model', 'jenisLayanan');
-		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
+		$this->mm->check_status_login();
 		$data['dataUser'] 		= $this->mm->getDataUser();
 		$data['title'] 			= 'Jenis Layanan - ' . $data['dataUser']['username'];
 
@@ -68,6 +68,11 @@ class JenisLayanan extends CI_Controller {
 		$id_jenis_layanan 	= $this->input->post('id_jenis_layanan');
 		$result 			= $this->jenisLayanan->getJenisLayananById($id_jenis_layanan);
 
+		echo json_encode($result);
+	}
+	public function getJenisLayananByKecAndBerat()
+	{
+		$result 			= $this->jenisLayanan->getJenisLayananByKecAndBerat();
 		echo json_encode($result);
 	}
 

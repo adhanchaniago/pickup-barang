@@ -132,8 +132,7 @@ class PickupBarang_model extends CI_Model {
 		$nama_barang						= $this->input->post('nama_barang',true);
 		$jumlah_barang						= $this->input->post('jumlah_barang',true);
 		$berat_barang						= $this->input->post('berat_barang',true);
-		$id_jenis_layanan					= $this->input->post('id_jenis_layanan',true);
-
+		$id_jenis_layanan					= $this->input->post('jenis_layanan',true);
 		// pengirim
 		$this->db->where('nama_pengirim', $nama_pengirim);
 		$this->db->where('no_wa_pengirim', $no_wa_pengirim);
@@ -153,7 +152,7 @@ class PickupBarang_model extends CI_Model {
 		}
 
 		$data 		= [];
-		for ($i=1; $i < count($this->input->post('nama_penerima')); $i++) { 
+		for ($i=0; $i < count($this->input->post('nama_penerima')); $i++) { 
 			// layanan
 			if ($berat_barang[$i] > 8) {
 				$id_jenis_paket 	= 2;

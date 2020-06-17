@@ -47,11 +47,11 @@
 						</select>
 					</div>
 						<label for="">Kabupaten/Kota</label>
-						<select name="kabupaten_pengirim" id="kabupaten_pengirim" class="form-control js-basic-single"></select>
+						<select name="kabupaten_pengirim" id="kabupaten_pengirim" class="form-control js-basic-single"><option value=""></option></select>
 					</div>
 					<div class="form-group">
 						<label for="">Kecamatan</label>
-						<select name="kecamatan_pengirim" id="kecamatan_pengirim" class="form-control js-basic-single"></select>
+						<select name="kecamatan_pengirim" id="kecamatan_pengirim" class="form-control js-basic-single"><option value=""></option></select>
 					</div>
 				</td>
 			</tr>
@@ -92,11 +92,11 @@
 						</div>
 						<div class="form-group">
 							<label for="">Kabupaten/Kota</label>
-							<select name="kabupaten_penerima[]" class="form-control js-basic-single kabupaten_penerima"></select>
+							<select name="kabupaten_penerima[]" class="form-control js-basic-single kabupaten_penerima"><option value=""></option></select>
 						</div>
 						<div class="form-group">
 							<label for="">Kecamatan</label>
-							<select name="kecamatan_penerima[]" class="form-control js-basic-single kecamatan_penerima"></select>
+							<select name="kecamatan_penerima[]" class="form-control js-basic-single kecamatan_penerima"><option value=""></option></select>
 						</div>
 					</td>
 				</tr>
@@ -115,17 +115,14 @@
 				<tr>
 					<td>Berat Barang (Kg)</td>
 					<td>
-						<input type="number" name="berat_barang[]" class="form-control" placeholder="Berat Barang">
+						<input type="number" name="berat_barang[]" class="form-control berat_barang" placeholder="Berat Barang">
 					</td>
 				</tr>
 				<tr>
 					<td>Layanan</td>
 					<td>
-						<select name="jenis_layanan[]" class="form-control js-basic-single">
+						<select name="jenis_layanan[]" class="form-control js-basic-single jenis_layanan">
 							<option value="">-- Pilih --</option>
-							<?php foreach ($jenis_layanan as $key): ?>
-								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>
-							<?php endforeach ?>
 						</select>
 					</td>
 				</tr>

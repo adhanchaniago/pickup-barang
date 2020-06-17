@@ -40,15 +40,57 @@ $(function() {
         function tambah() {
             klikTambah++;
             $('[type=submit]').removeAttr('disabled');
-            let el      = $('.penerima')[0];
+            let el      = $('.penerima');
 
-            el.classList.remove('d-none');
-            el.setAttribute('id','penerima'+klikTambah);
-            let html    = $('.penerima')[0].outerHTML;
+            el[0].classList.remove('d-none');
+            el[0].setAttribute('id','penerima'+klikTambah);
+            el.find('.form-control').removeAttr('disabled');
+            let html    = el[0].outerHTML;
             $('.boxPenerima').append(html);
 
-            el.classList.add('d-none');
-            el.removeAttribute('id');        
+            el.find('.form-control').attr('disabled','disabled');
+            el[0].classList.add('d-none');
+            el[0].removeAttribute('id');        
+        }
+        function jenisLayanan(id) {
+            let kec_pengirim    = $('#kecamatan_pengirim').val();
+            let kec_penerima    = $(id + ' .kecamatan_penerima').val();
+            let berat_barang    = $(id + ' .berat_barang').val();
+
+            if (kec_pengirim == '' || kec_penerima == '' || berat_barang == '') {
+                $(id + ' .jenis_layanan').html('<option value="" disabled selected class="d-none">Tidak Ada Layanan Apapun Untuk Pengiriman Ini</option>');
+                return;
+            }
+
+            let id_jenis_paket  = 0;
+
+            if (berat_barang > 8) {
+                id_jenis_paket  =2;
+            }else{
+                id_jenis_paket  =1;
+            }
+
+            let data    = {
+                kec_asal : kec_pengirim,
+                kec_tujuan : kec_penerima,
+                id_jenis_paket : id_jenis_paket
+            }
+            $.ajax({
+                url         : url + 'jenisLayanan/getJenisLayananByKecAndBerat',
+                data        : data,
+                method      : 'post',
+                dataType    : 'json',
+                success     : function(response) {
+                    let html    = '';
+                    for (var i = 0; i < response.length; i++) {
+                        html    += `<option value="${response[i].id_jenis_layanan}">${response[i].jenis_layanan}</option>`;
+                    }
+                    if (response.length == 0) {
+                        html    = '<option value="" disabled selected class="d-none">Tidak Ada Layanan Apapun Untuk Pengiriman Ini</option>';
+                    }
+                    $(id + ' .jenis_layanan').html(html);
+                }
+            })
         }
         $('.tambahPenerima').on('click',function(e) {
             e.preventDefault();
@@ -61,17 +103,31 @@ $(function() {
             disabledSubmit();
         })
 
+
         $('[name=provinsi_pengirim]').on('change',function() {
             let id_provinsi     = $(this).val();
             selectKabupaten(id_provinsi,'[name=kabupaten_pengirim]');
             setTimeout(function() {
                 let id_kabupaten    = $('[name=kabupaten_pengirim]').val();
                 selectKecamatan(id_kabupaten,'[name=kecamatan_pengirim]');
+                jenisLayanan('');
             },1000);
         })
         $('[name=kabupaten_pengirim]').on('change',function() {
             let id_kabupaten    = $('[name=kabupaten_pengirim]').val();
             selectKecamatan(id_kabupaten,'[name=kecamatan_pengirim]');
+            jenisLayanan('');
+        })
+        $('[name=kecamatan_pengirim]').on('change',function() {
+            $('.berat_barang').val('');
+            jenisLayanan('');
+        })
+
+
+
+        $('.boxPenerima').on('keyup','.berat_barang',function() {
+            let id              = '#'+$(this).parents('.penerima').attr('id');
+            jenisLayanan(id);
         })
 
         $('.boxPenerima').on('change','.provinsi_penerima',function() {
@@ -81,13 +137,22 @@ $(function() {
             setTimeout(function() {
                 let id_kabupaten    = $(id + ' .kabupaten_penerima').val();
                 selectKecamatan(id_kabupaten,id + ' .kecamatan_penerima');
+                jenisLayanan(id);
             },1000);
+
+
         })
+
         $('.boxPenerima').on('change','.kabupaten_penerima',function() {
             let id              = '#'+$(this).parents('.penerima').attr('id');
             let id_kabupaten    = $(id + ' .kabupaten_penerima').val();
             selectKecamatan(id_kabupaten,id + ' .kecamatan_penerima');
         })
+        $('.boxPenerima').on('change','.kecamatan_penerima',function() {
+            let id              = '#'+$(this).parents('.penerima').attr('id');
+            jenisLayanan(id);
+        })
+        
     }
     function kurirPickup() {
         load({status : $('#status').val()});

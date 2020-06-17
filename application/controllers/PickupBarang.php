@@ -126,7 +126,6 @@ class PickupBarang extends CI_Controller {
 		}
 		$data["title"] 				= "Form Pickup Barang";
 		$data["provinsi"]			= $this->provinsi->getAllProvinsi();
-		$data["jenis_layanan"]		= $this->jenis_layanan->getAllJenisLayanan();
 		$this->layout->view_auth('pickup_barang/form',$data);
 	}
 	public function kurir()
