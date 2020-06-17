@@ -75,7 +75,7 @@
             <?php endforeach ?>
           <?php endif ?>
         </div>
-        <div class="col-lg my-1 tidak_tampil">
+        <div class="col-lg my-1 tidak_tampil" id="dataJmlStatus">
           <div class="card">
             <?php if (isset($_GET['dari_tanggal'])): ?>
               <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $_GET['dari_tanggal']; ?> s/d <?= $_GET['sampai_tanggal']; ?> - <?= $status; ?></div>

@@ -44,11 +44,36 @@
                 $('#dataPesanan').load(location.href + " #dataPesanan>*", "");
             }, 2000);
 
+            setInterval(function() { 
+                $('#dataJmlStatus').load(location.href + " #dataJmlStatus>*", "");
+            }, 2000);
+
             function pesanan() {
                 BASE_URL = "<?= base_url(); ?>";
+                var pesanan = "pesanan";
                 $.ajax({
+                    url: BASE_URL + "admin/",
+                    type: 'post',
+                    data: {
+                        data: pesanan
+                    },
                     success:function(status) {
                         $('#dataPesanan').load(location.href + " #dataPesanan>*", "");
+                    }
+                });
+            };
+
+            function jmlStatus() {
+                BASE_URL = "<?= base_url(); ?>";
+                var status = "status";
+                $.ajax({
+                    url: BASE_URL + "admin/",
+                    type: 'post',
+                    data: {
+                        data: status
+                    },
+                    success:function(status) {
+                        $('#dataJmlStatus').load(location.href + " #dataJmlStatus>*", "");
                     }
                 });
             };
