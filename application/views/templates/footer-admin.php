@@ -27,6 +27,7 @@
     <script src="<?= base_url('assets/vendor/overlayScrollbars-1.11.0/js/jquery.overlayScrollbars.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/adminlte-3.0.5/adminlte.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/select2-4.0.13/select2.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.full.min.js'); ?>"></script>
     
     <div id="data-admin" data-link="<?= $def_link; ?>" data-url="<?= base_url() ?>"></div>
     <!-- My JS -->
@@ -35,6 +36,7 @@
 	<!-- Config -->
 	<script src="<?= base_url('assets/js/fancybox-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/select2-config.js'); ?>"></script>
-	<script src="<?= base_url('assets/js/sweetalert2-config.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/sweetalert2-config.js'); ?>"></script>
+	<script src="<?= base_url('assets/js/datetimepicker-config.js'); ?>"></script>
   </body>
 </html>

@@ -15,6 +15,7 @@ $('.page-scroll').on('click', function(e){
     $('.navbar-collapse.collapse').removeClass('show');
     e.preventDefault();
 });
+
 $(function() {
     switch(link){
         case 'pickupBarang/form':
