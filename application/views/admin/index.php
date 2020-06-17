@@ -6,20 +6,20 @@
       <div class="row my-0 py-0">
         <div class="col-sm my-auto py-1 header-title">
           <?php 
-            if (isset($_POST['status'])) {
-              if ($_POST['status'] == '1') {
+            if (isset($_GET['status'])) {
+              if ($_GET['status'] == '1') {
                 $status = 'Pending';
-              } elseif ($_POST['status'] == '2') {
+              } elseif ($_GET['status'] == '2') {
                 $status = 'Kurir Menjemput';
-              } elseif ($_POST['status'] == '3') {
+              } elseif ($_GET['status'] == '3') {
                 $status = 'Barang Masuk Logistik';
               } else {
                 $status = 'Semua';
               }
             } 
             ?>
-          <?php if (isset($_POST['dari_tanggal'])): ?>
-            <h4 class="text-dark my-auto">Dasbor - <?= $_POST['dari_tanggal']; ?> s/d <?= $_POST['sampai_tanggal']; ?> - <?= $status; ?></h4>
+          <?php if (isset($_GET['dari_tanggal'])): ?>
+            <h4 class="text-dark my-auto">Dasbor - <?= $_GET['dari_tanggal']; ?> s/d <?= $_GET['sampai_tanggal']; ?> - <?= $status; ?></h4>
           <?php else: ?>
             <h3 class="text-dark my-0 py-0">Dasbor - Hari Ini</h3>
           <?php endif ?>
@@ -77,8 +77,8 @@
         </div>
         <div class="col-lg my-1 tidak_tampil">
           <div class="card">
-            <?php if (isset($_POST['dari_tanggal'])): ?>
-              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $_POST['dari_tanggal']; ?> s/d <?= $_POST['sampai_tanggal']; ?> - <?= $status; ?></div>
+            <?php if (isset($_GET['dari_tanggal'])): ?>
+              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $_GET['dari_tanggal']; ?> s/d <?= $_GET['sampai_tanggal']; ?> - <?= $status; ?></div>
             <?php else: ?>
               <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan Hari Ini</div>
             <?php endif ?>
@@ -105,7 +105,7 @@
 <!-- Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form method="post">
+    <form method="get">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="filterModalLabel">Filter Dasbor</h5>
@@ -116,10 +116,10 @@
         <div class="modal-body">
             <div class="row">
               <div class="col-lg">
-                <?php if (isset($_POST['dari_tanggal'])): ?>
+                <?php if (isset($_GET['dari_tanggal'])): ?>
                   <div class="form-group">
                     <label for="dari_tanggal">Dari Tanggal</label>
-                    <input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= $_POST['dari_tanggal']; ?>">
+                    <input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= $_GET['dari_tanggal']; ?>">
                   </div>
                 <?php else: ?>
                   <div class="form-group">
@@ -129,10 +129,10 @@
                 <?php endif ?>
               </div>
               <div class="col-lg">
-                <?php if (isset($_POST['sampai_tanggal'])): ?>
+                <?php if (isset($_GET['sampai_tanggal'])): ?>
                   <div class="form-group">
                     <label for="sampai_tanggal">Sampai Tanggal</label>
-                    <input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $_POST['sampai_tanggal']; ?>">
+                    <input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $_GET['sampai_tanggal']; ?>">
                   </div>
                 <?php else: ?>
                   <div class="form-group">
@@ -146,8 +146,8 @@
               <div class="col-lg">
                 <label for="status">Status</label>
                 <select name="status" id="status" class="form-control">
-                  <?php if (isset($_POST['status'])): ?>
-                    <option value="<?= $_POST['status']; ?>"><?= $status; ?></option>
+                  <?php if (isset($_GET['status'])): ?>
+                    <option value="<?= $_GET['status']; ?>"><?= $status; ?></option>
                     <option disabled>-----</option>
                     <option value="1">Pending</option>
                     <option value="2">Kurir Menjemput</option>

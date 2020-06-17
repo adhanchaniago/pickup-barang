@@ -16,9 +16,9 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$data['dataUser'] 	= $this->mm->getDataUser();
-		if (isset($_POST['dari_tanggal']) AND isset($_POST['sampai_tanggal']) AND isset($_POST['status'])) {
-			$data['pesanan'] 	= $this->pesm->getPesanan($_POST['dari_tanggal'], $_POST['sampai_tanggal'], $_POST['status']);
-			$data['jml_status']	= $this->pesm->getJmlStatus($_POST['dari_tanggal'], $_POST['sampai_tanggal']);
+		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['status'])) {
+			$data['pesanan'] 	= $this->pesm->getPesanan($_GET['dari_tanggal'], $_GET['sampai_tanggal'], $_GET['status']);
+			$data['jml_status']	= $this->pesm->getJmlStatus($_GET['dari_tanggal'], $_GET['sampai_tanggal']);
 		} else {
 			$data['pesanan'] 	= $this->pesm->getPesanan();
 			$data['jml_status']	= $this->pesm->getJmlStatus();
