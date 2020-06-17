@@ -142,6 +142,9 @@ hr {
 }
 
 @media( max-width: 768px ) {
+	.tidak_tampil {
+		display: none;
+	}
 	.content-wrapper {
 		min-height: 490px!important;
 	}

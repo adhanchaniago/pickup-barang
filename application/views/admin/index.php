@@ -64,7 +64,7 @@
                 <div class="card p-0 bg-success">
               <?php endif ?>
                 <a href="" data-toggle="modal" data-target="#detailModal<?= $dp['id_pickup_barang']; ?>">
-                  <div class="card-body p-2 text-white">
+                  <div class="card-body p-3 text-white">
                     <h5><?= ucwords(strtolower($dp['nama_barang'])); ?></h5>
                     <h6>Dari <?= ucwords(strtolower($dp['nama_pengirim'])); ?> ke <?= ucwords(strtolower($dp['nama_penerima'])); ?></h6>
                     <h6><?= $dp['jenis_layanan']; ?> | Rp. <?= number_format($dp['harga']); ?> | <?= $dp['durasi_pengiriman']; ?> Jam</h6>
@@ -144,7 +144,7 @@
             <?php endforeach ?>
           <?php endif ?>
         </div>
-        <div class="col-lg my-1">
+        <div class="col-lg my-1 tidak_tampil">
           <div class="card">
             <?php if (isset($_POST['dari_tanggal'])): ?>
               <div class="card-header bg-secondary">Pesanan - <?= $_POST['dari_tanggal']; ?> s/d <?= $_POST['sampai_tanggal']; ?> - <?= $status; ?></div>
