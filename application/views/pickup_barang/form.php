@@ -13,11 +13,6 @@
 	</div>
   </div>
 </nav>
-<<<<<<< HEAD
-
-=======
->>>>>>> ajaxrealtime
-
 <form class="container bg-white my-3 shadow-sm py-2" action="" method="post">
 	<h5>Formulir Pickup Barang</h5>
 	<div class="mt-2 border">
