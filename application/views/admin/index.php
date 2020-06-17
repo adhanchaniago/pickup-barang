@@ -147,9 +147,9 @@
         <div class="col-lg my-1 tidak_tampil">
           <div class="card">
             <?php if (isset($_POST['dari_tanggal'])): ?>
-              <div class="card-header bg-secondary">Pesanan - <?= $_POST['dari_tanggal']; ?> s/d <?= $_POST['sampai_tanggal']; ?> - <?= $status; ?></div>
+              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $_POST['dari_tanggal']; ?> s/d <?= $_POST['sampai_tanggal']; ?> - <?= $status; ?></div>
             <?php else: ?>
-              <div class="card-header bg-secondary">Pesanan Hari Ini</div>
+              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan Hari Ini</div>
             <?php endif ?>
             <ul class="list-group list-group-flush">
               <?php if ($jml_status !== NULL): ?>
