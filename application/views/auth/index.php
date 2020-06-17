@@ -198,7 +198,7 @@
 						</div>
 					</section>
 				<?php elseif (isset($error)): ?>
-					<h4>No. Resi tidak ditemukan!</h4>
+					<h4>No. Resi tidak ditemukan!!</h4>
 					<p>Silahkan periksa kembali No. Resi Anda</p>
 				<?php endif ?>
 			</div>
