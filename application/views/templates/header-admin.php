@@ -169,7 +169,7 @@
                 </li>
                 <li class="nav-item">
                   <a href="<?= base_url('laporan'); ?>" class="nav-link">
-                    <i class="nav-icon fas fa-file"></i>
+                    <i class="nav-icon fas fa-file-alt"></i>
                     <p>
                       laporan
                     </p>
