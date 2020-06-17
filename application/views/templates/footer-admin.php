@@ -38,5 +38,26 @@
 	<script src="<?= base_url('assets/js/select2-config.js'); ?>"></script>
     <script src="<?= base_url('assets/js/sweetalert2-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/datetimepicker-config.js'); ?>"></script>
+    <script>
+        $(document).ready(function() {
+            setInterval(function() { 
+                $('#dataPesanan').load(location.href + " #dataPesanan>*", "");
+            }, 2000);
+            
+            function pesanan() {
+                BASE_URL = "<?= base_url(); ?>";
+                $.ajax({
+                    url: BASE_URL + "admin/",
+                    type: 'post',
+                    data: {
+                        data: data
+                    },
+                    success:function(status) {
+                        $('#dataPesanan').load(location.href + " #dataPesanan>*", "");
+                    }
+                });
+            };
+        })
+    </script>
   </body>
 </html>
