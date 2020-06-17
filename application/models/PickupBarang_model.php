@@ -129,8 +129,8 @@ class PickupBarang_model extends CI_Model {
 
 		// pengirim
 		$pengirim 			= $this->pengirim->searchPengirim();
-		if (count($pengirim) > 0) {
-			$id_pengirim 	= $pengirim["id_pengirim"];
+		if ($pengirim > 0) {
+			$id_pengirim 	= $pengirim;
 		}else{
 			$id_pengirim 	= $this->pengirim->addPengirim();
 		}

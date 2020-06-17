@@ -111,7 +111,7 @@ class LayananPaket_model extends CI_Model {
 		return $this->db->get_where('layanan_paket', ['id_layanan_paket' => $id])->row_array();
 	}
 
-	public function searchLayananPaket()
+	public function searchLayananPaket($i)
 	{
 
 		$berat_barang						= $this->input->post('berat_barang',true)[$i];
