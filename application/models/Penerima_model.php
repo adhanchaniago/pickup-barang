@@ -20,15 +20,13 @@ class Penerima_model extends CI_Model {
 		$this->db->where('no_wa_penerima', $no_wa_penerima);
 		$this->db->where('alamat_penerima', $alamat_penerima);
 		$this->db->where('id_kecamatan', $kecamatan_penerima);
-		$cek_penerima 		= $this->db->get('penerima');
+		$cek_penerima 		= $this->db->get('penerima')->row_array();
 
-		return $cek_penerima->row_array();
+		return $cek_penerima["id_penerima"];
 	}
 
 	public function addPenerima($i)
 	{
-		$dataUser 							= $this->mm->getDataUser();
-
 		$nama_penerima						= $this->input->post('nama_penerima',true)[$i];
 		$no_wa_penerima						= $this->input->post('no_wa_penerima',true)[$i];
 		$alamat_penerima					= $this->input->post('alamat_penerima',true)[$i];

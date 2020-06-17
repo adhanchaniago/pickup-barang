@@ -129,7 +129,7 @@ class PickupBarang_model extends CI_Model {
 
 		// pengirim
 		$pengirim 			= $this->pengirim->searchPengirim();
-		if ($pengirim > 0) {
+		if ($pengirim ) {
 			$id_pengirim 	= $pengirim;
 		}else{
 			$id_pengirim 	= $this->pengirim->addPengirim();
@@ -143,8 +143,8 @@ class PickupBarang_model extends CI_Model {
 
 			// penerima
 			$penerima 			= $this->penerima->searchPenerima($i);
-			if (count($penerima) > 0) {
-				$id_penerima 	= $penerima["id_penerima"];
+			if ($penerima) {
+				$id_penerima 	= $penerima;
 			}else{
 				$id_penerima 	= $this->penerima->addPenerima($i);
 			}
@@ -177,6 +177,7 @@ class PickupBarang_model extends CI_Model {
 		// ];
 
 		$this->db->insert_batch('pickup_barang', $data);
+		die;
 		if ($this->session->userdata('pelanggan') == '1') {
 			$this->session->set_flashdata('message-success', 'Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'] . ' untuk kami kirim. Tunggu kurir kami untuk mengambil barang Anda. Terima Kasih :D');
 			$this->mm->createLog('Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'], NULL);

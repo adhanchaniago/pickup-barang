@@ -21,7 +21,7 @@ class Pengirim_model extends CI_Model {
 		$this->db->where('id_kecamatan', $kecamatan_pengirim);
 		$cek_pengirim 		= $this->db->get('pengirim')->row_array();
 
-		return $cek_pengirim;
+		return $cek_pengirim["id_pengirim"];
 	}
 
 	public function addPengirim()
