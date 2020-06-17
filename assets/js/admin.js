@@ -4,9 +4,6 @@ $(function() {
     navbar_active();
     datatable();
     switch(halaman_ini){
-        case 'jabatan':
-            jabatan();
-        break;
         case 'user':
             user();
         break;
@@ -197,34 +194,6 @@ $(function() {
             $(modal + ' #id_kabupaten_tujuan').html('');
             $(modal + ' #id_kecamatan_asal').html('');
             $(modal + ' #id_kecamatan_tujuan').html('');
-        })
-    }
-
-
-    function jabatan() {
-        let modal       = '#jabatanModal';
-        $('#table_id').on('click','.btn-edit-jabatan',function(e){
-            e.preventDefault();
-            $(modal).modal('show');
-
-            let id_jabatan   = $(this).data('id');
-            $.ajax({
-                url         : url + 'Jabatan/getJabatanById',
-                method      : 'post',
-                data        : {id_jabatan : id_jabatan},
-                dataType    : 'json',
-                success     : function(response) {
-                    $(modal + ' #label').html('Ubah Jabatan - ' + response.nama_jabatan);
-                    $(modal + ' #nama_jabatan').val(response.nama_jabatan);
-                    $(modal + ' #id_jabatan').val(response.id_jabatan);
-                }
-            })
-        });
-        $('.btn-tambah-jabatan').on('click',function(e) {
-            e.preventDefault();
-            $(modal).modal('show');
-            $(modal+ ' #label').html('Tambah Jabatan');
-            $(modal+ ' #reset').click();
         })
     }
 
