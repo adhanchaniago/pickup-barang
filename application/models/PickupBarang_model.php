@@ -7,6 +7,9 @@ class PickupBarang_model extends CI_Model {
 	{
 		parent::__construct();
 		$this->load->model('Main_model', 'mm');
+		$this->load->model('Pengirim_model','pengirim');
+		$this->load->model('Penerima_model','penerima');
+		$this->load->model('layananPaket_model','layanan_paket');
 	}
 
 	public function _setDatatable()
@@ -119,70 +122,31 @@ class PickupBarang_model extends CI_Model {
 		$randNum .= time();
 		// ---- ./random number generator ----
 
-		$nama_pengirim						= $this->input->post('nama_pengirim',true);
-		$no_wa_pengirim						= $this->input->post('no_wa_pengirim',true);
-		$alamat_pengirim					= $this->input->post('alamat_pengirim',true);
-		$kecamatan_pengirim					= $this->input->post('kecamatan_pengirim',true);
-
-		$nama_penerima						= $this->input->post('nama_penerima',true);
-		$no_wa_penerima						= $this->input->post('no_wa_penerima',true);
-		$alamat_penerima					= $this->input->post('alamat_penerima',true);
-		$kecamatan_penerima					= $this->input->post('kecamatan_penerima',true);
-
 		$nama_barang						= $this->input->post('nama_barang',true);
 		$jumlah_barang						= $this->input->post('jumlah_barang',true);
 		$berat_barang						= $this->input->post('berat_barang',true);
-		$id_jenis_layanan					= $this->input->post('jenis_layanan',true);
+
+
 		// pengirim
-		$this->db->where('nama_pengirim', $nama_pengirim);
-		$this->db->where('no_wa_pengirim', $no_wa_pengirim);
-		$this->db->where('alamat_pengirim', $alamat_pengirim);
-		$this->db->where('id_kecamatan', $kecamatan_pengirim);
-		$cek_pengirim 		= $this->db->get('pengirim');
-		if ($cek_pengirim->num_rows() > 0) {
-			$get_pengirim 	= $cek_pengirim->row_array();
-			$id_pengirim 	= $get_pengirim["id_pengirim"];
+		$pengirim 			= $this->pengirim->searchPengirim();
+		if (count($pengirim) > 0) {
+			$id_pengirim 	= $pengirim["id_pengirim"];
 		}else{
-			$pengirim["nama_pengirim"]			= $nama_pengirim;
-			$pengirim["no_wa_pengirim"]			= $no_wa_pengirim;
-			$pengirim["alamat_pengirim"]		= $alamat_pengirim;
-			$pengirim["id_kecamatan"]			= $kecamatan_pengirim;
-			$this->db->insert('pengirim', $pengirim);
-			$id_pengirim 	= $this->db->insert_id();
+			$id_pengirim 	= $this->pengirim->addPengirim();
 		}
 
 		$data 		= [];
 		for ($i=0; $i < count($this->input->post('nama_penerima')); $i++) { 
 			// layanan
-			if ($berat_barang[$i] > 8) {
-				$id_jenis_paket 	= 2;
-			}else{
-				$id_jenis_paket 	= 1;
-			}
-
-			$this->db->where('id_jenis_layanan', $id_jenis_layanan[$i]);
-			$this->db->where('id_jenis_paket', $id_jenis_paket);
-			$this->db->where('id_kecamatan_asal', $kecamatan_pengirim);
-			$this->db->where('id_kecamatan_tujuan', $kecamatan_penerima[$i]);
-			$cek_layanan_paket 	= $this->db->get('layanan_paket')->row_array();
-			$id_layanan_paket 	= $cek_layanan_paket["id_layanan_paket"];
+			
+			$id_layanan_paket 	= $this->layanan_paket->searchLayananPaket($i);
 
 			// penerima
-			$this->db->where('nama_penerima', $nama_penerima[$i]);
-			$this->db->where('no_wa_penerima', $no_wa_penerima[$i]);
-			$this->db->where('alamat_penerima', $alamat_penerima[$i]);
-			$this->db->where('id_kecamatan', $kecamatan_penerima[$i]);
-			$cek_penerima 		= $this->db->get('penerima');
-			if ($cek_penerima->num_rows() > 0) {
-				$get_penerima 	= $cek_penerima->row_array();
-				$id_penerima 	= $get_penerima["id_penerima"];
+			$penerima 			= $this->penerima->searchPenerima($i);
+			if (count($penerima) > 0) {
+				$id_penerima 	= $penerima["id_penerima"];
 			}else{
-				$penerima["nama_penerima"]			= $nama_penerima[$i];
-				$penerima["no_wa_penerima"]			= $no_wa_penerima[$i];
-				$penerima["alamat_penerima"]		= $alamat_penerima[$i];
-				$penerima["id_kecamatan"]			= $kecamatan_penerima[$i];
-				$this->db->insert('penerima', $penerima);
-				$id_penerima 	= $this->db->insert_id();
+				$id_penerima 	= $this->penerima->addPenerima($i);
 			}
 
 			// pickup

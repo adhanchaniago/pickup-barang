@@ -25,12 +25,6 @@ $(function() {
         case 'jenisPaket':
             jenisPaket();
         break;
-        case 'pengirim':
-            pengirim();
-        break;
-        case 'penerima':
-            penerima();
-        break;
         case 'layananPaket':
             layananPaket();
         break;
@@ -367,125 +361,6 @@ $(function() {
             e.preventDefault();
             $(modal).modal('show');
             $(modal+ ' #label').html('Tambah Kecamatan');
-            $(modal+ ' #reset').click();
-        })
-    }
-
-    function penerima() {
-        let modal       = '#penerimaModal';
-        $('#table_id').on('click','.btn-edit-penerima',function(e){
-            e.preventDefault();
-            $(modal).modal('show');
-
-            let id_penerima   = $(this).data('id');
-            $.ajax({
-                url         : url + 'penerima/getPenerimaById',
-                method      : 'post',
-                data        : {id_penerima : id_penerima},
-                dataType    : 'json',
-                success     : function(response) {
-                    $(modal + ' #label').html('Ubah Penerima - ' + response.nama_penerima);
-                    $(modal + ' #nama_penerima').val(response.nama_penerima);
-                    $(modal + ' #no_wa_penerima').val(response.no_wa_penerima);
-                    $(modal + ' #alamat_penerima').val(response.alamat_penerima);
-                    $(modal + ' #id_penerima').val(response.id_penerima);
-                    $(modal + ' #id_provinsi').val(response.prov).trigger('change');
-                    let intKab  = setInterval(function() {
-                        let kab    = $(modal + ' #id_kabupaten')[0];
-                        if (kab.length > 2) {
-                            clearInterval(intKab);
-                            $(modal + ' #id_kabupaten').val(response.kab).trigger('change');
-                            let intKec  = setInterval(function() {
-                                let kec    = $(modal + ' #id_kecamatan')[0];
-                                if (kec.length > 2) {
-                                    $(modal + ' #id_kecamatan').val(response.kec).trigger('change');
-                                    clearInterval(intKec);
-                                }
-                            },1000);
-                        }
-                    },500);
-                }
-            });
-        });
-        
-        $(modal + ' #id_provinsi').on('change',function() {
-            let id_provinsi     = $(this).val();
-            selectKabupaten(id_provinsi,modal + ' #id_kabupaten');
-            setTimeout(function() {
-                let id_kabupaten     = $(modal + ' #id_kabupaten').val();
-                selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
-            },1000);
-        });
-        
-        $(modal + ' #id_kabupaten').on('change',function() {
-            let id_kabupaten     = $(this).val();
-            selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
-        });
-
-        $('.btn-tambah-penerima').on('click',function(e) {
-            e.preventDefault();
-            $(modal).modal('show');
-            $(modal+ ' #label').html('Tambah Penerima');
-            $(modal+ ' #reset').click();
-        })
-    }
-
-
-    function pengirim() {
-        let modal       = '#pengirimModal';
-        $('#table_id').on('click','.btn-edit-pengirim',function(e){
-            e.preventDefault();
-            $(modal).modal('show');
-
-            let id_pengirim   = $(this).data('id');
-            $.ajax({
-                url         : url + 'pengirim/getPengirimById',
-                method      : 'post',
-                data        : {id_pengirim : id_pengirim},
-                dataType    : 'json',
-                success     : function(response) {
-                    $(modal + ' #label').html('Ubah Pengirim - ' + response.nama_pengirim);
-                    $(modal + ' #nama_pengirim').val(response.nama_pengirim);
-                    $(modal + ' #no_wa_pengirim').val(response.no_wa_pengirim);
-                    $(modal + ' #alamat_pengirim').val(response.alamat_pengirim);
-                    $(modal + ' #id_pengirim').val(response.id_pengirim);
-                    $(modal + ' #id_provinsi').val(response.prov).trigger('change');
-                    let intKab  = setInterval(function() {
-                        let kab    = $(modal + ' #id_kabupaten')[0];
-                        if (kab.length > 2) {
-                            clearInterval(intKab);
-                            $(modal + ' #id_kabupaten').val(response.kab).trigger('change');
-                            let intKec  = setInterval(function() {
-                                let kec    = $(modal + ' #id_kecamatan')[0];
-                                if (kec.length > 2) {
-                                    $(modal + ' #id_kecamatan').val(response.kec).trigger('change');
-                                    clearInterval(intKec);
-                                }
-                            },1000);
-                        }
-                    },500);
-                }
-            });
-        });
-        
-        $(modal + ' #id_provinsi').on('change',function() {
-            let id_provinsi     = $(this).val();
-            selectKabupaten(id_provinsi,modal + ' #id_kabupaten');
-            setTimeout(function() {
-                let id_kabupaten     = $(modal + ' #id_kabupaten').val();
-                selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
-            },1000);
-        });
-        
-        $(modal + ' #id_kabupaten').on('change',function() {
-            let id_kabupaten     = $(this).val();
-            selectKecamatan(id_kabupaten,modal + ' #id_kecamatan');
-        });
-
-        $('.btn-tambah-pengirim').on('click',function(e) {
-            e.preventDefault();
-            $(modal).modal('show');
-            $(modal+ ' #label').html('Tambah Pengirim');
             $(modal+ ' #reset').click();
         })
     }

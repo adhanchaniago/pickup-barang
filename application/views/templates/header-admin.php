@@ -164,18 +164,6 @@
                         <p>Kecamatan</p>
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a href="<?= base_url('pengirim'); ?>" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Pengirim</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= base_url('penerima'); ?>" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Penerima</p>
-                      </a>
-                    </li>
                   </ul>
                 </li>
                 <div class="dropdown-divider"></div>
