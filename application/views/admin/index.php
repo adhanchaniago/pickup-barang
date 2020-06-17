@@ -51,7 +51,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row mb-2">
-        <div class="col-lg-6 my-1 dashboard">
+        <div class="col-lg-6 my-1 dashboard" id="dataPesanan">
           <?php if ($pesanan == NULL): ?>
             <h4>Tidak ada pesanan hari ini, coba gunakan fitur filter untuk melihat data lampau</h4>
           <?php else: ?>
