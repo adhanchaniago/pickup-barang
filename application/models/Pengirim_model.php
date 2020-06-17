@@ -19,9 +19,13 @@ class Pengirim_model extends CI_Model {
 		$this->db->where('no_wa_pengirim', $no_wa_pengirim);
 		$this->db->where('alamat_pengirim', $alamat_pengirim);
 		$this->db->where('id_kecamatan', $kecamatan_pengirim);
-		$cek_pengirim 		= $this->db->get('pengirim')->row_array();
-
-		return $cek_pengirim["id_pengirim"];
+		$cek_pengirim 		= $this->db->get('pengirim');
+		if ($cek_pengirim)->num_rows() > 0) {
+			$get_pengirim 	= $cek_pengirim->row_array();
+			return 	$get_pengirim["id_pengirim"];
+		}else{
+			return 0;
+		}
 	}
 
 	public function addPengirim()
