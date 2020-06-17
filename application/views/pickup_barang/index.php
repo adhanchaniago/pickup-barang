@@ -8,7 +8,9 @@
           <h1 class="m-0 text-dark">Daftar Pickup Barang</h1>
         </div><!-- /.col -->
         <div class="col-sm header-button">
-          <button type="button" class="btn btn-primary btn-tambah-pickupBarang"><i class="fas fa-fw fa-plus"></i> Tambah Pickup Barang</button>
+          <!-- <a href="#" class="btn btn-primary btn-tambah-pickupBarang"><i class="fas fa-fw fa-plus"></i> Tambah Pickup Barang</a> -->
+          <a href="<?= base_url('pickupBarang/kurir') ?>" class="btn btn-danger"><i class="fas fa-fw fa-box"></i>  Pickup Barang</a>
+          <a href="<?= base_url('pickupBarang/form') ?>" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Pickup Barang</a>
         </div>
       </div><!-- /.row -->
       <div class="row my-2">

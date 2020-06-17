@@ -23,8 +23,9 @@ class PickupBarang extends CI_Controller {
 	public function index()
 	{
 		$this->mm->check_status_login();
+		$dataUser 				= $this->mm->getDataUser();
 		$data['status']				= $this->status;
-		$data['dataUser'] 			= $this->mm->getDataUser();
+		$data['dataUser'] 			= $dataUser;
 		$data['layanan_paket'] 		= $this->lpm->getAllLayananPaket();
 		$data['penerima']			= $this->pm->getAllPenerima();
 		$data['pengirim']			= $this->pengm->getAllPengirim();
