@@ -175,7 +175,9 @@ class PickupBarang_model extends CI_Model {
 		// 	'status'						=> '1',
 		// 	'no_resi'						=> $randNum
 		// ];
-
+		if (!isset($_SESSION['id_user'])) {
+			$this->session->set_userdata(['pelanggan' => '1']);
+		}
 		$this->db->insert_batch('pickup_barang', $data);
 		if ($this->session->userdata('pelanggan') == '1') {
 			$this->session->set_flashdata('message-success', 'Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'] . ' untuk kami kirim. Tunggu kurir kami untuk mengambil barang Anda. Terima Kasih :D');
