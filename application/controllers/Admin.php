@@ -18,8 +18,10 @@ class Admin extends CI_Controller {
 		$data['dataUser'] 	= $this->mm->getDataUser();
 		if (isset($_POST['dari_tanggal']) AND isset($_POST['sampai_tanggal']) AND isset($_POST['status'])) {
 			$data['pesanan'] 	= $this->pesm->getPesanan($_POST['dari_tanggal'], $_POST['sampai_tanggal'], $_POST['status']);
+			$data['jml_status']	= $this->pesm->getJmlStatus($_POST['dari_tanggal'], $_POST['sampai_tanggal']);
 		} else {
 			$data['pesanan'] 	= $this->pesm->getPesanan();
+			$data['jml_status']	= $this->pesm->getJmlStatus();
 		}
 		$data['title'] 		= 'Dasbor - ' . $data['dataUser']['username'];
 		$this->layout->view_admin('admin/index', $data);
