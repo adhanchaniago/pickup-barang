@@ -1,5 +1,5 @@
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+        <footer class="main-footer my-auto">
             <strong>Copyright &copy; 2020 By Andri Firman Saputra.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">

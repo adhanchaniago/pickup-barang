@@ -9,12 +9,14 @@ class Admin extends CI_Controller {
 		$this->load->model('Admin_model', 'am');
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Jabatan_model', 'jm');
+		$this->load->model('Pesanan_model', 'pesm');
 		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
 		$data['dataUser'] 	= $this->mm->getDataUser();
+		$data['pesanan'] 	= $this->pesm->getPesanan();
 		$data['title'] 		= 'Dasbor - ' . $data['dataUser']['username'];
 		$this->layout->view_admin('admin/index', $data);
 	}
