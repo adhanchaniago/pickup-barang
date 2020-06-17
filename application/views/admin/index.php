@@ -4,9 +4,32 @@
   <div class="content-header my-0 pb-0 pt-1">
     <div class="container-fluid my-0 py-0">
       <div class="row my-0 py-0">
-        <div class="col-sm my-0 py-0">
-          <h2 class="text-dark my-0 py-0">Dasbor</h2>
+        <div class="col-sm-4 my-0 py-0">
+          <h2 class="text-dark my-0 py-0">Dasbor - Hari Ini</h2>
         </div><!-- /.col -->
+        <div class="col-sm my-0 py-0">
+          <form method="post">
+            <div class="row">
+              <div class="col">
+                <?php if (isset($_POST['dari_tanggal'])): ?>
+                  <input type="date" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= $_POST['dari_tanggal']; ?>">
+                <?php else: ?>
+                  <input type="date" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= date('Y-m-d'); ?>">
+                <?php endif ?>
+              </div>
+              <div class="col">
+                <?php if (isset($_POST['sampai_tanggal'])): ?>
+                  <input type="date" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $_POST['sampai_tanggal']; ?>">
+                <?php else: ?>
+                  <input type="date" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= date('Y-m-d'); ?>">
+                <?php endif ?>
+              </div>
+              <div class="col-2">
+                <button type="submit" class="btn btn-primary"> <i class="fas fa-fw fa-filter"></i> Sorting</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div><!-- /.row -->
       <div class="row my-2">
         <div class="col-lg-6">

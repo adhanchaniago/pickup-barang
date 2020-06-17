@@ -16,7 +16,11 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$data['dataUser'] 	= $this->mm->getDataUser();
-		$data['pesanan'] 	= $this->pesm->getPesanan();
+		if (isset($_POST['dari_tanggal']) AND isset($_POST['sampai_tanggal'])) {
+			$data['pesanan'] 	= $this->pesm->getPesanan($_POST['dari_tanggal'], $_POST['sampai_tanggal']);
+		} else {
+			$data['pesanan'] 	= $this->pesm->getPesanan();
+		}
 		$data['title'] 		= 'Dasbor - ' . $data['dataUser']['username'];
 		$this->layout->view_admin('admin/index', $data);
 	}
