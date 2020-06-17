@@ -43,9 +43,10 @@
             setInterval(function() { 
                 $('#dataPesanan').load(location.href + " #dataPesanan>*", "");
             }, 2000);
-            
+
             function pesanan() {
                 BASE_URL = "<?= base_url(); ?>";
+                var pesanan = "pesanan";
                 $.ajax({
                     url: BASE_URL + "admin/",
                     type: 'post',

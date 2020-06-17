@@ -26,6 +26,7 @@ class Pesanan_model extends CI_Model {
 				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
 				INNER JOIN layanan_paket ON pickup_barang.id_layanan_paket = layanan_paket.id_layanan_paket 
 				INNER JOIN jenis_layanan ON layanan_paket.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+				INNER JOIN jenis_paket ON layanan_paket.id_jenis_paket = jenis_paket.id_jenis_paket 
 				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND pickup_barang.status = '$status'
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
@@ -35,6 +36,7 @@ class Pesanan_model extends CI_Model {
 				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
 				INNER JOIN layanan_paket ON pickup_barang.id_layanan_paket = layanan_paket.id_layanan_paket 
 				INNER JOIN jenis_layanan ON layanan_paket.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+				INNER JOIN jenis_paket ON layanan_paket.id_jenis_paket = jenis_paket.id_jenis_paket 
 				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast'
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
