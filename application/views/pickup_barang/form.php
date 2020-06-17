@@ -66,20 +66,20 @@
 				<tr>
 					<td width="30%">Nama Penerima</td>
 					<td>
-						<input type="text" name="nama_penerima[]" class="form-control" placeholder="Nama Penerima">
+						<input type="text" name="nama_penerima[]" class="form-control" placeholder="Nama Penerima" required="required">
 					</td>
 				</tr>
 				<tr>
 					<td>No Whatsapp Penerima</td>
 					<td>
-						<input type="number"name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima">
+						<input type="number"name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima" required="required">
 					</td>
 				</tr>
 				<tr>
 					<td>Alamat Penerima</td>
 					<td>
 						<div class="form-group">
-							<input type="text" name="alamat_penerima[]" class="form-control" placeholder="Alamat Penerima">
+							<input type="text" name="alamat_penerima[]" class="form-control" placeholder="Alamat Penerima" required="required">
 						</div>
 						<div class="form-group">
 							<label for="">Provinsi</label>
@@ -103,19 +103,19 @@
 				<tr>
 					<td>Nama Barang</td>
 					<td>
-						<input type="text" name="nama_barang[]" class="form-control" placeholder="Nama Barang">
+						<input type="text" name="nama_barang[]" class="form-control" required="required" placeholder="Nama Barang">
 					</td>
 				</tr>
 				<tr>
 					<td>Jumlah Barang</td>
 					<td>
-						<input type="number" name="jumlah_barang[]" class="form-control" placeholder="Jumlah Barang">
+						<input type="number" name="jumlah_barang[]" class="form-control" required="required" placeholder="Jumlah Barang">
 					</td>
 				</tr>
 				<tr>
 					<td>Berat Barang (Kg)</td>
 					<td>
-						<input type="number" name="berat_barang[]" class="form-control berat_barang" placeholder="Berat Barang">
+						<input type="number" name="berat_barang[]" step="0.001" class="form-control berat_barang" required="required" placeholder="Berat Barang">
 					</td>
 				</tr>
 				<tr>

@@ -21,7 +21,7 @@ class Penerima_model extends CI_Model {
 		$this->db->where('alamat_penerima', $alamat_penerima);
 		$this->db->where('id_kecamatan', $kecamatan_penerima);
 		$cek_penerima 		= $this->db->get('penerima');
-		if ($cek_penerima)->num_rows() > 0) {
+		if ($cek_penerima->num_rows() > 0) {
 			$get_penerima 	= $cek_penerima->row_array();
 			return 	$get_penerima["id_penerima"];
 		}else{
