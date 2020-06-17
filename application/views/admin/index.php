@@ -4,7 +4,7 @@
   <div class="content-header my-0 pb-0 pt-1">
     <div class="container-fluid my-0 py-0">
       <div class="row my-0 py-0">
-        <div class="col-sm my-auto py-1">
+        <div class="col-sm my-auto py-1 header-title">
           <?php 
             if (isset($_POST['status'])) {
               if ($_POST['status'] == '1') {
@@ -24,7 +24,7 @@
             <h3 class="text-dark my-0 py-0">Dasbor - Hari Ini</h3>
           <?php endif ?>
         </div><!-- /.col -->
-        <div class="col-sm-2 text-right my-0 py-0">
+        <div class="col-sm-2 my-auto py-1 header-button">
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
             <i class="fas fa-fw fa-filter"></i> Filter
@@ -169,7 +169,7 @@
                 <?php else: ?>
                   <div class="form-group">
                     <label for="dari_tanggal">Dari Tanggal</label>
-                    <input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= date('Y-m-d'); ?>">
+                    <input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= date('Y/m/d'); ?>">
                   </div>
                 <?php endif ?>
               </div>
@@ -182,7 +182,7 @@
                 <?php else: ?>
                   <div class="form-group">
                     <label for="sampai_tanggal">Sampai Tanggal</label>
-                    <input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= date('Y-m-d'); ?>">
+                    <input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= date('Y/m/d'); ?>">
                   </div>
                 <?php endif ?>
               </div>

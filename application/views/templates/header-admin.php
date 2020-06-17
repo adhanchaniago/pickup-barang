@@ -167,6 +167,14 @@
                     </li>
                   </ul>
                 </li>
+                <li class="nav-item">
+                  <a href="<?= base_url('laporan'); ?>" class="nav-link">
+                    <i class="nav-icon fas fa-file"></i>
+                    <p>
+                      laporan
+                    </p>
+                  </a>
+                </li>
                 <div class="dropdown-divider"></div>
                 <li class="nav-item">
                   <a href="<?= base_url('log'); ?>" class="nav-link">
