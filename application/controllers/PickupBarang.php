@@ -185,7 +185,7 @@ class PickupBarang extends CI_Controller {
 			$this->status[0]		= "Semua";
 			$data["statusText"]		= $this->status[$status];
 			$data["status"]			= $status;
-			$data["pickup_barang"]	= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim,$status)[0];
+			$data["pickup_barang"]	= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim, $status);
 			$this->layout->view_auth('pickup_barang/kurirDetailPickup',$data);
 		}
 	}

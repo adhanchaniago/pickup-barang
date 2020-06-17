@@ -109,7 +109,6 @@
                     <i class="nav-icon fas fa-shipping-fast"></i>
                     <p>
                       Pickup Barang
-                      <span class="right badge badge-danger">New</span>
                     </p>
                   </a>
                 </li>

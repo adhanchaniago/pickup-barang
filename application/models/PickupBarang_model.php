@@ -348,9 +348,24 @@ class PickupBarang_model extends CI_Model {
 		// $this->db->limit($start,$limit);
 		return $this->db->get()->result_array();
 	}
-	public function getPickupBarangByWaAndStatus($no_wa_pengirim,$status = 0)
+	public function getPickupBarangByWaAndStatus($no_wa_pengirim, $status = 0)
 	{
-		$pengirim 			= $this->db->where('no_wa_pengirim', $no_wa_pengirim)->get('pengirim')->row_array();
+		$this->db->select('
+			pengirim.id_pengirim, 
+			pengirim.nama_pengirim, 
+			pengirim.no_wa_pengirim, 
+			pengirim.alamat_pengirim, 
+			pengirim.id_kecamatan,
+			pickup_barang.no_resi,
+			kecamatan.nama_kecamatan as kec_pengirim, 
+			kabupaten.nama_kabupaten as kab_pengirim, 
+			provinsi.nama_provinsi as prov_pengirim
+		');
+		$this->db->join('pickup_barang', 'pickup_barang.id_pengirim = pengirim.id_pengirim');
+		$this->db->join('kecamatan', 'kecamatan.id_kecamatan = pengirim.id_kecamatan');
+		$this->db->join('kabupaten', 'kabupaten.id_kabupaten = kecamatan.id_kabupaten');
+		$this->db->join('provinsi', 'provinsi.id_provinsi = kabupaten.id_provinsi');
+		$pengirim 			= $this->db->get_where('pengirim', ['no_wa_pengirim' => $no_wa_pengirim])->row_array();
 		$alamat 			= $pengirim["alamat_pengirim"];
 		$kecamatan 			= $pengirim["id_kecamatan"];
 
@@ -378,7 +393,7 @@ class PickupBarang_model extends CI_Model {
 			$this->db->where('status', $status);
 		}
 		$this->db->order_by('tanggal_pemesanan', 'desc');
-		return $this->db->get()->result_array();
+		return $pengirim;
 	}
 
 	public function cek_status_pesanan()
