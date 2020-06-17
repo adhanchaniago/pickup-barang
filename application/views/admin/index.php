@@ -153,13 +153,13 @@
             <?php endif ?>
             <ul class="list-group list-group-flush">
               <?php if ($jml_status !== NULL): ?>
-                <li class="list-group-item">Jumlah Status Pending: <?= $jml_status['pending']; ?></li>
-                <li class="list-group-item">Jumlah Status Kurir Menjemput: <?= $jml_status['kurir_menjemput']; ?></li>
-                <li class="list-group-item">Jumlah Status Barang Masuk Logistik: <?= $jml_status['barang_masuk_logistik']; ?></li>
+                <li class="list-group-item">Jumlah Status Pending: <span class="badge badge-primary"><?= $jml_status['pending']; ?></span></li>
+                <li class="list-group-item">Jumlah Status Kurir Menjemput: <span class="badge badge-primary"><?= $jml_status['kurir_menjemput']; ?></span></li>
+                <li class="list-group-item">Jumlah Status Barang Masuk Logistik: <span class="badge badge-primary"><?= $jml_status['barang_masuk_logistik']; ?></span></li>
               <?php else: ?>
-                <li class="list-group-item">Jumlah Status Pending: 0</li>
-                <li class="list-group-item">Jumlah Status Kurir Menjemput: 0</li>
-                <li class="list-group-item">Jumlah Status Barang Masuk Logistik: 0</li>
+                <li class="list-group-item">Jumlah Status Pending: <span class="badge badge-primary">0</span></li>
+                <li class="list-group-item">Jumlah Status Kurir Menjemput: <span class="badge badge-primary">0</span></li>
+                <li class="list-group-item">Jumlah Status Barang Masuk Logistik: <span class="badge badge-primary">0</span></li>
               <?php endif ?>
             </ul>
           </div>
