@@ -39,11 +39,7 @@ class Pesanan_model extends CI_Model {
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
 		}
-		$rs = $this->db->query($query);
-		while($obj = $rs->free_result()) {
-	    	$result[] = $obj;
-	    }
-	    echo $_GET['callback'] . '{"result":' . json_encode($result) . '}';
+		return $this->db->query($query)->result_array();
 	}
 
 	public function getJmlStatus($dari_tanggal = '', $sampai_tanggal = '')

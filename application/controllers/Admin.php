@@ -25,7 +25,6 @@ class Admin extends CI_Controller {
 		}
 		$data['title'] 		= 'Dasbor - ' . $data['dataUser']['username'];
 		$this->layout->view_admin('admin/index', $data);
-		$this->load->view('templates/ajax_admin_page', $data);
 	}
 
 	public function profile()
