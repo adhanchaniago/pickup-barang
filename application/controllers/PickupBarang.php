@@ -13,8 +13,6 @@ class PickupBarang extends CI_Controller {
 		$this->load->model('Provinsi_model', 'provinsi');
 		$this->load->model('JenisLayanan_model', 'jenis_layanan');
 		$this->load->model('JenisPaket_model', 'jenis_paket');
-		$this->load->model('Pengirim_model', 'pengm');
-		$this->load->model('Penerima_model', 'pm');
 		$this->status[1] 			= "Pending";
 		$this->status[2] 			= "Kurir Menjemput";
 		$this->status[3] 			= "Barang Masuk Logistik";
@@ -23,13 +21,9 @@ class PickupBarang extends CI_Controller {
 	public function index()
 	{
 		$this->mm->check_status_login();
-		$dataUser 				= $this->mm->getDataUser();
+		$dataUser 					= $this->mm->getDataUser();
 		$data['status']				= $this->status;
 		$data['dataUser'] 			= $dataUser;
-		$data['layanan_paket'] 		= $this->lpm->getAllLayananPaket();
-		$data['penerima']			= $this->pm->getAllPenerima();
-		$data['pengirim']			= $this->pengm->getAllPengirim();
-		$data['pickup_barang'] 		= $this->pbm->getAllPickupBarang();
 		$data['title'] 				= 'Pickup Barang - ' . $data['dataUser']['username'];
 
 		$this->form_validation->set_rules('id_pengirim', 'nama pengirim', 'required|trim');
