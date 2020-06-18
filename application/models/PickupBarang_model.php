@@ -64,6 +64,9 @@ class PickupBarang_model extends CI_Model {
 		}elseif(isset($default_order)) {
 			$this->db->order_by(key($default_order), $default_order[key($default_order)]);
 		}
+		if ($this->input->post('status') !== NULL) {
+			$this->db->where('status', $this->input->post('status'));
+		}
 
 	}
 

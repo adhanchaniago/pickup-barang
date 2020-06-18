@@ -32,14 +32,15 @@ $(function() {
     }
 
 
-    function datatable() {
+    function datatable(data = {}) {
         let link    = $('#table_id').data('link');
         $('#table_id').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": {
                 url     : link,
-                method  : 'post'
+                method  : 'post',
+                data    : data
             },
             "columnDefs" :[
             {
@@ -105,6 +106,12 @@ $(function() {
             $(modal).modal('show');
             $(modal+ ' #label').html('Tambah Pickup Barang');
             $(modal+ ' #reset').click();
+        })
+        $('#whereStatus').on('change',function() {
+            let val     = $(this).val();
+            $('#table_id').DataTable().destroy();
+            let data        = {status : val};
+            datatable(data);
         })
     }
 

@@ -33,7 +33,18 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row my-2">
-        <div class="col-lg">
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <label for="">Status</label>
+            <select id="whereStatus" class="form-control">
+              <option value="">-- Pilih --</option>
+              <?php foreach ($status as $key => $value): ?>
+                <option value="<?= $key; ?>"><?= $value; ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+        </div>
+        <div class="col-12">
           <div class="table-responsive">
             <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('pickupBarang/datatable') ?>">
               <thead>
