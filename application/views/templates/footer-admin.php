@@ -21,6 +21,8 @@
     <script src="<?= base_url('assets/vendor/chartjs-2.9.3/chart.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/datatables-1.10.21/js/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/datatables-1.10.21/js/dataTables.bootstrap4.min.js'); ?>"></script>
+    <script src="<?php echo base_url() ?>assets/datatables-responsive/js/dataTables.responsive.min.js" defer></script>
+    <script src="<?php echo base_url() ?>assets/datatables-responsive/js/responsive.bootstrap4.min.js" defer></script>
     <script src="<?= base_url('assets/vendor/fancybox-3.5.7/jquery.fancybox.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/fontawesome-free-5.13.0/js/all.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/sweetalert2-9.14.2/sweetalert2.all.min.js'); ?>"></script>
@@ -28,6 +30,7 @@
     <script src="<?= base_url('assets/vendor/adminlte-3.0.5/adminlte.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/select2-4.0.13/select2.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.full.min.js'); ?>"></script>
+   
     
     <div id="data-admin" data-link="<?= $def_link; ?>" data-url="<?= base_url() ?>"></div>
     <!-- My JS -->

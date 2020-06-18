@@ -31,7 +31,6 @@ $(function() {
         
     }
 
-
     function datatable(data = {}) {
         let link    = $('#table_id').data('link');
         $('#table_id').DataTable({
@@ -42,12 +41,12 @@ $(function() {
                 method  : 'post',
                 data    : data
             },
-            "columnDefs" :[
-            {
+            "columnDefs" :[{
                 "targets"    : [-1],
                 "orderable" : false
-            }
-            ]
+            }],
+            "responsive": true,
+            "autoWidth": false
         });
     }
 
