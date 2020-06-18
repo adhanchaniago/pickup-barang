@@ -185,7 +185,7 @@ class PickupBarang extends CI_Controller {
 			$this->status[0]		= "Semua";
 			$data["statusText"]		= $this->status[$status];
 			$data["status"]			= $status;
-			$data["pickup_barang"]	= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim, $status);
+			$data["pickup_barang"]	= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim, $status)->row_array();;
 			$this->layout->view_auth('pickup_barang/kurirDetailPickup',$data);
 		}
 	}
@@ -194,7 +194,7 @@ class PickupBarang extends CI_Controller {
 		$data 				= [];
 		$status 			= $this->input->post('status');
 		$no_wa_pengirim 	= $this->input->post('no_wa_pengirim');
-		$get 				= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim,$status);
+		$get 				= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim,$status)->result_array();
 		$data 				= [];
 		$total 				= 0;
 		$pending			= 0;

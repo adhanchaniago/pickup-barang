@@ -393,7 +393,7 @@ class PickupBarang_model extends CI_Model {
 			$this->db->where('status', $status);
 		}
 		$this->db->order_by('tanggal_pemesanan', 'desc');
-		return $pengirim;
+		return $this->db->get();
 	}
 
 	public function cek_status_pesanan()
