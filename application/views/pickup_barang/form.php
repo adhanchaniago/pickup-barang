@@ -58,7 +58,7 @@
 	</div>
 	
 	<div class="boxPenerima">
-		<div class="mt-2 border penerima d-none pt-2">
+		<div class="mt-2 border penerima d-none pt-2" id="penerima0">
 			<h6 class="m-2 d-inline">Penerima</h6>
 			<a href="#" class="close hapusPenerima float-right"><i class="fas fa-fw fa-sm fa-times fa-sm"></i></a>
 			<table class="table">

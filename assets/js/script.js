@@ -41,17 +41,17 @@ $(function() {
         function tambah() {
             klikTambah++;
             $('[type=submit]').removeAttr('disabled');
-            let el      = $('.penerima');
+            let el      = $('#penerima0');
 
-            el[0].classList.remove('d-none');
-            el[0].setAttribute('id','penerima'+klikTambah);
+            el.removeClass('d-none');
+            el.attr('id','penerima'+klikTambah);
             el.find('.form-control').removeAttr('disabled');
-            let html    = el[0].outerHTML;
+            let html    = el.html();
             $('.boxPenerima').append(html);
 
+            el.attr('id','penerima0');
             el.find('.form-control').attr('disabled','disabled');
-            el[0].classList.add('d-none');
-            el[0].removeAttribute('id');        
+            el.addClass('d-none');
         }
         function jenisLayanan(id) {
             let kec_pengirim    = $('#kecamatan_pengirim').val();
