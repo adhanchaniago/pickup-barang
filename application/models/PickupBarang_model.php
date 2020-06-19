@@ -2,41 +2,26 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PickupBarang_model extends CI_Model {
-	public $column_search 	= ["no_resi","nama_barang","jumlah_barang","berat_barang","tanggal_pemesanan","tanggal_penjemputan","tanggal_masuk_logistik","nama_pengirim","no_wa_pengirim","alamat_pengirim","nama_penerima","no_wa_penerima","alamat_penerima","harga","durasi_pengiriman","jenis_layanan","jenis_paket","kec_pengirim.nama_kecamatan","kab_pengirim.nama_kabupaten","prov_pengirim.nama_provinsi","prov_pengirim.negara","kec_penerima.nama_kecamatan","kab_penerima.nama_kabupaten","prov_penerima.nama_provinsi","prov_penerima.negara"];
+	public $column_search 	= ["no_resi","tanggal_pemesanan","tanggal_penjemputan","tanggal_masuk_logistik","nama_pengirim","no_wa_pengirim","alamat_pengirim","nama_penerima","no_wa_penerima","alamat_penerima","jenis_layanan"];
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('Main_model', 'mm');
-		$this->load->model('Pengirim_model','pengirim');
-		$this->load->model('Penerima_model','penerima');
-		$this->load->model('layananPaket_model','layanan_paket');
 	}
 
 	public function _setDatatable()
 	{
 
-		$this->db->select('*,
-			kec_penerima.nama_kecamatan as kec_penerima, kec_pengirim.nama_kecamatan as kec_pengirim,
-			kab_penerima.nama_kabupaten as kab_penerima, kab_pengirim.nama_kabupaten as kab_pengirim,
-			prov_penerima.nama_provinsi as prov_penerima, prov_pengirim.nama_provinsi as prov_pengirim,
-			prov_penerima.negara as negara_penerima, prov_pengirim.negara as negara_pengirim');
+		$this->db->select('*');
 		$this->db->from('pickup_barang');
 		$this->db->join('pengirim', 'pengirim.id_pengirim = pickup_barang.id_pengirim');
 		$this->db->join('penerima', 'penerima.id_penerima = pickup_barang.id_penerima');
-		$this->db->join('layanan_paket', 'layanan_paket.id_layanan_paket = pickup_barang.id_layanan_paket');
-		$this->db->join('jenis_layanan', 'jenis_layanan.id_jenis_layanan = layanan_paket.id_jenis_layanan');
-		$this->db->join('jenis_paket', 'jenis_paket.id_jenis_paket = layanan_paket.id_jenis_paket');
-		$this->db->join('kecamatan kec_pengirim', 'kec_pengirim.id_kecamatan = pengirim.id_kecamatan');
-		$this->db->join('kabupaten kab_pengirim', 'kec_pengirim.id_kabupaten = kab_pengirim.id_kabupaten');
-		$this->db->join('provinsi prov_pengirim', 'kab_pengirim.id_provinsi = prov_pengirim.id_provinsi');
-		$this->db->join('kecamatan kec_penerima', 'kec_penerima.id_kecamatan = penerima.id_kecamatan');
-		$this->db->join('kabupaten kab_penerima', 'kec_penerima.id_kabupaten = kab_penerima.id_kabupaten');
-		$this->db->join('provinsi prov_penerima', 'kab_penerima.id_provinsi = prov_penerima.id_provinsi');
+		$this->db->join('jenis_layanan', 'jenis_layanan.id_jenis_layanan = pickup_barang.id_jenis_layanan');
 	}
 	public function _filterDatatable()
 	{
 		$this->_setDatatable();
-		$column_order 		= [null,"no_resi","nama_pengirim","nama_barang","berat_barang","jumlah_barang","nama_penerima","tanggal_pemesanan","tanggal_masuk_logistik","jenis_layanan","status"];
+		$column_order 		= [null,"no_resi","nama_pengirim","nama_penerima","tanggal_pemesanan","tanggal_penjemputan","tanggal_masuk_logistik","jenis_layanan","id_status"];
 		$column_search 		= $this->column_search;
 		$default_order 		= ["tanggal_pemesanan"=>"DESC"];
 
@@ -64,8 +49,8 @@ class PickupBarang_model extends CI_Model {
 		}elseif(isset($default_order)) {
 			$this->db->order_by(key($default_order), $default_order[key($default_order)]);
 		}
-		if ($this->input->post('status') !== NULL) {
-			$this->db->where('status', $this->input->post('status'));
+		if ($this->input->post('id_status') !== NULL) {
+			$this->db->where('id_status', $this->input->post('id_status'));
 		}
 
 	}
@@ -116,20 +101,6 @@ class PickupBarang_model extends CI_Model {
 	{
 		$dataUser 		= $this->mm->getDataUser();
 
-		// ---- random number generator ----
-		$i = 0;
-		$randNum = mt_rand(1,9);
-		do {
-		    $randNum .= mt_rand(0, 9);
-		} while(++$i < 4);
-		$randNum .= time();
-		// ---- ./random number generator ----
-
-		$nama_barang						= $this->input->post('nama_barang',true);
-		$jumlah_barang						= $this->input->post('jumlah_barang',true);
-		$berat_barang						= $this->input->post('berat_barang',true);
-
-
 		// pengirim
 		$pengirim 			= $this->pengirim->searchPengirim();
 		if ($pengirim ) {
@@ -140,9 +111,6 @@ class PickupBarang_model extends CI_Model {
 
 		$data 		= [];
 		for ($i=0; $i < count($this->input->post('nama_penerima')); $i++) { 
-			// layanan
-			
-			$id_layanan_paket 	= $this->layanan_paket->searchLayananPaket($i);
 
 			// penerima
 			$penerima 			= $this->penerima->searchPenerima($i);
@@ -152,44 +120,31 @@ class PickupBarang_model extends CI_Model {
 				$id_penerima 	= $this->penerima->addPenerima($i);
 			}
 
+			$id_jenis_layanan 	= $this->input->post('id_jenis_layanan')[$i];
+
 			// pickup
-			$pickup["no_resi"]				= $randNum;
+			$pickup["no_resi"]				= NULL;
 			$pickup["id_pengirim"]			= $id_pengirim;
 			$pickup["id_penerima"]			= $id_penerima;
-			$pickup["id_layanan_paket"]		= $id_layanan_paket;
-			$pickup["nama_barang"]			= $nama_barang[$i];
-			$pickup["jumlah_barang"]		= $jumlah_barang[$i];
-			$pickup["berat_barang"]			= $berat_barang[$i];
+			$pickup["id_jenis_layanan"]		= $id_jenis_layanan;
 			$pickup["tanggal_pemesanan"]	= date('Y-m-d H:i:s');
-			$pickup["status"]				= 1;
+			$pickup["id_status"]			= 1;
 			$data[]							= $pickup;
 		}
 
-
-
-		// $data 			= [
-		// 	'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-		// 	'id_penerima' 					=> $this->input->post('id_penerima', true),	
-		// 	'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),	
-		// 	'nama_barang' 					=> $this->input->post('nama_barang', true),	
-		// 	'berat_barang' 					=> $this->input->post('berat_barang', true),	
-		// 	'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-		// 	'tanggal_pemesanan' 			=> date('Y-m-d H:i:s'),
-		// 	'status'						=> '1',
-		// 	'no_resi'						=> $randNum
-		// ];
+		$nama_pengirim 	= $this->input->post('nama_pengirim');
 		if (!isset($_SESSION['id_user'])) {
 			$this->session->set_userdata(['pelanggan' => '1']);
 		}
 		$this->db->insert_batch('pickup_barang', $data);
 		if ($this->session->userdata('pelanggan') == '1') {
-			$this->session->set_flashdata('message-success', 'Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'] . ' untuk kami kirim. Tunggu kurir kami untuk mengambil barang Anda. Terima Kasih :D');
-			$this->mm->createLog('Pelanggan ' . $data['nama_pengirim'] . ' berhasil menambahkan pesanan ' . $data['nama_barang'], NULL);
+			$this->session->set_flashdata('message-success', 'Pelanggan ' . $nama_pengirim . ' berhasil menambahkan pesanan untuk kami kirim. Tunggu kurir kami untuk mengambil barang Anda. Terima Kasih :D');
+			$this->mm->createLog('Pelanggan ' . $nama_pengirim . ' berhasil menambahkan pesanan ', NULL);
 			$this->session->unset_userdata('pelanggan');
 			redirect('auth');
 		} else {
-			$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil menambahkan pesanan ' . $data['nama_pengirim']);
-			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil menambahkan pesanan ' . $data['nama_pengirim'], $dataUser['id_user']);
+			$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil menambahkan pesanan ' . $nama_pengirim);
+			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil menambahkan pesanan ' . $nama_pengirim, $dataUser['id_user']);
 			redirect('pickupBarang');
 		}
 	}
@@ -198,29 +153,23 @@ class PickupBarang_model extends CI_Model {
 	{
 		$dataUser 		= $this->mm->getDataUser();
 		$pickup_barang 	= $this->getPickupBarangById($id);
-		$statusLama		= $pickup_barang['status'];
-		$status 		= $this->input->post('status', true);
+		$statusLama		= $pickup_barang['id_status'];
+		$status 		= $this->input->post('id_status', true);
 		if ($status == '2') {
 			$data 			= [
 				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-				'id_penerima' 					=> $this->input->post('id_penerima', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-				'status' 						=> $status,
+				'id_penerima' 					=> $this->input->post('id_penerima', true),
+				'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+				'id_status' 					=> $status,
 				'tanggal_penjemputan'			=> date('Y-m-d H:i:s'),
 				'tanggal_masuk_logistik'		=> NULL
 			];
 		} elseif ($status == '1') {
 			$data 			= [
 				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-				'id_penerima' 					=> $this->input->post('id_penerima', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-				'status' 						=> $status,
+				'id_penerima' 					=> $this->input->post('id_penerima', true),
+				'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+				'id_status' 					=> $status,
 				'tanggal_penjemputan'			=> NULL,
 				'tanggal_masuk_logistik'		=> NULL
 			];
@@ -232,8 +181,8 @@ class PickupBarang_model extends CI_Model {
 					'nama_barang' 					=> $this->input->post('nama_barang', true),	
 					'berat_barang' 					=> $this->input->post('berat_barang', true),	
 					'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-					'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-					'status' 						=> $status,
+					'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+					'id_status' 					=> $status,
 					'tanggal_penjemputan'			=> date('Y-m-d H:i:s')
 				];
 			} else {
@@ -243,8 +192,8 @@ class PickupBarang_model extends CI_Model {
 					'nama_barang' 					=> $this->input->post('nama_barang', true),	
 					'berat_barang' 					=> $this->input->post('berat_barang', true),	
 					'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-					'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-					'status' 						=> $status,
+					'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+					'id_status' 					=> $status,
 					'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s')
 				];
 			}
@@ -252,12 +201,9 @@ class PickupBarang_model extends CI_Model {
 		} else {
 			$data 			= [
 				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-				'id_penerima' 					=> $this->input->post('id_penerima', true),	
-				'nama_barang' 					=> $this->input->post('nama_barang', true),	
-				'berat_barang' 					=> $this->input->post('berat_barang', true),	
-				'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-				'id_layanan_paket' 				=> $this->input->post('id_layanan_paket', true),
-				'status' 						=> $status
+				'id_penerima' 					=> $this->input->post('id_penerima', true),
+				'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+				'id_status' 					=> $status
 			];
 		}
 
@@ -292,7 +238,7 @@ class PickupBarang_model extends CI_Model {
 		$pending 			= $this->input->post('pending');
 		$alamat_pengirim	= $this->input->post('alamat_pengirim');
 		foreach ($pending as $key) {
-			$data["status"]					= 2;
+			$data["id_status"]					= 2;
 			$data["tanggal_penjemputan"]	= date('Y-m-d H:i:s');
 			$this->db->where('id_pickup_barang', $key);
 			$this->db->update('pickup_barang',$data);
@@ -308,7 +254,7 @@ class PickupBarang_model extends CI_Model {
 		$pickup 			= $this->input->post('pickup');
 		$alamat_pengirim	= $this->input->post('alamat_pengirim');
 		foreach ($pickup as $key) {
-			$data["status"]					= 3;
+			$data["id_status"]				= 3;
 			$data["tanggal_masuk_logistik"]	= date('Y-m-d H:i:s');
 			$this->db->where('id_pickup_barang', $key);
 			$this->db->update('pickup_barang',$data);
@@ -354,23 +300,12 @@ class PickupBarang_model extends CI_Model {
 	public function getPickupBarangByWaAndStatus($no_wa_pengirim, $status = 0)
 	{
 		$this->db->select('
-			pengirim.id_pengirim, 
-			pengirim.nama_pengirim, 
-			pengirim.no_wa_pengirim, 
-			pengirim.alamat_pengirim, 
-			pengirim.id_kecamatan,
-			pickup_barang.no_resi,
-			kecamatan.nama_kecamatan as kec_pengirim, 
-			kabupaten.nama_kabupaten as kab_pengirim, 
-			provinsi.nama_provinsi as prov_pengirim
+			pengirim.no_wa_pengirim,
+			pengirim.alamat_pengirim
 		');
 		$this->db->join('pickup_barang', 'pickup_barang.id_pengirim = pengirim.id_pengirim');
-		$this->db->join('kecamatan', 'kecamatan.id_kecamatan = pengirim.id_kecamatan');
-		$this->db->join('kabupaten', 'kabupaten.id_kabupaten = kecamatan.id_kabupaten');
-		$this->db->join('provinsi', 'provinsi.id_provinsi = kabupaten.id_provinsi');
 		$pengirim 			= $this->db->get_where('pengirim', ['no_wa_pengirim' => $no_wa_pengirim])->row_array();
 		$alamat 			= $pengirim["alamat_pengirim"];
-		$kecamatan 			= $pengirim["id_kecamatan"];
 
 		$search 			= $this->input->post('search');
 		$column_search 		= $this->column_search;
@@ -391,9 +326,8 @@ class PickupBarang_model extends CI_Model {
 		}
 
 		$this->db->where('alamat_pengirim', $alamat);
-		$this->db->where('pengirim.id_kecamatan', $kecamatan);
 		if ($status != 0) {
-			$this->db->where('status', $status);
+			$this->db->where('id_status', $status);
 		}
 		$this->db->order_by('tanggal_pemesanan', 'desc');
 		return $this->db->get();
@@ -404,8 +338,7 @@ class PickupBarang_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
 		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
-		$this->db->join('layanan_paket', 'pickup_barang.id_layanan_paket=layanan_paket.id_layanan_paket');
-		$this->db->join('jenis_layanan', 'layanan_paket.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
+		$this->db->join('jenis_layanan', 'pickup_barang.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
 		return $this->db->get_where('pickup_barang', ['no_resi' => $this->input->post('no_resi', true)])->row_array();
 	}
 }

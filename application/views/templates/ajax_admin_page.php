@@ -1,1 +1,0 @@
-<script src="<?= base_url('assets/js/ajax_admin_page.js'); ?>"></script>

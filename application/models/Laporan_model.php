@@ -24,17 +24,15 @@ class Laporan_model extends CI_Model {
 			$query = "SELECT * FROM pickup_barang 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
 				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
-				INNER JOIN layanan_paket ON pickup_barang.id_layanan_paket = layanan_paket.id_layanan_paket 
-				INNER JOIN jenis_layanan ON layanan_paket.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
-				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND pickup_barang.status = '$status'
+				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND pickup_barang.id_status = '$status'
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
 		} else {
 			$query = "SELECT * FROM pickup_barang 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
 				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
-				INNER JOIN layanan_paket ON pickup_barang.id_layanan_paket = layanan_paket.id_layanan_paket 
-				INNER JOIN jenis_layanan ON layanan_paket.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
 				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast'
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";

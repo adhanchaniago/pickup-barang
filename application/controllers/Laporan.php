@@ -13,14 +13,14 @@ class Laporan extends CI_Controller {
 	public function index()
 	{
 		$data['dataUser'] 	= $this->mm->getDataUser();
-		if (isset($_POST['dari_tanggal']) AND isset($_POST['sampai_tanggal']) AND isset($_POST['status'])) {
-			$data['laporan'] 	= $this->lm->getLaporan($_POST['dari_tanggal'], $_POST['sampai_tanggal'], $_POST['status']);
-			if (isset($_POST['status'])) {
-		      if ($_POST['status'] == '1') {
+		if (isset($_POST['dari_tanggal']) AND isset($_POST['sampai_tanggal']) AND isset($_POST['id_status'])) {
+			$data['laporan'] 	= $this->lm->getLaporan($_POST['dari_tanggal'], $_POST['sampai_tanggal'], $_POST['id_status']);
+			if (isset($_POST['id_status'])) {
+		      if ($_POST['id_status'] == '1') {
 		        $status = 'Pending';
-		      } elseif ($_POST['status'] == '2') {
+		      } elseif ($_POST['id_status'] == '2') {
 		        $status = 'Kurir Menjemput';
-		      } elseif ($_POST['status'] == '3') {
+		      } elseif ($_POST['id_status'] == '3') {
 		        $status = 'Barang Masuk Logistik';
 		      } else {
 		        $status = 'Semua';

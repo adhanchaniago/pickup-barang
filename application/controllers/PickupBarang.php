@@ -9,10 +9,7 @@ class PickupBarang extends CI_Controller {
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Layout_model','layout');
 		$this->load->model('PickupBarang_model', 'pbm');
-		$this->load->model('LayananPaket_model', 'lpm');
-		$this->load->model('Provinsi_model', 'provinsi');
 		$this->load->model('JenisLayanan_model', 'jenis_layanan');
-		$this->load->model('JenisPaket_model', 'jenis_paket');
 		$this->status[1] 			= "Pending";
 		$this->status[2] 			= "Kurir Menjemput";
 		$this->status[3] 			= "Barang Masuk Logistik";
@@ -31,7 +28,6 @@ class PickupBarang extends CI_Controller {
 		$this->form_validation->set_rules('nama_barang', 'nama barang', 'required|trim');
 		$this->form_validation->set_rules('berat_barang', 'berat barang', 'required|trim');
 		$this->form_validation->set_rules('jumlah_barang', 'jumlah barang', 'required|trim');
-		$this->form_validation->set_rules('id_layanan_paket', 'id layanan paket', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('pickup_barang/index', $data);
 		} else {
@@ -73,9 +69,6 @@ class PickupBarang extends CI_Controller {
 			$row[] 	= "<div class='text-center'>".$no.".</div>";
 			$row[] 	= $item->no_resi;
 			$row[] 	= $item->nama_pengirim;
-			$row[] 	= $item->nama_barang;
-			$row[] 	= $item->berat_barang;
-			$row[] 	= $item->jumlah_barang;
 			$row[] 	= $item->nama_penerima;
 			$row[] 	= $item->tanggal_pemesanan;
 			$row[] 	= $item->tanggal_penjemputan;
@@ -119,7 +112,7 @@ class PickupBarang extends CI_Controller {
 			$this->pbm->addPickupBarang();
 		}
 		$data["title"] 				= "Form Pickup Barang";
-		$data["provinsi"]			= $this->provinsi->getAllProvinsi();
+		$data["jenis_layanan"]		= $this->jenis_layanan->getAllJenisLayanan();
 		$this->layout->view_auth('pickup_barang/form',$data);
 	}
 	
@@ -164,7 +157,7 @@ class PickupBarang extends CI_Controller {
 
 					</div>
 					<div class='col col-sm-12'>
-						<p>".$key["alamat_pengirim"].", ".$key["kec_pengirim"].", ".$key["kab_pengirim"]."</p>
+						<p>".$key["alamat_pengirim"]."</p>
 						<p class='text-center'>".$key["total"]." Paket</p>
 					</div>
 				</div>
@@ -192,9 +185,9 @@ class PickupBarang extends CI_Controller {
 	public function detailPickupAjax()
 	{
 		$data 				= [];
-		$status 			= $this->input->post('status');
+		$id_status 			= $this->input->post('id_status');
 		$no_wa_pengirim 	= $this->input->post('no_wa_pengirim');
-		$get 				= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim,$status)->result_array();
+		$get 				= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim,$id_status)->result_array();
 		$data 				= [];
 		$total 				= 0;
 		$pending			= 0;

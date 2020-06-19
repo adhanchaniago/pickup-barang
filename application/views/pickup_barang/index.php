@@ -52,9 +52,6 @@
                   <th>No</th>
                   <th>No. Resi</th>
                   <th>Nama Pengirim</th>
-                  <th>Nama Barang</th>
-                  <th>Berat Barang (Kg)</th>
-                  <th>Jumlah Barang</th>
                   <th>Nama Penerima</th>
                   <th>Tanggal Pemesanan</th>
                   <th>Tanggal Penjemputan</th>
