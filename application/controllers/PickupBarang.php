@@ -121,18 +121,18 @@ class PickupBarang extends CI_Controller {
 	public function kurirAjax()
 	{
 		$data 		= [];
-		$status 	= $this->input->post('status');
-		if ($status) {
-			$data 	= ["status" 	=> $status];
+		$id_status 	= $this->input->post('id_status');
+		if ($id_status) {
+			$data 	= ["id_status" 	=> $id_status];
 		}
 		$get 	= $this->pbm->getPickupBarangGroupByAlamat($data);
 		$data 	= [];
 		foreach ($get as $key) {
-			$warna 			= bg_status($status);
-			$warnaText		= text_status($status);
+			$warna 			= bg_status($id_status);
+			$warnaText		= text_status($id_status);
 
 			$data[] 	= "<div class='col-12 col-sm-6 col-md-4 col-lg-3 my-1'>
-			<a class='".$warna." ".$warnaText." p-3 shadow-sm d-block' href='". base_url('pickupBarang/detailPickup/'.$key["no_wa_pengirim"])."/".$status."'>
+			<a class='".$warna." ".$warnaText." p-3 shadow-sm d-block' href='". base_url('pickupBarang/detailPickup/'.$key["no_wa_pengirim"])."/".$id_status."'>
 				<div class='row'>
 					<div class='col-3 col-sm-12 text-center relative'>
 						<i class='fas fa-fw fa-map-marker-alt fa-lg font'></i>
@@ -174,14 +174,14 @@ class PickupBarang extends CI_Controller {
 		$pending			= 0;
 		$pickup 			= 0;
 		foreach ($get as $key) {
-			$warna 			= bg_status($key["status"]);
-			$warnaText		= text_status($key["status"]);
-			if ($key["status"] == 3) {
+			$warna 			= bg_status($key["id_status"]);
+			$warnaText		= text_status($key["id_status"]);
+			if ($key["id_status"] == 3) {
 				$checkbox 	= "";
-			}elseif($key["status"] == 2){
+			}elseif($key["id_status"] == 2){
 				$checkbox 	= "<input type='checkbox' name='pickup[]' value='".$key["id_pickup_barang"]."' class='font'>";
 				$pickup++;
-			}elseif($key["status"] == 1){
+			}elseif($key["id_status"] == 1){
 				$checkbox 	= "<input type='hidden' name='pending[]' value='".$key["id_pickup_barang"]."' class='font'>";
 				$pending++;
 			}
@@ -197,8 +197,7 @@ class PickupBarang extends CI_Controller {
 					</div>
 				</div>
 			</div>";
-			$total 		+= $key["harga"];
 		}
-		echo json_encode([$data,$total,$pending,$pickup]);
+		echo json_encode([$data,$pending,$pickup]);
 	}
 }

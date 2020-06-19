@@ -16,7 +16,7 @@
 </style>
 <div class="container my-3">
 	<a href="<?= base_url('pickupBarang') ?>" class="close"><i class="fas fa-fw fa-times"></i></a>
-	<h5>Daftar Pickup Barang</h5>
+	<h5>Daftar Pickup Barang</h5>	
 	<div class="row">
 		<div class="col-md-6">
 			<div class="forn-group">

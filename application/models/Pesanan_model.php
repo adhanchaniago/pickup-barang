@@ -50,9 +50,9 @@ class Pesanan_model extends CI_Model {
 			$dateLast = date('Y-m-d 23:59:58');
 		}
 
-		$query = "SELECT *, COUNT(IF(id_status = 1,1,0)) as pending, 
-			COUNT(IF(id_status = 2,1,0)) as kurir_menjemput,
-			COUNT(IF(id_status = 3,1,0)) as barang_masuk_logistik
+		$query = "SELECT *, SUM(IF(id_status = 1,1,0)) as pending, 
+			SUM(IF(id_status = 2,1,0)) as kurir_menjemput,
+			SUM(IF(id_status = 3,1,0)) as barang_masuk_logistik
 			FROM pickup_barang 
 			INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
 			INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 

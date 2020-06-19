@@ -272,7 +272,7 @@ class PickupBarang_model extends CI_Model {
 	{
 		// $start 	= $this->input->post('start');
 		// $limit 	= $this->input->post('limit');
-		$search 	= $this->input->post('search');
+		$search 			= $this->input->post('search');
 		$column_search 		= $this->column_search;
 		$this->_setDatatable();
 		$this->db->select('count(*) as total');

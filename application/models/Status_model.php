@@ -9,7 +9,6 @@ class Status_model extends CI_Model {
 	}
 	public function getAllStatus()
 	{
-		$this->db->order_by('status', 'ASC');
 		return $this->db->get('status')->result_array();
 	}
 	public function getStatusById($id_status)

@@ -72,7 +72,7 @@ $(function() {
         
     }
     function kurirPickup() {
-        load({status : $('#status').val()});
+        load({id_status : $('#status').val()});
         function load(data = {},reset = 0) {
             $.ajax({
                 url         : url + 'pickupBarang/kurirAjax',
@@ -100,6 +100,7 @@ $(function() {
             let data        = {};
             data.id_status  = $('#status').val();
             data.search     = $('#search').val();
+            console.log(data);
             load(data,1);
         })
         $('#search').on('keyup',function() {
@@ -161,12 +162,11 @@ $(function() {
                     for (var i = 0; i < response[0].length; i++) {
                         html    += response[0][i];
                     }
-                    $('#total').html(response[1]);
-                    if (response[2] == 0) {
+                    if (response[1] == 0) {
                         $('[name=btnPending]').attr('disabled','disabled');
                     }
                     let jml = $('input:checked').length;
-                    if (response[3] == 0 || jml == 0) {
+                    if (response[2] == 0 || jml == 0) {
                         $('[name=btnPickup]').attr('disabled','disabled');
                     }
                     if (reset == 0) {
