@@ -7,6 +7,8 @@ class PickupBarang_model extends CI_Model {
 	{
 		parent::__construct();
 		$this->load->model('Main_model', 'mm');
+		$this->load->model('Pengirim_model','pengirim');
+		$this->load->model('Penerima_model','penerima');
 	}
 
 	public function _setDatatable()
@@ -49,7 +51,8 @@ class PickupBarang_model extends CI_Model {
 		}elseif(isset($default_order)) {
 			$this->db->order_by(key($default_order), $default_order[key($default_order)]);
 		}
-		if ($this->input->post('id_status') !== NULL) {
+
+		if ($this->input->post('id_status') != '') {
 			$this->db->where('id_status', $this->input->post('id_status'));
 		}
 
@@ -100,7 +103,6 @@ class PickupBarang_model extends CI_Model {
 	public function addPickupBarang()
 	{
 		$dataUser 		= $this->mm->getDataUser();
-
 		// pengirim
 		$pengirim 			= $this->pengirim->searchPengirim();
 		if ($pengirim ) {
@@ -120,7 +122,7 @@ class PickupBarang_model extends CI_Model {
 				$id_penerima 	= $this->penerima->addPenerima($i);
 			}
 
-			$id_jenis_layanan 	= $this->input->post('id_jenis_layanan')[$i];
+			$id_jenis_layanan 	= $this->input->post('jenis_layanan')[$i];
 
 			// pickup
 			$pickup["no_resi"]				= NULL;

@@ -69,7 +69,7 @@
 				<tr>
 					<td>Layanan</td>
 					<td>
-						<select name="jenis_layanan[]" class="form-control js-basic-single jenis_layanan">
+						<select name="jenis_layanan[]" class="form-control  jenis_layanan" >
 							<option value="">-- Pilih --</option>
 							<?php foreach ($jenis_layanan as $key): ?>
 								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>

@@ -38,8 +38,8 @@
             <label for="">Status</label>
             <select id="whereStatus" class="form-control">
               <option value="">-- Pilih --</option>
-              <?php foreach ($status as $key => $value): ?>
-                <option value="<?= $key; ?>"><?= $value; ?></option>
+              <?php foreach ($status as $key): ?>
+                <option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
               <?php endforeach ?>
             </select>
           </div>

@@ -31,7 +31,7 @@ $(function() {
                 "orderable" : false
             }],
             "responsive": true,
-            "autoWidth": false
+            "autoWidth": true
         });
     }
 

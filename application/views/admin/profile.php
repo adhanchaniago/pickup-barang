@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm">
-          <h1 class="m-0 text-dark">Profil - <?= $dataUser['username']; ?></h1>
+          <h1 class="m-0 text-dark">Profil - <?= kapital($dataUser['username']); ?></h1>
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="row my-2">
@@ -37,9 +37,9 @@
       <div class="row justify-content-center my-2">
         <div class="col-lg-6">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Nama Lengkap: <?= ucwords(strtolower($dataUser['nama_lengkap'])); ?></li>
-            <li class="list-group-item">Username: <?= strtolower($dataUser['username']); ?></li>
-            <li class="list-group-item">Jabatan: <?= strtolower($dataUser['nama_jabatan']); ?></li>
+            <li class="list-group-item">Nama Lengkap: <?= kapital($dataUser['nama_lengkap']); ?></li>
+            <li class="list-group-item">Username: <?= kapital($dataUser['username']); ?></li>
+            <li class="list-group-item">Jabatan: <?= kapital($dataUser['nama_jabatan']); ?></li>
             <li class="list-group-item">
               <button type="button" data-toggle="modal" data-target="#editProfileModal" class="btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah Profile</button>
               <button type="button" data-toggle="modal" data-target="#changePasswordModal" class="btn btn-danger"><i class="fas fa-fw fa-lock"></i> Ganti Password</button>

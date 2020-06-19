@@ -22,9 +22,10 @@
 			<div class="forn-group">
 				<label for="status">Status</label>
 				<select id="status" class="form-control">
-					<?php foreach ($status as $key => $value): ?>
-						<option value="<?= $key; ?>"><?= $value; ?></option>
+					<?php foreach ($status as $key): ?>
+						<option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
 					<?php endforeach ?>
+					<option value="">Semua</option>
 				</select>
 			</div>
 		</div>

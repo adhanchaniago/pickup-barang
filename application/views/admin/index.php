@@ -5,24 +5,8 @@
     <div class="container-fluid my-0 py-0">
       <div class="row my-0 py-0">
         <div class="col-sm my-auto py-1 header-title">
-          <?php 
-            if (isset($_GET['status'])) {
-              if ($_GET['status'] == '1') {
-                $status = 'Pending';
-              } elseif ($_GET['status'] == '2') {
-                $status = 'Kurir Menjemput';
-              } elseif ($_GET['status'] == '3') {
-                $status = 'Barang Masuk Logistik';
-              } else {
-                $status = 'Semua';
-              }
-            } 
-            ?>
-          <?php if (isset($_GET['dari_tanggal'])): ?>
-            <h4 class="text-dark my-auto">Dasbor - <?= $_GET['dari_tanggal']; ?> s/d <?= $_GET['sampai_tanggal']; ?> - <?= $status; ?></h4>
-          <?php else: ?>
-            <h3 class="text-dark my-0 py-0">Dasbor - Hari Ini</h3>
-          <?php endif ?>
+          <?= $status; ?>
+          <h3 class="text-dark my-0 py-0"><?= $headline; ?></h3>
         </div><!-- /.col -->
         <div class="col-sm-2 my-auto py-1 header-button">
           <!-- Button trigger modal -->
@@ -31,6 +15,7 @@
           </button>
         </div>
       </div><!-- /.row -->
+
       <div class="row my-2">
         <div class="col-lg-6">
           <?php if (validation_errors()): ?>
@@ -56,18 +41,17 @@
             <h4>Tidak ada pesanan hari ini, coba gunakan fitur filter untuk melihat data lampau</h4>
           <?php else: ?>
             <?php foreach ($pesanan as $dp): ?>
-              <?php if ($dp['status'] == '1'): ?>
-                <div class="card p-0 bg-danger">
-              <?php elseif ($dp['status'] == '2'): ?>
-                <div class="card p-0 bg-warning">
-              <?php else: ?>
-                <div class="card p-0 bg-success">
-              <?php endif ?>
-                <a href="<?= base_url('pickupBarang/detailPickup/' . $dp['no_wa_pengirim']) . '/' . $dp['status']; ?>">
+                <div class="card p-0 <?= bg_status($dp['id_status']); ?>">
+                <a href="<?= base_url('pickupBarang/detailPickup/' . $dp['no_wa_pengirim']) . '/' . $dp['id_status']; ?>">
                   <div class="card-body p-3 text-white">
-                    <h5><?= ucwords(strtolower($dp['nama_barang'])); ?> <small class="float-right">(<?= $dp['berat_barang']; ?> Kg, <?= $dp['jumlah_barang']; ?> <?= $dp['jenis_paket']; ?>)</small></h5>
-                    <h6>Dari <strong><?= ucwords(strtolower($dp['nama_pengirim'])); ?></strong> ke <strong><?= ucwords(strtolower($dp['nama_penerima'])); ?></strong></h6>
-                    <h6><?= $dp['jenis_layanan']; ?> | Rp. <?= number_format($dp['harga']); ?> | <?= $dp['durasi_pengiriman']; ?> Jam</h6>
+                    <h6>Dari 
+                      <strong><?= kapital($dp['nama_pengirim']); ?></strong> 
+                      ke 
+                      <strong><?= kapital($dp['nama_penerima']); ?></strong>
+                    </h6>
+                    <h6>
+                      <?= $dp['jenis_layanan']; ?>
+                    </h6>
                     <h6><?= $dp['tanggal_pemesanan']; ?></h6>
                   </div>
                 </a>
@@ -75,18 +59,19 @@
             <?php endforeach ?>
           <?php endif ?>
         </div>
+
         <div class="col-lg my-1 tidak_tampil" id="dataJmlStatus">
           <div class="card">
-            <?php if (isset($_GET['dari_tanggal'])): ?>
-              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $_GET['dari_tanggal']; ?> s/d <?= $_GET['sampai_tanggal']; ?> - <?= $status; ?></div>
+            <?php if ($status != ''): ?>
+              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $dari_tanggal; ?> s/d <?= $sampai_tanggal; ?> - <?= $status; ?></div>
             <?php else: ?>
               <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan Hari Ini</div>
             <?php endif ?>
             <ul class="list-group list-group-flush">
-              <?php if ($jml_status !== NULL): ?>
-                <li class="list-group-item">Jumlah Status Pending: <span class="badge badge-primary"><?= $jml_status['pending']; ?></span></li>
-                <li class="list-group-item">Jumlah Status Kurir Menjemput: <span class="badge badge-primary"><?= $jml_status['kurir_menjemput']; ?></span></li>
-                <li class="list-group-item">Jumlah Status Barang Masuk Logistik: <span class="badge badge-primary"><?= $jml_status['barang_masuk_logistik']; ?></span></li>
+              <?php if ($jml_status != NULL): ?>
+                <li class="list-group-item">Jumlah Status Pending: <span class="badge badge-primary"><?= nominal($jml_status['pending']); ?></span></li>
+                <li class="list-group-item">Jumlah Status Kurir Menjemput: <span class="badge badge-primary"><?= nominal($jml_status['kurir_menjemput']); ?></span></li>
+                <li class="list-group-item">Jumlah Status Barang Masuk Logistik: <span class="badge badge-primary"><?= nominal($jml_status['barang_masuk_logistik']); ?></span></li>
               <?php else: ?>
                 <li class="list-group-item">Jumlah Status Pending: <span class="badge badge-primary float-right">0</span></li>
                 <li class="list-group-item">Jumlah Status Kurir Menjemput: <span class="badge badge-primary float-right">0</span></li>
@@ -116,49 +101,30 @@
         <div class="modal-body">
             <div class="row">
               <div class="col-lg">
-                <?php if (isset($_GET['dari_tanggal'])): ?>
-                  <div class="form-group">
-                    <label for="dari_tanggal">Dari Tanggal</label>
-                    <input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= $_GET['dari_tanggal']; ?>">
-                  </div>
-                <?php else: ?>
-                  <div class="form-group">
-                    <label for="dari_tanggal">Dari Tanggal</label>
-                    <input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= date('Y/m/d'); ?>">
-                  </div>
-                <?php endif ?>
+                <div class="form-group">
+                  <label for="dari_tanggal">Dari Tanggal</label>
+                  <input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= $val_dari_tanggal; ?>">
+                </div>
               </div>
               <div class="col-lg">
-                <?php if (isset($_GET['sampai_tanggal'])): ?>
-                  <div class="form-group">
-                    <label for="sampai_tanggal">Sampai Tanggal</label>
-                    <input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $_GET['sampai_tanggal']; ?>">
-                  </div>
-                <?php else: ?>
-                  <div class="form-group">
-                    <label for="sampai_tanggal">Sampai Tanggal</label>
-                    <input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= date('Y/m/d'); ?>">
-                  </div>
-                <?php endif ?>
+                <div class="form-group">
+                  <label for="sampai_tanggal">Sampai Tanggal</label>
+                  <input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $val_sampai_tanggal; ?>">
+                </div>
               </div>
             </div>
             <div class="row">
               <div class="col-lg">
                 <label for="status">Status</label>
-                <select name="status" id="status" class="form-control">
-                  <?php if (isset($_GET['status'])): ?>
-                    <option value="<?= $_GET['status']; ?>"><?= $status; ?></option>
-                    <option disabled>-----</option>
-                    <option value="1">Pending</option>
-                    <option value="2">Kurir Menjemput</option>
-                    <option value="3">Barang Masuk Logistik</option>
-                    <option value="4">Semua</option>
-                  <?php else: ?>
-                    <option value="1">Pending</option>
-                    <option value="2">Kurir Menjemput</option>
-                    <option value="3">Barang Masuk Logistik</option>
-                    <option value="4">Semua</option>
-                  <?php endif ?>
+                <select name="id_status" id="status" class="form-control">
+                  <?php foreach ($allStatus as $key): ?>
+                    <?php if ($key["id_status"] == $status["id_status"]): ?>
+                      <option value="<?= $key["id_status"]; ?>" selected><?= $key["status"]; ?></option>
+                    <?php else: ?>
+                      <option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
+                    <?php endif ?>
+                  <?php endforeach ?>
+                  <option value="4">Semua</option>
                 </select>
               </div>
             </div>

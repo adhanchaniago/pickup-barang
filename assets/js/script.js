@@ -42,16 +42,19 @@ $(function() {
             klikTambah++;
             $('[type=submit]').removeAttr('disabled');
             let el      = $('#penerima0');
+            $('.jenis_layanan').select2();
+            $('.jenis_layanan').select2('destroy');
 
             el.removeClass('d-none');
-            el.attr('id','penerima'+klikTambah);
             el.find('.form-control').removeAttr('disabled');
-            let html    = el.html();
+            el.attr('id','penerima'+klikTambah);
+            let html    = el[0].outerHTML;
             $('.boxPenerima').append(html);
 
             el.attr('id','penerima0');
             el.find('.form-control').attr('disabled','disabled');
             el.addClass('d-none');
+            $('.jenis_layanan').select2();
         }
 
         $('.tambahPenerima').on('click',function(e) {
@@ -62,7 +65,7 @@ $(function() {
         $('.boxPenerima').on('click','.hapusPenerima',function(e) {
             e.preventDefault();
             let el          = $(this).parents('.penerima');
-            el.outerHTML    = '';            
+            el[0].outerHTML    = '';
             disabledSubmit();
         })
 
