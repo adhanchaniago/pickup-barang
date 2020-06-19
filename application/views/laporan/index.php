@@ -58,13 +58,17 @@
 			                <label for="id_status">Status</label>
 			                <select name="id_status" id="id_status" class="form-control">
 			                  <?php foreach ($allStatus as $key): ?>
-			                    <?php if ($key["id_status"] == $status["id_status"]): ?>
+			                    <?php if ($key["id_status"] == $id_status): ?>
 			                      <option value="<?= $key["id_status"]; ?>" selected><?= $key["status"]; ?></option>
 			                    <?php else: ?>
 			                      <option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
 			                    <?php endif ?>
 			                  <?php endforeach ?>
-			                  <option value="4">Semua</option>
+			                  <?php if ($id_status == ''): ?>
+			                  		<option value="" selected>Semua</option>
+			                  	<?php else: ?>
+			                  		<option value="">Semua</option>
+			                   <?php endif ?>
 			                </select>
 			              </div>
 			            </div>
