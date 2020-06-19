@@ -1,4 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -8,9 +9,6 @@
           <h1 class="m-0 text-dark">Daftar Pickup Barang</h1>
         </div><!-- /.col -->
         <div class="col-sm header-button">
-          <!-- <a href="#" class="btn btn-primary btn-tambah-pickupBarang"><i class="fas fa-fw fa-plus"></i> Tambah Pickup Barang</a> -->
-          <a href="<?= base_url('pickupBarang/kurir') ?>" class="btn btn-danger my-1"><i class="fas fa-fw fa-box"></i>  Pickup Barang</a>
-          <a href="<?= base_url('pickupBarang/form') ?>" class="btn btn-primary my-1"><i class="fas fa-fw fa-plus"></i> Tambah Pickup Barang</a>
         </div>
       </div><!-- /.row -->
       <div class="row my-2">
@@ -33,7 +31,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row my-2">
-        <div class="col-md-6 col-12">
+        <div class="col-md col-12">
           <div class="form-group">
             <label for="">Status</label>
             <select id="whereStatus" class="form-control">
@@ -43,6 +41,11 @@
               <?php endforeach ?>
             </select>
           </div>
+        </div>
+        <div class="col-md-8 col-12 pt-md-2 text-md-right text-center mb-md-0 mb-2">
+          <a href="#" class="btn btn-success mt-md-4" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-box"></i>  Import Resi</a>
+          <a href="<?= base_url('pickupBarang/kurir') ?>" class="btn btn-danger mt-md-4"><i class="fas fa-fw fa-box"></i>  Pickup Barang</a>
+          <a href="<?= base_url('pickupBarang/form') ?>" class="btn btn-primary mt-md-4"><i class="fas fa-fw fa-plus"></i> Tambah</a>
         </div>
         <div class="col-12">
           <div class="table-responsive">
@@ -162,3 +165,30 @@
     </form>
   </div>
 </div>
+
+
+<!-- Modal -->
+<form action="" method="post" enctype="multipart/form-data">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Import Resi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="">Import FILE CSV/EXCEL</label>
+            <input type="file" class="form-control" name="file">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Close</button>
+          <button type="submit" name="submit" class="btn btn-primary"><i class="fas fa-fw fa-paper-plane"></i> Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

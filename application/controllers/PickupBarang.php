@@ -132,16 +132,15 @@ class PickupBarang extends CI_Controller {
 			$warna 			= bg_status($id_status);
 			$warnaText		= text_status($id_status);
 
-			$data[] 	= "<div class='col-12 col-sm-6 col-md-4 col-lg-3 my-1'>
+			$data[] 	= "<div class='col-12 col-md-6 col-lg-4 my-1'>
 			<a class='".$warna." ".$warnaText." p-3 shadow-sm d-block' href='". base_url('pickupBarang/detailPickup/'.$key["no_wa_pengirim"])."/".$id_status."'>
 				<div class='row'>
-					<div class='col-3 col-sm-12 text-center relative'>
+					<div class='col-5 text-center relative border-right border-dark'>
 						<i class='fas fa-fw fa-map-marker-alt fa-lg font'></i>
-
+						<p class='text-center total'>".nominal($key["total"])." Paket</p>
 					</div>
-					<div class='col col-sm-12'>
+					<div class='col'>
 						<p>".kapital($key["alamat_pengirim"])."</p>
-						<p class='text-center'>".nominal($key["total"])." Paket</p>
 					</div>
 				</div>
 			</a>

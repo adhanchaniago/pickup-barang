@@ -1,14 +1,21 @@
 <style>
 	.font{
-		font-size: 50px;
+		font-size: 40px;
 		position: absolute;
-		top: 50%;
+		top: 35%;
 		left: 50%;
 		transform: translate(-50%,-50%);
+	}
+	.total{
+		position: absolute;
+		top: 80%;
+		left: 50%;
+		transform: translate(-50%,-50%);	
 	}
 	.relative{
 		position: relative;
 		height: 100px;
+		margin-bottom: 0px;
 	}
 	a:hover{
 		text-decoration: none;
