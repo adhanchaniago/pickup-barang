@@ -85,7 +85,7 @@
         </div>
         <div class="modal-body">
           <input type="hidden" name="id_pickup_barang" id="id_pickup_barang">
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="status">Status</label>
             <select name="status" id="status" class="form-control">
               <?php foreach ($status as $key => $value): ?>
@@ -141,14 +141,16 @@
             <?= form_error('nama_barang', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
           <div class="form-group">
-            <label for="berat_barang">Berat Barang</label>
-            <input type="number" step="0.001" name="berat_barang" id="berat_barang" class="form-control" required value="<?= set_value('berat_barang'); ?>" placeholder="Berat Barang">
-            <?= form_error('berat_barang', '<small class="form-text text-danger">', '</small>'); ?>
-          </div>
-          <div class="form-group">
             <label for="jumlah_barang">Jumlah Barang</label>
             <input type="number" name="jumlah_barang" id="jumlah_barang" class="form-control" required value="<?= set_value('jumlah_barang'); ?>" placeholder="Jumlah Barang">
             <?= form_error('jumlah_barang', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+           -->
+
+           <div class="form-group">
+            <label for="no_resi">No. Resi</label>
+            <input type="number" name="no_resi" id="no_resi" class="form-control" required value="<?= set_value('no_resi'); ?>" placeholder="Nomor Resi">
+            <?= form_error('no_resi', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
         </div>
         <div class="modal-footer">

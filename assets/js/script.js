@@ -100,7 +100,6 @@ $(function() {
             let data        = {};
             data.id_status  = $('#status').val();
             data.search     = $('#search').val();
-            console.log(data);
             load(data,1);
         })
         $('#search').on('keyup',function() {

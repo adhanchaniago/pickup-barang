@@ -154,66 +154,68 @@ class PickupBarang_model extends CI_Model {
 	public function editPickupBarang($id)
 	{
 		$dataUser 		= $this->mm->getDataUser();
-		$pickup_barang 	= $this->getPickupBarangById($id);
-		$statusLama		= $pickup_barang['id_status'];
-		$status 		= $this->input->post('id_status', true);
-		if ($status == '2') {
-			$data 			= [
-				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-				'id_penerima' 					=> $this->input->post('id_penerima', true),
-				'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-				'id_status' 					=> $status,
-				'tanggal_penjemputan'			=> date('Y-m-d H:i:s'),
-				'tanggal_masuk_logistik'		=> NULL
-			];
-		} elseif ($status == '1') {
-			$data 			= [
-				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-				'id_penerima' 					=> $this->input->post('id_penerima', true),
-				'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-				'id_status' 					=> $status,
-				'tanggal_penjemputan'			=> NULL,
-				'tanggal_masuk_logistik'		=> NULL
-			];
-		} elseif ($status == '3') {
-			if ($statusLama == '1') {
-				$data 			= [
-					'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-					'id_penerima' 					=> $this->input->post('id_penerima', true),	
-					'nama_barang' 					=> $this->input->post('nama_barang', true),	
-					'berat_barang' 					=> $this->input->post('berat_barang', true),	
-					'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-					'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-					'id_status' 					=> $status,
-					'tanggal_penjemputan'			=> date('Y-m-d H:i:s')
-				];
-			} else {
-				$data 			= [
-					'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-					'id_penerima' 					=> $this->input->post('id_penerima', true),	
-					'nama_barang' 					=> $this->input->post('nama_barang', true),	
-					'berat_barang' 					=> $this->input->post('berat_barang', true),	
-					'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-					'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-					'id_status' 					=> $status,
-					'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s')
-				];
-			}
+		// $pickup_barang 	= $this->getPickupBarangById($id);
+		// $statusLama		= $pickup_barang['id_status'];
+		// $status 		= $this->input->post('id_status', true);
+		// if ($status == '2') {
+		// 	$data 			= [
+		// 		'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+		// 		'id_penerima' 					=> $this->input->post('id_penerima', true),
+		// 		'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+		// 		'id_status' 					=> $status,
+		// 		'tanggal_penjemputan'			=> date('Y-m-d H:i:s'),
+		// 		'tanggal_masuk_logistik'		=> NULL
+		// 	];
+		// } elseif ($status == '1') {
+		// 	$data 			= [
+		// 		'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+		// 		'id_penerima' 					=> $this->input->post('id_penerima', true),
+		// 		'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+		// 		'id_status' 					=> $status,
+		// 		'tanggal_penjemputan'			=> NULL,
+		// 		'tanggal_masuk_logistik'		=> NULL
+		// 	];
+		// } elseif ($status == '3') {
+		// 	if ($statusLama == '1') {
+		// 		$data 			= [
+		// 			'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+		// 			'id_penerima' 					=> $this->input->post('id_penerima', true),	
+		// 			'nama_barang' 					=> $this->input->post('nama_barang', true),	
+		// 			'berat_barang' 					=> $this->input->post('berat_barang', true),	
+		// 			'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
+		// 			'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+		// 			'id_status' 					=> $status,
+		// 			'tanggal_penjemputan'			=> date('Y-m-d H:i:s')
+		// 		];
+		// 	} else {
+		// 		$data 			= [
+		// 			'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+		// 			'id_penerima' 					=> $this->input->post('id_penerima', true),	
+		// 			'nama_barang' 					=> $this->input->post('nama_barang', true),	
+		// 			'berat_barang' 					=> $this->input->post('berat_barang', true),	
+		// 			'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
+		// 			'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+		// 			'id_status' 					=> $status,
+		// 			'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s')
+		// 		];
+		// 	}
 
-		} else {
-			$data 			= [
-				'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-				'id_penerima' 					=> $this->input->post('id_penerima', true),
-				'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-				'id_status' 					=> $status
-			];
-		}
+		// } else {
+		// 	$data 			= [
+		// 		'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
+		// 		'id_penerima' 					=> $this->input->post('id_penerima', true),
+		// 		'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
+		// 		'id_status' 					=> $status
+		// 	];
+		// }
+
+		$data["no_resi"]					= $this->input->post('no_resi');
 
 		$this->db->where('id_pickup_barang', $id);
 		$this->db->update('pickup_barang', $data);
 
-		$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil mengubah Pickup Barang ' . $data['pickup_barang']);
-		$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil mengubah Pickup Barang ' . $data['pickup_barang'], $dataUser['id_user']);
+		$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil mengubah Pickup Barang ' . $data['no_resi']);
+		$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil mengubah Pickup Barang ' . $data['no_resi'], $dataUser['id_user']);
 		redirect('pickupBarang');
 	}
 

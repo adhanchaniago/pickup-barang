@@ -20,17 +20,12 @@ class PickupBarang extends CI_Controller {
 		$data['dataUser'] 			= $dataUser;
 		$data['title'] 				= 'Pickup Barang - ' . $data['dataUser']['username'];
 
-		$this->form_validation->set_rules('id_pengirim', 'nama pengirim', 'required|trim');
-		$this->form_validation->set_rules('id_penerima', 'nama penerima', 'required|trim');
+		$this->form_validation->set_rules('no_resi', 'Nomor Resi', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('pickup_barang/index', $data);
 		} else {
-			if ($this->input->post('id_pickup_barang')) {
-				$id_pickup_barang 	= $this->input->post('id_pickup_barang');
-			    $this->pbm->editPickupBarang($id_pickup_barang);
-			}else{
-			    $this->pbm->addPickupBarang();
-			}
+			$id_pickup_barang 	= $this->input->post('id_pickup_barang');
+		    $this->pbm->editPickupBarang($id_pickup_barang);
 		}
 	}
 
@@ -45,8 +40,14 @@ class PickupBarang extends CI_Controller {
 
 			if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2') {
 				$button 	= "<div class='text-center'>";
+
+				if ($item->no_resi == NULL) {
 					$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-pickupBarang btn-xs' data-id='".$item->id_pickup_barang."'><i class='fas fa-fw fa-edit'></i></a>";
-					$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->nama_penerima)."'><i class='fas fa-fw fa-trash'></i></a>";
+				}else{
+					$button 	.= "<a href='".base_url('pickupBarang/kirimResi/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
+				}
+
+				$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->nama_penerima)."'><i class='fas fa-fw fa-trash'></i></a>";
 				$button 	.= "</div>";
 			}
 			$warna 			= bg_status($item->id_status,'btn');
