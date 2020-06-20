@@ -10,23 +10,8 @@ $(function() {
         case 'pickupBarang':
             pickupBarang();
         break;
-        case 'provinsi':
-            provinsi();
-        break;
-        case 'kabupaten':
-            kabupaten();
-        break;
-        case 'kecamatan':
-            kecamatan();
-        break;
         case 'jenisLayanan':
             jenisLayanan();
-        break;
-        case 'jenisPaket':
-            jenisPaket();
-        break;
-        case 'layananPaket':
-            layananPaket();
         break;
         
     }
@@ -46,7 +31,7 @@ $(function() {
                 "orderable" : false
             }],
             "responsive": true,
-            "autoWidth": false
+            "autoWidth": true
         });
     }
 
@@ -100,6 +85,7 @@ $(function() {
                 }
             })
         });
+
         $('.btn-tambah-pickupBarang').on('click',function(e) {
             e.preventDefault();
             $(modal).modal('show');
@@ -109,91 +95,8 @@ $(function() {
         $('#whereStatus').on('change',function() {
             let val     = $(this).val();
             $('#table_id').DataTable().destroy();
-            let data        = {status : val};
+            let data        = {id_status : val};
             datatable(data);
-        })
-    }
-
-    function layananPaket() {
-        let modal   = '#layananPaketModal';
-        $('#table_id').on('click','.btn-edit-layananPaket',function(e){
-            e.preventDefault();
-            $(modal).modal('show');
-            $(modal + ' #label').html('Ubah Layanan Paket');
-            let id_layanan_paket   = $(this).data('id');
-            $.ajax({
-                url         : url + 'layananPaket/getLayananPaketById',
-                method      : 'post',
-                data        : {id_layanan_paket : id_layanan_paket},
-                dataType    : 'json',
-                success     : function(response) {
-                    $(modal + ' #id_layanan_paket').val(response.id_layanan_paket);
-                    $(modal + ' #harga').val(response.harga);
-                    $(modal + ' #durasi_pengiriman').val(response.durasi_pengiriman);
-                    $(modal + ' #id_jenis_paket').val(response.id_jenis_paket).trigger('change');
-                    $(modal + ' #id_jenis_layanan').val(response.id_jenis_layanan).trigger('change');
-                    $(modal + ' #id_provinsi_asal').val(response.prov_asal).trigger('change');
-                    $(modal + ' #id_provinsi_tujuan').val(response.prov_tujuan).trigger('change');
-                    let intKab  = setInterval(function() {
-                        let kab_asal    = $(modal + ' #id_kabupaten_asal')[0];
-                        let kab_tujuan  = $(modal + ' #id_kabupaten_tujuan')[0];
-                        if (kab_asal.length > 2 && kab_tujuan.length > 2) {
-                            clearInterval(intKab);
-                            $(modal + ' #id_kabupaten_asal').val(response.kab_asal).trigger('change');
-                            $(modal + ' #id_kabupaten_tujuan').val(response.kab_tujuan).trigger('change');
-                            let intKec  = setInterval(function() {
-                                let kec_asal    = $(modal + ' #id_kecamatan_asal')[0];
-                                let kec_tujuan  = $(modal + ' #id_kecamatan_tujuan')[0];
-                                if (kec_asal.length > 2 && kec_tujuan.length > 2) {
-                                    $(modal + ' #id_kecamatan_asal').val(response.kec_asal).trigger('change');
-                                    $(modal + ' #id_kecamatan_tujuan').val(response.kec_tujuan).trigger('change');
-                                    clearInterval(intKec);
-                                }
-                            },1000);
-                        }
-                    },500);
-                }
-            })
-        });
-
-        $(modal).on('change','#id_provinsi_asal',function() {
-            let id_provinsi     = $(this).val();
-            selectKabupaten(id_provinsi,modal + ' #id_kabupaten_asal');
-            setTimeout(function() {
-                let id_kabupaten     = $(modal + ' #id_kabupaten_asal').val();
-                selectKecamatan(id_kabupaten,modal + ' #id_kecamatan_asal');
-            },1000);
-        });
-
-        $(modal).on('change','#id_provinsi_tujuan',function() {
-            let id_provinsi     = $(this).val();
-            selectKabupaten(id_provinsi,modal + ' #id_kabupaten_tujuan');
-            setTimeout(function() {
-                let id_kabupaten     = $('#id_kabupaten_tujuan').val();
-                selectKecamatan(id_kabupaten,modal + ' #id_kecamatan_tujuan');
-            },1000);
-        });
-
-        $(modal).on('change','#id_kabupaten_asal',function() {
-            let id_kabupaten     = $(this).val();
-            selectKecamatan(id_kabupaten,modal + ' #id_kecamatan_asal');
-        });
-
-        $(modal).on('change','#id_kabupaten_tujuan',function() {
-            let id_kabupaten     = $(this).val();
-            selectKecamatan(id_kabupaten,modal + ' #id_kecamatan_tujuan');
-        });
-
-        $('.btn-tambah-layananPaket').on('click',function(e) {
-            e.preventDefault();
-            $(modal).modal('show');
-            $(modal+ ' #reset').click();
-            $(modal + ' #label').html('Tambah Layanan Paket');
-            $(modal + ' select').val('').trigger('change');
-            $(modal + ' #id_kabupaten_asal').html('');
-            $(modal + ' #id_kabupaten_tujuan').html('');
-            $(modal + ' #id_kecamatan_asal').html('');
-            $(modal + ' #id_kecamatan_tujuan').html('');
         })
     }
 
@@ -259,159 +162,6 @@ $(function() {
         })
     }
 
-    function jenisPaket() {
-        let modal       = '#jenisPaketModal';
-        $('#table_id').on('click','.btn-edit-jenisPaket',function(e) {
-            e.preventDefault();
-            let id_jenis_paket     = $(this).data('id');
-            $(modal).modal('show');
 
-            $.ajax({
-                url         : url + 'jenisPaket/getJenisPaketById',
-                method      : 'post',
-                dataType    : 'json',
-                data        : {id_jenis_paket : id_jenis_paket},
-                success     : function(response) {
-                    $(modal+ ' #label').html('Edit Jenis Paket - '+response.jenis_paket);
-                    $(modal+' #id_jenis_paket').val(response.id_jenis_paket);
-                    $(modal+' #jenis_paket').val(response.jenis_paket);
-                }
-            })
-        })
-        $('.btn-tambah-jenisPaket').on('click',function(e) {
-            e.preventDefault();
-            $(modal).modal('show');
-            $(modal+ ' #label').html('Tambah Jenis Paket');
-            $(modal+ ' #reset').click();
-        })
-    }
-
-    function provinsi() {
-        let modal       = '#provinsiModal';
-        $('#table_id').on('click','.btn-edit-provinsi',function(e) {
-            e.preventDefault();
-            let id_provinsi     = $(this).data('id');
-            $(modal).modal('show');
-
-            $.ajax({
-                url         : url + 'provinsi/getProvinsiById',
-                method      : 'post',
-                dataType    : 'json',
-                data        : {id_provinsi : id_provinsi},
-                success     : function(response) {
-                    $(modal+ ' #label').html('Edit Provinsi - '+response.nama_provinsi);
-                    $(modal+' #id_provinsi').val(response.id_provinsi);
-                    $(modal+' #nama_provinsi').val(response.nama_provinsi);
-                    $(modal+' #negara').val(response.negara);
-                }
-            })
-        })
-        $('.btn-tambah-provinsi').on('click',function(e) {
-            $(modal).modal('show');
-            $(modal+ ' #label').html('Tambah Provinsi');
-            $(modal+ ' #reset').click();
-        })
-    }
-    function kabupaten() {
-        let modal       = '#kabupatenModal';
-        $('#table_id').on('click','.btn-edit-kabupaten',function(e) {
-            e.preventDefault();
-            let id_kabupaten     = $(this).data('id');
-            $(modal).modal('show');
-            $.ajax({
-                url         : url + 'kabupaten/getKabupatenById',
-                method      : 'post',
-                dataType    : 'json',
-                data        : {id_kabupaten : id_kabupaten},
-                success     : function(response) {
-                    $(modal+ ' #label').html('Edit Kabupaten - '+response.nama_kabupaten);
-                    $(modal+' #id_provinsi').val(response.id_provinsi).select().trigger('change');
-                    $(modal+' #id_kabupaten').val(response.id_kabupaten).trigger('change');
-                    $(modal+' #nama_kabupaten').val(response.nama_kabupaten);
-                }
-            })
-        })
-        $('.btn-tambah-kabupaten').on('click',function(e) {
-            e.preventDefault();
-            $(modal).modal('show');
-            $(modal+ ' #label').html('Tambah Kabupaten');
-            $(modal+ ' #reset').click();
-        })
-    }
-    function kecamatan() {
-        let modal       = '#kecamatanModal';
-        $('#table_id').on('click','.btn-edit-kecamatan',function(e) {
-            e.preventDefault();
-            let id_kecamatan     = $(this).data('id');
-            $(modal).modal('show');
-            $.ajax({
-                url         : url + 'kecamatan/getKecamatanById',
-                method      : 'post',
-                dataType    : 'json',
-                data        : {id_kecamatan : id_kecamatan},
-                success     : function(response) {
-                    $(modal+ ' #label').html('Edit Kecamatan - '+response.nama_kecamatan);
-                    selectKabupaten(response.id_provinsi,modal+' #id_kabupaten',response.id_kabupaten);
-                    $(modal+' #id_provinsi').val(response.id_provinsi).select().trigger('change');
-                    $(modal+' #id_kecamatan').val(response.id_kecamatan).trigger('change');
-                    $(modal+' #nama_kecamatan').val(response.nama_kecamatan);
-                }
-            })
-        })
-        $(modal+' #id_provinsi').on('change',function() {
-            let id_provinsi     = $(this).val();
-            selectKabupaten(id_provinsi,modal+' #id_kabupaten');
-        })
-
-        $('.btn-tambah-kecamatan').on('click',function(e) {
-            e.preventDefault();
-            $(modal).modal('show');
-            $(modal+ ' #label').html('Tambah Kecamatan');
-            $(modal+ ' #reset').click();
-        })
-    }
     
 })
-
-
-function selectKabupaten(id_provinsi,el,value = '') {
-    if (id_provinsi) {
-        $.ajax({
-            url         : url + 'kabupaten/getKabupatenByProvinsi',
-            data        : {id_provinsi : id_provinsi},
-            method      : 'post',
-            dataType    : 'json',
-            success     : function(response) {
-                let html    = '';
-                for (var i = 0; i < response.length; i++) {
-                    html    += `<option value="${response[i].id_kabupaten}">${response[i].nama_kabupaten}</option>`
-                }
-                $(el).html(html);
-                if (value != '') {
-                    $(el).val(value).select();
-                }
-            }
-        })
-    }
-}
-function selectKecamatan(id_kabupaten,el,value = '') {
-    if (id_kabupaten) {
-    
-        $.ajax({
-            url         : url + 'kecamatan/getKecamatanByKabupaten',
-            data        : {id_kabupaten : id_kabupaten},
-            method      : 'post',
-            dataType    : 'json',
-            success     : function(response) {
-                let html    = '';
-                for (var i = 0; i < response.length; i++) {
-                    html    += `<option value="${response[i].id_kecamatan}">${response[i].nama_kecamatan}</option>`
-                }
-                $(el).html(html);
-                if (value != '') {
-                    $(el).val(value).select();
-                }
-            }
-        })
-    }
-}

@@ -27,7 +27,7 @@ class Log extends CI_Controller {
 			$row 	= array();
 
 			$row[] 	= "<div class='text-center' >".$no.".</div>";
-			$row[] 	= $item->username;
+			$row[] 	= kapital($item->username);
 			$row[] 	= $item->isi_log;
 			$row[] 	= $item->tanggal_log;
 

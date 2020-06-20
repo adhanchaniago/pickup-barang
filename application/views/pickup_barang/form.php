@@ -36,29 +36,13 @@
 					<div class="form-group">
 						<input type="text" class="form-control" name="alamat_pengirim" placeholder="Alamat Pengirim" required="required">
 					</div>
-					<div class="form-group">
-						<label for="">Provinsi</label>
-						<select name="provinsi_pengirim" id="provinsi_pengirim" class="form-control js-basic-single">
-							<option value="">-- Pilih --</option>
-							<?php foreach ($provinsi as $key): ?>
-								<option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
-							<?php endforeach ?>
-						</select>
-					</div>
-						<label for="">Kabupaten/Kota</label>
-						<select name="kabupaten_pengirim" id="kabupaten_pengirim" class="form-control js-basic-single"><option value=""></option></select>
-					</div>
-					<div class="form-group">
-						<label for="">Kecamatan</label>
-						<select name="kecamatan_pengirim" id="kecamatan_pengirim" class="form-control js-basic-single"><option value=""></option></select>
-					</div>
 				</td>
 			</tr>
 		</table>
 	</div>
 	
 	<div class="boxPenerima">
-		<div class="mt-2 border penerima d-none pt-2">
+		<div class="mt-2 border penerima d-none pt-2" id="penerima0">
 			<h6 class="m-2 d-inline">Penerima</h6>
 			<a href="#" class="close hapusPenerima float-right"><i class="fas fa-fw fa-sm fa-times fa-sm"></i></a>
 			<table class="table">
@@ -80,48 +64,16 @@
 						<div class="form-group">
 							<input type="text" name="alamat_penerima[]" class="form-control" placeholder="Alamat Penerima" required="required">
 						</div>
-						<div class="form-group">
-							<label for="">Provinsi</label>
-							<select name="provinsi_penerima[]" class="form-control js-basic-single provinsi_penerima">
-								<option value="">-- Pilih --</option>
-								<?php foreach ($provinsi as $key): ?>
-									<option value="<?= $key["id_provinsi"]; ?>"><?= $key["nama_provinsi"]; ?></option>
-								<?php endforeach ?>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="">Kabupaten/Kota</label>
-							<select name="kabupaten_penerima[]" class="form-control js-basic-single kabupaten_penerima"><option value=""></option></select>
-						</div>
-						<div class="form-group">
-							<label for="">Kecamatan</label>
-							<select name="kecamatan_penerima[]" class="form-control js-basic-single kecamatan_penerima"><option value=""></option></select>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>Nama Barang</td>
-					<td>
-						<input type="text" name="nama_barang[]" class="form-control" required="required" placeholder="Nama Barang">
-					</td>
-				</tr>
-				<tr>
-					<td>Jumlah Barang</td>
-					<td>
-						<input type="number" name="jumlah_barang[]" class="form-control" required="required" placeholder="Jumlah Barang">
-					</td>
-				</tr>
-				<tr>
-					<td>Berat Barang (Kg)</td>
-					<td>
-						<input type="number" name="berat_barang[]" step="0.001" class="form-control berat_barang" required="required" placeholder="Berat Barang">
 					</td>
 				</tr>
 				<tr>
 					<td>Layanan</td>
 					<td>
-						<select name="jenis_layanan[]" class="form-control js-basic-single jenis_layanan">
+						<select name="jenis_layanan[]" class="form-control  jenis_layanan" >
 							<option value="">-- Pilih --</option>
+							<?php foreach ($jenis_layanan as $key): ?>
+								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>
+							<?php endforeach ?>
 						</select>
 					</td>
 				</tr>

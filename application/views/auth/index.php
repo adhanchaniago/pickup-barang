@@ -12,7 +12,6 @@
 	      	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="#tentang"><i class="fas fa-fw fa-book"></i> Tentang Kami</a>
 	    </div>
 	    <div class="navbar-nav ml-auto">
-	      	<!-- <a class="nav-item nav-link text-white btn btn-danger rounded-pill px-3 mx-2 my-1 page-scroll" href="#pesanan"><i class="fas fa-fw fa-shipping-fast"></i><sup><i class="fas fa-1x fa-plus"></i></sup> Buat Pesanan</a> -->
 	      	<a class="nav-item nav-link text-white btn btn-danger rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('pickupBarang/form') ?>"><i class="fas fa-fw fa-shipping-fast"></i><sup><i class="fas fa-1x fa-plus"></i></sup> Buat Pesanan</a>
 	      	<a class="nav-item nav-link text-white btn btn-success rounded-pill px-3 mx-2 my-1 page-scroll" href="#cek_status_pesanan"><i class="fas fa-fw fa-check"></i> Cek Status Pesanan</a>
 	    </div>

@@ -10,20 +10,45 @@ class Admin extends CI_Controller {
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Jabatan_model', 'jm');
 		$this->load->model('Pesanan_model', 'pesm');
+		$this->load->model('Status_model', 'status');
 		$this->mm->check_status_login();
 	}
 
 	public function index()
 	{
-		$data['dataUser'] 	= $this->mm->getDataUser();
-		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['status'])) {
-			$data['pesanan'] 	= $this->pesm->getPesanan($_GET['dari_tanggal'], $_GET['sampai_tanggal'], $_GET['status']);
-			$data['jml_status']	= $this->pesm->getJmlStatus($_GET['dari_tanggal'], $_GET['sampai_tanggal']);
+		$data['dataUser'] 			= $this->mm->getDataUser();
+		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['id_status'])) {
+			$dari_tanggal			= $_GET["dari_tanggal"];
+			$sampai_tanggal			= $_GET["sampai_tanggal"];
+
+			$headline 				= 'Dasbor - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status;
+			$status					= $this->status->getStatusById($_GET["id_status"])["status"];
+			$pesanan 				= $this->pesm->getPesanan($_GET['dari_tanggal'], $_GET['sampai_tanggal'], $_GET['id_status']);
+			$jml_status				= $this->pesm->getJmlStatus($_GET['dari_tanggal'], $_GET['sampai_tanggal']);
+			$val_dari_tanggal		= $dari_tanggal;
+			$val_sampai_tanggal		= $sampai_tanggal;
+
 		} else {
-			$data['pesanan'] 	= $this->pesm->getPesanan();
-			$data['jml_status']	= $this->pesm->getJmlStatus();
+			$headline 				= 'Dasbor - Hari Ini';
+			$status 				= '';
+			$pesanan 				= $this->pesm->getPesanan();
+			$jml_status				= $this->pesm->getJmlStatus();
+			$val_dari_tanggal		= date('Y/m/d');
+			$val_sampai_tanggal		= date('Y/m/d');
+			$dari_tanggal			= '';
+			$sampai_tanggal			= '';
 		}
-		$data['title'] 		= 'Dasbor - ' . $data['dataUser']['username'];
+
+		$data['title'] 				= 'Dasbor - ' . $data['dataUser']['username'];
+		$data["allStatus"]			= $this->status->getAllStatus();
+		$data["headline"]			= $headline;
+		$data["status"]				= $status;
+		$data["pesanan"]			= $pesanan;
+		$data["jml_status"]			= $jml_status;
+		$data["val_dari_tanggal"]	= $val_dari_tanggal;
+		$data["val_sampai_tanggal"]	= $val_sampai_tanggal;
+		$data["dari_tanggal"]		= $dari_tanggal;
+		$data["sampai_tanggal"]		= $sampai_tanggal;
 		$this->layout->view_admin('admin/index', $data);
 	}
 

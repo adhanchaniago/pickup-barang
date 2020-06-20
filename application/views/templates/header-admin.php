@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <style>
+      *{
+        font-size: 13px;
+      }
+    </style>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/vendor/bootstrap-4.5.0/css/bootstrap.min.css'); ?>">
     <!-- DataTables CSS -->
@@ -132,39 +138,9 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="<?= base_url('layananPaket'); ?>" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Layanan Paket</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
                       <a href="<?= base_url('jenisLayanan'); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Jenis Layanan</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= base_url('jenisPaket'); ?>" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Jenis Paket</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= base_url('provinsi'); ?>" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Provinsi</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= base_url('kabupaten'); ?>" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Kabupaten</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= base_url('kecamatan'); ?>" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Kecamatan</p>
                       </a>
                     </li>
                   </ul>
