@@ -126,20 +126,20 @@ $(function() {
             let modal   = '#modalDetail';
             $(modal).modal('show');
             let id = $(this).attr('href');
+            $(modal+ ' .modal-title').html("Detail Pickup");
             $.ajax({
                 url         : url + 'pickupBarang/getPickupBarangById',
                 method      : 'post',
                 dataType    : 'json',
                 data        : {id_pickup_barang:id},
                 success     : function(response) {
-                    $(modal+ ' .modal-title').html("Detail Pickup - " +response.no_resi);
                     $(modal+ ' #no_resi').html(response.no_resi);
                     $(modal+ ' #nama_pengirim').html(response.nama_pengirim);
                     $(modal+ ' #no_wa_pengirim').html(response.no_wa_pengirim);
-                    $(modal+ ' #alamat_pengirim').html(response.alamat_pengirim + ", " + response.kec_pengirim + ", " + response.kab_pengirim + ", " + response.prov_pengirim + ", " + response.negara_pengirim);
+                    $(modal+ ' #alamat_pengirim').html(response.alamat_pengirim);
                     $(modal+ ' #nama_penerima').html(response.nama_penerima);
                     $(modal+ ' #no_wa_penerima').html(response.no_wa_penerima);
-                    $(modal+ ' #alamat_penerima').html(response.alamat_penerima + ", " + response.kec_penerima + ", " + response.kab_penerima + ", " + response.prov_penerima + ", " + response.negara_penerima);
+                    $(modal+ ' #alamat_penerima').html(response.alamat_penerima);
                     $(modal+ ' #jenis_layanan').html(response.jenis_layanan);
                 }
             })

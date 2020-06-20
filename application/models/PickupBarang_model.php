@@ -113,7 +113,7 @@ class PickupBarang_model extends CI_Model {
 
 		$data 		= [];
 		for ($i=0; $i < count($this->input->post('nama_penerima')); $i++) { 
-			
+
 			// penerima
 			$penerima 			= $this->penerima->searchPenerima($i);
 			if ($penerima) {
@@ -154,61 +154,6 @@ class PickupBarang_model extends CI_Model {
 	public function editPickupBarang($id)
 	{
 		$dataUser 		= $this->mm->getDataUser();
-		// $pickup_barang 	= $this->getPickupBarangById($id);
-		// $statusLama		= $pickup_barang['id_status'];
-		// $status 		= $this->input->post('id_status', true);
-		// if ($status == '2') {
-		// 	$data 			= [
-		// 		'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-		// 		'id_penerima' 					=> $this->input->post('id_penerima', true),
-		// 		'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-		// 		'id_status' 					=> $status,
-		// 		'tanggal_penjemputan'			=> date('Y-m-d H:i:s'),
-		// 		'tanggal_masuk_logistik'		=> NULL
-		// 	];
-		// } elseif ($status == '1') {
-		// 	$data 			= [
-		// 		'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-		// 		'id_penerima' 					=> $this->input->post('id_penerima', true),
-		// 		'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-		// 		'id_status' 					=> $status,
-		// 		'tanggal_penjemputan'			=> NULL,
-		// 		'tanggal_masuk_logistik'		=> NULL
-		// 	];
-		// } elseif ($status == '3') {
-		// 	if ($statusLama == '1') {
-		// 		$data 			= [
-		// 			'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-		// 			'id_penerima' 					=> $this->input->post('id_penerima', true),	
-		// 			'nama_barang' 					=> $this->input->post('nama_barang', true),	
-		// 			'berat_barang' 					=> $this->input->post('berat_barang', true),	
-		// 			'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-		// 			'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-		// 			'id_status' 					=> $status,
-		// 			'tanggal_penjemputan'			=> date('Y-m-d H:i:s')
-		// 		];
-		// 	} else {
-		// 		$data 			= [
-		// 			'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-		// 			'id_penerima' 					=> $this->input->post('id_penerima', true),	
-		// 			'nama_barang' 					=> $this->input->post('nama_barang', true),	
-		// 			'berat_barang' 					=> $this->input->post('berat_barang', true),	
-		// 			'jumlah_barang' 				=> $this->input->post('jumlah_barang', true),	
-		// 			'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-		// 			'id_status' 					=> $status,
-		// 			'tanggal_masuk_logistik'		=> date('Y-m-d H:i:s')
-		// 		];
-		// 	}
-
-		// } else {
-		// 	$data 			= [
-		// 		'id_pengirim' 					=> $this->input->post('id_pengirim', true),	
-		// 		'id_penerima' 					=> $this->input->post('id_penerima', true),
-		// 		'id_jenis_layanan' 				=> $this->input->post('id_jenis_layanan', true),
-		// 		'id_status' 					=> $status
-		// 	];
-		// }
-
 		$data["no_resi"]					= $this->input->post('no_resi');
 
 		$this->db->where('id_pickup_barang', $id);
@@ -382,12 +327,13 @@ class PickupBarang_model extends CI_Model {
 					$this->db->join('penerima', 'penerima.id_penerima = pickup_barang.id_penerima');
 					$this->db->like('no_wa_pengirim', $no_wa_pengirim, 'LEFT');
 					$this->db->like('no_wa_penerima', $no_wa_penerima, 'LEFT');
-					$this->db->where('no_resi', '');
+					$this->db->where('no_resi', NULL);
 					$cek 			= $this->db->get();
 
 					if ($cek->num_rows()  ==  1) {
 						$data 					= $cek->row_array();
 						$id_pickup_barang 		= $data["id_pickup_barang"];
+						$no_resi 				= preg_replace('/[^0-9]/', "", $no_resi);
 
 						$this->db->where('id_pickup_barang', $id_pickup_barang);
 						$this->db->update('pickup_barang', ["no_resi" => $no_resi]);
