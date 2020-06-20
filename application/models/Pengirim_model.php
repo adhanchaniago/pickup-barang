@@ -36,9 +36,19 @@ class Pengirim_model extends CI_Model {
 		$ip_address 						= $this->input->ip_address();
 
 		$pengirim["nama_pengirim"]			= $nama_pengirim;
-		$pengirim["no_wa_pengirim"]			= $no_wa_pengirim;
 		$pengirim["alamat_pengirim"]		= $alamat_pengirim;
 		$pengirim["ip_address"]				= $ip_address;
+		$firstDigit 						= substr($no_wa_pengirim, 0, 1);
+		if ($firstDigit == '0') {
+			$no_wa_pengirim = substr($no_wa_pengirim, 1);
+			$no_wa_pengirim = '+62' . $no_wa_pengirim;
+		} elseif ($firstDigit == '6') {
+			$no_wa_pengirim = '+' . $no_wa_pengirim;
+		} elseif ($firstDigit == '8') {
+			$no_wa_pengirim = '+62' . $no_wa_pengirim;
+		}
+		$pengirim["no_wa_pengirim"]			= $no_wa_pengirim;
+
 		$this->db->insert('pengirim', $pengirim);
 		return $this->db->insert_id();
 	}

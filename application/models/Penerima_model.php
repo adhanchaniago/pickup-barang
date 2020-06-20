@@ -30,12 +30,21 @@ class Penerima_model extends CI_Model {
 	public function addPenerima($i)
 	{
 		$nama_penerima						= $this->input->post('nama_penerima',true)[$i];
-		$no_wa_penerima						= $this->input->post('no_wa_penerima',true)[$i];
 		$alamat_penerima					= $this->input->post('alamat_penerima',true)[$i];
+		$no_wa_penerima						= $this->input->post('no_wa_penerima',true)[$i];
 
 		$penerima["nama_penerima"]			= $nama_penerima;
-		$penerima["no_wa_penerima"]			= $no_wa_penerima;
 		$penerima["alamat_penerima"]		= $alamat_penerima;
+		$firstDigit 						= substr($no_wa_penerima, 0, 1);
+		if ($firstDigit == '0') {
+			$no_wa_penerima = substr($no_wa_penerima, 1);
+			$no_wa_penerima = '+62' . $no_wa_penerima;
+		} elseif ($firstDigit == '6') {
+			$no_wa_penerima = '+' . $no_wa_penerima;
+		} elseif ($firstDigit == '8') {
+			$no_wa_penerima = '+62' . $no_wa_penerima;
+		}
+		$penerima["no_wa_penerima"]			= $no_wa_penerima;
 		$this->db->insert('penerima', $penerima);
 		return $this->db->insert_id();
 	}

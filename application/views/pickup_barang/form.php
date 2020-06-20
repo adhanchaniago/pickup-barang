@@ -33,7 +33,7 @@
 			<tr>
 				<td>No Whatsapp Pengirim</td>
 				<td>
-					<input type="number" class="form-control" name="no_wa_pengirim" placeholder="No Whatsapp Pengirim" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
+					<input type="text" class="form-control" name="no_wa_pengirim" placeholder="No Whatsapp Pengirim" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
 				</td>
 			</tr>
 			<tr>
@@ -61,7 +61,7 @@
 				<tr>
 					<td>No Whatsapp Penerima</td>
 					<td>
-						<input type="number"name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima" required="required">
+						<input type="text" name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima" required="required">
 					</td>
 				</tr>
 				<tr>

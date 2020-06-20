@@ -13,7 +13,7 @@
 		        </div>    
 		        <div class="row text-left my-2">
 		          <div class="col-5"><i class="fab fa-fw fa-whatsapp"></i> WhatsApp</div>
-		          <div class="col-7"><a class="text-white" target="_blank" href="https://api.whatsapp.com/send?phone=+6287808675313">+62 878 0867 5313</a></div>
+		          <div class="col-7"><a class="text-white" target="_blank" href="https://api.whatsapp.com/send?phone=+6287808675313&text=Hallo Developer">+62 878 0867 5313</a></div>
 		        </div>
 		        <div class="row text-left my-2">
 		          <div class="col-5">
