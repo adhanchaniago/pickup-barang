@@ -5,7 +5,6 @@
     <div class="container-fluid my-0 py-0">
       <div class="row my-0 py-0">
         <div class="col-sm my-auto py-1 header-title">
-          <?= $status; ?>
           <h3 class="text-dark my-0 py-0"><?= $headline; ?></h3>
         </div><!-- /.col -->
         <div class="col-sm-2 my-auto py-1 header-button">
