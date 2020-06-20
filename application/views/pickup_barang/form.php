@@ -3,12 +3,15 @@
   	<a class="navbar-brand" href="<?= base_url('auth'); ?>">
   		<img src="<?= base_url('assets/img/img_properties/icon.png'); ?>" width="75" alt="logo">
   	</a>
+	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('auth/index'); ?>#home"><i class="fas fa-fw fa-home"></i> Beranda</a>
+  	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('auth/index'); ?>#tentang-50"><i class="fas fa-fw fa-book"></i> Tentang Kami</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-	    <div class="navbar-nav">
-	    	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('auth') ?>"><i class="fas fa-fw fa-home"></i> Beranda</a>
+	    <div class="navbar-nav ml-auto">
+	      	<a class="nav-item nav-link text-white btn btn-danger rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('pickupBarang/form') ?>"><i class="fas fa-fw fa-shipping-fast"></i><sup><i class="fas fa-1x fa-plus"></i></sup> Buat Pesanan</a>
+	      	<a class="nav-item nav-link text-white btn btn-success rounded-pill px-3 mx-2 my-1" href="https://www.jne.co.id/id/tracking/trace" target="_blank"><i class="fas fa-fw fa-check"></i> Cek No. Resi</a>
 	    </div>
 	</div>
   </div>
