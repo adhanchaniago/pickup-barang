@@ -113,7 +113,7 @@ class PickupBarang_model extends CI_Model {
 
 		$data 		= [];
 		for ($i=0; $i < count($this->input->post('nama_penerima')); $i++) { 
-
+			
 			// penerima
 			$penerima 			= $this->penerima->searchPenerima($i);
 			if ($penerima) {
