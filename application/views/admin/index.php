@@ -14,7 +14,6 @@
           </button>
         </div>
       </div><!-- /.row -->
-
       <div class="row my-2">
         <div class="col-lg-6">
           <?php if (validation_errors()): ?>
@@ -61,8 +60,8 @@
 
         <div class="col-lg my-1 tidak_tampil" id="dataJmlStatus">
           <div class="card">
-            <?php if ($status != ''): ?>
-              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $dari_tanggal; ?> s/d <?= $sampai_tanggal; ?> - <?= $status; ?></div>
+            <?php if ($status['status'] != ''): ?>
+              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $dari_tanggal; ?> s/d <?= $sampai_tanggal; ?> - <?= $status['status']; ?></div>
             <?php else: ?>
               <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan Hari Ini</div>
             <?php endif ?>
