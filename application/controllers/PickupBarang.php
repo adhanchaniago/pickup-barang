@@ -128,6 +128,7 @@ class PickupBarang extends CI_Controller {
 		$data["status"]				= $status;
 		$this->layout->view_auth('pickup_barang/kurirPickup',$data);
 	}
+	
 	public function kurirAjax()
 	{
 		$data 		= [];
