@@ -17,7 +17,7 @@ class Pesanan_model extends CI_Model {
 		} else {
 			$dateThen = date('Y-m-d 00:00:00');
 			$dateLast = date('Y-m-d 23:59:58');
-			$id_status = '1';
+			$id_status = '4';
 		}
 
 		if ($id_status !== '4') {
