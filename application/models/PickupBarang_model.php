@@ -102,7 +102,7 @@ class PickupBarang_model extends CI_Model {
 
 	public function addPickupBarang()
 	{
-		$dataUser 		= $this->mm->getDataUser();
+		$dataUser 			= $this->mm->getDataUser();
 		// pengirim
 		$pengirim 			= $this->pengirim->searchPengirim();
 		if ($pengirim ) {
@@ -233,7 +233,7 @@ class PickupBarang_model extends CI_Model {
 		
 		$this->db->delete('pickup_barang', ['id_pickup_barang' => $id]);
 		$this->session->set_flashdata('message-success', 'Pickup Barang ' . $pickup_barang . ' berhasil dihapus');
-		$this->mm->createLog('Jabatan ' . $pickup_barang . ' berhasil dihapus', $dataUser['id_user']);
+		$this->mm->createLog('Pickup Barang ' . $pickup_barang . ' berhasil dihapus', $dataUser['id_user']);
 		redirect('pickupBarang');
 	}
 
@@ -344,5 +344,62 @@ class PickupBarang_model extends CI_Model {
 		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
 		$this->db->join('jenis_layanan', 'pickup_barang.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
 		return $this->db->get_where('pickup_barang', ['no_resi' => $this->input->post('no_resi', true)])->row_array();
+	}
+
+	public function importExcel()
+	{
+		$config['upload_path'] 		= './assets/excel/';
+		$config['allowed_types'] 	= 'csv|xls|xlsx';
+		$config['encrypt_name'] 	= true;
+		
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload('excel')){
+			$this->session->set_flashdata('message-success',  $this->upload->display_errors());
+		}
+		else{
+			$data_upload 		= $this->upload->data('file_name');
+			$explode 			= explode('.', $data_upload);
+			$extension 			= end($explode);
+
+			if ($extension == 'csv') {
+				$excelreader 	= PHPExcel_IOFactory::createReader($extension);
+			}else{
+				$excelreader 	= PHPExcel_IOFactory::createReader('Excel2007');
+			}
+			$loadexcel			= $excelreader->load('assets/excel/'.$data_upload);
+			$sheet 			    = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
+			$numrow 			= 0;
+			foreach($sheet as $row){
+				if($numrow > 0){
+					$no_resi 		= $row["A"];
+					$no_wa_pengirim = substr($row["I"], 4);
+					$no_wa_penerima = substr($row["K"], 4);
+
+					$this->db->select('id_pickup_barang,no_wa_pengirim,nama_penerima,alamat_penerima,no_wa_penerima');
+					$this->db->from('pickup_barang');
+					$this->db->join('pengirim', 'pengirim.id_pengirim = pickup_barang.id_pengirim');
+					$this->db->join('penerima', 'penerima.id_penerima = pickup_barang.id_penerima');
+					$this->db->like('no_wa_pengirim', $no_wa_pengirim, 'LEFT');
+					$this->db->like('no_wa_penerima', $no_wa_penerima, 'LEFT');
+					$this->db->where('no_resi', '');
+					$cek 			= $this->db->get();
+
+					if ($cek->num_rows()  ==  1) {
+						$data 					= $cek->row_array();
+						$id_pickup_barang 		= $data["id_pickup_barang"];
+
+						$this->db->where('id_pickup_barang', $id_pickup_barang);
+						$this->db->update('pickup_barang', ["no_resi" => $no_resi]);
+					}
+				}
+				$numrow++;
+			}
+			$dataUser 			= $this->mm->getDataUser();
+			$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' mengimport nomor resi ');
+			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mengimport nomor resi ', $dataUser['id_user']);
+		}
+		return redirect('pickupBarang','refresh');
+
 	}
 }

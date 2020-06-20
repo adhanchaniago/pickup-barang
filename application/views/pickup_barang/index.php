@@ -168,7 +168,7 @@
 
 
 <!-- Modal -->
-<form action="" method="post" enctype="multipart/form-data">
+<form action="<?= base_url('pickupBarang/importExcel') ?>" method="post" enctype="multipart/form-data">
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -181,7 +181,7 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="">Import FILE CSV/EXCEL</label>
-            <input type="file" class="form-control" name="file">
+            <input type="file" class="form-control" name="excel">
           </div>
         </div>
         <div class="modal-footer">

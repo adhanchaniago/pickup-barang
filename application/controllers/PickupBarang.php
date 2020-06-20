@@ -200,4 +200,10 @@ class PickupBarang extends CI_Controller {
 		}
 		echo json_encode([$data,$pending,$pickup]);
 	}
+
+	public function importExcel()
+	{
+		require_once APPPATH.'/third_party/PHPExcel/PHPExcel.php';
+		$this->pbm->importExcel();
+	}
 }
