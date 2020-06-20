@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jun 2020 pada 23.29
+-- Waktu pembuatan: 20 Jun 2020 pada 12.09
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -59,7 +59,8 @@ CREATE TABLE `jenis_layanan` (
 INSERT INTO `jenis_layanan` (`id_jenis_layanan`, `jenis_layanan`) VALUES
 (1, 'YES (Yakin Esok Sampai)'),
 (2, 'REG (Reguler)'),
-(3, 'OKE (Ongkos Kirim Ekonomis)');
+(3, 'OKE (Ongkos Kirim Ekonomis)'),
+(5, 'SS (Spesial Service)');
 
 -- --------------------------------------------------------
 
@@ -685,7 +686,10 @@ CREATE TABLE `layanan_paket` (
 --
 
 INSERT INTO `layanan_paket` (`id_layanan_paket`, `id_jenis_layanan`, `id_kecamatan_asal`, `id_kecamatan_tujuan`, `id_jenis_paket`, `harga`, `durasi_pengiriman`) VALUES
-(1, 2, 28, 27, 1, 10000, 48);
+(1, 2, 28, 27, 1, 10000, 48),
+(2, 1, 28, 29, 1, 23000, 24),
+(3, 3, 29, 28, 1, 9000, 48),
+(4, 2, 26, 31, 1, 9000, 48);
 
 -- --------------------------------------------------------
 
@@ -915,7 +919,118 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (209, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-15 03:27:18', 1),
 (210, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:27:24', 1),
 (211, 'Pengguna admin berhasil mengubah Pickup Barang ', '2020-06-15 03:30:26', 1),
-(212, 'Pengguna admin berhasil login', '2020-06-15 04:17:18', 1);
+(212, 'Pengguna admin berhasil login', '2020-06-15 04:17:18', 1),
+(213, 'Pengguna admin berhasil login', '2020-06-15 12:12:04', 1),
+(214, 'Pengguna admin berhasil login', '2020-06-15 23:07:55', 1),
+(215, 'Pengguna admin berhasil logout', '2020-06-15 23:08:37', 1),
+(216, 'Pengguna admin berhasil login', '2020-06-15 23:18:10', 1),
+(217, 'Pengguna admin berhasil login', '2020-06-17 12:23:46', 1),
+(218, 'Pengguna admin berhasil login', '2020-06-17 17:02:07', 1),
+(219, 'Pengguna admin berhasil menambahkan pengguna irgi', '2020-06-17 17:21:38', 1),
+(220, 'Pengguna admin berhasil logout', '2020-06-17 17:21:46', 1),
+(221, 'Pengguna irgi berhasil login', '2020-06-17 17:21:49', 3),
+(222, 'Pengguna irgi berhasil logout', '2020-06-17 17:21:58', 3),
+(223, 'Pengguna admin berhasil login', '2020-06-17 17:22:02', 1),
+(224, 'Pengguna admin berhasil menambahkan Layanan Paket ', '2020-06-17 17:22:40', 1),
+(225, 'Pengguna admin berhasil mengubah Layanan Paket ', '2020-06-17 17:22:50', 1),
+(226, 'Pengguna admin berhasil diubah', '2020-06-17 17:24:10', 1),
+(227, 'Pengguna admin berhasil diubah', '2020-06-17 17:24:54', 1),
+(228, 'Pengguna admin berhasil login', '2020-06-17 17:34:24', 1),
+(229, 'Pengguna admin berhasil menambahkan Jenis Layanan SS (Spesial Service)', '2020-06-17 17:34:56', 1),
+(230, 'Pengguna admin berhasil mengubah Jenis Layanan SS (Spesial Services)', '2020-06-17 17:35:02', 1),
+(231, 'Pengguna admin berhasil mengubah Jenis Layanan SS (Spesial Service)', '2020-06-17 17:35:08', 1),
+(232, 'Pengguna admin berhasil menambahkan Jenis Paket Elektronik', '2020-06-17 17:35:47', 1),
+(233, 'Pengguna admin berhasil mengubah Jenis Paket Elektroni', '2020-06-17 17:35:51', 1),
+(234, 'Jenis Paket Elektroni berhasil dihapus', '2020-06-17 17:35:54', 1),
+(235, 'Pengguna admin berhasil mengubah Jenis Layanan SS (Spesial Service)', '2020-06-17 17:36:00', 1),
+(236, 'Jenis Layanan SS (Spesial Service) berhasil dihapus', '2020-06-17 17:36:04', 1),
+(237, 'Pengguna admin berhasil menambahkan Jenis Layanan SS (Spesial Service)', '2020-06-17 17:36:07', 1),
+(238, 'Pengguna admin berhasil menambahkan Provinsi ', '2020-06-17 17:36:20', 1),
+(239, 'Pengguna admin berhasil mengubah Provinsi ', '2020-06-17 17:36:31', 1),
+(240, 'Provinsi Mana Aja berhasil dihapus', '2020-06-17 17:36:38', 1),
+(241, 'Pengguna admin berhasil menambahkan kabupaten ', '2020-06-17 17:37:01', 1),
+(242, 'Pengguna admin berhasil mengubah kabupaten ', '2020-06-17 17:37:08', 1),
+(243, 'kabupaten Asdasdasd berhasil dihapus', '2020-06-17 17:37:11', 1),
+(244, 'Pengguna admin berhasil menambahkan kecamatan ', '2020-06-17 17:37:31', 1),
+(245, 'Pengguna admin berhasil mengubah kecamatan ', '2020-06-17 17:37:39', 1),
+(246, 'kecamatan Asdasdas berhasil dihapus', '2020-06-17 17:37:43', 1),
+(247, 'Jabatan Andri Firman Saputra | tas | Andre Farhan Saputra berhasil dihapus', '2020-06-17 19:11:49', 1),
+(248, 'Jabatan Andri Firman Saputra | tas | Andre Farhan Saputra berhasil dihapus', '2020-06-17 19:11:52', 1),
+(249, 'Kurir admin Akan Mengambil Barang Di \r\n<div style=', '2020-06-17 19:12:44', 1),
+(250, 'Jabatan Andri Firman Saputra | Kemeja Pendek | Andre Farhan Saputra berhasil dihapus', '2020-06-17 19:19:35', 1),
+(251, 'Jabatan Andri Firman Saputra | Kemeja Panjang | Andre Farhan Saputra berhasil dihapus', '2020-06-17 19:19:39', 1),
+(252, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-17 19:30:28', 1),
+(253, 'Jabatan Andri Firman Saputra | handphone | Andere berhasil dihapus', '2020-06-17 19:30:35', 1),
+(254, 'Pengguna admin berhasil logout', '2020-06-17 19:41:26', 1),
+(255, 'Pengguna  berhasil menambahkan pesanan ', '2020-06-17 19:43:34', NULL),
+(256, 'Pengguna admin berhasil login', '2020-06-17 19:44:52', 1),
+(257, 'Pengguna admin berhasil login', '2020-06-17 19:44:59', 1),
+(258, 'Pelanggan  berhasil menambahkan pesanan ', '2020-06-17 19:51:17', NULL),
+(259, 'Pengguna admin berhasil login', '2020-06-17 19:53:30', 1),
+(260, 'Pengguna admin berhasil login', '2020-06-17 19:54:06', 1),
+(261, 'Kurir admin Akan Mengambil Barang Di Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-17 20:21:12', 1),
+(262, 'Jabatan Andri Firman Saputra | tas | Andre Farhan Saputra berhasil dihapus', '2020-06-17 20:21:21', 1),
+(263, 'Jabatan Andri Firman Saputra | handphone | Andere berhasil dihapus', '2020-06-17 20:21:24', 1),
+(264, 'Jabatan Andri Firman Saputra | kopi bali 2kg | Andre Fahr berhasil dihapus', '2020-06-17 20:21:28', 1),
+(265, 'Kurir admin Telah Mengambil Barang Di Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-17 20:21:36', 1),
+(266, 'Kurir admin Akan Mengambil Barang Di Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-17 20:23:37', 1),
+(267, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-17 20:25:32', 1),
+(268, 'Pengguna admin berhasil login', '2020-06-17 21:20:01', 1),
+(269, 'Pengguna admin berhasil login', '2020-06-17 21:24:14', 1),
+(270, 'Pengguna admin berhasil login', '2020-06-17 21:34:57', 1),
+(271, 'Pengguna admin berhasil login', '2020-06-17 21:38:16', 1),
+(272, 'Pengguna admin berhasil login', '2020-06-17 21:39:35', 1),
+(273, 'Kurir admin Akan Mengambil Barang Di Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-17 22:52:29', 1),
+(274, 'Pengguna admin berhasil login', '2020-06-17 23:21:00', 1),
+(275, 'Pengguna admin berhasil logout', '2020-06-17 23:41:20', 1),
+(276, 'Pengguna admin berhasil login', '2020-06-17 23:41:34', 1),
+(277, 'Pengguna admin berhasil login', '2020-06-18 00:34:30', 1),
+(278, 'Pengguna admin berhasil login', '2020-06-18 00:37:18', 1),
+(279, 'Pengguna admin berhasil login', '2020-06-18 00:38:20', 1),
+(280, 'Pengguna admin berhasil login', '2020-06-18 00:38:33', 1),
+(281, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 00:39:47', 1),
+(282, 'Pengguna admin berhasil login', '2020-06-18 00:42:38', 1),
+(283, 'Pengguna admin berhasil login', '2020-06-18 00:45:39', 1),
+(284, 'Jabatan Andri Firman Saputra | kopi bali 2kg | Andre berhasil dihapus', '2020-06-18 00:47:52', 1),
+(285, 'Pengguna admin berhasil login', '2020-06-18 01:18:55', 1),
+(286, 'Pengguna admin berhasil logout', '2020-06-18 01:19:46', 1),
+(287, 'Pengguna admin berhasil login', '2020-06-18 01:22:11', 1),
+(288, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 01:52:53', 1),
+(289, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 02:06:58', 1),
+(290, 'Jabatan Andri Firman Saputra | handphone | Andre berhasil dihapus', '2020-06-18 02:07:20', 1),
+(291, 'Pengguna admin berhasil logout', '2020-06-18 02:19:45', 1),
+(292, 'Pelanggan  berhasil menambahkan pesanan ', '2020-06-18 02:20:17', NULL),
+(293, 'Pengguna admin berhasil login', '2020-06-18 02:20:32', 1),
+(294, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 02:22:03', 1),
+(295, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 02:26:24', 1),
+(296, 'Jabatan Andri Firman Saputra | handphone | Andre berhasil dihapus', '2020-06-18 02:47:21', 1),
+(297, 'Jabatan Andri Firman Saputra | stick es krim | Andre berhasil dihapus', '2020-06-18 02:47:25', 1),
+(298, 'Jabatan Andri Firman Saputra | buku | Andre berhasil dihapus', '2020-06-18 02:47:28', 1),
+(299, 'Jabatan Andri Firman Saputra | pulpen | Andre berhasil dihapus', '2020-06-18 02:47:32', 1),
+(300, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 02:48:31', 1),
+(301, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 02:58:08', 1),
+(302, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 03:03:23', 1),
+(303, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 03:06:37', 1),
+(304, 'Pengguna admin berhasil login', '2020-06-18 03:09:52', 1),
+(305, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 03:10:48', 1),
+(306, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 03:12:13', 1),
+(307, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 03:13:13', 1),
+(308, 'Pengguna admin berhasil menambahkan Layanan Paket ', '2020-06-18 03:14:41', 1),
+(309, 'Pengguna admin berhasil login', '2020-06-18 12:20:19', 1),
+(310, 'Kurir admin Telah Mengambil Barang Di Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-18 12:20:41', 1),
+(311, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-18 12:20:55', 1),
+(312, 'Kurir admin Akan Mengambil Barang Di Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-18 12:21:40', 1),
+(313, 'Jabatan Andri Firman Saputra | sempak | Andre berhasil dihapus', '2020-06-18 14:15:43', 1),
+(314, 'Jabatan Andri Firman Saputra | piring pecah | Andre berhasil dihapus', '2020-06-18 14:15:55', 1),
+(315, 'Pengguna admin berhasil logout', '2020-06-18 14:16:10', 1),
+(316, 'Pelanggan  berhasil menambahkan pesanan ', '2020-06-18 14:18:45', NULL),
+(317, 'Pengguna admin berhasil login', '2020-06-18 14:19:01', 1),
+(318, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-18 14:19:16', 1),
+(319, 'Pengguna admin berhasil logout', '2020-06-18 14:20:11', 1),
+(320, 'Pengguna admin berhasil login', '2020-06-18 14:25:16', 1),
+(321, 'Kurir admin Telah Mengambil Barang Di Jl. AMD Babakan Pocis No. 100, Setu, Kota Tangerang Selatan, Banten', '2020-06-18 14:26:04', 1),
+(322, 'Pengguna admin berhasil menambahkan Layanan Paket ', '2020-06-18 14:29:41', 1),
+(323, 'Pengguna admin berhasil menambahkan pesanan ', '2020-06-18 14:30:24', 1);
 
 -- --------------------------------------------------------
 
@@ -936,7 +1051,31 @@ CREATE TABLE `penerima` (
 --
 
 INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `no_wa_penerima`, `alamat_penerima`, `id_kecamatan`) VALUES
-(2, 'Andre Farhan Saputra', '081314213758', 'Jl. Amd Babakan Pocis No. 69 Rt02/02', 28);
+(2, 'Andre Farhan Saputra', '081314213758', 'Jl. Amd Babakan Pocis No. 69 Rt02/02', 28),
+(3, 'Andre Farhan Saputra', '08123', 'Gg. Kemerdekaan No. 22', 29),
+(5, 'Andre Farhan Saputra', '0878787878', 'Gg. Kemerdekaan No. 100', 29),
+(6, 'Andre Farhan Saputra', '23423432', 'Jl. AMD Babakan Pocis No. 69 RT02/02', 29),
+(7, 'Andre Farhan Saputra', '087808675343', 'di bali gw cuy no, 100 ', 29),
+(8, 'Andre Farhan Saputra', '0878787878', 'bali no. 100', 29),
+(9, 'Andere', '087878787', 'bali no. 100', 29),
+(10, 'Andre Fahr', '123124124123', 'Bali 123', 29),
+(11, 'Andreesadsad', '08237128321', 'bali no. 100', 29),
+(12, 'asddasd', '12312321', 'eqwewqewq', 29),
+(13, 'Andre', '21312312321', 'Pocis No. 101', 29),
+(14, 'Andre', '087808787878', 'Pocis No. 101', 29),
+(15, 'Andre', '0877879878', 'Pocis No. 101', 29),
+(16, 'Andre', '0878237123821', 'Bali no. 100', 29),
+(17, 'Andre', '12312321312312', 'Bali no. 100', 29),
+(18, 'Andre', '2321312312', 'Bali no. 100', 29),
+(19, 'andre', '0872328137128', 'Bali', 29),
+(20, 'andre', '213213213213', 'Pocis No. 101`', 29),
+(21, 'Andre', '2313213', 'Pocis No. 102', 29),
+(22, 'Andre', '32142124', 'Pocis No. 101', 29),
+(23, 'Andre', '34324', 'Pocis No. 101', 29),
+(24, 'Andre', '213131', 'Pocis No. 101', 29),
+(25, 'andre', '3123123', 'dasdsad', 29),
+(26, 'Friscal', '089623231321', 'Bali no. 100', 29),
+(27, 'Gery', '089623231111', 'Kuta selatan no. 11', 31);
 
 -- --------------------------------------------------------
 
@@ -957,7 +1096,21 @@ CREATE TABLE `pengirim` (
 --
 
 INSERT INTO `pengirim` (`id_pengirim`, `nama_pengirim`, `no_wa_pengirim`, `alamat_pengirim`, `id_kecamatan`) VALUES
-(2, 'Andri Firman Saputra', '087808675313', 'Jl. Amd Babakn Pocis No. 100 Rt02/02', 28);
+(2, 'Andri Firman Saputra', '087808675313', 'Jl. Amd Babakn Pocis No. 100 Rt02/02', 28),
+(3, 'Andri Firman Saputra', '087808675313', 'Jl. AMD Babakan Pocis No. 100 RT02/02', 28),
+(4, 'Andri Firman Saputra', '087808675313', 'Pocis No. 100', 28),
+(5, 'Andri Firman Saputra', '0878086756313', 'aasd', 22),
+(6, 'Andri Firman Saputra', '087808675313', '12312312', 28),
+(7, 'Andri Firman Saputra', '087808675313', 'Jl. AMD Babakan Pocis No. 100', 28),
+(8, 'Andri Firman Saputra', '087808675343', 'Jl. AMD Babakan Pocis No. 100', 28),
+(9, 'Andri Firman Saputra', '0878086753413', 'Pocis No. 100', 28),
+(10, 'Andri Firman Saputra', '21321321', 'Pocis No. 100', 28),
+(11, 'Andri Firman Saputra', '12312321', 'Jl. AMD Babakan Pocis No. 100', 28),
+(12, 'Andri Firman Saputra', '234123', 'Jl. AMD Babakan Pocis No. 100', 28),
+(13, 'Andri Firman Saputra', '2134213', 'Jl. AMD Babakan Pocis No. 100', 28),
+(14, 'Andri Firman Saputra', '21312321321', 'Jl. AMD Babakan Pocis No. 100', 28),
+(15, 'Pitarenda', '081314213758', 'Jl. AMD Babakan Pocis No. 100', 28),
+(16, 'Andri Firman Saputra', '087808675313', 'Jl. Rawa buntu selatan', 26);
 
 -- --------------------------------------------------------
 
@@ -985,8 +1138,37 @@ CREATE TABLE `pickup_barang` (
 --
 
 INSERT INTO `pickup_barang` (`id_pickup_barang`, `no_resi`, `id_pengirim`, `id_penerima`, `id_layanan_paket`, `nama_barang`, `berat_barang`, `jumlah_barang`, `tanggal_pemesanan`, `tanggal_penjemputan`, `tanggal_masuk_logistik`, `status`) VALUES
-(3, '999191592166046', 2, 2, 1, 'Kemeja Panjang', 0.4, 1, '2020-06-15 03:20:46', '2020-06-15 03:26:40', '2020-06-15 03:26:45', 3),
-(4, '992251592166438', 2, 2, 1, 'Kemeja Pendek', 0.4, 1, '2020-06-15 03:27:18', '2020-06-15 03:27:24', '2020-06-15 03:30:26', 3);
+(11, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-15 19:51:17', '2020-06-16 21:17:26', '2020-06-17 22:17:37', 3),
+(12, '226951592400332', 6, 12, 2, 'wqdasdasd', 1.232, 1, '2020-06-17 20:25:32', NULL, NULL, 1),
+(13, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-17 20:04:58', '2020-06-17 20:18:04', '2020-06-18 12:20:41', 3),
+(14, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-15 19:51:17', '2020-06-16 21:17:26', '2020-06-17 22:17:37', 3),
+(15, '226951592400332', 6, 12, 2, 'wqdasdasd', 1.232, 1, '2020-06-17 20:25:32', NULL, NULL, 1),
+(16, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-17 20:04:58', '2020-06-17 20:18:04', NULL, 2),
+(17, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-15 19:51:17', '2020-06-16 21:17:26', '2020-06-17 22:17:37', 3),
+(18, '226951592400332', 6, 12, 2, 'wqdasdasd', 1.232, 1, '2020-06-17 20:25:32', NULL, NULL, 1),
+(19, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-17 20:04:58', '2020-06-17 20:18:04', NULL, 2),
+(20, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-15 19:51:17', '2020-06-16 21:17:26', '2020-06-17 22:17:37', 3),
+(21, '226951592400332', 6, 12, 2, 'wqdasdasd', 1.232, 1, '2020-06-17 20:25:32', NULL, NULL, 1),
+(22, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-17 20:04:58', '2020-06-17 20:18:04', NULL, 2),
+(23, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-15 19:51:17', '2020-06-16 21:17:26', '2020-06-17 22:17:37', 3),
+(24, '226951592400332', 6, 12, 2, 'wqdasdasd', 1.232, 1, '2020-06-17 20:25:32', NULL, NULL, 1),
+(25, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-17 20:04:58', '2020-06-17 20:18:04', '2020-06-18 12:20:41', 3),
+(26, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-15 19:51:17', '2020-06-16 21:17:26', '2020-06-17 22:17:37', 3),
+(27, '226951592400332', 6, 12, 2, 'wqdasdasd', 1.232, 1, '2020-06-17 20:25:32', NULL, NULL, 1),
+(28, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-17 20:04:58', '2020-06-17 20:18:04', NULL, 2),
+(29, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-15 19:51:17', '2020-06-16 21:17:26', '2020-06-17 22:17:37', 3),
+(30, '226951592400332', 6, 12, 2, 'wqdasdasd', 1.232, 1, '2020-06-17 20:25:32', NULL, NULL, 1),
+(31, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-17 20:04:58', '2020-06-17 20:18:04', NULL, 2),
+(32, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-15 19:51:17', '2020-06-16 21:17:26', '2020-06-17 22:17:37', 3),
+(33, '226951592400332', 6, 12, 2, 'wqdasdasd', 1.232, 1, '2020-06-17 20:25:32', NULL, NULL, 1),
+(34, '767041592398277', 4, 11, 2, 'kopi jambi', 1, 1, '2020-06-17 20:04:58', '2020-06-17 20:18:04', NULL, 2),
+(41, '793571592423311', 4, 19, 2, 'pensil', 1, 1, '2020-06-18 02:48:31', NULL, NULL, 1),
+(42, '870581592423888', 4, 20, 2, 'handphone', 1, 1, '2020-06-18 02:58:08', NULL, NULL, 1),
+(44, '559981592424397', 11, 22, 2, 'celana dalam', 0.02, 2, '2020-06-18 03:06:37', '2020-06-18 12:20:55', NULL, 2),
+(46, '999961592424733', 13, 24, 2, 'handphone siaomi', 4, 2, '2020-06-18 03:12:13', '2020-06-18 12:20:55', NULL, 2),
+(47, '990381592424793', 14, 25, 2, 'kaos jersey', 5, 10, '2020-06-18 03:13:13', '2020-06-18 12:20:55', NULL, 2),
+(48, '289361592464725', 15, 26, 2, 'Dompet', 3, 5, '2020-06-18 14:18:45', '2020-06-18 14:19:16', '2020-06-18 14:26:04', 3),
+(49, '581181592465424', 16, 27, 4, 'Buku Gambar a3', 3.5, 8, '2020-06-18 14:30:24', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1060,8 +1242,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `img_profile`, `nama_lengkap`, `username`, `password`, `id_jabatan`) VALUES
-(1, 'avatar31.png', 'Administrator', 'admin', '$2y$10$9RYtJdUQAdduDpy0kOpfOey5qdIp1tvB1WLDexgaWQ83Rez4ubxxe', 1),
-(2, 'default.png', 'Andri Firman Saputra', 'andri975', '$2y$10$B8CG0imMpSNlopfeBKBGBOQPUALR/LCpacCb5cXaWY9IrRuYtEg4a', 3);
+(1, 'avatar311.png', 'Administrator', 'admin', '$2y$10$9RYtJdUQAdduDpy0kOpfOey5qdIp1tvB1WLDexgaWQ83Rez4ubxxe', 1),
+(2, 'default.png', 'Andri Firman Saputra', 'andri975', '$2y$10$B8CG0imMpSNlopfeBKBGBOQPUALR/LCpacCb5cXaWY9IrRuYtEg4a', 3),
+(3, 'default.png', 'Irgisan', 'irgi', '$2y$10$XDRvG7cys2jMQqTC87WxqOokOGrvpB.spSRhI7kPaTOUUEuQsFBaK', 3);
 
 --
 -- Indexes for dumped tables
@@ -1168,67 +1351,67 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `jenis_layanan`
 --
 ALTER TABLE `jenis_layanan`
-  MODIFY `id_jenis_layanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jenis_layanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenis_paket`
 --
 ALTER TABLE `jenis_paket`
-  MODIFY `id_jenis_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jenis_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `kabupaten`
 --
 ALTER TABLE `kabupaten`
-  MODIFY `id_kabupaten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=529;
+  MODIFY `id_kabupaten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=530;
 
 --
 -- AUTO_INCREMENT untuk tabel `kecamatan`
 --
 ALTER TABLE `kecamatan`
-  MODIFY `id_kecamatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_kecamatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT untuk tabel `layanan_paket`
 --
 ALTER TABLE `layanan_paket`
-  MODIFY `id_layanan_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_layanan_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=324;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
 --
 ALTER TABLE `penerima`
-  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengirim`
 --
 ALTER TABLE `pengirim`
-  MODIFY `id_pengirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pengirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
 --
 ALTER TABLE `pickup_barang`
-  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `provinsi`
 --
 ALTER TABLE `provinsi`
-  MODIFY `id_provinsi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_provinsi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
