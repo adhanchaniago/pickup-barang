@@ -43,9 +43,9 @@
           </div>
         </div>
         <div class="col-md-8 col-12 pt-md-2 text-md-right text-center mb-md-0 mb-2">
-          <a href="#" class="btn btn-success mt-md-4" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-box"></i>  Import Resi</a>
-          <a href="<?= base_url('pickupBarang/kurir') ?>" class="btn btn-danger mt-md-4"><i class="fas fa-fw fa-box"></i>  Pickup Barang</a>
-          <a href="<?= base_url('pickupBarang/form') ?>" class="btn btn-primary mt-md-4"><i class="fas fa-fw fa-plus"></i> Tambah</a>
+          <a href="#" class="m-1 btn btn-success mt-md-4" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-box"></i>  Import Resi</a>
+          <a href="<?= base_url('pickupBarang/kurir') ?>" class="m-1 btn btn-danger mt-md-4"><i class="fas fa-fw fa-box"></i>  Pickup Barang</a>
+          <a href="<?= base_url('pickupBarang/form') ?>" class="m-1 btn btn-primary mt-md-4"><i class="fas fa-fw fa-plus"></i> Tambah</a>
         </div>
         <div class="col-12">
           <div class="table-responsive">

@@ -84,7 +84,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
           <!-- Brand Logo -->
-          <a href="<?= base_url('admin'); ?>" class="brand-link px-0">
+          <a href="<?= base_url('admin'); ?>" class="brand-link px-0 py-4">
             <img src="<?= base_url('assets/img/img_properties/icon.png'); ?>" alt="Logo" class="brand-image">
             <span class="brand-text font-weight-light">Pickup Barang</span>
           </a>
