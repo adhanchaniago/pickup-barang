@@ -60,7 +60,7 @@
 
         <div class="col-lg my-1 tidak_tampil" id="dataJmlStatus">
           <div class="card">
-            <?php if ($status['status'] != ''): ?>
+            <?php if ($status != ''): ?>
               <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $dari_tanggal; ?> s/d <?= $sampai_tanggal; ?> - <?= $status['status']; ?></div>
             <?php else: ?>
               <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan Hari Ini</div>
