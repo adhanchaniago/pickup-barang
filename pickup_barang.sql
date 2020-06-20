@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jun 2020 pada 13.17
+-- Waktu pembuatan: 20 Jun 2020 pada 13.41
 -- Versi server: 10.1.31-MariaDB
 -- Versi PHP: 7.2.4
 
@@ -129,7 +129,10 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (48, 'Pickup Barang Bambang |  | Parman berhasil dihapus', '2020-06-20 17:58:14', 1),
 (49, 'Pengguna admin mengimport nomor resi ', '2020-06-20 17:58:24', 1),
 (50, 'Pengguna admin mengimport nomor resi ', '2020-06-20 17:59:01', 1),
-(51, 'Pengguna admin berhasil menambahkan pesanan Bambang', '2020-06-20 18:13:13', 1);
+(51, 'Pengguna admin berhasil menambahkan pesanan Bambang', '2020-06-20 18:13:13', 1),
+(52, 'Pengguna admin mengimport nomor resi ', '2020-06-20 18:24:27', 1),
+(53, 'Pengguna admin berhasil menambahkan pesanan Bambang', '2020-06-20 18:38:45', 1),
+(54, 'Pengguna admin berhasil logout', '2020-06-20 18:40:53', 1);
 
 -- --------------------------------------------------------
 
@@ -166,17 +169,19 @@ CREATE TABLE `pengirim` (
   `id_pengirim` int(11) NOT NULL,
   `nama_pengirim` varchar(100) NOT NULL,
   `no_wa_pengirim` varchar(25) NOT NULL,
-  `alamat_pengirim` text NOT NULL
+  `alamat_pengirim` text NOT NULL,
+  `ip_address` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `pengirim`
 --
 
-INSERT INTO `pengirim` (`id_pengirim`, `nama_pengirim`, `no_wa_pengirim`, `alamat_pengirim`) VALUES
-(1, 'Bambang', '081212345678', 'Jln ABC'),
-(2, 'Bambang', '628151407477', 'Jln ABC'),
-(3, 'Bambang', '081512345678', 'Jln ABC');
+INSERT INTO `pengirim` (`id_pengirim`, `nama_pengirim`, `no_wa_pengirim`, `alamat_pengirim`, `ip_address`) VALUES
+(1, 'Bambang', '081212345678', 'Jln ABC', ''),
+(2, 'Bambang', '628151407477', 'Jln ABC', ''),
+(3, 'Bambang', '081512345678', 'Jln ABC', ''),
+(4, 'Bambang', '081512345678', 'Jln ABC', '::1');
 
 -- --------------------------------------------------------
 
@@ -202,7 +207,8 @@ CREATE TABLE `pickup_barang` (
 
 INSERT INTO `pickup_barang` (`id_pickup_barang`, `no_resi`, `id_pengirim`, `id_penerima`, `id_jenis_layanan`, `tanggal_pemesanan`, `tanggal_penjemputan`, `tanggal_masuk_logistik`, `id_status`) VALUES
 (12, NULL, 3, 6, 1, '2020-06-20 18:13:13', NULL, NULL, 1),
-(13, NULL, 3, 5, 1, '2020-06-20 18:13:13', NULL, NULL, 1);
+(13, NULL, 3, 5, 1, '2020-06-20 18:13:13', NULL, NULL, 1),
+(14, NULL, 4, 6, 3, '2020-06-20 18:38:45', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -326,7 +332,7 @@ ALTER TABLE `jenis_layanan`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
@@ -338,13 +344,13 @@ ALTER TABLE `penerima`
 -- AUTO_INCREMENT untuk tabel `pengirim`
 --
 ALTER TABLE `pengirim`
-  MODIFY `id_pengirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pengirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
 --
 ALTER TABLE `pickup_barang`
-  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `status`

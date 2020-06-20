@@ -13,10 +13,12 @@ class Pengirim_model extends CI_Model {
 		$nama_pengirim						= $this->input->post('nama_pengirim',true);
 		$no_wa_pengirim						= $this->input->post('no_wa_pengirim',true);
 		$alamat_pengirim					= $this->input->post('alamat_pengirim',true);
+		$ip_address 						= $this->input->ip_address();
 
 		$this->db->where('nama_pengirim', $nama_pengirim);
 		$this->db->where('no_wa_pengirim', $no_wa_pengirim);
 		$this->db->where('alamat_pengirim', $alamat_pengirim);
+		$this->db->where('ip_address', $ip_address);
 		$cek_pengirim 		= $this->db->get('pengirim');
 		if ($cek_pengirim->num_rows() > 0) {
 			$get_pengirim 	= $cek_pengirim->row_array();
@@ -31,12 +33,24 @@ class Pengirim_model extends CI_Model {
 		$nama_pengirim						= $this->input->post('nama_pengirim',true);
 		$no_wa_pengirim						= $this->input->post('no_wa_pengirim',true);
 		$alamat_pengirim					= $this->input->post('alamat_pengirim',true);
+		$ip_address 						= $this->input->ip_address();
 
 		$pengirim["nama_pengirim"]			= $nama_pengirim;
 		$pengirim["no_wa_pengirim"]			= $no_wa_pengirim;
 		$pengirim["alamat_pengirim"]		= $alamat_pengirim;
+		$pengirim["ip_address"]				= $ip_address;
 		$this->db->insert('pengirim', $pengirim);
 		return $this->db->insert_id();
+	}
+
+	public function getPengirimByIp()
+	{
+		$ip_address 		= $this->input->ip_address();
+		$this->db->where('ip_address', $ip_address);
+		$this->db->order_by('id_pengirim', 'desc');
+		$cek_pengirim 		= $this->db->get('pengirim');
+		$get_pengirim 		= $cek_pengirim->row_array();
+		return 	$get_pengirim;
 	}
 
 }

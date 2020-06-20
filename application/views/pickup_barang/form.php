@@ -21,20 +21,20 @@
 			<tr>
 				<td width="30%">Nama Pengirim</td>
 				<td>
-					<input type="text" class="form-control" name="nama_pengirim" placeholder="Nama Pengirim" required="required">
+					<input type="text" class="form-control" name="nama_pengirim" placeholder="Nama Pengirim" required="required" value="<?= $pengirim["nama_pengirim"]; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>No Whatsapp Pengirim</td>
 				<td>
-					<input type="number" class="form-control" name="no_wa_pengirim" placeholder="No Whatsapp Pengirim" required="required">
+					<input type="number" class="form-control" name="no_wa_pengirim" placeholder="No Whatsapp Pengirim" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Alamat Pengirim</td>
 				<td>
 					<div class="form-group">
-						<input type="text" class="form-control" name="alamat_pengirim" placeholder="Alamat Pengirim" required="required">
+						<input type="text" class="form-control" name="alamat_pengirim" placeholder="Alamat Pengirim" required="required" value="<?= $pengirim["alamat_pengirim"]; ?>">
 					</div>
 				</td>
 			</tr>

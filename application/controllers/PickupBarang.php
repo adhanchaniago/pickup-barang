@@ -106,8 +106,17 @@ class PickupBarang extends CI_Controller {
 		if ($this->input->post('submit')) {
 			$this->pbm->addPickupBarang();
 		}
-		$data["title"] 				= "Form Pickup Barang";
-		$data["jenis_layanan"]		= $this->jenis_layanan->getAllJenisLayanan();
+		$pengirim 							= $this->pengirim->getPengirimByIp();
+		$dataUser 							= $this->mm->getDataUser();
+		if (empty($pengirim) || $dataUser["id_jabatan"] !== NULL) {
+			$pengirim["nama_pengirim"]		= "";
+			$pengirim["alamat_pengirim"]	= "";
+			$pengirim["no_wa_pengirim"]		= "";
+			$data["pengirim"]				= $pengirim;
+		}
+		$data["pengirim"]					= $pengirim;
+		$data["title"] 						= "Form Pickup Barang";
+		$data["jenis_layanan"]				= $this->jenis_layanan->getAllJenisLayanan();
 		$this->layout->view_auth('pickup_barang/form',$data);
 	}
 	
