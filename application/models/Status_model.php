@@ -13,8 +13,11 @@ class Status_model extends CI_Model {
 	}
 	public function getStatusById($id_status)
 	{
-		$this->db->where('id_status', $id_status);
-		return $this->db->get('status')->row_array();
+		if ($id_status !== '4') {
+			return $this->db->get_where('status', ['id_status' => $id_status])->row_array();
+		} else {
+			return ['status' => 'Semua'];
+		}
 	}
 
 }

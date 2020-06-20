@@ -21,8 +21,8 @@ class Admin extends CI_Controller {
 			$dari_tanggal			= $_GET["dari_tanggal"];
 			$sampai_tanggal			= $_GET["sampai_tanggal"];
 
-			$headline 				= 'Dasbor - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status;
-			$status					= $this->status->getStatusById($_GET["id_status"])["status"];
+			$status					= $this->status->getStatusById($_GET["id_status"]);
+			$headline 				= 'Dasbor - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status['status'];
 			$pesanan 				= $this->pesm->getPesanan($_GET['dari_tanggal'], $_GET['sampai_tanggal'], $_GET['id_status']);
 			$jml_status				= $this->pesm->getJmlStatus($_GET['dari_tanggal'], $_GET['sampai_tanggal']);
 			$val_dari_tanggal		= $dari_tanggal;

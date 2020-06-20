@@ -5,7 +5,6 @@
     <div class="container-fluid my-0 py-0">
       <div class="row my-0 py-0">
         <div class="col-sm my-auto py-1 header-title">
-          <?= $status; ?>
           <h3 class="text-dark my-0 py-0"><?= $headline; ?></h3>
         </div><!-- /.col -->
         <div class="col-sm-2 my-auto py-1 header-button">
@@ -15,7 +14,6 @@
           </button>
         </div>
       </div><!-- /.row -->
-
       <div class="row my-2">
         <div class="col-lg-6">
           <?php if (validation_errors()): ?>
@@ -63,7 +61,7 @@
         <div class="col-lg my-1 tidak_tampil" id="dataJmlStatus">
           <div class="card">
             <?php if ($status != ''): ?>
-              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $dari_tanggal; ?> s/d <?= $sampai_tanggal; ?> - <?= $status; ?></div>
+              <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan - <?= $dari_tanggal; ?> s/d <?= $sampai_tanggal; ?> - <?= $status['status']; ?></div>
             <?php else: ?>
               <div class="card-header bg-secondary"><i class="fas fa-fw fa-calendar-alt"></i> Pesanan Hari Ini</div>
             <?php endif ?>
@@ -117,14 +115,25 @@
               <div class="col-lg">
                 <label for="status">Status</label>
                 <select name="id_status" id="status" class="form-control">
-                  <?php foreach ($allStatus as $key): ?>
-                    <?php if ($key["id_status"] == $status["id_status"]): ?>
-                      <option value="<?= $key["id_status"]; ?>" selected><?= $key["status"]; ?></option>
-                    <?php else: ?>
-                      <option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
-                    <?php endif ?>
-                  <?php endforeach ?>
-                  <option value="4">Semua</option>
+                  <?php if ($_GET['id_status'] == '4'): ?>
+                    <option value="4">Semua</option>
+                    <?php foreach ($allStatus as $key): ?>
+                      <?php if ($key["id_status"] == $status["id_status"]): ?>
+                        <option value="<?= $key["id_status"]; ?>" selected><?= $key["status"]; ?></option>
+                      <?php else: ?>
+                        <option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
+                      <?php endif ?>
+                    <?php endforeach ?>
+                  <?php else: ?>
+                    <?php foreach ($allStatus as $key): ?>
+                      <?php if ($key["id_status"] == $status["id_status"]): ?>
+                        <option value="<?= $key["id_status"]; ?>" selected><?= $key["status"]; ?></option>
+                      <?php else: ?>
+                        <option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
+                      <?php endif ?>
+                    <?php endforeach ?>
+                    <option value="4">Semua</option>
+                  <?php endif ?>
                 </select>
               </div>
             </div>
