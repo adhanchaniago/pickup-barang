@@ -32,6 +32,9 @@ class Layout_model extends CI_Model {
 
 		$this->load->view('templates/header-auth', $data);
 		$this->load->view($url, $data);
+		if ($this->uri->segment(2) !== 'login') {
+			$this->load->view('templates/footer-landing', $data);
+		}
 		$this->load->view('templates/footer-auth', $data);
 	}
 
