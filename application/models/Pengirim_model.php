@@ -46,6 +46,8 @@ class Pengirim_model extends CI_Model {
 			$no_wa_pengirim = '+' . $no_wa_pengirim;
 		} elseif ($firstDigit == '8') {
 			$no_wa_pengirim = '+62' . $no_wa_pengirim;
+		} else {
+			$no_wa_pengirim = '+62' . $no_wa_pengirim;
 		}
 		$pengirim["no_wa_pengirim"]			= $no_wa_pengirim;
 

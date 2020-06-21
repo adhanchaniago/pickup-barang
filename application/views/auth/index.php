@@ -61,11 +61,11 @@
 </section>
 <div class="bg-danger pt-5"></div>
 
-<section id="cek_status_pesanan" class="cek_status_pesanan bg-blue text-white">
-	<div class="container">
-		<div class="row py-5">
+<section id="cek_status_pesanan" class="cek_status_pesanan bg-blue">
+	<div class="container pb-4">
+		<div class="row pt-5">
 			<div class="col-lg-12 text-center">
-				<h2>Cek Status Pesanan</h2>
+				<h2 class="text-white">Cek Status Pesanan</h2>
 				<hr>
 				<form action="<?= base_url('auth/cek_status_pesanan#cek_status_pesanan'); ?>" method="post">
 					<div class="row">
@@ -84,6 +84,18 @@
 					<p>Silahkan periksa kembali No. Whatsapp Anda</p>
 				<?php endif ?>
 			</div>
-		</div>
+		<?php elseif (isset($error)): ?>
+			<div class="row">
+				<div class="col-lg text-center">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<h4>No. WhatsApp tidak ditemukan!</h4>
+						<p>Silahkan periksa kembali No. WhatsApp Anda</p>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		<?php endif ?>
 	</div>
 </section>
