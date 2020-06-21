@@ -60,7 +60,7 @@
 	</div>
 </section>
 <div class="bg-danger pt-5"></div>
-<!-- 
+
 <section id="cek_status_pesanan" class="cek_status_pesanan bg-blue text-white">
 	<div class="container">
 		<div class="row py-5">
@@ -69,8 +69,8 @@
 				<hr>
 				<form action="<?= base_url('auth/cek_status_pesanan#cek_status_pesanan'); ?>" method="post">
 					<div class="form-group">
-						<label for="no_resi">No. Resi (15 digit)</label>
-						<input style="font-size: 25px; text-align: center;" type="text" name="no_resi" class="form-control" required value="<?= set_value('no_resi'); ?>" maxlength="15" minlength="15">
+						<label for="no_wa_pengirim">No. WhatsApp Pengirim</label>
+						<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
 					</div>
 					<button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-search"></i> Lacak</button>
 				</form>
@@ -87,24 +87,33 @@
 							<div class="col">
 								<div class="text-white rounded p-1 bg-success"><i class="fas fa-2x fa-pallet"></i></div>
 							</div>
+							<div class="col">
+								<div class="text-white rounded p-1 bg-primary"><i class="fas fa-2x fa-paper-plane"></i></div>
+							</div>
 						</div>
 						<div class="row text-center my-2">
-							<?php if ($no_resi['status'] == '1'): ?>
+							<?php if ($cek_status_pesanan['id_status'] == '1'): ?>
 								<div class="col">
 									<div class="progress">
-				                  	  <div class="progress-bar bg-danger" role="progressbar" style="width: 16%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+				                  	  <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
 				                    </div>
 								</div>
-							<?php elseif ($no_resi['status'] == '2'): ?>
+							<?php elseif ($cek_status_pesanan['id_status'] == '2'): ?>
 								<div class="col">
 									<div class="progress">
 				                  	  <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
 				                    </div>
 								</div>
-							<?php elseif ($no_resi['status'] == '3'): ?>
+							<?php elseif ($cek_status_pesanan['id_status'] == '3'): ?>
 								<div class="col">
 									<div class="progress">
-				                  	  <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+				                  	  <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+				                    </div>
+								</div>
+							<?php else: ?>
+								<div class="col">
+									<div class="progress">
+				                  	  <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
 				                    </div>
 								</div>
 							<?php endif ?>
@@ -113,12 +122,12 @@
 							<table class="table table-bordered table-hover table-striped text-center">
 								<thead>
 									<tr>
-										<?php if ($no_resi['status'] == '1'): ?>
+										<?php if ($cek_status_pesanan['id_status'] == '1'): ?>
 										<th>Pending</th>
-										<?php elseif ($no_resi['status'] == '2'): ?>
+										<?php elseif ($cek_status_pesanan['id_status'] == '2'): ?>
 										<th>Pending</th>
 										<th>Kurir Menjemput</th>
-										<?php elseif ($no_resi['status'] == '3'): ?>
+										<?php elseif ($cek_status_pesanan['id_status'] == '3'): ?>
 										<th>Pending</th>
 										<th>Kurir Menjemput</th>
 										<th>Barang Sampai Logistik</th>
@@ -127,15 +136,20 @@
 								</thead>
 								<tbody>
 									<tr>
-										<?php if ($no_resi['status'] == '1'): ?>
-											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
-										<?php elseif ($no_resi['status'] == '2'): ?>
-											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
-											<td><?= $no_resi['tanggal_penjemputan']; ?></td>
-										<?php elseif ($no_resi['status'] == '3'): ?>
-											<td><?= $no_resi['tanggal_pemesanan']; ?></td>
-											<td><?= $no_resi['tanggal_penjemputan']; ?></td>
-											<td><?= $no_resi['tanggal_masuk_logistik']; ?></td>
+										<?php if ($cek_status_pesanan['id_status'] == '1'): ?>
+											<td><?= $cek_status_pesanan['tanggal_pemesanan']; ?></td>
+										<?php elseif ($cek_status_pesanan['id_status'] == '2'): ?>
+											<td><?= $cek_status_pesanan['tanggal_pemesanan']; ?></td>
+											<td><?= $cek_status_pesanan['tanggal_penjemputan']; ?></td>
+										<?php elseif ($cek_status_pesanan['id_status'] == '3'): ?>
+											<td><?= $cek_status_pesanan['tanggal_pemesanan']; ?></td>
+											<td><?= $cek_status_pesanan['tanggal_penjemputan']; ?></td>
+											<td><?= $cek_status_pesanan['tanggal_masuk_logistik']; ?></td>
+										<?php else: ?>
+											<td><?= $cek_status_pesanan['tanggal_pemesanan']; ?></td>
+											<td><?= $cek_status_pesanan['tanggal_penjemputan']; ?></td>
+											<td><?= $cek_status_pesanan['tanggal_masuk_logistik']; ?></td>
+											<td><?= $cek_status_pesanan['tanggal_input_resi']; ?></td>
 										<?php endif ?>
 									</tr>
 								</tbody>
@@ -147,57 +161,42 @@
 			                    <tr>
 			                      <td class="font-weight-bold">No. Resi</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['no_resi']; ?></td>
+			                      <td><?= $cek_status_pesanan['no_resi']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">Nama Pengirim</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['nama_pengirim']; ?></td>
+			                      <td><?= $cek_status_pesanan['nama_pengirim']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">No. WhatsApp Pengirim</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['no_wa_pengirim']; ?></td>
+			                      <td><?= $cek_status_pesanan['no_wa_pengirim']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">Alamat Pengirim</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['alamat_pengirim']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">Nama Barang</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['nama_barang']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">Berat Barang (Kg)</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['berat_barang']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">Jumlah Barang</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['jumlah_barang']; ?></td>
+			                      <td><?= $cek_status_pesanan['alamat_pengirim']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">Nama Penerima</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['nama_penerima']; ?></td>
+			                      <td><?= $cek_status_pesanan['nama_penerima']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">No. WhatsApp Penerima</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['no_wa_penerima']; ?></td>
+			                      <td><?= $cek_status_pesanan['no_wa_penerima']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">Alamat Penerima</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['alamat_penerima']; ?></td>
+			                      <td><?= $cek_status_pesanan['alamat_penerima']; ?></td>
 			                    </tr>
 			                    <tr>
 			                      <td class="font-weight-bold">Layanan Paket</td>
 			                      <td class="px-1"> : </td>
-			                      <td><?= $no_resi['jenis_layanan']; ?> | Rp. <?= number_format($no_resi['harga']); ?> | <?= $no_resi['durasi_pengiriman']; ?> Jam</td>
+			                      <td><?= $cek_status_pesanan['jenis_layanan']; ?></td>
 			                    </tr>
 			                </table>
 						</div>
@@ -210,4 +209,3 @@
 		</div>
 	</div>
 </section>
- -->

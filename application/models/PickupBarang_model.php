@@ -153,9 +153,10 @@ class PickupBarang_model extends CI_Model {
 
 	public function editPickupBarang($id)
 	{
-		$dataUser 				= $this->mm->getDataUser();
-		$data["no_resi"]		= $this->input->post('no_resi');
-		$data["id_status"]		= 4;
+		$dataUser 					 = $this->mm->getDataUser();
+		$data["no_resi"]			 = $this->input->post('no_resi');
+		$data["id_status"]			 = 4;
+		$data ['tanggal_input_resi'] = date('Y-m-d H:i:s');
 
 		$this->db->where('id_pickup_barang', $id);
 		$this->db->update('pickup_barang', $data);
@@ -189,7 +190,7 @@ class PickupBarang_model extends CI_Model {
 		$alamat_pengirim	= $this->input->post('alamat_pengirim');
 		foreach ($pending as $key) {
 			$data["id_status"]					= 2;
-			$data["tanggal_penjemputan"]	= date('Y-m-d H:i:s');
+			$data["tanggal_penjemputan"]		= date('Y-m-d H:i:s');
 			$this->db->where('id_pickup_barang', $key);
 			$this->db->update('pickup_barang',$data);
 		}
@@ -289,7 +290,7 @@ class PickupBarang_model extends CI_Model {
 		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
 		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
 		$this->db->join('jenis_layanan', 'pickup_barang.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
-		return $this->db->get_where('pickup_barang', ['no_resi' => $this->input->post('no_resi', true)])->row_array();
+		return $this->db->get_where('pickup_barang', ['pengirim.no_wa_pengirim' => $this->input->post('no_wa_pengirim', true)])->row_array();
 	}
 
 	public function importExcel()
@@ -319,25 +320,25 @@ class PickupBarang_model extends CI_Model {
 			foreach($sheet as $row){
 				if($numrow > 0){
 					$no_resi 		= $row["A"];
-					$no_wa_pengirim = substr($row["I"], 4);
-					$no_wa_penerima = substr($row["K"], 4);
+					$no_wa_pengirim = $row["I"];
+					$no_wa_penerima = $row["K"];
 
 					$this->db->select('id_pickup_barang,no_wa_pengirim,nama_penerima,alamat_penerima,no_wa_penerima');
 					$this->db->from('pickup_barang');
 					$this->db->join('pengirim', 'pengirim.id_pengirim = pickup_barang.id_pengirim');
 					$this->db->join('penerima', 'penerima.id_penerima = pickup_barang.id_penerima');
-					$this->db->like('no_wa_pengirim', $no_wa_pengirim, 'LEFT');
-					$this->db->like('no_wa_penerima', $no_wa_penerima, 'LEFT');
+					$this->db->where('no_wa_pengirim', $no_wa_pengirim);
+					$this->db->where('no_wa_penerima', $no_wa_penerima);
 					$this->db->where('id_status', 3);
 					$cek 			= $this->db->get();
 
 					if ($cek->num_rows()  ==  1) {
-						$data 					= $cek->row_array();
-						$id_pickup_barang 		= $data["id_pickup_barang"];
-						$no_resi 				= preg_replace('/[^0-9]/', "", $no_resi);
-						$upd["no_resi"]			= $no_resi;
-						$upd["id_status"]		= 4;
-
+						$data 						= $cek->row_array();
+						$id_pickup_barang 			= $data["id_pickup_barang"];
+						$no_resi 					= preg_replace('/[^0-9]/', "", $no_resi);
+						$upd["no_resi"]				= $no_resi;
+						$upd["id_status"]			= 4;
+						$upd['tanggal_input_resi']	= date('Y-m-d H:i:s');
 						$this->db->where('id_pickup_barang', $id_pickup_barang);
 						$this->db->update('pickup_barang', $upd);
 					}

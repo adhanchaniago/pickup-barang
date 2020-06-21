@@ -50,17 +50,18 @@ class Auth extends CI_Controller {
 
 	public function cek_status_pesanan()
 	{
-		$this->form_validation->set_rules('no_resi', 'No. Resi', 'required|trim');
+		$this->form_validation->set_rules('no_wa_pengirim', 'No. WhatsApp Pengirim', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$this->index();
+			$this->layout->view_auth('auth/index', $data);
 		} else {
-			$data['no_resi'] = $this->pbm->cek_status_pesanan();
-			if ($data['no_resi'] > 0) {
+			$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+			$data['cek_status_pesanan'] = $this->pbm->cek_status_pesanan();
+			if ($data['cek_status_pesanan'] > 0) {
 				$data['berhasil'] = true;
 			} else {
 				$data['error'] = true;
 			}
-			$this->index();
+			$this->layout->view_auth('auth/index', $data);
 		}
 	}
 }
