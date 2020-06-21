@@ -44,7 +44,7 @@ class PickupBarang extends CI_Controller {
 				if ($item->no_resi == NULL) {
 					$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-pickupBarang btn-xs' data-id='".$item->id_pickup_barang."'><i class='fas fa-fw fa-edit'></i></a>";
 				}else{
-					$button 	.= "<a href='".base_url('pickupBarang/kirimResi/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
+					$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
 				}
 
 				$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->nama_penerima)."'><i class='fas fa-fw fa-trash'></i></a>";
@@ -128,6 +128,7 @@ class PickupBarang extends CI_Controller {
 		$data["status"]				= $status;
 		$this->layout->view_auth('pickup_barang/kurirPickup',$data);
 	}
+	
 	public function kurirAjax()
 	{
 		$data 		= [];
@@ -175,7 +176,7 @@ class PickupBarang extends CI_Controller {
 			$data["title"] 			= "Detail Pickup Barang";
 			$data["statusText"]		= $statusText;
 			$data["status"]			= $status;
-			$data["pickup_barang"]	= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim, $status)->row_array();;
+			$data["pickup_barang"]	= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim, $status)->row_array();
 			$this->layout->view_auth('pickup_barang/kurirDetailPickup',$data);
 		}
 	}
@@ -222,4 +223,11 @@ class PickupBarang extends CI_Controller {
 		require_once APPPATH.'/third_party/PHPExcel/PHPExcel.php';
 		$this->pbm->importExcel();
 	}
+	
+	public function kirimResi($id_pickup_barang)
+	{
+		$data = $this->pbm->getPickupBarangById($id_pickup_barang);
+		redirect('https://api.whatsapp.com/send?phone='.$data['no_wa_pengirim'].'&text=No. Resi Anda ' . $data['no_resi']);
+	}
+
 }

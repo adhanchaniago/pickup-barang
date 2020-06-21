@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
   <div class="container">
   	<a class="navbar-brand" href="<?= base_url('auth'); ?>">
   		<img src="<?= base_url('assets/img/img_properties/icon.png'); ?>" width="75" alt="logo">
@@ -7,12 +7,18 @@
 	    <span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-	    <div class="navbar-nav">
-	    	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('auth') ?>"><i class="fas fa-fw fa-home"></i> Beranda</a>
+		<div class="navbar-nav">
+			<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('auth/index'); ?>#home"><i class="fas fa-fw fa-home"></i> Beranda</a>
+		  	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('auth/index'); ?>#tentang-50"><i class="fas fa-fw fa-book"></i> Tentang Kami</a>
+		</div>
+	    <div class="navbar-nav ml-auto">
+	      	<a class="nav-item nav-link text-white btn btn-danger rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('pickupBarang/form') ?>"><i class="fas fa-fw fa-shipping-fast"></i><sup><i class="fas fa-1x fa-plus"></i></sup> Buat Pesanan</a>
+	      	<a class="nav-item nav-link text-white btn btn-success rounded-pill px-3 mx-2 my-1" href="https://www.jne.co.id/id/tracking/trace" target="_blank"><i class="fas fa-fw fa-check"></i> Cek No. Resi</a>
 	    </div>
 	</div>
   </div>
 </nav>
+
 <form class="container bg-white my-3 shadow-sm py-2" action="" method="post">
 	<h5>Formulir Pickup Barang</h5>
 	<div class="mt-2 border">
@@ -27,7 +33,7 @@
 			<tr>
 				<td>No Whatsapp Pengirim</td>
 				<td>
-					<input type="number" class="form-control" name="no_wa_pengirim" placeholder="No Whatsapp Pengirim" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
+					<input type="text" class="form-control" name="no_wa_pengirim" placeholder="No Whatsapp Pengirim" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
 				</td>
 			</tr>
 			<tr>
@@ -55,7 +61,7 @@
 				<tr>
 					<td>No Whatsapp Penerima</td>
 					<td>
-						<input type="number"name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima" required="required">
+						<input type="text" name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima" required="required">
 					</td>
 				</tr>
 				<tr>
@@ -88,38 +94,3 @@
 	</div>
 </form>
 
-<footer class="bg-dark text-white p-4">
-	<div class="container-fluid">
-		<div class="row justify-content-center">
-			<div class="col-lg-6 my-3">
-		        <h4 class="mb-3 font-weight-bold">Kontak Kami</h4>
-		        <div class="row text-left my-2">
-		          <div class="col-lg-4"><i class="fab fa-fw fa-whatsapp"></i> Hub. WhatsApp</div>
-		          <div class="col-lg-5"><a class="text-white" target="_blank" href="https://api.whatsapp.com/send?phone=+6287808675313">+62 878 0867 5313</a></div>
-		        </div>
-		        <div class="row my-2 ml-0">
-		          <div class="col-xs-1 mr-2"><a class="text-white" target="_blank" href="https://twitter.com"><i class="fab fa-fw fa-twitter"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://facebook.com"><i class="fab fa-fw fa-facebook"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://instagram.com"><i class="fab fa-fw fa-instagram"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://linkedin.com"><i class="fab fa-fw fa-linkedin-in"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://pinterest.com"><i class="fab fa-fw fa-pinterest"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://gmail.com"><i class="far fa-fw fa-envelope"></i></a></div>
-		        </div>    
-		        <div class="row text-left my-2">
-		          <div class="col-lg-4">
-		            <i class="fas fa-fw fa-map-marker-alt"></i> Alamat 
-		          </div>
-		          <div class="col-lg-8">Jl. Kalimantan, Rw. Mekar Jaya, Kec. Serpong, Kota Tangerang Selatan, Banten 15310</div>
-		        </div>
-      		</div>
-      		<div class="col-lg-6 my-3">
-		    	<h3 class="oleo-font">JNE Tangsel BSD Nusaloka</h3>
-		    	<div class="row mt-2">
-		    		<div class="col-lg">
-						<span>&copy; Copyright <?= date('Y'); ?> All rights Reserved By Andri Firman Saputra.</span>
-		    		</div>
-		    	</div>
-			</div>
-		</div>
-	</div>
-</footer>

@@ -23,7 +23,7 @@
 
 <div class="container">
 	<div class="row justify-content-center my-2">
-		<div class="col-lg-5 mx-3 shadow rounded bg-primary text-white p-4">
+		<div class="col-lg-5 mx-3 shadow rounded bg-primary text-white py-4 px-5">
 			<h2 class="heading_2 text-center">Pickup Barang</h2>
 			<h3 class="heading_3">Masuk</h3>
 			<form method="post" action="<?= base_url('auth/login'); ?>">
@@ -40,7 +40,7 @@
 			  	<div class="form-group">
 				  	<div class="row justify-content-center">
 				  		<div class="col text-left">
-				  			<a href="<?= base_url('/'); ?>" class="btn btn-info rounded-pill"><i class="fas fa-fw fa-arrow-left"></i> Kembali</a>
+				  			<a href="<?= base_url('/'); ?>" class="px-1 btn btn-info rounded-pill"><i class="fas fa-fw fa-arrow-left"></i> Kembali</a>
 				  		</div>
 				  		<div class="col text-right">
 						    <button type="submit" name="login" class="btn btn-success rounded-pill"><i class="fas fa-fw fa-sign-in-alt"></i> Masuk</button>
