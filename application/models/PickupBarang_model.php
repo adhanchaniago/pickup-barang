@@ -328,7 +328,7 @@ class PickupBarang_model extends CI_Model {
 					$this->db->join('penerima', 'penerima.id_penerima = pickup_barang.id_penerima');
 					$this->db->like('no_wa_pengirim', $no_wa_pengirim, 'LEFT');
 					$this->db->like('no_wa_penerima', $no_wa_penerima, 'LEFT');
-					$this->db->where('no_resi', NULL);
+					$this->db->where('id_status', 3);
 					$cek 			= $this->db->get();
 
 					if ($cek->num_rows()  ==  1) {
