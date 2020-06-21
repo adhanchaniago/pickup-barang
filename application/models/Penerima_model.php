@@ -43,6 +43,8 @@ class Penerima_model extends CI_Model {
 			$no_wa_penerima = '+' . $no_wa_penerima;
 		} elseif ($firstDigit == '8') {
 			$no_wa_penerima = '+62' . $no_wa_penerima;
+		} else {
+			$no_wa_penerima = '+62' . $no_wa_penerima;
 		}
 		$penerima["no_wa_penerima"]			= $no_wa_penerima;
 		$this->db->insert('penerima', $penerima);

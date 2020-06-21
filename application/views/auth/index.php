@@ -61,166 +61,162 @@
 </section>
 <div class="bg-danger pt-5"></div>
 
-<section id="cek_status_pesanan" class="cek_status_pesanan bg-blue text-white">
-	<div class="container">
-		<div class="row py-5">
+<section id="cek_status_pesanan" class="cek_status_pesanan bg-blue">
+	<div class="container pb-4">
+		<div class="row pt-5">
 			<div class="col-lg-12 text-center">
-				<h2>Cek Status Pesanan</h2>
+				<h2 class="text-white">Cek Status Pesanan</h2>
 				<hr>
 				<form action="<?= base_url('auth/cek_status_pesanan#cek_status_pesanan'); ?>" method="post">
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<label for="no_wa_pengirim">No. WhatsApp Pengirim</label>
+								<label class="text-white" for="no_wa_pengirim">No. WhatsApp Pengirim</label>
 								<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								<label for="no_wa_penerima">No. WhatsApp Penerima</label>
-								<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_penerima" class="form-control" required value="<?= set_value('no_wa_penerima'); ?>">
 							</div>
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-search"></i> Lacak</button>
 				</form>
 				<br>
-				<?php if (isset($berhasil)): ?>
-					<section class="bg-light p-3 rounded border border-secondary">
-						<div class="row my-2">
-							<div class="col">
-								<div class="text-white rounded p-1 bg-danger"><i class="fas fa-2x fa-stopwatch"></i></div>
-							</div>
-							<div class="col">
-								<div class="text-white rounded p-1 bg-warning"><i class="fas fa-2x fa-shipping-fast"></i></div>
-							</div>
-							<div class="col">
-								<div class="text-white rounded p-1 bg-success"><i class="fas fa-2x fa-pallet"></i></div>
-							</div>
-							<div class="col">
-								<div class="text-white rounded p-1 bg-primary"><i class="fas fa-2x fa-paper-plane"></i></div>
-							</div>
-						</div>
-						<div class="row text-center my-2">
-							<?php if ($cek_status_pesanan['id_status'] == '1'): ?>
-								<div class="col">
-									<div class="progress">
-				                  	  <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-				                    </div>
-								</div>
-							<?php elseif ($cek_status_pesanan['id_status'] == '2'): ?>
-								<div class="col">
-									<div class="progress">
-				                  	  <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-				                    </div>
-								</div>
-							<?php elseif ($cek_status_pesanan['id_status'] == '3'): ?>
-								<div class="col">
-									<div class="progress">
-				                  	  <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-				                    </div>
-								</div>
-							<?php else: ?>
-								<div class="col">
-									<div class="progress">
-				                  	  <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-				                    </div>
-								</div>
-							<?php endif ?>
-						</div>
-						<div class="table-responsive my-2">
-							<table class="table table-bordered table-hover table-striped text-center">
-								<thead>
-									<tr>
-										<?php if ($cek_status_pesanan['id_status'] == '1'): ?>
-										<th>Pending</th>
-										<?php elseif ($cek_status_pesanan['id_status'] == '2'): ?>
-										<th>Pending</th>
-										<th>Kurir Menjemput</th>
-										<?php elseif ($cek_status_pesanan['id_status'] == '3'): ?>
-										<th>Pending</th>
-										<th>Kurir Menjemput</th>
-										<th>Barang Sampai Logistik</th>
-										<?php else: ?>
-										<th>Pending</th>
-										<th>Kurir Menjemput</th>
-										<th>Barang Sampai Logistik</th>
-										<th>No. Resi Terkirim</th>
-										<?php endif ?>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<?php if ($cek_status_pesanan['id_status'] == '1'): ?>
-											<td><?= $cek_status_pesanan['tanggal_pemesanan']; ?></td>
-										<?php elseif ($cek_status_pesanan['id_status'] == '2'): ?>
-											<td><?= $cek_status_pesanan['tanggal_pemesanan']; ?></td>
-											<td><?= $cek_status_pesanan['tanggal_penjemputan']; ?></td>
-										<?php elseif ($cek_status_pesanan['id_status'] == '3'): ?>
-											<td><?= $cek_status_pesanan['tanggal_pemesanan']; ?></td>
-											<td><?= $cek_status_pesanan['tanggal_penjemputan']; ?></td>
-											<td><?= $cek_status_pesanan['tanggal_masuk_logistik']; ?></td>
-										<?php else: ?>
-											<td><?= $cek_status_pesanan['tanggal_pemesanan']; ?></td>
-											<td><?= $cek_status_pesanan['tanggal_penjemputan']; ?></td>
-											<td><?= $cek_status_pesanan['tanggal_masuk_logistik']; ?></td>
-											<td><?= $cek_status_pesanan['tanggal_input_resi']; ?></td>
-										<?php endif ?>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<br>
-						<div class="table-responsive">
-							<table class="table text-left">
-			                    <tr>
-			                      <td class="font-weight-bold">No. Resi</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $cek_status_pesanan['no_resi']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">Nama Pengirim</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $cek_status_pesanan['nama_pengirim']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">No. WhatsApp Pengirim</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $cek_status_pesanan['no_wa_pengirim']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">Alamat Pengirim</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $cek_status_pesanan['alamat_pengirim']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">Nama Penerima</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $cek_status_pesanan['nama_penerima']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">No. WhatsApp Penerima</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $cek_status_pesanan['no_wa_penerima']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">Alamat Penerima</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $cek_status_pesanan['alamat_penerima']; ?></td>
-			                    </tr>
-			                    <tr>
-			                      <td class="font-weight-bold">Layanan Paket</td>
-			                      <td class="px-1"> : </td>
-			                      <td><?= $cek_status_pesanan['jenis_layanan']; ?></td>
-			                    </tr>
-			                </table>
-						</div>
-					</section>
-				<?php elseif (isset($error)): ?>
-					<h4>No. Resi tidak ditemukan!</h4>
-					<p>Silahkan periksa kembali No. Resi Anda</p>
-				<?php endif ?>
 			</div>
 		</div>
+		<?php if (isset($berhasil)): ?>
+			<div class="row my-2">
+				<div class="col-lg-6 my-2 text-left">
+					<ul class="list-group list-group-flush rounded">
+						<li class="list-group-item active"><i class="fas fa-fw fa-id-card"></i> Data Pengirim</li>
+						<li class="list-group-item"><strong><i class="fas fa-fw fa-address-card text-info"></i></strong> <?= $cek_status_pesanan['nama_pengirim']; ?></li>
+						<li class="list-group-item"><strong><i class="fab fa-fw fa-whatsapp text-success"></i></strong> <a href="https://api.whatsapp.com/send?phone=<?= $cek_status_pesanan['no_wa_pengirim']; ?>"><?= $cek_status_pesanan['no_wa_pengirim']; ?></a></li>
+						<li class="list-group-item"><strong><i class="fas fa-fw fa-map-marker-alt text-danger"></i></strong> <?= $cek_status_pesanan['alamat_pengirim']; ?></li>
+					</ul>
+					<ul class="list-group list-group-flush rounded my-1">
+						<li class="list-group-item active"><i class="fas fa-fw fa-id-card"></i> Jumlah Status</li>
+			            <?php if ($jml_status != NULL): ?>
+							<li class="list-group-item text-center">
+								<span class="mx-2 bg-danger text-white rounded p-2">
+									<i class="fas fa-fw fa-stopwatch"></i> <?= $jml_status['pending']; ?>
+								</span>
+								<span class="mx-2 bg-warning rounded p-2">
+									<i class="fas fa-fw fa-shipping-fast"></i> <?= $jml_status['kurir_menjemput']; ?>
+								</span>
+								<span class="mx-2 bg-success text-white rounded p-2">
+									<i class="fas fa-fw fa-pallet"></i> <?= $jml_status['barang_masuk_logistik']; ?>
+								</span>
+								<span class="mx-2 bg-primary text-white rounded p-2">
+									<i class="fas fa-fw fa-check"></i> <?= $jml_status['resi_terinput']; ?>
+								</span>
+							</li>
+						<?php else: ?>
+							<li class="list-group-item text-center">
+								<span class="mx-2 bg-danger text-white rounded p-2">
+									<i class="fas fa-fw fa-stopwatch"></i> 0
+								</span>
+								<span class="mx-2 bg-warning rounded p-2">
+									<i class="fas fa-fw fa-shipping-fast"></i> 0
+								</span>
+								<span class="mx-2 bg-success text-white rounded p-2">
+									<i class="fas fa-fw fa-pallet"></i> 0
+								</span>
+								<span class="mx-2 bg-primary text-white rounded p-2">
+									<i class="fas fa-fw fa-check"></i> 0
+								</span>
+							</li>
+						<?php endif ?>
+					</ul>
+					
+				</div>
+				<div class="col-lg-6 my-2 text-left">
+					<form method="get" action="<?= base_url('auth/cek_status_pesanan_filter/#daftar_pesanan'); ?>">
+						<?php if (isset($_GET['no_wa_pengirim'])): ?>
+							<input type="hidden" name="no_wa_pengirim" value="<?= $_GET['no_wa_pengirim']; ?>">
+						<?php else: ?>
+							<input type="hidden" name="no_wa_pengirim" value="<?= set_value('no_wa_pengirim'); ?>">
+						<?php endif ?>
+						<ul class="list-group list-group-flush rounded">
+							<li class="list-group-item active"><i class="fas fa-fw fa-filter"></i> Filter</li>
+							<li class="list-group-item">
+								<div class="row">
+									<div class="col-lg">
+										<div class="form-group">
+											<label for="dari_tanggal">Dari Tanggal</label>
+						                  	<input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= $val_dari_tanggal; ?>">
+										</div>											
+									</div>
+									<div class="col-lg">
+										<div class="form-group">
+											<label for="sampai_tanggal">Sampai Tanggal</label>
+						                  	<input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $val_sampai_tanggal; ?>">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg">
+										<div class="form-group">
+						                	<label for="status">Status</label>
+							                <select name="id_status" id="status" class="form-control">
+							                    <option value="">Semua</option>
+							                    <?php foreach ($allStatus as $key): ?>
+							                      <?php if ($key["id_status"] == $status["id_status"]): ?>
+							                        <option value="<?= $key["id_status"]; ?>" selected><?= $key["status"]; ?></option>
+							                      <?php else: ?>
+							                        <option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
+							                      <?php endif ?>
+							                    <?php endforeach ?>
+							                </select>
+						                </div>
+									</div>
+								</div>
+								<button type="submit" name="btnFilter" class="btn btn-primary"><i class="fas fa-fw fa-filter"></i> Filter</button>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+			<div class="row my-2">
+				<div id="daftar_pesanan" class="col-lg mx-3 rounded bg-white pt-2 pb-0">
+					<h4>Daftar Pesanan</h4>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover" id="table_id">
+							<thead>
+								<th>No</th>
+								<th>Nama Penerima</th>
+								<th>Tanggal Pengiriman</th>
+								<th>Status</th>
+							</thead>
+							<tbody>
+								<?php if ($pesanan != NULL): ?>
+									<?php $i = 1; ?>
+									<?php foreach ($pesanan as $dp): ?>
+										<tr>
+											<td><?= $i++; ?></td>
+											<td><?= $dp['nama_penerima']; ?></td>
+											<td><?= $dp['tanggal_pemesanan']; ?></td>
+											<td><?= $dp['status']; ?></td>
+										</tr>
+									<?php endforeach ?>
+								<?php else: ?>
+									<tr class="text-center">
+										<td colspan="4">Tidak ada data</td>
+									</tr>
+								<?php endif ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		<?php elseif (isset($error)): ?>
+			<div class="row">
+				<div class="col-lg text-center">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<h4>No. WhatsApp tidak ditemukan!</h4>
+						<p>Silahkan periksa kembali No. WhatsApp Anda</p>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		<?php endif ?>
 	</div>
 </section>

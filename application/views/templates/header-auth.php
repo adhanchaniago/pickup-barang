@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/vendor/owlCarousel2-2.3.4/css/owl.carousel.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/vendor/owlCarousel2-2.3.4/css/owl.theme.default.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/vendor/select2-4.0.13/select2.min.css'); ?>">
-    
+    <!-- datetimepicker CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.min.css'); ?>">
 
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">  

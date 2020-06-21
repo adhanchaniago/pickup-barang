@@ -13,12 +13,14 @@
     <script src="<?= base_url('assets/vendor/sweetalert2-9.14.2/sweetalert2.all.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/owlCarousel2-2.3.4/js/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/select2-4.0.13/select2.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.full.min.js'); ?>"></script>
 
     <div id="data-auth" data-url="<?= base_url() ?>" data-link="<?= $def_link; ?>"></div>
     <!-- My JS -->
     <script src="<?= base_url('assets/js/script.js'); ?>"></script>
 	
 	<!-- Config -->
+    <script src="<?= base_url('assets/js/datetimepicker-config.js'); ?>"></script>
     <script src="<?= base_url('assets/js/select2-config.js'); ?>"></script>
     <script src="<?= base_url('assets/js/sweetalert2-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/owlCarousel2-config.js'); ?>"></script>

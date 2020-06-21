@@ -27,7 +27,6 @@ class Admin extends CI_Controller {
 			$jml_status				= $this->pesm->getJmlStatus($_GET['dari_tanggal'], $_GET['sampai_tanggal']);
 			$val_dari_tanggal		= $dari_tanggal;
 			$val_sampai_tanggal		= $sampai_tanggal;
-
 		} else {
 			$headline 				= 'Dasbor - Hari Ini';
 			$status					= $this->status->getStatusById();
