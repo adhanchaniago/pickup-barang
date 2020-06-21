@@ -69,6 +69,10 @@ $(function() {
             disabledSubmit();
         })
 
+        $('[type=submit]').on('dblclick',function(e) {
+            e.preventDefault();
+        })
+
         
     }
     function kurirPickup() {
