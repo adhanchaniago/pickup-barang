@@ -34,7 +34,7 @@
 			<tr>
 				<td>No Whatsapp Pengirim</td>
 				<td>
-					<input type="text" class="form-control" name="no_wa_pengirim" placeholder="No Whatsapp Pengirim" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
+					<input type="text" class="form-control" name="no_wa_pengirim" placeholder="+62" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
             		<?= form_error('no_wa_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
 				</td>
 			</tr>
@@ -42,7 +42,7 @@
 				<td>Alamat Pengirim</td>
 				<td>
 					<div class="form-group">
-						<input type="text" class="form-control" name="alamat_pengirim" placeholder="Alamat Pengirim" required="required" value="<?= $pengirim["alamat_pengirim"]; ?>">
+						<input type="text" class="form-control" name="alamat_pengirim" placeholder="Alamat pengirim sertakan nama kecamatan, kota, provinsi dan kode pos" required="required" value="<?= $pengirim["alamat_pengirim"]; ?>">
            		 		<?= form_error('alamat_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
 					</div>
 				</td>
@@ -65,7 +65,7 @@
 				<tr>
 					<td>No Whatsapp Penerima</td>
 					<td>
-						<input type="text" value="<?= set_value('no_wa_penerima[]'); ?>" name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima" required="required">
+						<input type="text" value="<?= set_value('no_wa_penerima[]'); ?>" name="no_wa_penerima[]" class="form-control" placeholder="+62" required="required">
            		 		<?= form_error('no_wa_penerima[]', '<small class="form-text text-danger">', '</small>'); ?>
 					</td>
 				</tr>
@@ -73,7 +73,7 @@
 					<td>Alamat Penerima</td>
 					<td>
 						<div class="form-group">
-							<input type="text" value="<?= set_value('alamat_penerima[]'); ?>" name="alamat_penerima[]" class="form-control" placeholder="Alamat Penerima" required="required">
+							<input type="text" value="<?= set_value('alamat_penerima[]'); ?>" name="alamat_penerima[]" class="form-control" placeholder="Alamat penerima sertakan nama kecamatan, kota, provinsi dan kode pos" required="required">
            		 			<?= form_error('alamat_penerima[]', '<small class="form-text text-danger">', '</small>'); ?>
 						</div>
 					</td>
