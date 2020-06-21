@@ -290,7 +290,7 @@ class PickupBarang_model extends CI_Model {
 		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
 		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
 		$this->db->join('jenis_layanan', 'pickup_barang.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
-		return $this->db->get_where('pickup_barang', ['pengirim.no_wa_pengirim' => $this->input->post('no_wa_pengirim', true)])->row_array();
+		return $this->db->get_where('pickup_barang', ['pengirim.no_wa_pengirim' => $this->input->post('no_wa_pengirim', true), 'penerima.no_wa_penerima' => $this->input->post('no_wa_penerima', true)])->row_array();
 	}
 
 	public function importExcel()

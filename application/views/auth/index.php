@@ -68,9 +68,19 @@
 				<h2>Cek Status Pesanan</h2>
 				<hr>
 				<form action="<?= base_url('auth/cek_status_pesanan#cek_status_pesanan'); ?>" method="post">
-					<div class="form-group">
-						<label for="no_wa_pengirim">No. WhatsApp Pengirim</label>
-						<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<label for="no_wa_pengirim">No. WhatsApp Pengirim</label>
+								<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label for="no_wa_penerima">No. WhatsApp Penerima</label>
+								<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_penerima" class="form-control" required value="<?= set_value('no_wa_penerima'); ?>">
+							</div>
+						</div>
 					</div>
 					<button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-search"></i> Lacak</button>
 				</form>
@@ -131,6 +141,11 @@
 										<th>Pending</th>
 										<th>Kurir Menjemput</th>
 										<th>Barang Sampai Logistik</th>
+										<?php else: ?>
+										<th>Pending</th>
+										<th>Kurir Menjemput</th>
+										<th>Barang Sampai Logistik</th>
+										<th>No. Resi Terkirim</th>
 										<?php endif ?>
 									</tr>
 								</thead>
