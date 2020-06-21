@@ -350,6 +350,45 @@ class PickupBarang_model extends CI_Model {
 			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mengimport nomor resi ', $dataUser['id_user']);
 		}
 		return redirect('pickupBarang','refresh');
-
 	}
+
+	// private function _sendMessageNoResi($no_wa_pengirim, $pesan)
+	// {
+	// 	curl -X POST $MESSAGES_API_URL \
+	// 	  -H 'Authorization: Bearer' $JWT \
+	// 	  -H 'Content-Type: application/json' \
+	// 	  -d '{
+	// 	   "from":{
+	// 	      "type":"whatsapp",
+	// 	      "number":"+6287808675313"
+	// 	   },
+	// 	   "to":{
+	// 	      "type":"whatsapp",
+	// 	      "number":"'$no_wa_pengirim'"
+	// 	   },
+	// 	   "message":{
+	// 	      "content":{
+	// 	         "type":"template",
+	// 	         "template":{
+	// 	            "name": "'$pesan'",
+	// 	            "parameters":[
+	// 	               {
+	// 	                  "default":"Nexmo Verification"
+	// 	               },
+	// 	               {
+	// 	                  "default":"64873"
+	// 	               },
+	// 	               {
+	// 	                  "default":"10"
+	// 	               }
+	// 	            ]
+	// 	         }
+	// 	      },
+	// 	      "whatsapp": {
+	// 	        "policy": "deterministic",
+	// 	        "locale": "en-GB"
+	// 	      }
+	// 	   }
+	// 	}'
+	// }
 }
