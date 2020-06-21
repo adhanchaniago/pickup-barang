@@ -153,8 +153,9 @@ class PickupBarang_model extends CI_Model {
 
 	public function editPickupBarang($id)
 	{
-		$dataUser 		= $this->mm->getDataUser();
-		$data["no_resi"]					= $this->input->post('no_resi');
+		$dataUser 				= $this->mm->getDataUser();
+		$data["no_resi"]		= $this->input->post('no_resi');
+		$data["id_status"]		= 4;
 
 		$this->db->where('id_pickup_barang', $id);
 		$this->db->update('pickup_barang', $data);
@@ -334,9 +335,11 @@ class PickupBarang_model extends CI_Model {
 						$data 					= $cek->row_array();
 						$id_pickup_barang 		= $data["id_pickup_barang"];
 						$no_resi 				= preg_replace('/[^0-9]/', "", $no_resi);
+						$upd["no_resi"]			= $no_resi;
+						$upd["id_status"]		= 4;
 
 						$this->db->where('id_pickup_barang', $id_pickup_barang);
-						$this->db->update('pickup_barang', ["no_resi" => $no_resi]);
+						$this->db->update('pickup_barang', $upd);
 					}
 				}
 				$numrow++;

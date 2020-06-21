@@ -20,22 +20,28 @@ function bg_status($value,$jenis = 'bg')
 		case 3:
 			return $jenis.'-success';
 		break;
+		case 4:
+			return $jenis.'-primary';
+		break;
 		default:
 			return $jenis.'-white';
 		break;
 	}
 }
-function text_status($value)
+function text_status($value,$jenis = 'text')
 {
 	switch ($value) {
 		case 1:
-			return 'text-light';
+			return $jenis.'-light';
 		break;
 		case 2:
-			return 'text-dark';
+			return $jenis.'-dark';
 		break;
 		case 3:
-			return 'text-light';
+			return $jenis.'-light';
+		break;
+		case 4:
+			return $jenis.'-light';
 		break;
 		default:
 			return '';

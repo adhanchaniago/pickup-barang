@@ -14,18 +14,15 @@ class Laporan extends CI_Controller {
 	public function index()
 	{
 		$data['dataUser'] 			= $this->mm->getDataUser();
-		$status 					= "";
+		$status 					= "Semua";
 		$id_status 					= "";
+
 		if (isset($_POST['dari_tanggal']) AND isset($_POST['sampai_tanggal']) AND isset($_POST['id_status'])) {
 			$title 					= 'Laporan dari tanggal' . $_POST['dari_tanggal'] . 's/d' . $_POST['sampai_tanggal'] . ', status: '. $status;
-			if ($this->input->post('id_status') != '') {
-				$getStatus 			= $this->status->getStatusById($_POST["id_status"]);
-				$status				= $getStatus["status"];
-				$id_status			= $getStatus["id_status"];
-			}else{
-				$status				= "Semua";
-				$id_status			= '';
-			}
+			$getStatus 				= $this->status->getStatusById($_POST["id_status"]);
+			$status					= $getStatus["status"];
+			$id_status				= $getStatus["id_status"];
+
 			$laporan 				= $this->lm->getLaporan($_POST['dari_tanggal'], $_POST['sampai_tanggal'], $_POST['id_status']);
 			$dari_tanggal 			= $this->input->post('dari_tanggal');
 			$sampai_tanggal 		= $this->input->post('sampai_tanggal');
@@ -34,7 +31,6 @@ class Laporan extends CI_Controller {
 
 		} else {
 			$title 					= 'Laporan - ' . $data['dataUser']['username'];
-			$status 				= "";
 			$laporan 				= $this->lm->getLaporan();
 			$dari_tanggal 			= "";
 			$sampai_tanggal 		= "";

@@ -49,7 +49,7 @@
 			</div>
 			<div class="col-8 text-right pl-0">
 				<button class="btn btn-danger btn-sm" type="submit" name="btnPending" value="1"><i class="fas fa-fw fa-paper-plane"></i> Ambil</button>
-				<button class="btn btn-primary btn-sm" type="submit" name="btnPickup" value="1"><i class="fas fa-fw fa-paper-plane"></i> Submit (<span id="angka">0</span>)</button>
+				<button class="btn btn-success btn-sm" type="submit" name="btnPickup" value="1"><i class="fas fa-fw fa-paper-plane"></i> Submit (<span id="angka">0</span>)</button>
 			</div>
 		</div>
 	</div>	
@@ -59,7 +59,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Detail Pickup</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

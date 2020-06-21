@@ -30,7 +30,7 @@ class Admin extends CI_Controller {
 
 		} else {
 			$headline 				= 'Dasbor - Hari Ini';
-			$status 				= '';
+			$status					= $this->status->getStatusById();
 			$pesanan 				= $this->pesm->getPesanan();
 			$jml_status				= $this->pesm->getJmlStatus();
 			$val_dari_tanggal		= date('Y/m/d');

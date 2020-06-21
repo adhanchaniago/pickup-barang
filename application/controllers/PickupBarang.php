@@ -41,9 +41,9 @@ class PickupBarang extends CI_Controller {
 			if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2') {
 				$button 	= "<div class='text-center'>";
 
-				if ($item->no_resi == NULL) {
+				if ($item->id_status == 3 ) {
 					$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-pickupBarang btn-xs' data-id='".$item->id_pickup_barang."'><i class='fas fa-fw fa-edit'></i></a>";
-				}else{
+				}elseif($item->id_status == 4){
 					$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
 				}
 
@@ -55,8 +55,10 @@ class PickupBarang extends CI_Controller {
 				$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw fa-stopwatch"></i></span>';
 			}elseif ($item->id_status == 2) {
 				$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw fa-shipping-fast"></i></span>';
-			}else{
+			}elseif ($item->id_status == 3){
 				$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw fa-pallet"></i></span>';
+			}else{
+				$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw fa-check"></i></span>';
 			}
 
 			$row 	= array();
@@ -167,11 +169,7 @@ class PickupBarang extends CI_Controller {
 			$this->pbm->terimaPickupBarang();
 		}else{
 			$get_status 			= $this->status->getStatusById($status);
-			if (empty($get_status)) {
-				$statusText 		= "Semua";
-			}else{
-				$statusText 		= $get_status["status"];
-			}
+			$statusText 			= $get_status["status"];
 
 			$data["title"] 			= "Detail Pickup Barang";
 			$data["statusText"]		= $statusText;
@@ -193,14 +191,14 @@ class PickupBarang extends CI_Controller {
 		foreach ($get as $key) {
 			$warna 			= bg_status($key["id_status"]);
 			$warnaText		= text_status($key["id_status"]);
-			if ($key["id_status"] == 3) {
-				$checkbox 	= "";
+			if ($key["id_status"] == 1) {
+				$checkbox 	= "<input type='hidden' name='pending[]' value='".$key["id_pickup_barang"]."' class='font'>";
+				$pending++;
 			}elseif($key["id_status"] == 2){
 				$checkbox 	= "<input type='checkbox' name='pickup[]' value='".$key["id_pickup_barang"]."' class='font'>";
 				$pickup++;
-			}elseif($key["id_status"] == 1){
-				$checkbox 	= "<input type='hidden' name='pending[]' value='".$key["id_pickup_barang"]."' class='font'>";
-				$pending++;
+			}else{
+				$checkbox 	= "";
 			}
 			$data[] 	= "
 			<div class='col-12 col-sm-6 col-md-4 col-lg-3 my-1'>

@@ -8,19 +8,17 @@ class Pesanan_model extends CI_Model {
 		$this->load->model('Main_model', 'mm');
 	}
 
-	public function getPesanan($dari_tanggal = '', $sampai_tanggal = '', $id_status = '1')
+	public function getPesanan($dari_tanggal = '', $sampai_tanggal = '', $id_status = '')
 	{
-		if ($dari_tanggal !== '' AND $sampai_tanggal !== '' AND $id_status !== '') {
+		if ($dari_tanggal !== '' AND $sampai_tanggal !== '') {
 			$dateThen = $dari_tanggal . ' 00:00:00';
 			$dateLast = $sampai_tanggal . ' 23:59:58';
-			$id_status = $id_status;
 		} else {
 			$dateThen = date('Y-m-d 00:00:00');
 			$dateLast = date('Y-m-d 23:59:58');
-			$id_status = '4';
 		}
 
-		if ($id_status !== '4') {
+		if ($id_status !== '') {
 			$query = "SELECT * FROM pickup_barang 
 				INNER JOIN status ON pickup_barang.id_status = status.id_status 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
@@ -52,9 +50,10 @@ class Pesanan_model extends CI_Model {
 			$dateLast = date('Y-m-d 23:59:58');
 		}
 
-		$query = "SELECT *, SUM(IF(id_status = 1,1,0)) as pending, 
+		$query = "SELECT SUM(IF(id_status = 1,1,0)) as pending, 
 			SUM(IF(id_status = 2,1,0)) as kurir_menjemput,
-			SUM(IF(id_status = 3,1,0)) as barang_masuk_logistik
+			SUM(IF(id_status = 3,1,0)) as barang_masuk_logistik,
+			SUM(IF(id_status = 4,1,0)) as resi_terinput
 			FROM pickup_barang 
 			INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
 			INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
