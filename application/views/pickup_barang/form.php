@@ -28,12 +28,14 @@
 				<td width="30%">Nama Pengirim</td>
 				<td>
 					<input type="text" class="form-control" name="nama_pengirim" placeholder="Nama Pengirim" required="required" value="<?= $pengirim["nama_pengirim"]; ?>">
+            		<?= form_error('nama_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
 				</td>
 			</tr>
 			<tr>
 				<td>No Whatsapp Pengirim</td>
 				<td>
 					<input type="text" class="form-control" name="no_wa_pengirim" placeholder="No Whatsapp Pengirim" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
+            		<?= form_error('no_wa_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
 				</td>
 			</tr>
 			<tr>
@@ -41,6 +43,7 @@
 				<td>
 					<div class="form-group">
 						<input type="text" class="form-control" name="alamat_pengirim" placeholder="Alamat Pengirim" required="required" value="<?= $pengirim["alamat_pengirim"]; ?>">
+           		 		<?= form_error('alamat_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
 					</div>
 				</td>
 			</tr>
@@ -55,20 +58,23 @@
 				<tr>
 					<td width="30%">Nama Penerima</td>
 					<td>
-						<input type="text" name="nama_penerima[]" class="form-control" placeholder="Nama Penerima" required="required">
+						<input type="text" value="<?= set_value('nama_penerima[]'); ?>" name="nama_penerima[]" class="form-control" placeholder="Nama Penerima" required="required">
+           		 		<?= form_error('nama_penerima[]', '<small class="form-text text-danger">', '</small>'); ?>
 					</td>
 				</tr>
 				<tr>
 					<td>No Whatsapp Penerima</td>
 					<td>
-						<input type="text" name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima" required="required">
+						<input type="text" value="<?= set_value('no_wa_penerima[]'); ?>" name="no_wa_penerima[]" class="form-control" placeholder="No Whatsapp Penerima" required="required">
+           		 		<?= form_error('no_wa_penerima[]', '<small class="form-text text-danger">', '</small>'); ?>
 					</td>
 				</tr>
 				<tr>
 					<td>Alamat Penerima</td>
 					<td>
 						<div class="form-group">
-							<input type="text" name="alamat_penerima[]" class="form-control" placeholder="Alamat Penerima" required="required">
+							<input type="text" value="<?= set_value('alamat_penerima[]'); ?>" name="alamat_penerima[]" class="form-control" placeholder="Alamat Penerima" required="required">
+           		 			<?= form_error('alamat_penerima[]', '<small class="form-text text-danger">', '</small>'); ?>
 						</div>
 					</td>
 				</tr>
@@ -81,6 +87,7 @@
 								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>
 							<?php endforeach ?>
 						</select>
+       		 			<?= form_error('jenis_layanan[]', '<small class="form-text text-danger">', '</small>'); ?>
 					</td>
 				</tr>
 			</table>

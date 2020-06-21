@@ -105,12 +105,9 @@ class PickupBarang extends CI_Controller {
 
 	public function form()
 	{
-		if ($this->input->post('submit')) {
-			$this->pbm->addPickupBarang();
-		}
 		$pengirim 							= $this->pengirim->getPengirimByIp();
 		$dataUser 							= $this->mm->getDataUser();
-		if (empty($pengirim) || $dataUser["id_jabatan"] !== NULL) {
+		if (empty($pengirim) || $dataUser !== NULL) {
 			$pengirim["nama_pengirim"]		= "";
 			$pengirim["alamat_pengirim"]	= "";
 			$pengirim["no_wa_pengirim"]		= "";
@@ -119,7 +116,18 @@ class PickupBarang extends CI_Controller {
 		$data["pengirim"]					= $pengirim;
 		$data["title"] 						= "Form Pickup Barang";
 		$data["jenis_layanan"]				= $this->jenis_layanan->getAllJenisLayanan();
-		$this->layout->view_auth('pickup_barang/form',$data);
+		$this->form_validation->set_rules('nama_pengirim', 'Nama Pengirim', 'required|trim');
+		$this->form_validation->set_rules('no_wa_pengirim', 'No. Whatsapp Pengirim', 'required|trim');
+		$this->form_validation->set_rules('alamat_pengirim', 'Alamat Pengirim', 'required|trim');
+		$this->form_validation->set_rules('nama_penerima[]', 'Nama Penerima', 'required|trim');
+		$this->form_validation->set_rules('no_wa_penerima[]', 'No. Whatsapp Penerima', 'required|trim');
+		$this->form_validation->set_rules('alamat_penerima[]', 'Alamat Penerima', 'required|trim');
+		$this->form_validation->set_rules('jenis_layanan[]', 'Jenis Layanan', 'required|trim');
+		if ($this->form_validation->run() == false) {
+			$this->layout->view_auth('pickup_barang/form',$data);
+		} else {
+			$this->pbm->addPickupBarang();
+		}
 	}
 	
 	public function kurir()
