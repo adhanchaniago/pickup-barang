@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/vendor/select2-4.0.13/select2.min.css'); ?>">
     <!-- datetimepicker CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.min.css'); ?>">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/datatables-1.10.21/css/dataTables.bootstrap4.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/datatables-responsive/css/responsive.bootstrap4.min.css">
 
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">  

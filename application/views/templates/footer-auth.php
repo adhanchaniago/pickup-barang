@@ -14,9 +14,14 @@
     <script src="<?= base_url('assets/vendor/owlCarousel2-2.3.4/js/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/select2-4.0.13/select2.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.full.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/vendor/datatables-1.10.21/js/jquery.dataTables.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/vendor/datatables-1.10.21/js/dataTables.bootstrap4.min.js'); ?>"></script>
+    <script src="<?php echo base_url() ?>assets/datatables-responsive/js/dataTables.responsive.min.js" defer></script>
+    <script src="<?php echo base_url() ?>assets/datatables-responsive/js/responsive.bootstrap4.min.js" defer></script>
 
     <div id="data-auth" data-url="<?= base_url() ?>" data-link="<?= $def_link; ?>"></div>
     <!-- My JS -->
+    <script src="<?= base_url('assets/js/admin.js'); ?>"></script>
     <script src="<?= base_url('assets/js/script.js'); ?>"></script>
 	
 	<!-- Config -->

@@ -72,7 +72,11 @@
 						<div class="col">
 							<div class="form-group">
 								<label class="text-white" for="no_wa_pengirim">No. WhatsApp Pengirim</label>
-								<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
+								<?php if (isset($_GET['no_wa_pengirim'])): ?>
+									<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_pengirim" class="form-control" required value="<?= $_GET['no_wa_pengirim']; ?>">
+								<?php else: ?>
+									<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
+								<?php endif ?>
 							</div>
 						</div>
 					</div>
@@ -175,30 +179,31 @@
 			</div>
 			<div class="row my-2">
 				<div id="daftar_pesanan" class="col-lg mx-3 rounded bg-white pt-2 pb-0">
-					<h4>Daftar Pesanan</h4>
+					<h4>Daftar Pesanan <?= $headline; ?></h4>
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered table-hover" id="table_id">
+						<!-- id="table_id" data-link="<?= base_url('auth/datatablePesanan') ?>" -->
+						<table class="table table-striped table-bordered table-hover">
 							<thead>
-								<th>No</th>
+								<th>No. Resi</th>
 								<th>Nama Penerima</th>
-								<th>Tanggal Pengiriman</th>
+								<th>Tanggal Pemesanan</th>
 								<th>Status</th>
 							</thead>
 							<tbody>
-								<?php if ($pesanan != NULL): ?>
+								<?php if ($pesanan == NULL): ?>
+									<tr class="text-center">
+										<td colspan="4">Tidak ada data</td>
+									</tr>
+								<?php else: ?>
 									<?php $i = 1; ?>
 									<?php foreach ($pesanan as $dp): ?>
 										<tr>
-											<td><?= $i++; ?></td>
+											<td><?= $dp['no_resi']; ?></td>
 											<td><?= $dp['nama_penerima']; ?></td>
 											<td><?= $dp['tanggal_pemesanan']; ?></td>
 											<td><?= $dp['status']; ?></td>
 										</tr>
 									<?php endforeach ?>
-								<?php else: ?>
-									<tr class="text-center">
-										<td colspan="4">Tidak ada data</td>
-									</tr>
 								<?php endif ?>
 							</tbody>
 						</table>
