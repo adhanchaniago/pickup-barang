@@ -48,3 +48,23 @@ function text_status($value,$jenis = 'text')
 		break;
 	}
 }
+function icon_status($value,$jenis = 'fa')
+{
+	switch ($value) {
+		case 1:
+			return $jenis.'-stopwatch';
+		break;
+		case 2:
+			return $jenis.'-shipping-fast';
+		break;
+		case 3:
+			return $jenis.'-pallet';
+		break;
+		case 4:
+			return $jenis.'-paper-plane';
+		break;
+		default:
+			return '';
+		break;
+	}
+}

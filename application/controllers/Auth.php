@@ -55,13 +55,14 @@ class Auth extends CI_Controller {
 			$this->layout->view_auth('auth/index', $data);
 		} else {
 			$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
-			$data['cek_status_pesanan'] = $this->pbm->cek_status_pesanan();
-			if ($data['cek_status_pesanan'] > 0) {
-				$data['berhasil'] = true;
+			$data['pengirim'] 			= $this->pbm->cek_status_pesanan()[0];
+			$data['penerima'] 			= $this->pbm->cek_status_pesanan();
+			if ($data['pengirim'] > 0) {
+				$data['berhasil'] 		= true;
 			} else {
-				$data['error'] = true;
+				$data['error'] 			= true;
 			}
-			$this->layout->view_auth('auth/index', $data);
+			$this->layout->view_auth('auth/cek_pesanan', $data);
 		}
 	}
 }

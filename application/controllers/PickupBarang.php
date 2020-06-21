@@ -50,16 +50,9 @@ class PickupBarang extends CI_Controller {
 				$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->nama_penerima)."'><i class='fas fa-fw fa-trash'></i></a>";
 				$button 	.= "</div>";
 			}
-			$warna 			= bg_status($item->id_status,'btn');
-			if ($item->id_status == 1) {
-				$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw fa-stopwatch"></i></span>';
-			}elseif ($item->id_status == 2) {
-				$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw fa-shipping-fast"></i></span>';
-			}elseif ($item->id_status == 3){
-				$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw fa-pallet"></i></span>';
-			}else{
-				$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw fa-check"></i></span>';
-			}
+			$warna 		= bg_status($item->id_status,'btn');
+			$icon 		= icon_status($item->id_status);
+			$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw '.$icon.'"></i></span>';
 
 			$row 	= array();
 
