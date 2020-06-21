@@ -59,10 +59,11 @@ class Auth extends CI_Controller {
 			$data['penerima'] 			= $this->pbm->cek_status_pesanan();
 			if ($data['pengirim'] > 0) {
 				$data['berhasil'] 		= true;
+				$this->layout->view_auth('auth/cek_pesanan', $data);
 			} else {
 				$data['error'] 			= true;
+				$this->layout->view_auth('auth/index', $data);
 			}
-			$this->layout->view_auth('auth/cek_pesanan', $data);
 		}
 	}
 }
