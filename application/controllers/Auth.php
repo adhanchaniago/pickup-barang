@@ -58,7 +58,7 @@ class Auth extends CI_Controller {
 		}
 		$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
 
-		if (!isset($_POST['no_wa_pengirim'])) {
+		if (!isset($_POST['dari_tanggal']) AND !isset($_POST['sampai_tanggal'])) {
 			$headline 				= ' - Hari Ini';
 			$status					= $this->status->getStatusById();
 			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
