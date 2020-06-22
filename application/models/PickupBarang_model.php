@@ -290,26 +290,52 @@ class PickupBarang_model extends CI_Model {
 
 	public function cek_status_pesanan()
 	{
-		$this->db->select('*');
-		$this->db->from('pickup_barang');
-		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
-		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
-		$this->db->join('jenis_layanan', 'pickup_barang.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
+		$no_wa_pengirim = $this->mm->no_telepon_validasi($this->input->post('no_wa_pengirim', true));
+		$dari_tanggal 	= $this->input->post('dari_tanggal', true);
+		$sampai_tanggal	= $this->input->post('sampai_tanggal', true);
+		$id_status 		= $this->input->post('id_status', true);
 
-		$this->db->join('status', 'status.id_status = pickup_barang.id_status');
-		$no_wa_pengirim = $this->mm->no_telepon_validasi($this->input->post('no_wa_pengirim'));
-		$this->db->where('pengirim.no_wa_pengirim', $no_wa_pengirim);
-		$this->db->order_by('status.id_status', 'asc');
-		return $this->db->get()->result_array();
-	}
+		if (isset($_POST['dari_tanggal']) AND isset($_POST['sampai_tanggal'])) {
+			$dateThen = $dari_tanggal . ' 00:00:00';
+			$dateLast = $sampai_tanggal . ' 23:59:58';
+		} else {
+			$dateThen = date('Y-m-d 00:00:00');
+			$dateLast = date('Y-m-d 23:59:58');
+		}
 
-	public function cek_status_pesananByNoWaPengirim($no_wa_pengirim = '')
-	{
-		$this->db->select('*');
-		$this->db->join('pengirim', 'pickup_barang.id_pengirim=pengirim.id_pengirim');
-		$this->db->join('penerima', 'pickup_barang.id_penerima=penerima.id_penerima');
-		$this->db->join('jenis_layanan', 'pickup_barang.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
-		return $this->db->get_where('pickup_barang', ['pengirim.no_wa_pengirim' => $no_wa_pengirim])->row_array();
+		if ($id_status != '') {
+			$query = "SELECT * FROM pickup_barang 
+				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+				INNER JOIN status ON pickup_barang.id_status = status.id_status 
+				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND pickup_barang.id_status = '$id_status' AND 
+				pengirim.no_wa_pengirim = '$no_wa_pengirim'
+				ORDER BY pickup_barang.tanggal_pemesanan DESC
+			";
+		} elseif ($id_status == '4') {
+			$query = "SELECT * FROM pickup_barang 
+				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+				INNER JOIN status ON pickup_barang.id_status = status.id_status 
+				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND 
+				pengirim.no_wa_pengirim = '$no_wa_pengirim'
+				ORDER BY pickup_barang.tanggal_pemesanan DESC
+			";
+		} else {
+			$query = "SELECT * FROM pickup_barang 
+				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+				INNER JOIN status ON pickup_barang.id_status = status.id_status 
+				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND 
+				pengirim.no_wa_pengirim = '$no_wa_pengirim'
+				ORDER BY pickup_barang.tanggal_pemesanan DESC
+			";
+		}
+
+		return $this->db->query($query)->result_array();
 	}
 
 	public function importExcel()

@@ -10,6 +10,7 @@ class Auth extends CI_Controller {
 		$this->load->model('PickupBarang_model', 'pbm');
 		$this->load->model('Status_model', 'status');
 		$this->load->model('Pesanan_model', 'pesm');
+		$this->load->model('Pengirim_model', 'peng');
 	}
 	
 	public function index()
@@ -52,13 +53,18 @@ class Auth extends CI_Controller {
 
 	public function cek_status_pesanan()
 	{
+		if (!isset($_POST['no_wa_pengirim'])) {
+			redirect('auth/index#cek_status_pesanan');
+		}
+		$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+
 		$headline 				= ' - Hari Ini';
 		$status					= $this->status->getStatusById();
 		$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
 		$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($no_wa_pengirim);
 		$jml_status				= $this->pesm->getJmlStatusByNoWaPengirimNoSort($no_wa_pengirim);
-		$val_dari_tanggal		= date('Y/m/d');
-		$val_sampai_tanggal		= date('Y/m/d');
+		$val_dari_tanggal		= date('Y-m-d');
+		$val_sampai_tanggal		= date('Y-m-d');
 		$dari_tanggal			= '';
 		$sampai_tanggal			= '';
 
@@ -72,15 +78,13 @@ class Auth extends CI_Controller {
 		$data["dari_tanggal"]		= $dari_tanggal;
 		$data["sampai_tanggal"]		= $sampai_tanggal;
 
-		$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
 		$this->form_validation->set_rules('no_wa_pengirim', 'No. WhatsApp Pengirim', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_auth('auth/index', $data);
 		} else {
-			$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
-			$data['pengirim'] 			= $this->pbm->cek_status_pesanan()[0];
-			$data['penerima'] 			= $this->pbm->cek_status_pesanan();
-			if ($data['pengirim'] > 0) {
+			$data['pengirim'] 			= $this->peng->getPengirimByNoWa();
+			$data['pesanan'] 			= $this->pbm->cek_status_pesanan();
+			if ($data['pesanan'] > 0) {
 				$data['berhasil'] 		= true;
 				$this->layout->view_auth('auth/cek_pesanan', $data);
 			} else {
@@ -90,39 +94,6 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	public function cek_status_pesanan_filter()
-	{
-		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['id_status'])) {
-			$dari_tanggal			= $_GET["dari_tanggal"];
-			$sampai_tanggal			= $_GET["sampai_tanggal"];
-
-			$status					= $this->status->getStatusById($_GET["id_status"]);
-			$headline 				= ' - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status['status'];
-			$pesanan 				= $this->pesm->getPesananByNoWaPengirim($_GET['dari_tanggal'], $_GET['sampai_tanggal'], $_GET['id_status'], $_GET['no_wa_pengirim']);
-			$jml_status				= $this->pesm->getJmlStatusByNoWaPengirim($_GET['dari_tanggal'], $_GET['sampai_tanggal'], $_GET['no_wa_pengirim']);
-			$val_dari_tanggal		= $dari_tanggal;
-			$val_sampai_tanggal		= $sampai_tanggal;
-
-			$data["allStatus"]			= $this->status->getAllStatus();
-			$data["headline"]			= $headline;
-			$data["status"]				= $status;
-			$data["pesanan"]			= $pesanan;
-			$data["jml_status"]			= $jml_status;
-			$data["val_dari_tanggal"]	= $val_dari_tanggal;
-			$data["val_sampai_tanggal"]	= $val_sampai_tanggal;
-			$data["dari_tanggal"]		= $dari_tanggal;
-			$data["sampai_tanggal"]		= $sampai_tanggal;
-		}
-
-		$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
-		$data['cek_status_pesanan'] = $this->pbm->cek_status_pesananByNoWaPengirim($_GET['no_wa_pengirim']);
-		if ($data['cek_status_pesanan'] > 0) {
-			$data['berhasil'] = true;
-		} else {
-			$data['error'] = true;
-		}
-		$this->layout->view_auth('auth/index', $data);
-	}
 
 	// public function datatablePesanan()
 	// {

@@ -22,8 +22,52 @@
         </table>
     </div>
     <div class="dropdown-divider"></div>
+	
+	<form method="post" action="<?= base_url('auth/cek_status_pesanan/'); ?>">
+		<?php if (isset($_POST['no_wa_pengirim'])): ?>
+			<input type="hidden" name="no_wa_pengirim" value="<?= $_POST['no_wa_pengirim']; ?>">
+		<?php endif ?>
+		<ul class="list-group list-group-flush rounded">
+			<li class="list-group-item active"><i class="fas fa-fw fa-filter"></i> Filter</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-lg">
+						<div class="form-group">
+							<label for="dari_tanggal">Dari Tanggal</label>
+		                  	<input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= $val_dari_tanggal; ?>">
+						</div>											
+					</div>
+					<div class="col-lg">
+						<div class="form-group">
+							<label for="sampai_tanggal">Sampai Tanggal</label>
+		                  	<input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $val_sampai_tanggal; ?>">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg">
+						<div class="form-group">
+		                	<label for="status">Status</label>
+			                <select name="id_status" id="status" class="form-control">
+			                    <option value="">Semua</option>
+			                    <?php foreach ($allStatus as $key): ?>
+			                      <?php if ($key["id_status"] == $status["id_status"]): ?>
+			                        <option value="<?= $key["id_status"]; ?>" selected><?= $key["status"]; ?></option>
+			                      <?php else: ?>
+			                        <option value="<?= $key["id_status"]; ?>"><?= $key["status"]; ?></option>
+			                      <?php endif ?>
+			                    <?php endforeach ?>
+			                </select>
+		                </div>
+					</div>
+				</div>
+				<button type="submit" name="btnFilter" class="btn btn-primary"><i class="fas fa-fw fa-filter"></i> Filter</button>
+			</li>
+		</ul>
+	</form>
 
-    <h5>Penerima</h5>
+    <h5>Penerima <?= $headline; ?></h5>
+
     <div class="table-responsive">
     	<table class="table table-bordered">
     		<thead>
@@ -38,7 +82,7 @@
     			</tr>
     		</thead>
     		<tbody>
-    			<?php $no=1;foreach ($penerima as $key): ?>
+    			<?php $no=1;foreach ($pesanan as $key): ?>
     			<tr>
 	    			<td><?= $no; ?></td>
 	    			<td><?= $key["no_resi"]; ?></td>

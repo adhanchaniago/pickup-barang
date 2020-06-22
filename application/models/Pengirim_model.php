@@ -56,4 +56,18 @@ class Pengirim_model extends CI_Model {
 		return 	$get_pengirim;
 	}
 
+	public function getPengirimByNoWa()
+	{
+		$no_wa_pengirim = $this->mm->no_telepon_validasi($this->input->post('no_wa_pengirim', true));
+		$query = "SELECT * FROM pickup_barang 
+			INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+			INNER JOIN status ON pickup_barang.id_status = status.id_status 
+			INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+			INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+			WHERE pengirim.no_wa_pengirim = '$no_wa_pengirim'
+		";
+		return $this->db->query($query)->row_array();
+	}
+
+
 }
