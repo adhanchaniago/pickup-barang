@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jun 2020 pada 20.13
+-- Waktu pembuatan: 22 Jun 2020 pada 20.26
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -166,7 +166,12 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (85, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:03:47', 1),
 (86, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:05:33', 1),
 (87, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:06:25', 1),
-(88, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:06:45', 1);
+(88, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:06:45', 1),
+(89, 'Pengguna admin berhasil logout', '2020-06-23 01:19:49', 1),
+(90, 'Pelanggan Andri Firman Saputra berhasil menambahkan pesanan ', '2020-06-23 01:21:36', NULL),
+(91, 'Pengguna admin berhasil login', '2020-06-23 01:22:04', 1),
+(92, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 01:22:11', 1),
+(93, 'Kurir admin Telah Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 01:22:24', 1);
 
 -- --------------------------------------------------------
 
@@ -186,7 +191,8 @@ CREATE TABLE `penerima` (
 --
 
 INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `no_wa_penerima`, `alamat_penerima`) VALUES
-(1, 'Andre Farhan Saputra', '+628782458522', 'Jl. AMD Babakan Pocis No. 69 RT02/02, Setu, Tangerang Selatan, Banten 15344');
+(1, 'Andre Farhan Saputra', '+628782458522', 'Jl. AMD Babakan Pocis No. 69 RT02/02, Setu, Tangerang Selatan, Banten 15344'),
+(2, 'Gerry Gusnawan', '+6221753498217', 'Jl. Kademangan No. 23 RT06/01, Setu, Tangerang Selatan, Banten 15315');
 
 -- --------------------------------------------------------
 
@@ -236,7 +242,9 @@ CREATE TABLE `pickup_barang` (
 --
 
 INSERT INTO `pickup_barang` (`id_pickup_barang`, `no_resi`, `id_pengirim`, `id_penerima`, `id_jenis_layanan`, `nama_barang`, `jumlah_barang`, `berat_barang`, `tanggal_pemesanan`, `tanggal_penjemputan`, `tanggal_masuk_logistik`, `tanggal_input_resi`, `id_status`) VALUES
-(1, '540700080433320', 1, 1, 3, 'Handphone xiami', 1090, 2, '2020-06-23 00:46:52', '2020-06-23 01:01:27', '2020-06-23 01:01:34', '2020-06-23 01:06:45', 4);
+(1, '540700080433320', 1, 1, 3, 'Handphone xiami', 1090, 2, '2020-06-23 00:46:52', '2020-06-23 01:01:27', '2020-06-23 01:01:34', '2020-06-23 01:06:45', 4),
+(2, NULL, 1, 1, 3, 'Handphone xiami realmie', 2, NULL, '2020-06-23 01:21:36', '2020-06-23 01:22:11', '2020-06-23 01:22:24', NULL, 3),
+(3, NULL, 1, 2, 1, 'Kerupuk Kulit', 1, NULL, '2020-06-23 01:21:36', '2020-06-23 01:22:11', '2020-06-23 01:22:24', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -361,13 +369,13 @@ ALTER TABLE `jenis_layanan`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
 --
 ALTER TABLE `penerima`
-  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengirim`
@@ -379,7 +387,7 @@ ALTER TABLE `pengirim`
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
 --
 ALTER TABLE `pickup_barang`
-  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `status`

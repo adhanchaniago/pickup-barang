@@ -25,7 +25,7 @@
 
     <h5>Penerima</h5>
     <div class="table-responsive">
-    	<table class="table">
+    	<table class="table table-bordered">
     		<thead>
     			<tr>
 	    			<th>No</th>
@@ -33,6 +33,7 @@
 	    			<th>Nama Penerima</th>
 	    			<th>No Wa</th>
 	    			<th>Alamat</th>
+	    			<th>Keterangan Barang</th>
 	    			<th>Status</th>
     			</tr>
     		</thead>
@@ -44,6 +45,11 @@
 	    			<td><?= $key["nama_penerima"]; ?></td>
 	    			<td><?= $key["no_wa_penerima"]; ?></td>
 	    			<td><?= $key["alamat_penerima"]; ?></td>
+	    			<td>
+	    				<strong>Nama Barang: </strong> <?= $key["nama_barang"]; ?>,  
+	    				<strong>Jumlah Barang: </strong> <?= number_format($key['jumlah_barang']); ?> Unit, 
+	    				<strong>Berat Barang: </strong> <?= number_format($key['berat_barang']); ?> Kg
+	    			</td>
 	    			<td>
 	    				<div class="text-center">
 	    				<a href="#" class="btn btn-sm <?= bg_status($key["id_status"]); ?> <?= text_status($key["id_status"]); ?>">
