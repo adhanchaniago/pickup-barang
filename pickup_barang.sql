@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Jun 2020 pada 09.56
+-- Waktu pembuatan: 22 Jun 2020 pada 20.13
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -140,7 +140,33 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (59, 'Pengguna admin mengimport nomor resi ', '2020-06-21 14:28:55', 1),
 (60, 'Pengguna admin mengimport nomor resi ', '2020-06-21 14:30:57', 1),
 (61, 'Pengguna admin mengimport nomor resi ', '2020-06-21 14:31:09', 1),
-(62, 'Pengguna admin mengimport nomor resi ', '2020-06-21 14:35:04', 1);
+(62, 'Pengguna admin mengimport nomor resi ', '2020-06-21 14:35:04', 1),
+(63, 'Pengguna admin berhasil logout', '2020-06-21 14:58:03', 1),
+(64, 'Pengguna admin berhasil login', '2020-06-21 19:22:18', 1),
+(65, 'Pengguna admin berhasil logout', '2020-06-21 20:35:51', 1),
+(66, 'Pelanggan Andre Farhan Saputra berhasil menambahkan pesanan ', '2020-06-21 20:36:25', NULL),
+(67, 'Pengguna admin berhasil login', '2020-06-21 20:37:15', 1),
+(68, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 69', '2020-06-21 20:37:22', 1),
+(69, 'Pengguna admin berhasil login', '2020-06-22 20:10:48', 1),
+(70, 'Pengguna admin berhasil login', '2020-06-23 00:08:35', 1),
+(71, 'Pengguna admin berhasil login', '2020-06-23 00:11:03', 1),
+(72, 'Pengguna admin berhasil logout', '2020-06-23 00:20:05', 1),
+(73, 'Pengguna admin berhasil login', '2020-06-23 00:20:43', 1),
+(74, 'Pengguna admin berhasil logout', '2020-06-23 00:21:09', 1),
+(75, 'Pengguna admin berhasil login', '2020-06-23 00:22:50', 1),
+(76, 'Pelanggan Andri Firman Saputra berhasil menambahkan pesanan ', '2020-06-23 00:46:52', NULL),
+(77, 'Pengguna admin berhasil login', '2020-06-23 00:47:06', 1),
+(78, 'Pengguna admin berhasil login', '2020-06-23 00:50:36', 1),
+(79, 'Pengguna admin mengimport nomor resi ', '2020-06-23 00:53:55', 1),
+(80, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:00:54', 1),
+(81, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:01:06', 1),
+(82, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 01:01:27', 1),
+(83, 'Kurir admin Telah Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 01:01:34', 1),
+(84, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:01:51', 1),
+(85, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:03:47', 1),
+(86, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:05:33', 1),
+(87, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:06:25', 1),
+(88, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:06:45', 1);
 
 -- --------------------------------------------------------
 
@@ -160,8 +186,7 @@ CREATE TABLE `penerima` (
 --
 
 INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `no_wa_penerima`, `alamat_penerima`) VALUES
-(1, 'Anderson', '+6287832211222', 'New York No. 12'),
-(2, 'Anderson Farhan', '+62898123123', 'Jl. AMD Babakan Pocis No. 69, Setu, Tangsel, Banten 15315');
+(1, 'Andre Farhan Saputra', '+628782458522', 'Jl. AMD Babakan Pocis No. 69 RT02/02, Setu, Tangerang Selatan, Banten 15344');
 
 -- --------------------------------------------------------
 
@@ -182,7 +207,7 @@ CREATE TABLE `pengirim` (
 --
 
 INSERT INTO `pengirim` (`id_pengirim`, `nama_pengirim`, `no_wa_pengirim`, `alamat_pengirim`, `ip_address`) VALUES
-(1, 'Andri Firman Saputra', '+6287808675313', 'Jl. AMD Babakan Pocis No. 100', '::1');
+(1, 'Andri Firman Saputra', '+6287808675313', 'Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '::1');
 
 -- --------------------------------------------------------
 
@@ -196,10 +221,13 @@ CREATE TABLE `pickup_barang` (
   `id_pengirim` int(11) NOT NULL,
   `id_penerima` int(11) NOT NULL,
   `id_jenis_layanan` int(11) NOT NULL,
+  `nama_barang` varchar(100) NOT NULL,
+  `jumlah_barang` int(11) NOT NULL,
+  `berat_barang` float DEFAULT NULL,
   `tanggal_pemesanan` datetime DEFAULT NULL,
   `tanggal_penjemputan` datetime DEFAULT NULL,
   `tanggal_masuk_logistik` datetime DEFAULT NULL,
-  `tanggal_input_resi` datetime NOT NULL,
+  `tanggal_input_resi` datetime DEFAULT NULL,
   `id_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -207,9 +235,8 @@ CREATE TABLE `pickup_barang` (
 -- Dumping data untuk tabel `pickup_barang`
 --
 
-INSERT INTO `pickup_barang` (`id_pickup_barang`, `no_resi`, `id_pengirim`, `id_penerima`, `id_jenis_layanan`, `tanggal_pemesanan`, `tanggal_penjemputan`, `tanggal_masuk_logistik`, `tanggal_input_resi`, `id_status`) VALUES
-(1, '540700080433320', 1, 1, 3, '2020-06-21 12:09:14', '2020-06-21 12:09:51', '2020-06-21 12:09:57', '2020-06-21 14:35:04', 4),
-(2, NULL, 1, 2, 3, '2020-06-21 14:19:36', '2020-06-21 14:26:50', '2020-06-21 14:26:56', '0000-00-00 00:00:00', 3);
+INSERT INTO `pickup_barang` (`id_pickup_barang`, `no_resi`, `id_pengirim`, `id_penerima`, `id_jenis_layanan`, `nama_barang`, `jumlah_barang`, `berat_barang`, `tanggal_pemesanan`, `tanggal_penjemputan`, `tanggal_masuk_logistik`, `tanggal_input_resi`, `id_status`) VALUES
+(1, '540700080433320', 1, 1, 3, 'Handphone xiami', 1090, 2, '2020-06-23 00:46:52', '2020-06-23 01:01:27', '2020-06-23 01:01:34', '2020-06-23 01:06:45', 4);
 
 -- --------------------------------------------------------
 
@@ -334,13 +361,13 @@ ALTER TABLE `jenis_layanan`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
 --
 ALTER TABLE `penerima`
-  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengirim`
@@ -352,7 +379,7 @@ ALTER TABLE `pengirim`
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
 --
 ALTER TABLE `pickup_barang`
-  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `status`

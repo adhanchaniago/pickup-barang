@@ -79,11 +79,8 @@
 					<button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-search"></i> Lacak</button>
 				</form>
 				<br>
-				<?php if (isset($error)): ?>
-					<h4>Pesanan tidak ditemukan!</h4>
-					<p>Silahkan periksa kembali No. Whatsapp Anda</p>
-				<?php endif ?>
 			</div>
+		</div>
 		<?php if (isset($error)): ?>
 			<div class="row">
 				<div class="col-lg text-center">

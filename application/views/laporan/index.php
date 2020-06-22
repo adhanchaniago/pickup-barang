@@ -100,6 +100,7 @@
 		  								<th>Tanggal Pemesanan</th>
 		  								<th>Tanggal Penjemputan</th>
 		  								<th>Tanggal Masuk Logistik</th>
+		  								<th>Keterangan Barang</th>
 		  								<th>Jenis Layanan</th>
 		  								<th>Status</th>
 		  							</tr>
@@ -123,6 +124,7 @@
 	  										<?php else: ?>
 			  									<td><?= $dl['tanggal_masuk_logistik']; ?></td>
 		  									<?php endif ?>
+		  									<td><strong>Nama: </strong> <?= $dl['nama_barang']; ?>, <strong>Jumlah: </strong> <?= number_format($dl['jumlah_barang']); ?>, <strong>Berat: </strong> <?= number_format($dl['berat_barang']); ?> Kg</td>
 		  									<td><?= $dl['jenis_layanan']; ?></td>
 		  									<td><?= $dl['status']; ?></td>
 		  								</tr>

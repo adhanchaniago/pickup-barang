@@ -79,6 +79,24 @@
 					</td>
 				</tr>
 				<tr>
+					<td>Nama Barang</td>
+					<td>
+						<div class="form-group">
+							<input type="text" value="<?= set_value('nama_barang[]'); ?>" name="nama_barang[]" class="form-control" placeholder="Masukkan Nama Barang" required="required">
+           		 			<?= form_error('nama_barang[]', '<small class="form-text text-danger">', '</small>'); ?>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>Jumlah Barang</td>
+					<td>
+						<div class="form-group">
+							<input type="number" min="1" value="<?= set_value('jumlah_barang[]'); ?>" name="jumlah_barang[]" class="form-control" placeholder="Masukkan Jumlah Barang" required="required">
+           		 			<?= form_error('jumlah_barang[]', '<small class="form-text text-danger">', '</small>'); ?>
+						</div>
+					</td>
+				</tr>
+				<tr>
 					<td>Layanan</td>
 					<td>
 						<select name="jenis_layanan[]" class="form-control  jenis_layanan" >

@@ -95,6 +95,18 @@
         		<td id="alamat_penerima"></td>
         	</tr>
         	<tr>
+        		<td>Nama Barang</td>
+        		<td id="nama_barang"></td>
+        	</tr>
+        	<tr>
+        		<td>Jumlah Barang</td>
+        		<td id="jumlah_barang"></td>
+        	</tr>
+        	<tr>
+        		<td>Berat Barang</td>
+        		<td id="berat_barang"></td>
+        	</tr>
+        	<tr>
         		<td>Layanan</td>
         		<td id="jenis_layanan"></td>
         	</tr>

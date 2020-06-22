@@ -27,5 +27,21 @@ class Main_model extends CI_Model {
 		$this->db->join('jabatan', 'user.id_jabatan = jabatan.id_jabatan');
 		return $this->db->get_where('user', ['user.id_user' => $id_user])->row_array();
 	}
+
+	public function no_telepon_validasi($no_wa = '')
+	{
+		$firstDigit = substr($no_wa, 0, 1);
+		if ($firstDigit == '0') {
+			$no_wa = substr($no_wa, 1);
+			$no_wa = '+62' . $no_wa;
+		} elseif ($firstDigit == '6') {
+			$no_wa = '+' . $no_wa;
+		} elseif ($firstDigit == '8') {
+			$no_wa = '+62' . $no_wa;
+		} elseif ($firstDigit !== '+') {
+			$no_wa = '+62' . $no_wa;
+		}
+		return $no_wa;
+	}
 }
 	

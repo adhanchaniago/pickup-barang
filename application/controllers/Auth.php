@@ -54,8 +54,9 @@ class Auth extends CI_Controller {
 	{
 		$headline 				= ' - Hari Ini';
 		$status					= $this->status->getStatusById();
-		$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($_POST['no_wa_pengirim']);
-		$jml_status				= $this->pesm->getJmlStatusByNoWaPengirimNoSort($_POST['no_wa_pengirim']);
+		$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
+		$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($no_wa_pengirim);
+		$jml_status				= $this->pesm->getJmlStatusByNoWaPengirimNoSort($no_wa_pengirim);
 		$val_dari_tanggal		= date('Y/m/d');
 		$val_sampai_tanggal		= date('Y/m/d');
 		$dari_tanggal			= '';

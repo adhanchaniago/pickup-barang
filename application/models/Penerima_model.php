@@ -35,17 +35,7 @@ class Penerima_model extends CI_Model {
 
 		$penerima["nama_penerima"]			= $nama_penerima;
 		$penerima["alamat_penerima"]		= $alamat_penerima;
-		$firstDigit 						= substr($no_wa_penerima, 0, 1);
-		if ($firstDigit == '0') {
-			$no_wa_penerima = substr($no_wa_penerima, 1);
-			$no_wa_penerima = '+62' . $no_wa_penerima;
-		} elseif ($firstDigit == '6') {
-			$no_wa_penerima = '+' . $no_wa_penerima;
-		} elseif ($firstDigit == '8') {
-			$no_wa_penerima = '+62' . $no_wa_penerima;
-		} else {
-			$no_wa_penerima = '+62' . $no_wa_penerima;
-		}
+		$no_wa_penerima						= $this->mm->no_telepon_validasi($no_wa_penerima);
 		$penerima["no_wa_penerima"]			= $no_wa_penerima;
 		$this->db->insert('penerima', $penerima);
 		return $this->db->insert_id();

@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="col-md-8 col-12 pt-md-2 text-md-right text-center mb-md-0 mb-2">
-          <a href="#" class="m-1 btn btn-success mt-md-4" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-box"></i>  Import Resi</a>
+          <a href="#" class="m-1 btn btn-success mt-md-4" data-toggle="modal" data-target="#importResiModal"><i class="fas fa-fw fa-box"></i>  Import Resi</a>
           <a href="<?= base_url('pickupBarang/kurir') ?>" class="m-1 btn btn-danger mt-md-4"><i class="fas fa-fw fa-box"></i>  Pickup Barang</a>
           <a href="<?= base_url('pickupBarang/form') ?>" class="m-1 btn btn-primary mt-md-4"><i class="fas fa-fw fa-plus"></i> Tambah</a>
         </div>
@@ -169,11 +169,11 @@
 
 <!-- Modal -->
 <form action="<?= base_url('pickupBarang/importExcel') ?>" method="post" enctype="multipart/form-data">
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="importResiModal" tabindex="-1" role="dialog" aria-labelledby="importResiModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Import Resi</h5>
+          <h5 class="modal-title" id="importResiModalLabel">Import Resi</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

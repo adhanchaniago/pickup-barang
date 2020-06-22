@@ -144,6 +144,9 @@ $(function() {
                     $(modal+ ' #nama_penerima').html(response.nama_penerima);
                     $(modal+ ' #no_wa_penerima').html(response.no_wa_penerima);
                     $(modal+ ' #alamat_penerima').html(response.alamat_penerima);
+                    $(modal+ ' #nama_barang').html(response.nama_barang);
+                    $(modal+ ' #jumlah_barang').html(response.jumlah_barang);
+                    $(modal+ ' #berat_barang').html(response.berat_barang);
                     $(modal+ ' #jenis_layanan').html(response.jenis_layanan);
                 }
             })

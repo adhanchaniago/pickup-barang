@@ -123,12 +123,16 @@ class PickupBarang_model extends CI_Model {
 			}
 
 			$id_jenis_layanan 	= $this->input->post('jenis_layanan')[$i];
+			$nama_barang 		= $this->input->post('nama_barang')[$i];
+			$jumlah_barang 		= $this->input->post('jumlah_barang')[$i];
 
 			// pickup
 			$pickup["no_resi"]				= NULL;
 			$pickup["id_pengirim"]			= $id_pengirim;
 			$pickup["id_penerima"]			= $id_penerima;
 			$pickup["id_jenis_layanan"]		= $id_jenis_layanan;
+			$pickup["nama_barang"]			= $nama_barang;
+			$pickup["jumlah_barang"]		= $jumlah_barang;
 			$pickup["tanggal_pemesanan"]	= date('Y-m-d H:i:s');
 			$pickup["id_status"]			= 1;
 			$data[]							= $pickup;
@@ -293,7 +297,8 @@ class PickupBarang_model extends CI_Model {
 		$this->db->join('jenis_layanan', 'pickup_barang.id_jenis_layanan=jenis_layanan.id_jenis_layanan');
 
 		$this->db->join('status', 'status.id_status = pickup_barang.id_status');
-		$this->db->where('pengirim.no_wa_pengirim', $this->input->post('no_wa_pengirim'));
+		$no_wa_pengirim = $this->mm->no_telepon_validasi($this->input->post('no_wa_pengirim'));
+		$this->db->where('pengirim.no_wa_pengirim', $no_wa_pengirim);
 		$this->db->order_by('status.id_status', 'asc');
 		return $this->db->get()->result_array();
 	}
@@ -334,6 +339,7 @@ class PickupBarang_model extends CI_Model {
 			foreach($sheet as $row){
 				if($numrow > 0){
 					$no_resi 		= $row["A"];
+					$berat_barang	= $row["D"];
 					$no_wa_pengirim = $row["I"];
 					$no_wa_penerima = $row["K"];
 
@@ -350,6 +356,8 @@ class PickupBarang_model extends CI_Model {
 						$data 						= $cek->row_array();
 						$id_pickup_barang 			= $data["id_pickup_barang"];
 						$no_resi 					= preg_replace('/[^0-9]/', "", $no_resi);
+						$berat_barang 				= preg_replace('/[^0-9]/', "", $berat_barang);
+						$upd["berat_barang"]				= $berat_barang;
 						$upd["no_resi"]				= $no_resi;
 						$upd["id_status"]			= 4;
 						$upd['tanggal_input_resi']	= date('Y-m-d H:i:s');
