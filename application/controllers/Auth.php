@@ -58,15 +58,28 @@ class Auth extends CI_Controller {
 		}
 		$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
 
-		$headline 				= ' - Hari Ini';
-		$status					= $this->status->getStatusById();
-		$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
-		$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($no_wa_pengirim);
-		$jml_status				= $this->pesm->getJmlStatusByNoWaPengirimNoSort($no_wa_pengirim);
-		$val_dari_tanggal		= date('Y-m-d');
-		$val_sampai_tanggal		= date('Y-m-d');
-		$dari_tanggal			= '';
-		$sampai_tanggal			= '';
+		if (!isset($_POST['no_wa_pengirim'])) {
+			$headline 				= ' - Hari Ini';
+			$status					= $this->status->getStatusById();
+			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
+			$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($no_wa_pengirim);
+			$jml_status				= $this->pesm->getJmlStatusByNoWaPengirimNoSort($no_wa_pengirim);
+			$val_dari_tanggal		= date('Y-m-d');
+			$val_sampai_tanggal		= date('Y-m-d');
+			$dari_tanggal			= '';
+			$sampai_tanggal			= '';
+		} else {
+			$dari_tanggal			= $_POST["dari_tanggal"];
+			$sampai_tanggal			= $_POST["sampai_tanggal"];
+			$status					= $this->status->getStatusById($_POST["id_status"]);
+			$headline 				= ' - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status['status'];
+			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
+			$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($no_wa_pengirim);
+			$jml_status				= $this->pesm->getJmlStatusByNoWaPengirimNoSort($no_wa_pengirim);
+			$val_dari_tanggal		= $dari_tanggal;
+			$val_sampai_tanggal		= $sampai_tanggal;
+		}
+
 
 		$data["allStatus"]			= $this->status->getAllStatus();
 		$data["headline"]			= $headline;
