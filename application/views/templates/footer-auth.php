@@ -16,12 +16,11 @@
     <script src="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.full.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/datatables-1.10.21/js/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/datatables-1.10.21/js/dataTables.bootstrap4.min.js'); ?>"></script>
-    <script src="<?php echo base_url() ?>assets/datatables-responsive/js/dataTables.responsive.min.js" defer></script>
-    <script src="<?php echo base_url() ?>assets/datatables-responsive/js/responsive.bootstrap4.min.js" defer></script>
+    <script src="<?= base_url('assets/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
+    <script src="<?= base_url('assets/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
 
     <div id="data-auth" data-url="<?= base_url() ?>" data-link="<?= $def_link; ?>"></div>
     <!-- My JS -->
-    <script src="<?= base_url('assets/js/admin.js'); ?>"></script>
     <script src="<?= base_url('assets/js/script.js'); ?>"></script>
 	
 	<!-- Config -->

@@ -84,7 +84,7 @@
 					<p>Silahkan periksa kembali No. Whatsapp Anda</p>
 				<?php endif ?>
 			</div>
-		<?php elseif (isset($error)): ?>
+		<?php if (isset($error)): ?>
 			<div class="row">
 				<div class="col-lg text-center">
 					<div class="alert alert-danger alert-dismissible fade show" role="alert">

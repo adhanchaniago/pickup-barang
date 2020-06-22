@@ -23,12 +23,12 @@ class Laporan extends CI_Controller {
 			$status					= $getStatus["status"];
 			$id_status				= $getStatus["id_status"];
 
-			$laporan 				= $this->lm->getLaporan($_POST['dari_tanggal'], $_POST['sampai_tanggal'], $_POST['id_status']);
 			$dari_tanggal 			= $this->input->post('dari_tanggal');
 			$sampai_tanggal 		= $this->input->post('sampai_tanggal');
 			$val_dari_tanggal 		= $dari_tanggal;
 			$val_sampai_tanggal		= $sampai_tanggal;
-
+			
+			$laporan 				= $this->lm->getLaporan($dari_tanggal, $sampai_tanggal, $id_status);
 		} else {
 			$title 					= 'Laporan - ' . $data['dataUser']['username'];
 			$laporan 				= $this->lm->getLaporan();

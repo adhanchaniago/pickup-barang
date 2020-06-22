@@ -13,11 +13,9 @@ class Laporan_model extends CI_Model {
 		if ($dari_tanggal !== '' AND $sampai_tanggal !== '' AND $status !== '') {
 			$dateThen = $dari_tanggal . ' 00:00:00';
 			$dateLast = $sampai_tanggal . ' 23:59:58';
-			$status = $status;
 		} else {
 			$dateThen = date('Y-m-d 00:00:00');
 			$dateLast = date('Y-m-d 23:59:58');
-			$status = '';
 		}
 
 		if ($status != '') {
@@ -30,6 +28,7 @@ class Laporan_model extends CI_Model {
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
 		} else {
+			
 			$query = "SELECT * FROM pickup_barang 
 				INNER JOIN status ON pickup_barang.id_status = status.id_status 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
