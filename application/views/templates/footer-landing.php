@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white py-4 px-2">
+<footer class="bg-dark text-white py-4 px-2 not_print">
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-lg-6 my-3">

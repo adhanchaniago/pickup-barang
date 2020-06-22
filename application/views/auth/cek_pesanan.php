@@ -1,6 +1,21 @@
+<style>
+	.d-none {
+		display: none;
+	}
+	@media print {
+		.not_print {
+			display: none;
+		}
+		.is_print {
+			display: block!important;
+		}
+	}
+</style>
+
+
 <section class="bg-light p-3 rounded bg-white shadow-sm container my-2">
 
-	<div class="table-responsive">
+	<div class="table-responsive not_print">
 		<a href="<?= base_url('auth') ?>" class="close"><i class="fas fa-fw fa-times"></i></a>
 		<h5>Pengirim</h5>
 		<table class="table text-left">
@@ -21,9 +36,9 @@
             </tr>
         </table>
     </div>
-    <div class="dropdown-divider"></div>
+    <div class="not_print dropdown-divider"></div>
 	
-	<form method="post" action="<?= base_url('auth/cek_status_pesanan/'); ?>">
+	<form method="post" class="not_print" action="<?= base_url('auth/cek_status_pesanan/'); ?>">
 		<?php if (isset($_POST['no_wa_pengirim'])): ?>
 			<input type="hidden" name="no_wa_pengirim" value="<?= $_POST['no_wa_pengirim']; ?>">
 		<?php endif ?>
@@ -62,6 +77,7 @@
 					</div>
 				</div>
 				<button type="submit" name="btnFilter" class="btn btn-primary"><i class="fas fa-fw fa-filter"></i> Filter</button>
+				<button type="button" onclick="window.print()" class="btn btn-success"><i class="fas fa-fw fa-print"></i> Print</button>
 			</li>
 		</ul>
 	</form>
@@ -75,7 +91,7 @@
 	    			<th>No</th>
 	    			<th>No Resi</th>
 	    			<th>Nama Penerima</th>
-	    			<th>No Wa</th>
+	    			<th>No. WhatsApp</th>
 	    			<th>Alamat</th>
 	    			<th>Keterangan Barang</th>
 	    			<th>Status</th>
@@ -96,9 +112,18 @@
 		    			</td>
 		    			<td>
 		    				<div class="text-center">
-			    				<a href="#" data-target="#progressModal<?= $key['id_pickup_barang']; ?>" data-toggle="modal" class="btn btn-sm <?= bg_status($key["id_status"]); ?> <?= text_status($key["id_status"]); ?>">
+			    				<a href="#" data-target="#progressModal<?= $key['id_pickup_barang']; ?>" data-toggle="modal" class="not_print btn btn-sm <?= bg_status($key["id_status"]); ?> <?= text_status($key["id_status"]); ?>">
 			    					<i class="fas fa-fw <?= icon_status($key["id_status"]); ?>"></i>
 				    			</a>
+				    			<?php if ($key['status'] == '1'): ?>
+				    				<span class="d-none is_print text-dark">Pending</span>
+				    			<?php elseif ($key['status'] == '2'): ?>
+				    				<span class="d-none is_print text-dark">Kurir Menjemput</span>
+				    			<?php elseif ($key['status'] == '3'): ?>
+					    			<span class="d-none is_print text-dark">Barang Masuk Logistik</span>
+				    			<?php else: ?>
+					    			<span class="d-none is_print text-dark">No. Resi Dicetak</span>
+				    			<?php endif ?>
 			    			</div>
 			    		</td>
 	    			</tr>
