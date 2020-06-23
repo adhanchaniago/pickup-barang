@@ -397,6 +397,7 @@ class PickupBarang_model extends CI_Model {
 						$upd['tanggal_input_resi']	= date('Y-m-d H:i:s');
 						$this->db->where('id_pickup_barang', $id_pickup_barang);
 						$this->db->update('pickup_barang', $upd);
+						$this->sendMessage($id_pickup_barang);
 					}
 				}
 				$numrow++;
