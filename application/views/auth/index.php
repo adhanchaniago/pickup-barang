@@ -47,7 +47,7 @@
 	<div class="container">
 		<div class="row py-5">
 			<div class="col-lg text-center px-5">
-				<h2>Tenang Kami</h2>
+				<h2>Tentang Kami</h2>
 				<hr class="bg-blue">
 				<p>
 					JNE merupakan perusahaan yang bergerak dalam bidang pengiriman dan logistik yang bermarkas di Jakarta, Indonesia. Nama resminya adalah Tiki Jalur Nugraha Ekakurir (Tiki JNE).

@@ -19,6 +19,7 @@ class PickupBarang_model extends CI_Model {
 		$this->db->join('pengirim', 'pengirim.id_pengirim = pickup_barang.id_pengirim');
 		$this->db->join('penerima', 'penerima.id_penerima = pickup_barang.id_penerima');
 		$this->db->join('jenis_layanan', 'jenis_layanan.id_jenis_layanan = pickup_barang.id_jenis_layanan');
+		$this->db->join('status', 'status.id_status = pickup_barang.id_status');
 	}
 	public function _filterDatatable()
 	{
@@ -313,16 +314,16 @@ class PickupBarang_model extends CI_Model {
 				pengirim.no_wa_pengirim = '$no_wa_pengirim'
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
-		} elseif ($id_status == '4') {
-			$query = "SELECT * FROM pickup_barang 
-				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
-				INNER JOIN status ON pickup_barang.id_status = status.id_status 
-				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
-				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
-				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND 
-				pengirim.no_wa_pengirim = '$no_wa_pengirim'
-				ORDER BY pickup_barang.tanggal_pemesanan DESC
-			";
+		// } elseif ($id_status == '4') {
+		// 	$query = "SELECT * FROM pickup_barang 
+		// 		INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+		// 		INNER JOIN status ON pickup_barang.id_status = status.id_status 
+		// 		INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+		// 		INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+		// 		WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND 
+		// 		pengirim.no_wa_pengirim = '$no_wa_pengirim'
+		// 		ORDER BY pickup_barang.tanggal_pemesanan DESC
+		// 	";
 		} else {
 			$query = "SELECT * FROM pickup_barang 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 

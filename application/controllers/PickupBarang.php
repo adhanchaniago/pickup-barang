@@ -225,8 +225,10 @@ class PickupBarang extends CI_Controller {
 	
 	public function kirimResi($id_pickup_barang)
 	{
-		$data = $this->pbm->getPickupBarangById($id_pickup_barang);
-		redirect('https://api.whatsapp.com/send?phone='.$data['no_wa_pengirim'].'&text=No. Resi Anda ' . $data['no_resi']);
+		$data 	= $this->pbm->getPickupBarangById($id_pickup_barang);
+		$text 	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
+		redirect('https://api.whatsapp.com/send?phone='.$data['no_wa_pengirim'].'&text=' . $text);
 	}
+
 
 }

@@ -27,6 +27,9 @@ $(function() {
         case 'pickupBarang/detailPickup':
             kurirDetailPickup();
         break;
+        case 'auth/cek_status_pesanan':
+            cekStatusPesanan();
+        break;
     }
 
     function formPickupBarang() {
@@ -191,6 +194,97 @@ $(function() {
         $('#search').on('keyup',function() {
             data.search     = $('#search').val();
             load(data,1);
+        })
+    }
+
+    function cekStatusPesanan() {
+        let warnaBar    = '';
+        $('.table').on('click','.btn-detail-status',function(e) {
+            e.preventDefault();
+            let id              = $(this).data('id');
+            let modal           = $('#progressModal');
+            let progressBar     = modal.find('.progress-bar');
+            modal.modal('show');
+            $.ajax({
+                url             : url + 'pickupBarang/getPickupBarangById',
+                data            : {id_pickup_barang : id},
+                method          : 'post',
+                dataType        : 'json',
+                success         : function(response) {
+                    progressBar.removeClass(warnaBar);
+                    progressBar.css({"width" : 0 + '%'});
+
+                    if (response.id_status == 4) {
+                        modal.find('.modal-title').html('Status Barang - '+response.nama_barang+', '+ response.no_resi);
+                    }else{
+                        modal.find('.modal-title').html('Status Barang - '+response.nama_barang);
+                    }
+                    let width   = 'bg-danger';
+                    let warna   = 50;
+                    let html    = '';
+
+                    switch(parseInt(response.id_status)){
+                        case 1:
+                            width   = 12;
+                            warna   = 'bg-danger';
+                            html    = `
+                            <tr>
+                            <th>Pending</th>
+                            <td>${response.tanggal_pemesanan}</td>
+                            </tr>
+                            `;
+                        break;
+                        case 2:
+                            width   = 37;
+                            warna   = 'bg-warning';
+                        break;
+                        case 3:
+                            width   = 63;
+                            warna   = 'bg-success';
+                        break;
+                        case 4:
+                            width   = 100;
+                            warna   = 'bg-primary';
+                        break;
+                    }
+                    if(parseInt(response.id_status) >= 1){
+                        html    += `
+                        <tr>
+                        <th>Pending</th>
+                        <td>${response.tanggal_pemesanan}</td>
+                        </tr>
+                        `;}
+                    if(parseInt(response.id_status) >= 2){
+                        html    += `
+                        <tr>
+                        <th>Kurir Menjemput</th>
+                        <td>${response.tanggal_penjemputan}</td>
+                        </tr>
+                        `;}
+                    if(parseInt(response.id_status) >= 3){
+                         html    += `
+                        <tr>
+                        <th>Barang Masuk Logistik</th>
+                        <td>${response.tanggal_masuk_logistik}</td>
+                        </tr>
+                        `;}
+                    if(parseInt(response.id_status) >= 4){
+                        html    += `
+                        <tr>
+                        <th>Resi Terkirim</th>
+                        <td>${response.tanggal_input_resi}</td>
+                        </tr>
+                        `;}
+                    warnaBar    = warna;
+                    progressBar.addClass(warna);
+                    progressBar.css({"width" : width + '%'});
+
+                    modal.find('table').html(html);
+
+
+                }
+            })
+
         })
     }
 })
