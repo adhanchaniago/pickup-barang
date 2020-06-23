@@ -414,30 +414,55 @@ class PickupBarang_model extends CI_Model {
 		$data 		= $this->getPickupBarangById($id_pickup_barang);
 		$message	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
 
-		$phone 		= $data["no_wa_pengirim"];
-		$phone 		= preg_replace('/[^0-9]/', "", $phone);
+		$phone			= "+6281510030416";
+		// $phone 		= $data["no_wa_pengirim"];
+		// $phone 		= preg_replace('/[^0-9]/', "", $phone);
 
-		$apiURL		= "https://api.api4bot.com/instance142262/";
-		$token		= "8sauxoikjlotij7j";
+		// chat-api
 
+		// $apiURL		= "https://api.api4bot.com/instance142262/";
+		// $token		= "8sauxoikjlotij7j";
 
-		$data = json_encode(
-			[
-				'chatId'	=>$phone.'@c.us',
-				'body'		=>$message
-			]
+		// $data = json_encode(
+		// 	[
+		// 		'chatId'	=>$phone.'@c.us',
+		// 		'body'		=>$message
+		// 	]
+		// );
+		// $url 		= $apiURL.'message?token='.$token;
+		// $options 	= stream_context_create(
+		// 	['http' =>
+		// 		[
+		// 		'method'  => 'POST',
+		// 		'header'  => 'Content-type: application/json',
+		// 		'content' => $data
+		// 		]
+		// 	]
+		// );
+		// $response = file_get_contents($url,false,$options);
+
+		// woowa
+
+		$key_demo='db63f52c1a00d33cf143524083dd3ffd025d672e255cc688';
+		$url='http://149.28.156.46:8000/demo/send_message';
+		$data = array(
+		  "no_wa"=> $phone,
+		  "key"   =>$key_demo,
+		  "message" =>$message
 		);
-		$url 		= $apiURL.'message?token='.$token;
-		$options 	= stream_context_create(
-			['http' =>
-				[
-				'method'  => 'POST',
-				'header'  => 'Content-type: application/json',
-				'content' => $data
-				]
-			]
-		);
-		$response = file_get_contents($url,false,$options);
+
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_VERBOSE, 0);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		  'Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA=='
+		));
+		echo $res=curl_exec($ch);
+		curl_close($ch);
 
 	}
 
