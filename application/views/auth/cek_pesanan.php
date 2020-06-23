@@ -142,6 +142,11 @@
 			    		</td>
 	    			</tr>
     			<?php $no++;endforeach ?>
+    			<?php if (count($pesanan) == 0): ?>
+    				<tr>
+    					<td colspan="7" class="text-center">Data Tidak Ditemukan</td>
+    				</tr>
+    			<?php endif ?>
     		</tbody>
     	</table>
     </div>

@@ -56,7 +56,7 @@ class Auth extends CI_Controller {
 		if (!isset($_POST['no_wa_pengirim'])) {
 			redirect('auth/index#cek_status_pesanan');
 		}
-		$data['title']	 			= 'Selamat Datang di JNE Tangsel BSD Nusaloka';
+		$data['title']	 			= 'Cek Pesanan - '.$this->input->post('no_wa_pengirim');
 
 		if (!isset($_POST['dari_tanggal']) AND !isset($_POST['sampai_tanggal'])) {
 			$headline 				= ' - Hari Ini';
@@ -102,7 +102,7 @@ class Auth extends CI_Controller {
 				$this->layout->view_auth('auth/cek_pesanan', $data);
 			} else {
 				$data['error'] 			= true;
-				$this->layout->view_auth('auth/index', $data);
+				$this->layout->view_auth('auth/cek_pesanan', $data);
 			}
 		}
 	}
