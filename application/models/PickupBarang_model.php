@@ -379,7 +379,12 @@ class PickupBarang_model extends CI_Model {
 					$this->db->where('id_status', 3);
 					$cek 			= $this->db->get();
 
-					if ($cek->num_rows()  ==  1) {
+					$this->db->select('id_pickup_barang');
+					$this->db->from('pickup_barang');
+					$this->db->where('no_resi', $no_resi);
+					$cek_resi 		= $this->db->get()->num_rows();
+
+					if ($cek->num_rows()  ==  1 && $cek_resi == 0) {
 						$data 						= $cek->row_array();
 						$id_pickup_barang 			= $data["id_pickup_barang"];
 						$no_resi 					= preg_replace('/[^0-9]/', "", $no_resi);
