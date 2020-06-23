@@ -369,6 +369,7 @@ class PickupBarang_model extends CI_Model {
 					$berat_barang	= $row["D"];
 					$no_wa_pengirim = $row["I"];
 					$no_wa_penerima = $row["K"];
+					$jumlah_barang 	= $row["E"];
 
 					$this->db->select('id_pickup_barang,no_wa_pengirim,nama_penerima,alamat_penerima,no_wa_penerima');
 					$this->db->from('pickup_barang');
@@ -376,6 +377,7 @@ class PickupBarang_model extends CI_Model {
 					$this->db->join('penerima', 'penerima.id_penerima = pickup_barang.id_penerima');
 					$this->db->where('no_wa_pengirim', $no_wa_pengirim);
 					$this->db->where('no_wa_penerima', $no_wa_penerima);
+					$this->db->where('jumlah_barang', $jumlah_barang);
 					$this->db->where('id_status', 3);
 					$cek 			= $this->db->get();
 
@@ -389,7 +391,7 @@ class PickupBarang_model extends CI_Model {
 						$id_pickup_barang 			= $data["id_pickup_barang"];
 						$no_resi 					= preg_replace('/[^0-9]/', "", $no_resi);
 						$berat_barang 				= preg_replace('/[^0-9]/', "", $berat_barang);
-						$upd["berat_barang"]				= $berat_barang;
+						$upd["berat_barang"]		= $berat_barang;
 						$upd["no_resi"]				= $no_resi;
 						$upd["id_status"]			= 4;
 						$upd['tanggal_input_resi']	= date('Y-m-d H:i:s');
@@ -404,6 +406,38 @@ class PickupBarang_model extends CI_Model {
 			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mengimport nomor resi ', $dataUser['id_user']);
 		}
 		return redirect('pickupBarang','refresh');
+	}
+
+	public function sendMessage($id_pickup_barang)
+	{
+		$data 		= $this->getPickupBarangById($id_pickup_barang);
+		$message	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
+
+		$phone 		= $data["no_wa_pengirim"];
+		$phone 		= preg_replace('/[^0-9]/', "", $phone);
+
+		$apiURL		= "https://api.api4bot.com/instance142262/";
+		$token		= "8sauxoikjlotij7j";
+
+
+		$data = json_encode(
+			[
+				'chatId'	=>$phone.'@c.us',
+				'body'		=>$message
+			]
+		);
+		$url 		= $apiURL.'message?token='.$token;
+		$options 	= stream_context_create(
+			['http' =>
+				[
+				'method'  => 'POST',
+				'header'  => 'Content-type: application/json',
+				'content' => $data
+				]
+			]
+		);
+		$response = file_get_contents($url,false,$options);
+
 	}
 
 	// private function _sendMessageNoResi($no_wa_pengirim, $pesan)
