@@ -34,8 +34,8 @@ class Laporan extends CI_Controller {
 			$laporan 				= $this->lm->getLaporan();
 			$dari_tanggal 			= "";
 			$sampai_tanggal 		= "";
-			$val_dari_tanggal 		= date("Y/m/01");
-			$val_sampai_tanggal		= date("Y/m/d");
+			$val_dari_tanggal 		= date("Y-m-01");
+			$val_sampai_tanggal		= date("Y-m-d");
 		}
 
 		$data["allStatus"]			= $this->status->getAllStatus();
