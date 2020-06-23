@@ -414,8 +414,7 @@ class PickupBarang_model extends CI_Model {
 		$data 		= $this->getPickupBarangById($id_pickup_barang);
 		$message	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
 
-		$phone			= "+6281510030416";
-		// $phone 		= $data["no_wa_pengirim"];
+		$phone 		= $data["no_wa_pengirim"];
 		// $phone 		= preg_replace('/[^0-9]/', "", $phone);
 
 		// chat-api
