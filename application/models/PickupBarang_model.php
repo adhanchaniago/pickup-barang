@@ -54,7 +54,7 @@ class PickupBarang_model extends CI_Model {
 		}
 
 		if ($this->input->post('id_status') != '') {
-			$this->db->where('id_status', $this->input->post('id_status'));
+			$this->db->where('pickup_barang.id_status', $this->input->post('id_status'));
 		}
 
 	}
@@ -283,7 +283,7 @@ class PickupBarang_model extends CI_Model {
 
 		$this->db->where('alamat_pengirim', $alamat);
 		if ($status != 0) {
-			$this->db->where('id_status', $status);
+			$this->db->where('pickup_barang.id_status', $status);
 		}
 		$this->db->order_by('tanggal_pemesanan', 'desc');
 		return $this->db->get();
