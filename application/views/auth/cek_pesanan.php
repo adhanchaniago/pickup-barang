@@ -69,13 +69,13 @@
 					<div class="col-lg">
 						<div class="form-group">
 							<label for="dari_tanggal">Dari Tanggal</label>
-		                  	<input type="text" class="form-control" id="dari_tanggal" name="dari_tanggal" required value="<?= $val_dari_tanggal; ?>">
+		                  	<input type="text" class="form-control dated-input" id="dari_tanggal" name="dari_tanggal" required value="<?= $val_dari_tanggal; ?>">
 						</div>											
 					</div>
 					<div class="col-lg">
 						<div class="form-group">
 							<label for="sampai_tanggal">Sampai Tanggal</label>
-		                  	<input type="text" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $val_sampai_tanggal; ?>">
+		                  	<input type="text" class="form-control dated-input" id="sampai_tanggal" name="sampai_tanggal" required value="<?= $val_sampai_tanggal; ?>">
 						</div>
 					</div>
 				</div>
