@@ -10,6 +10,7 @@
 		<div class="navbar-nav">
 			<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="#home"><i class="fas fa-fw fa-home"></i> Beranda</a>
 		  	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="#tentang"><i class="fas fa-fw fa-book"></i> Tentang Kami</a>
+		  	<a class="nav-item nav-link text-white btn btn-primary rounded-pill px-3 mx-2 my-1 page-scroll" href="#tracking"><i class="fas fa-fw fa-align-right"></i> Cek Tracking</a>
 		</div>
 	    <div class="navbar-nav ml-auto">
 	      	<a class="nav-item nav-link text-white btn btn-danger rounded-pill px-3 mx-2 my-1 page-scroll" href="<?= base_url('pickupBarang/form') ?>"><i class="fas fa-fw fa-shipping-fast"></i><sup><i class="fas fa-1x fa-plus"></i></sup> Buat Pesanan</a>
@@ -61,7 +62,7 @@
 </section>
 <div class="bg-danger pt-5"></div>
 
-<section id="cek_status_pesanan" class="cek_status_pesanan bg-blue">
+<section id="tracking" class="cek_status_pesanan bg-blue py-5">
 	<div class="container pb-4">
 		<div class="row pt-5">
 			<div class="col-lg-12 text-center">
