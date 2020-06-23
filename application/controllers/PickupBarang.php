@@ -137,7 +137,7 @@ class PickupBarang extends CI_Controller {
 		$data 		= [];
 		$id_status 	= $this->input->post('id_status');
 		if ($id_status) {
-			$data 	= ["id_status" 	=> $id_status];
+			$data 	= ["pickup_barang.id_status" 	=> $id_status];
 		}
 		$get 	= $this->pbm->getPickupBarangGroupByAlamat($data);
 		$data 	= [];

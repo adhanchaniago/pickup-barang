@@ -227,12 +227,6 @@ $(function() {
                         case 1:
                             width   = 12;
                             warna   = 'bg-danger';
-                            html    = `
-                            <tr>
-                            <th>Pending</th>
-                            <td>${response.tanggal_pemesanan}</td>
-                            </tr>
-                            `;
                         break;
                         case 2:
                             width   = 37;
@@ -253,28 +247,32 @@ $(function() {
                         <th>Pending</th>
                         <td>${response.tanggal_pemesanan}</td>
                         </tr>
-                        `;}
+                        `;
+                    }
                     if(parseInt(response.id_status) >= 2){
                         html    += `
                         <tr>
                         <th>Kurir Menjemput</th>
                         <td>${response.tanggal_penjemputan}</td>
                         </tr>
-                        `;}
+                        `;
+                    }
                     if(parseInt(response.id_status) >= 3){
-                         html    += `
+                        html    += `
                         <tr>
                         <th>Barang Masuk Logistik</th>
                         <td>${response.tanggal_masuk_logistik}</td>
                         </tr>
-                        `;}
+                        `;
+                    }
                     if(parseInt(response.id_status) >= 4){
                         html    += `
                         <tr>
                         <th>Resi Terkirim</th>
                         <td>${response.tanggal_input_resi}</td>
                         </tr>
-                        `;}
+                        `;
+                    }
                     warnaBar    = warna;
                     progressBar.addClass(warna);
                     progressBar.css({"width" : width + '%'});
