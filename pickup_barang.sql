@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jun 2020 pada 20.26
+-- Waktu pembuatan: 24 Jun 2020 pada 14.12
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -171,7 +171,48 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tanggal_log`, `id_user`) VALUES
 (90, 'Pelanggan Andri Firman Saputra berhasil menambahkan pesanan ', '2020-06-23 01:21:36', NULL),
 (91, 'Pengguna admin berhasil login', '2020-06-23 01:22:04', 1),
 (92, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 01:22:11', 1),
-(93, 'Kurir admin Telah Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 01:22:24', 1);
+(93, 'Kurir admin Telah Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 01:22:24', 1),
+(94, 'Pengguna admin mengimport nomor resi ', '2020-06-23 01:28:38', 1),
+(95, 'Pengguna admin berhasil logout', '2020-06-23 01:28:55', 1),
+(96, 'Pelanggan Andri Firman Saputra berhasil menambahkan pesanan ', '2020-06-23 21:14:51', NULL),
+(97, 'Pengguna admin berhasil login', '2020-06-23 21:15:50', 1),
+(98, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 21:19:03', 1),
+(99, 'Kurir admin Telah Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 21:25:03', 1),
+(100, 'Pengguna admin mengimport nomor resi ', '2020-06-23 21:29:33', 1),
+(101, 'Pengguna admin berhasil login', '2020-06-23 21:52:34', 1),
+(102, 'Pengguna admin berhasil login', '2020-06-23 21:59:13', 1),
+(103, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 21:59:18', 1),
+(104, 'Kurir admin Telah Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-23 21:59:28', 1),
+(105, 'Pengguna admin mengimport nomor resi ', '2020-06-23 21:59:55', 1),
+(106, 'Pengguna admin berhasil logout', '2020-06-23 22:08:08', 1),
+(107, 'Pengguna admin berhasil login', '2020-06-23 22:41:24', 1),
+(108, 'Pengguna admin mengimport nomor resi ', '2020-06-23 22:41:30', 1),
+(109, 'Pengguna admin mengimport nomor resi ', '2020-06-23 22:41:51', 1),
+(110, 'Pengguna admin mengimport nomor resi ', '2020-06-23 22:43:13', 1),
+(111, 'Pengguna admin mengimport nomor resi ', '2020-06-23 22:52:05', 1),
+(112, 'Pengguna admin berhasil login', '2020-06-24 17:17:23', 1),
+(113, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '2020-06-24 17:18:21', 1),
+(114, 'Pengguna admin berhasil logout', '2020-06-24 17:19:20', 1),
+(115, 'Pelanggan Andri Firman Saputra berhasil menambahkan pesanan ', '2020-06-24 17:22:15', NULL),
+(116, 'Pengguna admin berhasil login', '2020-06-24 17:23:11', 1),
+(117, 'Kurir admin Akan Mengambil Barang Di Jl. AMD Babakan Pocis No. 100', '2020-06-24 17:23:18', 1),
+(118, 'Kurir admin Telah Mengambil Barang Di Jl. AMD Babakan Pocis No. 100', '2020-06-24 17:23:32', 1),
+(119, 'Pengguna admin mengimport nomor resi ', '2020-06-24 17:27:55', 1),
+(120, 'Pengguna admin mengimport nomor resi ', '2020-06-24 17:29:36', 1),
+(121, 'Pengguna admin mengimport nomor resi ', '2020-06-24 17:35:17', 1),
+(122, 'Pengguna admin mengimport nomor resi ', '2020-06-24 17:43:46', 1),
+(123, 'Pengguna admin berhasil logout', '2020-06-24 17:49:48', 1),
+(124, 'Pelanggan Escepat berhasil menambahkan pesanan ', '2020-06-24 17:52:40', NULL),
+(125, 'Pengguna andri975 berhasil login', '2020-06-24 17:53:00', 2),
+(126, 'Pengguna admin berhasil login', '2020-06-24 17:53:29', 1),
+(127, 'Pengguna admin berhasil menambahkan pesanan Ajos', '2020-06-24 17:57:38', 1),
+(128, 'Pengguna admin berhasil login', '2020-06-24 18:02:40', 1),
+(129, 'Kurir admin Akan Mengambil Barang Di Auto pad BSD', '2020-06-24 18:28:59', 1),
+(130, 'Kurir admin Telah Mengambil Barang Di Auto pad BSD', '2020-06-24 18:29:30', 1),
+(131, 'Pengguna admin mengimport nomor resi ', '2020-06-24 18:45:19', 1),
+(132, 'Pengguna admin mengimport nomor resi ', '2020-06-24 18:54:46', 1),
+(133, 'Pengguna admin mengimport nomor resi ', '2020-06-24 19:00:42', 1),
+(134, 'Pengguna admin mengimport nomor resi ', '2020-06-24 19:05:00', 1);
 
 -- --------------------------------------------------------
 
@@ -191,8 +232,11 @@ CREATE TABLE `penerima` (
 --
 
 INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `no_wa_penerima`, `alamat_penerima`) VALUES
-(1, 'Andre Farhan Saputra', '+628782458522', 'Jl. AMD Babakan Pocis No. 69 RT02/02, Setu, Tangerang Selatan, Banten 15344'),
-(2, 'Gerry Gusnawan', '+6221753498217', 'Jl. Kademangan No. 23 RT06/01, Setu, Tangerang Selatan, Banten 15315');
+(1, 'Andre Farhan Saputra', '+628965343212', 'Jl. kebangsaan no. 5'),
+(2, 'Imam', '+6289531231231', 'Banjar Negara'),
+(3, 'Udin', '+628747747374', 'Semarang'),
+(4, 'Budi', '+628780897727', 'Jl. Solo'),
+(5, 'Iwan', '+6237139139137', 'Malang');
 
 -- --------------------------------------------------------
 
@@ -213,7 +257,9 @@ CREATE TABLE `pengirim` (
 --
 
 INSERT INTO `pengirim` (`id_pengirim`, `nama_pengirim`, `no_wa_pengirim`, `alamat_pengirim`, `ip_address`) VALUES
-(1, 'Andri Firman Saputra', '+6287808675313', 'Jl. AMD Babakan Pocis No. 100 RT02/02, Setu, Tangerang Selatan, Banten 15315', '::1');
+(1, 'Andri Firman Saputra', '+6287808675313', 'Jl. AMD Babakan Pocis No. 100', '::1'),
+(2, 'Escepat', '+6287808675313', 'Auto pad BSD', '::1'),
+(3, 'Ajos', '+6287808675313', 'Auto pad BSD', '::1');
 
 -- --------------------------------------------------------
 
@@ -230,6 +276,7 @@ CREATE TABLE `pickup_barang` (
   `nama_barang` varchar(100) NOT NULL,
   `jumlah_barang` int(11) NOT NULL,
   `berat_barang` float DEFAULT NULL,
+  `harga_pengiriman` int(11) DEFAULT NULL,
   `tanggal_pemesanan` datetime DEFAULT NULL,
   `tanggal_penjemputan` datetime DEFAULT NULL,
   `tanggal_masuk_logistik` datetime DEFAULT NULL,
@@ -241,10 +288,12 @@ CREATE TABLE `pickup_barang` (
 -- Dumping data untuk tabel `pickup_barang`
 --
 
-INSERT INTO `pickup_barang` (`id_pickup_barang`, `no_resi`, `id_pengirim`, `id_penerima`, `id_jenis_layanan`, `nama_barang`, `jumlah_barang`, `berat_barang`, `tanggal_pemesanan`, `tanggal_penjemputan`, `tanggal_masuk_logistik`, `tanggal_input_resi`, `id_status`) VALUES
-(1, '540700080433320', 1, 1, 3, 'Handphone xiami', 1090, 2, '2020-06-23 00:46:52', '2020-06-23 01:01:27', '2020-06-23 01:01:34', '2020-06-23 01:06:45', 4),
-(2, NULL, 1, 1, 3, 'Handphone xiami realmie', 2, NULL, '2020-06-23 01:21:36', '2020-06-23 01:22:11', '2020-06-23 01:22:24', NULL, 3),
-(3, NULL, 1, 2, 1, 'Kerupuk Kulit', 1, NULL, '2020-06-23 01:21:36', '2020-06-23 01:22:11', '2020-06-23 01:22:24', NULL, 3);
+INSERT INTO `pickup_barang` (`id_pickup_barang`, `no_resi`, `id_pengirim`, `id_penerima`, `id_jenis_layanan`, `nama_barang`, `jumlah_barang`, `berat_barang`, `harga_pengiriman`, `tanggal_pemesanan`, `tanggal_penjemputan`, `tanggal_masuk_logistik`, `tanggal_input_resi`, `id_status`) VALUES
+(1, '540700080433320', 1, 1, 1, 'surat', 2, 1, NULL, '2020-06-24 17:22:15', '2020-06-24 17:23:18', '2020-06-24 17:23:32', '2020-06-24 17:43:41', 4),
+(2, '540700080433321', 2, 2, 1, 'CDI', 1, 1, 18000, '2020-06-24 17:52:40', '2020-06-24 18:28:59', '2020-06-24 18:29:30', '2020-06-24 19:04:41', 4),
+(3, '540700080433322', 2, 3, 1, 'Handle', 1, 1, 10000, '2020-06-24 17:52:40', '2020-06-24 18:28:59', '2020-06-24 18:29:30', '2020-06-24 19:04:45', 4),
+(4, '540700080433323', 3, 4, 1, 'Stir Mobil', 1, 1, 9000, '2020-06-24 17:57:38', '2020-06-24 18:28:59', '2020-06-24 18:29:30', '2020-06-24 19:04:51', 4),
+(5, '540700080433324', 3, 5, 1, 'Hordyn', 1, 1, 12000, '2020-06-24 17:57:38', '2020-06-24 18:28:59', '2020-06-24 18:29:30', '2020-06-24 19:04:56', 4);
 
 -- --------------------------------------------------------
 
@@ -369,25 +418,25 @@ ALTER TABLE `jenis_layanan`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
 --
 ALTER TABLE `penerima`
-  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_penerima` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengirim`
 --
 ALTER TABLE `pengirim`
-  MODIFY `id_pengirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pengirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `pickup_barang`
 --
 ALTER TABLE `pickup_barang`
-  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pickup_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `status`

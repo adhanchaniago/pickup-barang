@@ -262,7 +262,6 @@ class PickupBarang_model extends CI_Model {
 		$this->db->join('pickup_barang', 'pickup_barang.id_pengirim = pengirim.id_pengirim');
 		$pengirim 			= $this->db->get_where('pengirim', ['no_wa_pengirim' => $no_wa_pengirim])->row_array();
 		$alamat 			= $pengirim["alamat_pengirim"];
-
 		$search 			= $this->input->post('search');
 		$column_search 		= $this->column_search;
 		$this->_setDatatable();
@@ -281,11 +280,12 @@ class PickupBarang_model extends CI_Model {
 			$i++;
 		}
 
-		$this->db->where('alamat_pengirim', $alamat);
+		// $this->db->where('alamat_pengirim', $alamat);
 		if ($status != 0) {
 			$this->db->where('pickup_barang.id_status', $status);
 		}
 		$this->db->order_by('tanggal_pemesanan', 'desc');
+
 		return $this->db->get();
 	}
 
@@ -365,11 +365,12 @@ class PickupBarang_model extends CI_Model {
 			$numrow 			= 0;
 			foreach($sheet as $row){
 				if($numrow > 0){
-					$no_resi 		= $row["A"];
-					$berat_barang	= $row["D"];
-					$no_wa_pengirim = $row["I"];
-					$no_wa_penerima = $row["K"];
-					$jumlah_barang 	= $row["E"];
+					$no_resi 		  = $row["A"];
+					$berat_barang	  = $row["D"];
+					$no_wa_pengirim   = $row["I"];
+					$no_wa_penerima   = $row["K"];
+					$jumlah_barang 	  = $row["E"];
+					$harga_pengiriman = $row["O"];
 
 					$this->db->select('id_pickup_barang,no_wa_pengirim,nama_penerima,alamat_penerima,no_wa_penerima');
 					$this->db->from('pickup_barang');
@@ -391,7 +392,9 @@ class PickupBarang_model extends CI_Model {
 						$id_pickup_barang 			= $data["id_pickup_barang"];
 						$no_resi 					= preg_replace('/[^0-9]/', "", $no_resi);
 						$berat_barang 				= preg_replace('/[^0-9]/', "", $berat_barang);
+						$harga_pengiriman			= preg_replace('/[^0-9]/', "", $harga_pengiriman);
 						$upd["berat_barang"]		= $berat_barang;
+						$upd["harga_pengiriman"]	= $harga_pengiriman;
 						$upd["no_resi"]				= $no_resi;
 						$upd["id_status"]			= 4;
 						$upd['tanggal_input_resi']	= date('Y-m-d H:i:s');
@@ -412,7 +415,7 @@ class PickupBarang_model extends CI_Model {
 	public function sendMessage($id_pickup_barang)
 	{
 		$data 		= $this->getPickupBarangById($id_pickup_barang);
-		$message	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
+		$message	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"] . '. Seharga: Rp.' . number_format($data['harga_pengiriman']);
 
 		$phone 		= $data["no_wa_pengirim"];
 		// $phone 		= preg_replace('/[^0-9]/', "", $phone);
