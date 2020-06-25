@@ -19,21 +19,31 @@ class Pesanan_model extends CI_Model {
 		}
 
 		if ($id_status !== '') {
-			$query = "SELECT * FROM pickup_barang 
+			$query = "SELECT *,
+				SUM(IF(jenis_layanan.id_jenis_layanan = 1,1,0)) jenis1,
+				SUM(IF(jenis_layanan.id_jenis_layanan = 2,1,0)) jenis2,
+				SUM(IF(jenis_layanan.id_jenis_layanan = 3,1,0)) jenis3
+				FROM pickup_barang 
 				INNER JOIN status ON pickup_barang.id_status = status.id_status 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
 				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
 				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
 				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND pickup_barang.id_status = '$id_status'
+				GROUP BY pickup_barang.id_pengirim
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
 		} else {
-			$query = "SELECT * FROM pickup_barang 
+			$query = "SELECT *,
+				SUM(IF(jenis_layanan.id_jenis_layanan = 1,1,0)) jenis1,
+				SUM(IF(jenis_layanan.id_jenis_layanan = 2,1,0)) jenis2,
+				SUM(IF(jenis_layanan.id_jenis_layanan = 3,1,0)) jenis3
+				FROM pickup_barang 
 				INNER JOIN status ON pickup_barang.id_status = status.id_status 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
 				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
 				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
 				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast'
+				GROUP BY pickup_barang.id_pengirim
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
 		}

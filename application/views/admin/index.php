@@ -33,7 +33,39 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <div class="row mb-2">
+
+      <div class="table-responsive bg-white p-3 shadow">
+        <table class="table table-striped">
+          <thead class="thead bg-primary text-white text-center">
+            <tr>
+              <th>No</th>
+              <th>Nama Pengirim</th>
+              <th>Jumlah Paket</th>
+              <th>#</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php $no=1;foreach ($pesanan as $key): ?>
+              <tr>
+                <td><div class="text-center" width="10px"><?= $no; ?></div></td>
+                <td><?= $key["nama_pengirim"]; ?></td>
+                <td>
+                  <div class="text-center">
+                    <?= $key["jenis1"]; ?> REG - <?= $key["jenis2"]; ?> OKE - <?= $key["jenis3"]; ?>  YES 
+                  </div>
+                </td>
+              <td>
+                  <div class="text-center">
+                  <a href="<?= base_url('admin/detailBarang?id_pickup_barang='.$key["id_pickup_barang"]."dari_tanggal=".$dari_tanggal."1&sampai_tanggal=".$sampai_tanggal."&id_status=".$status["id_status"]) ?>" class="btn btn-primary"><i class="fas fa-fw fa-bars"></i></a>
+                  </div>
+                </td>
+              </tr>
+            <?php $no++;endforeach ?>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <div class="row mb-2">
         <div class="col-lg-6 my-1 dashboard" id="dataPesanan">
           <?php if ($pesanan == NULL): ?>
             <h4>Tidak ada pesanan hari ini, coba gunakan fitur filter untuk melihat data lampau</h4>
@@ -81,7 +113,9 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> -->
+
+
     </div>
   </section>
   <!-- /.content -->
