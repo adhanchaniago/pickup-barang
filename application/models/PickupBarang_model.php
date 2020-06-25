@@ -415,11 +415,11 @@ class PickupBarang_model extends CI_Model {
 	public function sendMessage($id_pickup_barang)
 	{
 		$data 		= $this->getPickupBarangById($id_pickup_barang);
-		$message	= 	"No. Resi                : " . $data["no_resi"] . '\n' . 
-						"Nama Penerima    : " . $data["nama_penerima"] . '\n' . 
-						"Alamat Penerima  : " . $data["alamat_penerima"] . '\n' . 
-						"Jenis Layanan       : " . $data["jenis_layanan"] . '\n' . 
-						"Biaya Pengiriman  : Rp. " . number_format($data["harga_pengiriman"]);
+		$message	= 	"No. Resi : " . $data["no_resi"] . '\n' . 
+						"Nama Penerima : " . $data["nama_penerima"] . '\n' . 
+						"Alamat Penerima : " . $data["alamat_penerima"] . '\n' . 
+						"Jenis Layanan : " . $data["jenis_layanan"] . '\n' . 
+						"Biaya Pengiriman : Rp. " . number_format($data["harga_pengiriman"]);
 		$phone 		= $data["no_wa_pengirim"];
 		// $phone 		= preg_replace('/[^0-9]/', "", $phone);
 
