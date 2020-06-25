@@ -66,7 +66,7 @@
 	<div class="container pb-4">
 		<div class="row pt-5">
 			<div class="col-lg-12 text-center">
-				<h2 class="text-white">Cek Status Pesanan</h2>
+				<h2 class="text-white">Cek Tracking</h2>
 				<hr>
 				<form action="<?= base_url('auth/cek_status_pesanan#cek_status_pesanan'); ?>" method="post">
 					<div class="row">
