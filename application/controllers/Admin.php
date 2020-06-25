@@ -32,8 +32,8 @@ class Admin extends CI_Controller {
 			$status					= $this->status->getStatusById();
 			$pesanan 				= $this->pesm->getPesanan();
 			$jml_status				= $this->pesm->getJmlStatus();
-			$val_dari_tanggal		= date('Y/m/d');
-			$val_sampai_tanggal		= date('Y/m/d');
+			$val_dari_tanggal		= date('Y-m-d');
+			$val_sampai_tanggal		= date('Y-m-d');
 			$dari_tanggal			= '';
 			$sampai_tanggal			= '';
 		}
