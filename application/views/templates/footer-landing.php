@@ -4,12 +4,12 @@
 			<div class="col-lg-6 my-3">
 		        <h4 class="mb-3 font-weight-bold">Kontak Kami</h4>
 		        <div class="row my-2 ml-0">
-		          <div class="col-xs-1 mr-2"><a class="text-white" target="_blank" href="https://twitter.com"><i class="fab fa-fw fa-twitter"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://facebook.com"><i class="fab fa-fw fa-facebook"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://instagram.com"><i class="fab fa-fw fa-instagram"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://linkedin.com"><i class="fab fa-fw fa-linkedin-in"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://pinterest.com"><i class="fab fa-fw fa-pinterest"></i></a></div>
-		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://gmail.com"><i class="far fa-fw fa-envelope"></i></a></div>
+		          <div class="col-xs-1 mr-2"><a class="text-white" target="_blank" href="https://twitter.com/JNE_ID"><i class="fab fa-fw fa-twitter"></i></a></div>
+		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://web.facebook.com/JNEPusat/?ref=br_rs"><i class="fab fa-fw fa-facebook"></i></a></div>
+		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://www.instagram.com/jne_id"><i class="fab fa-fw fa-instagram"></i></a></div>
+		          <!-- <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://linkedin.com"><i class="fab fa-fw fa-linkedin-in"></i></a></div> -->
+		          <!-- <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="https://pinterest.com"><i class="fab fa-fw fa-pinterest"></i></a></div> -->
+		          <div class="col-xs-1 mx-2"><a class="text-white" target="_blank" href="mailto:customercare@jne.co.id"><i class="far fa-fw fa-envelope"></i></a></div>
 		        </div>    
 		        <div class="row text-left my-2">
 		          <div class="col-5"><i class="fab fa-fw fa-whatsapp"></i> WhatsApp</div>
