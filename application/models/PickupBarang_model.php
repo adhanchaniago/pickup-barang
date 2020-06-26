@@ -365,19 +365,23 @@ class PickupBarang_model extends CI_Model {
 			$numrow 			= 0;
 			foreach($sheet as $row){
 				if($numrow > 0){
-					$no_resi 		  = $row["A"];
-					$berat_barang	  = $row["D"];
-					$no_wa_pengirim   = $row["I"];
-					$no_wa_penerima   = $row["K"];
-					$jumlah_barang 	  = $row["E"];
-					$harga_pengiriman = $row["O"];
+					$no_resi 		  	= $row["A"];
+					$berat_barang	  	= $row["D"];
+					$no_wa_pengirim   	= $row["I"];
+					$no_wa_penerima   	= $row["K"];
+					$nama_penerima 		= $row["J"];
+					$jumlah_barang 	  	= $row["E"];
+					$harga_pengiriman 	= $row["O"];
 
 					$this->db->select('id_pickup_barang,no_wa_pengirim,nama_penerima,alamat_penerima,no_wa_penerima');
 					$this->db->from('pickup_barang');
 					$this->db->join('pengirim', 'pengirim.id_pengirim = pickup_barang.id_pengirim');
 					$this->db->join('penerima', 'penerima.id_penerima = pickup_barang.id_penerima');
 					$this->db->where('no_wa_pengirim', $no_wa_pengirim);
+					$this->db->group_start();
 					$this->db->where('no_wa_penerima', $no_wa_penerima);
+					$this->db->or_where('nama_penerima', $nama_penerima);
+					$this->db->group_end();
 					$this->db->where('jumlah_barang', $jumlah_barang);
 					$this->db->where('id_status', 3);
 					$cek 			= $this->db->get();
