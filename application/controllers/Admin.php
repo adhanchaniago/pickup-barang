@@ -20,11 +20,12 @@ class Admin extends CI_Controller {
 		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['id_status'])) {
 			$dari_tanggal			= $_GET["dari_tanggal"];
 			$sampai_tanggal			= $_GET["sampai_tanggal"];
+			$id_status 				= $_GET["id_status"];
 
-			$status					= $this->status->getStatusById($_GET["id_status"]);
+			$status					= $this->status->getStatusById($id_status);
 			$headline 				= 'Dasbor - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status['status'];
-			$pesanan 				= $this->pesm->getPesanan($_GET['dari_tanggal'], $_GET['sampai_tanggal'], $_GET['id_status']);
-			$jml_status				= $this->pesm->getJmlStatus($_GET['dari_tanggal'], $_GET['sampai_tanggal']);
+			$pesanan 				= $this->pesm->getPesanan($dari_tanggal, $sampai_tanggal, $id_status);
+			$jml_status				= $this->pesm->getJmlStatus($dari_tanggal, $sampai_tanggal);
 			$val_dari_tanggal		= $dari_tanggal;
 			$val_sampai_tanggal		= $sampai_tanggal;
 		} else {
@@ -49,6 +50,39 @@ class Admin extends CI_Controller {
 		$data["dari_tanggal"]		= $dari_tanggal;
 		$data["sampai_tanggal"]		= $sampai_tanggal;
 		$this->layout->view_admin('admin/index', $data);
+	}
+
+	public function detail()
+	{	
+		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['id_status']) AND isset($_GET['id_pengirim'])) {
+			$data['dataUser'] 			= $this->mm->getDataUser();
+			$dari_tanggal				= $_GET["dari_tanggal"];
+			$sampai_tanggal				= $_GET["sampai_tanggal"];
+			$id_status 					= $_GET["id_status"];
+			$id_pengirim 				= $_GET["id_pengirim"];
+
+			$status						= $this->status->getStatusById($id_status);
+			$headline 					= 'Detail - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status['status'];
+			$pesanan 					= $this->pesm->getDetailPenerima($dari_tanggal, $sampai_tanggal, $id_status,$id_pengirim);
+			$jml_status					= $this->pesm->getJmlStatus($dari_tanggal, $sampai_tanggal);
+			$val_dari_tanggal			= $dari_tanggal;
+			$val_sampai_tanggal			= $sampai_tanggal;
+
+			$data['title'] 				= 'Detail - ' . $data['dataUser']['username'];
+			$data["allStatus"]			= $this->status->getAllStatus();
+			$data["headline"]			= $headline;
+			$data["status"]				= $status;
+			$data["pesanan"]			= $pesanan;
+			$data["jml_status"]			= $jml_status;
+			$data["val_dari_tanggal"]	= $val_dari_tanggal;
+			$data["val_sampai_tanggal"]	= $val_sampai_tanggal;
+			$data["dari_tanggal"]		= $dari_tanggal;
+			$data["sampai_tanggal"]		= $sampai_tanggal;
+			$this->layout->view_admin('admin/detail', $data);
+		}else{
+			redirect('admin','refresh');
+		}
+
 	}
 
 	public function profile()

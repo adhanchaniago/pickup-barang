@@ -35,13 +35,18 @@
     <div class="container-fluid">
 
       <div class="table-responsive bg-white p-3 shadow">
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered" id="table_id">
           <thead class="thead bg-primary text-white text-center">
             <tr>
-              <th>No</th>
-              <th>Nama Pengirim</th>
-              <th>Jumlah Paket</th>
-              <th>#</th>
+              <th rowspan="2" width="10">No</th>
+              <th rowspan="2">Nama Pengirim</th>
+              <th colspan="3">Jumlah Paket</th>
+              <th rowspan="2" width="10">#</th>
+            </tr>
+            <tr>
+              <th>REG</th>
+              <th>OKE</th>
+              <th>YES</th>
             </tr>
           </thead>
           <tbody>
@@ -51,12 +56,22 @@
                 <td><?= $key["nama_pengirim"]; ?></td>
                 <td>
                   <div class="text-center">
-                    <?= $key["jenis1"]; ?> REG - <?= $key["jenis2"]; ?> OKE - <?= $key["jenis3"]; ?>  YES 
+                     <?= $key["jenis1"]; ?> 
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                     <?= $key["jenis2"]; ?>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                     <?= $key["jenis3"]; ?>
                   </div>
                 </td>
               <td>
                   <div class="text-center">
-                  <a href="<?= base_url('admin/detailBarang?id_pickup_barang='.$key["id_pickup_barang"]."dari_tanggal=".$dari_tanggal."1&sampai_tanggal=".$sampai_tanggal."&id_status=".$status["id_status"]) ?>" class="btn btn-primary"><i class="fas fa-fw fa-bars"></i></a>
+                  <a href="<?= base_url('admin/detail?id_pengirim='.$key["id_pengirim"]."&dari_tanggal=".$dari_tanggal."1&sampai_tanggal=".$sampai_tanggal."&id_status=".$status["id_status"]) ?>" class="btn btn-primary"><i class="fas fa-fw fa-bars"></i></a>
                   </div>
                 </td>
               </tr>

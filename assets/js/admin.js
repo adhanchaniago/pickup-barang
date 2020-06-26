@@ -18,21 +18,26 @@ $(function() {
 
     function datatable(data = {}) {
         let link    = $('#table_id').data('link');
-        $('#table_id').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                url     : link,
-                method  : 'post',
-                data    : data
-            },
-            "columnDefs" :[{
-                "targets"    : [-1],
-                "orderable" : false
-            }],
-            "responsive": true,
-            "autoWidth": true
-        });
+        
+        if (link == undefined) {
+            $('#table_id').DataTable();
+        }else{
+            $('#table_id').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    url     : link,
+                    method  : 'post',
+                    data    : data
+                },
+                "columnDefs" :[{
+                    "targets"    : [-1],
+                    "orderable" : false
+                }],
+                "responsive": true,
+                "autoWidth": true
+            });
+        }
     }
 
     
