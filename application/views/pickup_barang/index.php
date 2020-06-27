@@ -155,6 +155,16 @@
             <input type="number" name="no_resi" id="no_resi" class="form-control" required value="<?= set_value('no_resi'); ?>" placeholder="Nomor Resi">
             <?= form_error('no_resi', '<small class="form-text text-danger">', '</small>'); ?>
           </div>
+          <div class="form-group">
+            <label for="berat_barang">Berat</label>
+            <input type="number" name="berat_barang" id="berat_barang" class="form-control" required value="<?= set_value('berat_barang'); ?>" placeholder="Berat Barang">
+            <?= form_error('berat_barang', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
+          <div class="form-group">
+            <label for="harga_pengiriman">Harga</label>
+            <input type="number" name="harga_pengiriman" id="harga_pengiriman" class="form-control" required value="<?= set_value('harga_pengiriman'); ?>" placeholder="Harga Pengiriman">
+            <?= form_error('harga_pengiriman', '<small class="form-text text-danger">', '</small>'); ?>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>

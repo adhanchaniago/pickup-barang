@@ -73,7 +73,7 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="no_wa_pengirim">No. WhatsApp Pengirim</label>
-								<input style="font-size: 25px; text-align: center;" type="text" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
+								<input style="font-size: 25px; text-align: center;" type="number" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
 							</div>
 						</div>
 					</div>

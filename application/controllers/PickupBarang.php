@@ -21,6 +21,8 @@ class PickupBarang extends CI_Controller {
 		$data['title'] 				= 'Pickup Barang - ' . $data['dataUser']['username'];
 
 		$this->form_validation->set_rules('no_resi', 'Nomor Resi', 'required|trim');
+		$this->form_validation->set_rules('berat_barang', 'Berat Barang', 'required|trim');
+		$this->form_validation->set_rules('harga_pengiriman', 'Harga Pengiriman', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_admin('pickup_barang/index', $data);
 		} else {

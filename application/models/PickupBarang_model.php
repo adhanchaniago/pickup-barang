@@ -158,10 +158,12 @@ class PickupBarang_model extends CI_Model {
 
 	public function editPickupBarang($id)
 	{
-		$dataUser 					 = $this->mm->getDataUser();
-		$data["no_resi"]			 = $this->input->post('no_resi');
-		$data["id_status"]			 = 4;
-		$data ['tanggal_input_resi'] = date('Y-m-d H:i:s');
+		$dataUser 						= $this->mm->getDataUser();
+		$data["no_resi"]				= $this->input->post('no_resi');
+		$data["berat_barang"]			= $this->input->post('berat_barang');
+		$data["harga_pengiriman"]		= $this->input->post('harga_pengiriman');
+		$data["id_status"]				= 4;
+		$data ['tanggal_input_resi']	= date('Y-m-d H:i:s');
 
 		$this->db->where('id_pickup_barang', $id);
 		$this->db->update('pickup_barang', $data);
