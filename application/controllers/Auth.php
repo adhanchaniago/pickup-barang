@@ -101,8 +101,9 @@ class Auth extends CI_Controller {
 				$data['berhasil'] 		= true;
 				$this->layout->view_auth('auth/cek_pesanan', $data);
 			} else {
+				// redirect('auth/index#cek_pesanan','refresh');
 				$data['error'] 			= true;
-				$this->layout->view_auth('auth/cek_pesanan', $data);
+				$this->layout->view_auth('auth/index', $data);
 			}
 		}
 	}
