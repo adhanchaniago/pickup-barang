@@ -56,10 +56,10 @@ class Admin extends CI_Controller {
 	{	
 		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['id_status']) AND isset($_GET['id_pengirim'])) {
 			$data['dataUser'] 			= $this->mm->getDataUser();
-			$dari_tanggal				= $_GET["dari_tanggal"];
-			$sampai_tanggal				= $_GET["sampai_tanggal"];
-			$id_status 					= $_GET["id_status"];
-			$id_pengirim 				= $_GET["id_pengirim"];
+			$dari_tanggal				= $this->input->get('dari_tanggal');
+			$sampai_tanggal				= $this->input->get('sampai_tanggal');
+			$id_status 					= $this->input->get('id_status');
+			$id_pengirim 				= $this->input->get('id_pengirim');
 
 			$status						= $this->status->getStatusById($id_status);
 			$headline 					= 'Detail - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status['status'];

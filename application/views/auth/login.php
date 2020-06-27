@@ -29,7 +29,7 @@
 			<form method="post" action="<?= base_url('auth/login'); ?>">
 				<div class="form-group">
 				    <label for="username"><i class="fas fa-fw fa-user"></i> Nama Pengguna</label>
-				    <input required type="text" autocomplete="off" id="username" class="form-control rounded-pill" name="username" value="<?= set_value('username'); ?>">
+				    <input required type="text" autocomplete="off" id="username" class="form-control rounded-pill" name="username" value="<?= set_value('username'); ?>" autofocus="autofocus">
 				    <?= form_error('username', '<small class="form-text text-danger">', '</small>'); ?>
 			  	</div>
 			  	<div class="form-group">

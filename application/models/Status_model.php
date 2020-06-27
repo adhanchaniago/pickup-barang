@@ -13,7 +13,7 @@ class Status_model extends CI_Model {
 	}
 	public function getStatusById($id_status = 0)
 	{
-		if ($id_status != '' || $id_status != 0 || $id_status != NULL) {
+		if ($id_status != '' && $id_status != 0 && $id_status != NULL) {
 			return $this->db->get_where('status', ['id_status' => $id_status])->row_array();
 		} else {
 			return ['id_status' => 0,'status' => 'Semua'];
