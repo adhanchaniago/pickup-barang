@@ -301,42 +301,50 @@ class PickupBarang_model extends CI_Model {
 		if (isset($_POST['dari_tanggal']) AND isset($_POST['sampai_tanggal'])) {
 			$dateThen = $dari_tanggal . ' 00:00:00';
 			$dateLast = $sampai_tanggal . ' 23:59:58';
+			if ($id_status != '') {
+				$query = "SELECT * FROM pickup_barang 
+					INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+					INNER JOIN status ON pickup_barang.id_status = status.id_status 
+					INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+					INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+					WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND pickup_barang.id_status = '$id_status' AND 
+					pengirim.no_wa_pengirim = '$no_wa_pengirim'
+					ORDER BY pickup_barang.tanggal_pemesanan DESC
+				";
+			} else {
+				$query = "SELECT * FROM pickup_barang 
+					INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+					INNER JOIN status ON pickup_barang.id_status = status.id_status 
+					INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+					INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+					WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND 
+					pengirim.no_wa_pengirim = '$no_wa_pengirim'
+					ORDER BY pickup_barang.tanggal_pemesanan DESC
+				";
+			}
 		} else {
-			$dateThen = date('Y-m-d 00:00:00');
-			$dateLast = date('Y-m-d 23:59:58');
+			if ($id_status != '') {
+				$query = "SELECT * FROM pickup_barang 
+					INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+					INNER JOIN status ON pickup_barang.id_status = status.id_status 
+					INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+					INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+					WHERE pickup_barang.id_status = '$id_status' AND 
+					pengirim.no_wa_pengirim = '$no_wa_pengirim'
+					ORDER BY pickup_barang.tanggal_pemesanan DESC
+				";
+			} else {
+				$query = "SELECT * FROM pickup_barang 
+					INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
+					INNER JOIN status ON pickup_barang.id_status = status.id_status 
+					INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
+					INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
+					WHERE pengirim.no_wa_pengirim = '$no_wa_pengirim'
+					ORDER BY pickup_barang.tanggal_pemesanan DESC
+				";
+			}
 		}
 
-		if ($id_status != '') {
-			$query = "SELECT * FROM pickup_barang 
-				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
-				INNER JOIN status ON pickup_barang.id_status = status.id_status 
-				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
-				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
-				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND pickup_barang.id_status = '$id_status' AND 
-				pengirim.no_wa_pengirim = '$no_wa_pengirim'
-				ORDER BY pickup_barang.tanggal_pemesanan DESC
-			";
-		// } elseif ($id_status == '4') {
-		// 	$query = "SELECT * FROM pickup_barang 
-		// 		INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
-		// 		INNER JOIN status ON pickup_barang.id_status = status.id_status 
-		// 		INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
-		// 		INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
-		// 		WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND 
-		// 		pengirim.no_wa_pengirim = '$no_wa_pengirim'
-		// 		ORDER BY pickup_barang.tanggal_pemesanan DESC
-		// 	";
-		} else {
-			$query = "SELECT * FROM pickup_barang 
-				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
-				INNER JOIN status ON pickup_barang.id_status = status.id_status 
-				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
-				INNER JOIN jenis_layanan ON pickup_barang.id_jenis_layanan = jenis_layanan.id_jenis_layanan 
-				WHERE pickup_barang.tanggal_pemesanan BETWEEN '$dateThen' AND '$dateLast' AND 
-				pengirim.no_wa_pengirim = '$no_wa_pengirim'
-				ORDER BY pickup_barang.tanggal_pemesanan DESC
-			";
-		}
 
 		return $this->db->query($query)->result_array();
 	}
