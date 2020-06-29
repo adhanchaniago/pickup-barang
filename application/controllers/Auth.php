@@ -54,7 +54,7 @@ class Auth extends CI_Controller {
 	public function cek_status_pesanan()
 	{
 		if (!isset($_POST['no_wa_pengirim'])) {
-			redirect('auth/index#cek_status_pesanan');
+			redirect('auth/index#tracking');
 		}
 		$data['title']	 			= 'Cek Pesanan - '.$this->input->post('no_wa_pengirim');
 

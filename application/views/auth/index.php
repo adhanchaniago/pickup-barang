@@ -68,7 +68,7 @@
 			<div class="col-lg-12 text-center">
 				<h2 class="text-white">Cek Tracking</h2>
 				<hr>
-				<form action="<?= base_url('auth/cek_status_pesanan#cek_status_pesanan'); ?>" method="post">
+				<form action="<?= base_url('auth/cek_status_pesanan#tracking'); ?>" method="post">
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
