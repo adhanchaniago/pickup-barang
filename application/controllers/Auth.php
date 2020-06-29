@@ -71,11 +71,12 @@ class Auth extends CI_Controller {
 		} else {
 			$dari_tanggal			= $_POST["dari_tanggal"];
 			$sampai_tanggal			= $_POST["sampai_tanggal"];
-			$status					= $this->status->getStatusById($_POST["id_status"]);
+			$id_status	 			= $_POST["id_status"];
+			$status					= $this->status->getStatusById($id_status);
 			$headline 				= ' - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status['status'];
 			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
-			$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($no_wa_pengirim);
-			$jml_status				= $this->pesm->getJmlStatusByNoWaPengirimNoSort($no_wa_pengirim);
+			$pesanan 				= $this->pesm->getPesananByNoWaPengirim($dari_tanggal, $sampai_tanggal, $id_status, $no_wa_pengirim);
+			$jml_status				= $this->pesm->getJmlStatusByNoWaPengirim($dari_tanggal, $sampai_tanggal, $id_status, $no_wa_pengirim);
 			$val_dari_tanggal		= $dari_tanggal;
 			$val_sampai_tanggal		= $sampai_tanggal;
 		}
@@ -97,7 +98,7 @@ class Auth extends CI_Controller {
 		} else {
 			$data['pengirim'] 			= $this->peng->getPengirimByNoWa();
 			$data['pesanan'] 			= $this->pbm->cek_status_pesanan();
-			if (count($data['pesanan']) > 0) {
+			if (count($data['pesanan']) > 0 OR count($data['pengirim']) > 0) {
 				$data['berhasil'] 		= true;
 				$this->layout->view_auth('auth/cek_pesanan', $data);
 			} else {
