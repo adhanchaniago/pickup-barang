@@ -73,7 +73,11 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="no_wa_pengirim">No. WhatsApp Pengirim</label>
-								<input style="font-size: 25px; text-align: center;" type="number" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
+								<?php if (isset($_GET['no_wa_pengirim'])): ?>
+									<input style="font-size: 25px; text-align: center;" type="number" name="no_wa_pengirim" class="form-control" required value="<?= $_GET['no_wa_pengirim']; ?>">
+								<?php else: ?>
+									<input style="font-size: 25px; text-align: center;" type="number" name="no_wa_pengirim" class="form-control" required value="<?= set_value('no_wa_pengirim'); ?>">
+								<?php endif ?>
 							</div>
 						</div>
 					</div>
