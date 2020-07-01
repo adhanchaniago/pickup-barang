@@ -98,7 +98,7 @@ class Auth extends CI_Controller {
 		} else {
 			$data['pengirim'] 			= $this->peng->getPengirimByNoWa();
 			$data['pesanan'] 			= $this->pbm->cek_status_pesanan();
-			if (count($data['pesanan']) > 0 OR count($data['pengirim']) > 0) {
+			if (count($data['pesanan']) > 0 OR $data['pengirim'] > 0) {
 				$data['berhasil'] 		= true;
 				$this->layout->view_auth('auth/cek_pesanan', $data);
 			} else {
