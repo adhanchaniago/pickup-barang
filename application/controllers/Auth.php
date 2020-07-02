@@ -59,7 +59,7 @@ class Auth extends CI_Controller {
 		$data['title']	 			= 'Cek Pesanan - '.$this->input->post('no_wa_pengirim');
 
 		if (!isset($_POST['dari_tanggal']) AND !isset($_POST['sampai_tanggal'])) {
-			$headline 				= ' - Hari Ini';
+			$headline 				= ' - Semua';
 			$status					= $this->status->getStatusById();
 			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
 			$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($no_wa_pengirim);

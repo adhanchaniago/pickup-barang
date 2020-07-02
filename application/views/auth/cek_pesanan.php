@@ -31,6 +31,18 @@
 		.is_print {
 			display: block!important;
 		}
+		.table {
+			font-size: 8.5px;
+			padding: 0;
+			margin: 0;
+		}
+		.headline {
+			font-size: 10px;
+		}
+		.table_head, .table_data {
+			padding: .3rem !important;
+		}
+
 	}
 </style>
 
@@ -103,42 +115,46 @@
 		</ul>
 	</form>
 
-    <h5>Penerima <?= $headline; ?></h5>
+    <h5 class="headline">Penerima <?= $headline; ?></h5>
 
     <div class="table-responsive">
     	<table class="table table-bordered">
-    		<thead>
+    		<thead class="text-center">
     			<tr>
-	    			<th>No</th>
-	    			<th>No Resi</th>
-	    			<th>Nama Penerima</th>
-	    			<th>No. WhatsApp</th>
-	    			<th>Alamat</th>
-	    			<th>Keterangan Barang</th>
-	    			<th>Status</th>
+	    			<th class="table_head">No</th>
+	    			<th class="table_head">No Resi</th>
+	    			<th class="table_head">Layanan</th>
+	    			<th class="table_head">Berat</th>
+	    			<th class="table_head">Jumlah</th>
+	    			<th style="min-width: 16rem!important">Destinasi</th>
+	    			<th class="table_head">Nama Pengirim</th>
+	    			<th class="table_head">No. WA Pengirim</th>
+	    			<th class="table_head">Nama Penerima</th>
+	    			<th class="table_head">No. WA Penerima</th>
+	    			<th class="table_head">Harga Pengiriman</th>
+	    			<th class="table_head">Status</th>
     			</tr>
     		</thead>
     		<tbody>
     			<?php $no=1;foreach ($pesanan as $key): ?>
 	    			<tr>
-		    			<td><?= $no; ?></td>
-		    			<td><?= $key["no_resi"]; ?></td>
-		    			<td><?= $key["nama_penerima"]; ?></td>
-		    			<td><?= $key["no_wa_penerima"]; ?></td>
-		    			<td><?= $key["alamat_penerima"]; ?></td>
-		    			<td>
-		    				<ul>
-		    				<li><strong>Nama Barang: </strong> <?= $key["nama_barang"]; ?></li>
-		    				<li><strong>Jumlah Barang: </strong> <?= number_format($key['jumlah_barang']); ?> Unit</li>
-		    				<li><strong>Berat Barang: </strong> <?= number_format($key['berat_barang']); ?> Kg</li>
-		    				</ul>
-		    			</td>
-		    			<td>
+		    			<td class="table_data"><?= $no; ?></td>
+		    			<td class="table_data"><?= $key["no_resi"]; ?></td>
+		    			<td class="table_data"><?= $key["jenis_layanan"]; ?></td>
+		    			<td class="table_data"><?= $key["berat_barang"]; ?> Kg</td>
+		    			<td class="table_data"><?= $key["jumlah_barang"]; ?></td>
+		    			<td class="table_data"><?= $key["alamat_penerima"]; ?></td>
+		    			<td class="table_data"><?= $key["nama_pengirim"]; ?></td>
+		    			<td class="table_data"><?= $key["no_wa_pengirim"]; ?></td>
+		    			<td class="table_data"><?= $key["nama_penerima"]; ?></td>
+		    			<td class="table_data"><?= $key["no_wa_penerima"]; ?></td>
+		    			<td class="table_data">Rp. <?= number_format($key["harga_pengiriman"]); ?></td>
+		    			<td class="table_data">
 		    				<div class="text-center">
 			    				<a href="#" data-id="<?= $key["id_pickup_barang"]; ?>" class="not_print btn btn-sm btn-detail-status <?= bg_status($key["id_status"]); ?> <?= text_status($key["id_status"]); ?>">
 			    					<i class="fas fa-fw <?= icon_status($key["id_status"]); ?>"></i>
 				    			</a>
-				    			<span class="d-none is_print text-dark"><?= $key["status"]; ?></span>
+				    			<span class="d-none text-left is_print text-dark"><?= $key["status"]; ?></span>
 			    			</div>
 			    		</td>
 	    			</tr>

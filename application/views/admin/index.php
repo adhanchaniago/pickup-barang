@@ -71,7 +71,7 @@
                 </td>
               <td>
                   <div class="text-center">
-                  <a href="<?= base_url('admin/detail?id_pengirim='.$key["id_pengirim"]."&dari_tanggal=".$dari_tanggal."1&sampai_tanggal=".$sampai_tanggal."&id_status=".$status["id_status"]) ?>" class="btn btn-primary"><i class="fas fa-fw fa-bars"></i></a>
+                  <a href="<?= base_url('admin/detail?id_pengirim='.$key["id_pengirim"]."&dari_tanggal=".$dari_tanggal."&sampai_tanggal=".$sampai_tanggal."&id_status=".$status["id_status"]) ?>" class="btn btn-primary"><i class="fas fa-fw fa-bars"></i></a>
                   </div>
                 </td>
               </tr>
