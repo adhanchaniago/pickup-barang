@@ -31,6 +31,7 @@
 		    	<img src="<?= base_url('assets/img/img_properties/img_carousel/1.jpg'); ?>" class="d-block w-100 rounded img-carousel" alt="img-carousel">
 		      	<img src="<?= base_url('assets/img/img_properties/img_carousel/2.jpg'); ?>" class="d-block w-100 rounded img-carousel" alt="img-carousel">
 		      	<img src="<?= base_url('assets/img/img_properties/img_carousel/3.jpg'); ?>" class="d-block w-100 rounded img-carousel" alt="img-carousel">
+		      	<img src="<?= base_url('assets/img/img_properties/img_carousel/4.jpg'); ?>" class="d-block w-100 rounded img-carousel" alt="img-carousel">
 			</div>
 		</div>
 		<div class="row py-2">
