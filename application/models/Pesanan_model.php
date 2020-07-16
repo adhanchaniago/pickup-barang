@@ -17,13 +17,18 @@ class Pesanan_model extends CI_Model {
 			$dateThen = date('Y-m-d 00:00:00');
 			$dateLast = date('Y-m-d 23:59:58');
 		}
-
+		$jenis_layanan 	= $this->db->get('jenis_layanan')->result();
 		if ($id_status !== '') {
-			$query = "SELECT *,
-				SUM(IF(jenis_layanan.id_jenis_layanan = 1,1,0)) jenis1,
-				SUM(IF(jenis_layanan.id_jenis_layanan = 2,1,0)) jenis2,
-				SUM(IF(jenis_layanan.id_jenis_layanan = 3,1,0)) jenis3
-				FROM pickup_barang 
+			$query 	= "SELECT *,";
+			$i 		= 1;
+			foreach ($jenis_layanan as $value) {
+				$query 	.= " SUM(IF(jenis_layanan.id_jenis_layanan = $value->id_jenis_layanan,1,0)) jenis$value->id_jenis_layanan ";
+				if ($i < count($jenis_layanan)) {
+					$query 	.= " , ";
+				}
+				$i++;
+			}
+			$query .=	" FROM pickup_barang 
 				INNER JOIN status ON pickup_barang.id_status = status.id_status 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
 				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 
@@ -32,12 +37,18 @@ class Pesanan_model extends CI_Model {
 				GROUP BY pickup_barang.id_pengirim
 				ORDER BY pickup_barang.tanggal_pemesanan DESC
 			";
+
 		} else {
-			$query = "SELECT *,
-				SUM(IF(jenis_layanan.id_jenis_layanan = 1,1,0)) jenis1,
-				SUM(IF(jenis_layanan.id_jenis_layanan = 2,1,0)) jenis2,
-				SUM(IF(jenis_layanan.id_jenis_layanan = 3,1,0)) jenis3
-				FROM pickup_barang 
+			$query 	= "SELECT *,";
+			$i 		= 1;
+			foreach ($jenis_layanan as $value) {
+				$query 	.= " SUM(IF(jenis_layanan.id_jenis_layanan = $value->id_jenis_layanan,1,0)) jenis$value->id_jenis_layanan ";
+				if ($i < count($jenis_layanan)) {
+					$query 	.= " , ";
+				}
+				$i++;
+			}
+			$query .=	" FROM pickup_barang 
 				INNER JOIN status ON pickup_barang.id_status = status.id_status 
 				INNER JOIN pengirim ON pickup_barang.id_pengirim = pengirim.id_pengirim 
 				INNER JOIN penerima ON pickup_barang.id_penerima = penerima.id_penerima 

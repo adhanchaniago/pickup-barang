@@ -49,6 +49,7 @@ class Admin extends CI_Controller {
 		$data["val_sampai_tanggal"]	= $val_sampai_tanggal;
 		$data["dari_tanggal"]		= $dari_tanggal;
 		$data["sampai_tanggal"]		= $sampai_tanggal;
+		$data["jenis_layanan"]		= $this->db->get('jenis_layanan')->result();
 		$this->layout->view_admin('admin/index', $data);
 	}
 

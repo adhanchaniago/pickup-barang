@@ -47,10 +47,8 @@ class PickupBarang extends CI_Controller {
 			$no++;
 			$tanggal_pemesanan 	= date('Y-m-d',strtotime($item->tanggal_pemesanan));
 			$button 	= "<div class='text-center'>";
-			$button 	.= "<a href='".base_url('pickupBarang/index?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.date('Y-m-d',strtotime($item->tanggal_pemesanan))) ."'' class='m-1 btn btn-primary btn-xs'><i class='fas fa-fw fa-bars'></i></a>";
-			if($item->id_status == 4){
-				$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
-			}
+			$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
+			$button 	.= "<a href='".base_url('pickupBarang/index?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.date('Y-m-d',strtotime($item->tanggal_pemesanan))) ."'' class='m-1 btn btn-secondary btn-xs'><i class='fas fa-fw fa-bars'></i></a>";
 			$button 	.= "</div>";
 
 			$row 		= array();
@@ -158,7 +156,7 @@ class PickupBarang extends CI_Controller {
 		$this->form_validation->set_rules('no_wa_pengirim', 'No. Whatsapp Pengirim', 'required|trim');
 		$this->form_validation->set_rules('alamat_pengirim', 'Alamat Pengirim', 'required|trim');
 		$this->form_validation->set_rules('nama_penerima[]', 'Nama Penerima', 'required|trim');
-		$this->form_validation->set_rules('no_wa_penerima[]', 'No. Whatsapp Penerima', 'required|trim');
+		//$this->form_validation->set_rules('no_wa_penerima[]', 'No. Whatsapp Penerima', 'required|trim');
 		$this->form_validation->set_rules('alamat_penerima[]', 'Alamat Penerima', 'required|trim');
 		$this->form_validation->set_rules('jenis_layanan[]', 'Jenis Layanan', 'required|trim');
 		if ($this->form_validation->run() == false) {

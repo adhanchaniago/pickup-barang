@@ -512,12 +512,14 @@ class PickupBarang_model extends CI_Model {
 		if (!empty($id_pickup_barang)) {
 			$this->_setDatatable();
 			$this->db->where('pickup_barang.id_pickup_barang', $id_pickup_barang);
+			$this->db->where('pickup_barang.id_status', 4);
 			$data_arr				= $this->db->get()->result();
 		}else{
 			if (!empty($this->input->get('id_pickup_barang'))) {
 				$id_pickup_barang 	= $this->input->get($id_pickup_barang);
 				$this->_setDatatable();
 				$this->db->where('pickup_barang.id_pickup_barang', $id_pickup_barang);
+				$this->db->where('pickup_barang.id_status', 4);
 				$data_arr			= $this->db->get()->result();
 			}else{
 				$id_pengirim 		= $this->input->get('id_pengirim');
@@ -526,6 +528,7 @@ class PickupBarang_model extends CI_Model {
 				$this->_setDatatable();
 				$this->db->where('pickup_barang.id_pengirim', $id_pengirim);
 				$this->db->where('pickup_barang.tanggal_pemesanan', $tanggal_pemesanan);
+				$this->db->where('pickup_barang.id_status', 4);
 				$data_arr			= $this->db->get()->result();
 			}
 		}

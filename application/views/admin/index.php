@@ -40,13 +40,13 @@
             <tr>
               <th rowspan="2" width="10">No</th>
               <th rowspan="2">Nama Pengirim</th>
-              <th colspan="3">Jumlah Paket</th>
+              <th colspan="<?= count($jenis_layanan); ?>">Jumlah Paket</th>
               <th rowspan="2" width="10">#</th>
             </tr>
             <tr>
-              <th>REG</th>
-              <th>OKE</th>
-              <th>YES</th>
+            	<?php foreach ($jenis_layanan as $key): ?>
+            		<th><?= substr($key->jenis_layanan, 0,3); ?></th>
+            	<?php endforeach ?>
             </tr>
           </thead>
           <tbody>
@@ -54,21 +54,13 @@
               <tr>
                 <td><div class="text-center" width="10px"><?= $no; ?></div></td>
                 <td><?= $key["nama_pengirim"]; ?></td>
-                <td>
-                  <div class="text-center">
-                     <?= $key["jenis1"]; ?> 
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                     <?= $key["jenis2"]; ?>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                     <?= $key["jenis3"]; ?>
-                  </div>
-                </td>
+                <?php foreach ($jenis_layanan as $val): ?>
+                	 <td>
+	                  <div class="text-center">
+	                     <?= $key["jenis".$val->id_jenis_layanan]; ?>
+	                  </div>
+	                </td>
+                <?php endforeach ?>
               <td>
                   <div class="text-center">
                   <a href="<?= base_url('admin/detail?id_pengirim='.$key["id_pengirim"]."&dari_tanggal=".$dari_tanggal."&sampai_tanggal=".$sampai_tanggal."&id_status=".$status["id_status"]) ?>" class="btn btn-primary"><i class="fas fa-fw fa-bars"></i></a>

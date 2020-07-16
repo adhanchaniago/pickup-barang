@@ -66,8 +66,7 @@
 				<tr>
 					<td>No Whatsapp Penerima</td>
 					<td>
-						<input type="text" value="<?= set_value('no_wa_penerima[]'); ?>" name="no_wa_penerima[]" class="form-control" placeholder="+62" required="required">
-           		 		<?= form_error('no_wa_penerima[]', '<small class="form-text text-danger">', '</small>'); ?>
+						<input type="text" name="no_wa_penerima[]" class="form-control" placeholder="+62">
 					</td>
 				</tr>
 				<tr>
@@ -83,8 +82,7 @@
 					<td>Nama Barang</td>
 					<td>
 						<div class="form-group">
-							<input type="text" value="<?= set_value('nama_barang[]'); ?>" name="nama_barang[]" class="form-control" placeholder="Masukkan Nama Barang" required="required">
-           		 			<?= form_error('nama_barang[]', '<small class="form-text text-danger">', '</small>'); ?>
+							<input type="text" name="nama_barang[]" class="form-control" placeholder="Masukkan Nama Barang">
 						</div>
 					</td>
 				</tr>
@@ -100,7 +98,7 @@
 				<tr>
 					<td>Layanan</td>
 					<td>
-						<select name="jenis_layanan[]" class="form-control  jenis_layanan" >
+						<select name="jenis_layanan[]" class="form-control  jenis_layanan" required="required">
 							<option value="">-- Pilih --</option>
 							<?php foreach ($jenis_layanan as $key): ?>
 								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>
