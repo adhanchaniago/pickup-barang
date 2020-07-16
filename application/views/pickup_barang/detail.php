@@ -43,21 +43,27 @@
           </div>
         </div>
         <div class="col-md-8 col-12 pt-md-2 text-md-right text-center mb-md-0 mb-2">
-          <a href="#" class="m-1 btn btn-success mt-md-4" data-toggle="modal" data-target="#importResiModal"><i class="fas fa-fw fa-file-import"></i>  Import Resi</a>
           <a href="<?= base_url('pickupBarang/kurir') ?>" class="m-1 btn btn-danger mt-md-4"><i class="fas fa-fw fa-box"></i>  Pickup Barang</a>
           <a href="<?= base_url('pickupBarang/form') ?>" class="m-1 btn btn-primary mt-md-4"><i class="fas fa-fw fa-plus"></i> Tambah</a>
         </div>
         <div class="col-12">
           <div class="table-responsive">
-            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('pickupBarang/datatable') ?>">
+            <table class="table table-hover table-striped table-bordered" id="table_id" data-link="<?= base_url('pickupBarang/datatable2?id_pengirim='.$id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ?>">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama Pengirim</th>
-                  <th>No Wa Pengirim</th>
-                  <th>Alamat Pengirim</th>
+                  <th>No. Resi</th>
+                  <th>Nama Penerima</th>
+                  <th>No Wa Penerima</th>
+                  <th>Alamat Penerima</th>
                   <th>Tanggal Pemesanan</th>
-                  <th>Aksi</th>
+                  <th>Tanggal Penjemputan</th>
+                  <th>Tanggal Masuk Logistik</th>
+                  <th>Jenis Layanan</th>
+                  <th>Status</th>
+                  <?php if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2'): ?>
+                    <th>Aksi</th>
+                  <?php endif ?>
                 </tr>
               </thead>
             </table>
@@ -107,30 +113,3 @@
     </form>
   </div>
 </div>
-
-
-<!-- Modal -->
-<form action="<?= base_url('pickupBarang/importExcel') ?>" method="post" enctype="multipart/form-data">
-  <div class="modal fade" id="importResiModal" tabindex="-1" role="dialog" aria-labelledby="importResiModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="importResiModalLabel">Import Resi</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="">Import FILE CSV/EXCEL</label>
-            <input type="file" class="form-control" name="excel">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Close</button>
-          <button type="submit" name="submit" class="btn btn-primary"><i class="fas fa-fw fa-paper-plane"></i> Simpan</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>

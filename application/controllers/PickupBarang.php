@@ -24,7 +24,13 @@ class PickupBarang extends CI_Controller {
 		$this->form_validation->set_rules('berat_barang', 'Berat Barang', 'required|trim');
 		$this->form_validation->set_rules('harga_pengiriman', 'Harga Pengiriman', 'required|trim');
 		if ($this->form_validation->run() == false) {
-			$this->layout->view_admin('pickup_barang/index', $data);
+			if (!empty($this->input->get('id_pengirim'))) {
+				$data["id_pengirim"]		= $this->input->get('id_pengirim');
+				$data["tanggal_pemesanan"]	= $this->input->get('tanggal_pemesanan');
+				$this->layout->view_admin('pickup_barang/detail', $data);
+			}else{
+				$this->layout->view_admin('pickup_barang/index', $data);
+			}
 		} else {
 			$id_pickup_barang 	= $this->input->post('id_pickup_barang');
 		    $this->pbm->editPickupBarang($id_pickup_barang);
@@ -39,14 +45,50 @@ class PickupBarang extends CI_Controller {
 		$dataUser	= $this->mm->getDataUser();
 		foreach ($list as $item) {
 			$no++;
+			$tanggal_pemesanan 	= date('Y-m-d',strtotime($item->tanggal_pemesanan));
+			$button 	= "<div class='text-center'>";
+			$button 	.= "<a href='".base_url('pickupBarang/index?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.date('Y-m-d',strtotime($item->tanggal_pemesanan))) ."'' class='m-1 btn btn-primary btn-xs'><i class='fas fa-fw fa-bars'></i></a>";
+			if($item->id_status == 4){
+				$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
+			}
+			$button 	.= "</div>";
 
+			$row 		= array();
+
+			$row[] 		= "<div class='text-center'>".$no.".</div>";
+			$row[] 		= kapital($item->nama_pengirim);
+			$row[] 		= $item->no_wa_pengirim;
+			$row[] 		= $item->alamat_pengirim;
+			$row[] 		= $tanggal_pemesanan;
+			$row[] 		= $button;
+
+			$data[] 	= $row;
+		}
+		$output = array(
+			"draw" 					=> $this->input->post('draw'),
+			"recordsTotal" 			=> $this->pbm->countAllDatatable(),
+			"recordsFiltered" 		=> $this->pbm->countFilteredDatatable(),
+			"data" 					=> $data
+		);
+
+		echo json_encode($output);
+	}
+
+	public function datatable2()
+	{
+		$list 		= $this->pbm->getDatatable2();
+		$data 		= array();
+		$no 		= $this->input->post('start');
+		$dataUser	= $this->mm->getDataUser();
+		foreach ($list as $item) {
+			$no++;
 			if ($dataUser['id_jabatan'] == '1' || $dataUser['id_jabatan'] == '2') {
 				$button 	= "<div class='text-center'>";
 
 				if ($item->id_status == 3 ) {
 					$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-pickupBarang btn-xs' data-id='".$item->id_pickup_barang."'><i class='fas fa-fw fa-edit'></i></a>";
 				}elseif($item->id_status == 4){
-					$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
+					$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi?id_pickup_barang='.$item->id_pickup_barang) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
 				}
 
 				$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->nama_penerima)."'><i class='fas fa-fw fa-trash'></i></a>";
@@ -60,8 +102,9 @@ class PickupBarang extends CI_Controller {
 
 			$row[] 	= "<div class='text-center'>".$no.".</div>";
 			$row[] 	= $item->no_resi;
-			$row[] 	= kapital($item->nama_pengirim);
 			$row[] 	= kapital($item->nama_penerima);
+			$row[] 	= $item->no_wa_penerima;
+			$row[] 	= $item->alamat_penerima;
 			$row[] 	= $item->tanggal_pemesanan;
 			$row[] 	= $item->tanggal_penjemputan;
 			$row[] 	= $item->tanggal_masuk_logistik;
@@ -76,8 +119,8 @@ class PickupBarang extends CI_Controller {
 		}
 		$output = array(
 			"draw" 					=> $this->input->post('draw'),
-			"recordsTotal" 			=> $this->pbm->countAllDatatable(),
-			"recordsFiltered" 		=> $this->pbm->countFilteredDatatable(),
+			"recordsTotal" 			=> $this->pbm->countAllDatatable2(),
+			"recordsFiltered" 		=> $this->pbm->countFilteredDatatable2(),
 			"data" 					=> $data
 		);
 
@@ -225,12 +268,12 @@ class PickupBarang extends CI_Controller {
 		$this->pbm->importExcel();
 	}
 	
-	public function kirimResi($id_pickup_barang)
+	public function kirimResi()
 	{
 		// $data 	= $this->pbm->getPickupBarangById($id_pickup_barang);
 		// $text 	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
 		// redirect('https://api.whatsapp.com/send?phone='.$data['no_wa_pengirim'].'&text=' . $text);
-		$this->pbm->sendMessage($id_pickup_barang);
+		$this->pbm->sendMessage();
 		redirect('pickupBarang','refresh');
 	}
 

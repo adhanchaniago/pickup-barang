@@ -13,7 +13,6 @@ class PickupBarang_model extends CI_Model {
 
 	public function _setDatatable()
 	{
-
 		$this->db->select('*');
 		$this->db->from('pickup_barang');
 		$this->db->join('pengirim', 'pengirim.id_pengirim = pickup_barang.id_pengirim');
@@ -24,7 +23,7 @@ class PickupBarang_model extends CI_Model {
 	public function _filterDatatable()
 	{
 		$this->_setDatatable();
-		$column_order 		= [null,"no_resi","nama_pengirim","nama_penerima","tanggal_pemesanan","tanggal_penjemputan","tanggal_masuk_logistik","jenis_layanan","id_status"];
+		$column_order 		= [null,"nama_pengirim","no_wa_pengirim","alamat_pengirim","tanggal_pemesanan"];
 		$column_search 		= $this->column_search;
 		$default_order 		= ["tanggal_pemesanan"=>"DESC"];
 
@@ -63,7 +62,8 @@ class PickupBarang_model extends CI_Model {
 	public function getDatatable()
 	{
 		$this->_filterDatatable();
-		
+		$this->db->group_by('pengirim.id_pengirim');
+		$this->db->group_by('DATE(tanggal_pemesanan)');
 		$length 	= $this->input->post('length');
 		$start 		= $this->input->post('start');
 		if($length != -1){
@@ -77,6 +77,8 @@ class PickupBarang_model extends CI_Model {
 	public function countFilteredDatatable()
 	{
 		$this->_filterDatatable();
+		$this->db->group_by('pengirim.id_pengirim');
+		$this->db->group_by('DATE(tanggal_pemesanan)');
 		$sql 	= $this->db->get();
 		return $sql->num_rows();
 	}
@@ -84,6 +86,85 @@ class PickupBarang_model extends CI_Model {
 	public function countAllDatatable()
 	{
 		$this->_setDatatable();
+		$this->db->group_by('pengirim.id_pengirim');
+		$this->db->group_by('DATE(tanggal_pemesanan)');
+		$sql 	= $this->db->get();
+		return $sql->num_rows();
+	}
+
+	public function _filterDatatable2()
+	{
+		$this->_setDatatable();
+		$column_order 		= [null,"no_resi","nama_penerima","no_wa_penerima","alamat_penerima","tanggal_pemesanan","tanggal_penjemputan","tanggal_masuk_logistik","jenis_layanan","id_status"];
+		$column_search 		= $this->column_search;
+		$default_order 		= ["tanggal_pemesanan"=>"DESC"];
+
+		$search 			= $this->input->post('search');
+		$i = 0;
+		foreach ($column_search as $item) { 
+			if($search["value"]) { 
+				if($i===0) {
+					$this->db->group_start();
+					$this->db->like($item, $search['value']);
+				} else {
+					$this->db->or_like($item, $search['value']);
+				}
+
+				if(count($column_search) - 1 == $i){
+					$this->db->group_end(); 
+				}
+			}
+			$i++;
+		}
+
+		$order 	= $this->input->post('order');
+		if(isset($order) && $order['0']['column']!=0) {
+			$this->db->order_by($column_order[$order['0']['column']], $order['0']['dir']);
+		}elseif(isset($default_order)) {
+			$this->db->order_by(key($default_order), $default_order[key($default_order)]);
+		}
+
+		if ($this->input->post('id_status') != '') {
+			$this->db->where('pickup_barang.id_status', $this->input->post('id_status'));
+		}
+
+	}
+
+	public function getDatatable2()
+	{
+		$this->_filterDatatable2();
+		$id_pengirim 		= $this->input->get('id_pengirim');
+		$tanggal_pemesanan 	= $this->input->get('tanggal_pemesanan');
+		$this->db->where('pickup_barang.id_pengirim', $id_pengirim);
+		$this->db->where('DATE(pickup_barang.tanggal_pemesanan)', $tanggal_pemesanan);
+		$length 	= $this->input->post('length');
+		$start 		= $this->input->post('start');
+		if($length != -1){
+			$this->db->limit($length, $start);
+		}
+
+		$sql 	= $this->db->get();
+		return $sql->result();
+	}
+
+	public function countFilteredDatatable2()
+	{
+		$this->_filterDatatable2();
+		$id_pengirim 		= $this->input->get('id_pengirim');
+		$tanggal_pemesanan 	= $this->input->get('tanggal_pemesanan');
+		$this->db->where('pickup_barang.id_pengirim', $id_pengirim);
+		$this->db->where('DATE(pickup_barang.tanggal_pemesanan)', $tanggal_pemesanan);
+		$sql 	= $this->db->get();
+		return $sql->num_rows();
+	}
+
+	public function countAllDatatable2()
+	{
+		$this->_setDatatable();
+		$id_pengirim 		= $this->input->get('id_pengirim');
+		$tanggal_pemesanan 	= $this->input->get('tanggal_pemesanan');
+		$this->db->where('pickup_barang.id_pengirim', $id_pengirim);
+		$this->db->where('DATE(pickup_barang.tanggal_pemesanan)', $tanggal_pemesanan);
 		$sql 	= $this->db->get();
 		return $sql->num_rows();
 	}
@@ -426,10 +507,31 @@ class PickupBarang_model extends CI_Model {
 		return redirect('pickupBarang','refresh');
 	}
 
-	public function sendMessage($id_pickup_barang)
+	public function sendMessage($id_pickup_barang = 0)
 	{
-		$data 		= $this->getPickupBarangById($id_pickup_barang);
-		$message	= 	"Tn/Ny. " . $data['nama_pengirim'] . ", berikut adalah detail pengiriman anda : " . '\n' . '\n' . 
+		if (!empty($id_pickup_barang)) {
+			$this->_setDatatable();
+			$this->db->where('pickup_barang.id_pickup_barang', $id_pickup_barang);
+			$data_arr				= $this->db->get()->result();
+		}else{
+			if (!empty($this->input->get('id_pickup_barang'))) {
+				$id_pickup_barang 	= $this->input->get($id_pickup_barang);
+				$this->_setDatatable();
+				$this->db->where('pickup_barang.id_pickup_barang', $id_pickup_barang);
+				$data_arr			= $this->db->get()->result();
+			}else{
+				$id_pengirim 		= $this->input->get('id_pengirim');
+				$tanggal_pemesanan 	= $this->input->get('tanggal_pemesanan');
+
+				$this->_setDatatable();
+				$this->db->where('pickup_barang.id_pengirim', $id_pengirim);
+				$this->db->where('pickup_barang.tanggal_pemesanan', $tanggal_pemesanan);
+				$data_arr			= $this->db->get()->result();
+			}
+		}
+		
+		foreach ($data_arr as $data) {
+			$message	= 	"Tn/Ny. " . $data['nama_pengirim'] . ", berikut adalah detail pengiriman anda : " . '\n' . '\n' . 
 						"No. Resi : " . $data["no_resi"] . '\n' . 
 						"Nama Penerima : " . $data["nama_penerima"] . '\n' . 
 						"Alamat Penerima : " . $data["alamat_penerima"] . '\n' . 
@@ -438,94 +540,29 @@ class PickupBarang_model extends CI_Model {
 						"Terima kasih sudah menggunakan jasa pengiriman JNE kami." . '\n' .
 						"Untuk melihat detail lebih lengkap, klik link dibawah ini. " . '\n' .
 						base_url('auth');
-		$phone 		= $data["no_wa_pengirim"];
-		// $phone 		= preg_replace('/[^0-9]/', "", $phone);
+			$phone 		= $data["no_wa_pengirim"];
 
-		// chat-api
+			// woowa
+			$key_demo='db63f52c1a00d33cf143524083dd3ffd025d672e255cc688';
+			$url='http://149.28.156.46:8000/demo/send_message';
+			$data = array(
+			  "no_wa"=> $phone,
+			  "key"   =>$key_demo,
+			  "message" =>$message
+			);
 
-		// $apiURL		= "https://api.api4bot.com/instance142262/";
-		// $token		= "8sauxoikjlotij7j";
-
-		// $data = json_encode(
-		// 	[
-		// 		'chatId'	=>$phone.'@c.us',
-		// 		'body'		=>$message
-		// 	]
-		// );
-		// $url 		= $apiURL.'message?token='.$token;
-		// $options 	= stream_context_create(
-		// 	['http' =>
-		// 		[
-		// 		'method'  => 'POST',
-		// 		'header'  => 'Content-type: application/json',
-		// 		'content' => $data
-		// 		]
-		// 	]
-		// );
-		// $response = file_get_contents($url,false,$options);
-
-		// woowa
-
-		$key_demo='db63f52c1a00d33cf143524083dd3ffd025d672e255cc688';
-		$url='http://149.28.156.46:8000/demo/send_message';
-		$data = array(
-		  "no_wa"=> $phone,
-		  "key"   =>$key_demo,
-		  "message" =>$message
-		);
-
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_VERBOSE, 0);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 360);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-		  'Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA=='
-		));
-		echo $res=curl_exec($ch);
-		curl_close($ch);
-
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_VERBOSE, 0);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			  'Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA=='
+			));
+			echo $res=curl_exec($ch);
+			curl_close($ch);
+		}
 	}
-
-	// private function _sendMessageNoResi($no_wa_pengirim, $pesan)
-	// {
-	// 	curl -X POST $MESSAGES_API_URL \
-	// 	  -H 'Authorization: Bearer' $JWT \
-	// 	  -H 'Content-Type: application/json' \
-	// 	  -d '{
-	// 	   "from":{
-	// 	      "type":"whatsapp",
-	// 	      "number":"+6287808675313"
-	// 	   },
-	// 	   "to":{
-	// 	      "type":"whatsapp",
-	// 	      "number":"'$no_wa_pengirim'"
-	// 	   },
-	// 	   "message":{
-	// 	      "content":{
-	// 	         "type":"template",
-	// 	         "template":{
-	// 	            "name": "'$pesan'",
-	// 	            "parameters":[
-	// 	               {
-	// 	                  "default":"Nexmo Verification"
-	// 	               },
-	// 	               {
-	// 	                  "default":"64873"
-	// 	               },
-	// 	               {
-	// 	                  "default":"10"
-	// 	               }
-	// 	            ]
-	// 	         }
-	// 	      },
-	// 	      "whatsapp": {
-	// 	        "policy": "deterministic",
-	// 	        "locale": "en-GB"
-	// 	      }
-	// 	   }
-	// 	}'
-	// }
 }
