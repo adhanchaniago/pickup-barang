@@ -103,6 +103,9 @@ class PickupBarang extends CI_Controller {
 			$row[] 	= kapital($item->nama_penerima);
 			$row[] 	= $item->no_wa_penerima;
 			$row[] 	= $item->alamat_penerima;
+			$row[] 	= 'Nama Barang: ' . '<strong>' . $item->nama_barang . '</strong>' . ' <br> ' . 
+					  'Jml: ' . '<strong>' . $item->jumlah_barang . '</strong>' . ' <br> ' .
+					  'Berat: ' . '<strong>' . $item->berat_barang . ' Kg</strong>';
 			$row[] 	= $item->tanggal_pemesanan;
 			$row[] 	= $item->tanggal_penjemputan;
 			$row[] 	= $item->tanggal_masuk_logistik;

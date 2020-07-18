@@ -27,7 +27,6 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-
       <div class="table-responsive bg-white p-3 shadow">
         <table class="table table-striped table-bordered" id="table_id">
           <thead class="thead bg-primary text-white text-center">
