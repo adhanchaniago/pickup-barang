@@ -527,45 +527,51 @@ class PickupBarang_model extends CI_Model {
 
 				$this->_setDatatable();
 				$this->db->where('pickup_barang.id_pengirim', $id_pengirim);
-				$this->db->where('pickup_barang.tanggal_pemesanan', $tanggal_pemesanan);
+				$this->db->where('DATE(pickup_barang.tanggal_pemesanan)', $tanggal_pemesanan);
 				$this->db->where('pickup_barang.id_status', 4);
 				$data_arr			= $this->db->get()->result();
 			}
 		}
 		
 		foreach ($data_arr as $data) {
-			$message	= 	"Tn/Ny. " . $data['nama_pengirim'] . ", berikut adalah detail pengiriman anda : " . '\n' . '\n' . 
-						"No. Resi : " . $data["no_resi"] . '\n' . 
-						"Nama Penerima : " . $data["nama_penerima"] . '\n' . 
-						"Alamat Penerima : " . $data["alamat_penerima"] . '\n' . 
-						"Jenis Layanan : " . $data["jenis_layanan"] . '\n' . 
-						"Biaya Pengiriman : Rp. " . number_format($data["harga_pengiriman"]) . '\n' . '\n' . 
+			$message	= 	"Tn/Ny. " . $data->nama_pengirim . ", berikut adalah detail pengiriman anda : " . '\n' . '\n' . 
+						"No. Resi : " . $data->no_resi . '\n' . 
+						"Nama Penerima : " . $data->nama_penerima . '\n' . 
+						"Alamat Penerima : " . $data->alamat_penerima . '\n' . 
+						"Jenis Layanan : " . $data->jenis_layanan . '\n' . 
+						"Biaya Pengiriman : Rp. " . number_format($data->harga_pengiriman) . '\n' . '\n' . 
 						"Terima kasih sudah menggunakan jasa pengiriman JNE kami." . '\n' .
 						"Untuk melihat detail lebih lengkap, klik link dibawah ini. " . '\n' .
 						base_url('auth');
-			$phone 		= $data["no_wa_pengirim"];
+			$phone 		= $data->no_wa_pengirim;
 
 			// woowa
-			$key_demo='db63f52c1a00d33cf143524083dd3ffd025d672e255cc688';
-			$url='http://149.28.156.46:8000/demo/send_message';
+			$key	='77a9f91954dab844a9de83b55e005dda68819542a2c77cbe';
+			$url 	='http://116.203.92.59/api/send_message';
 			$data = array(
-			  "no_wa"=> $phone,
-			  "key"   =>$key_demo,
-			  "message" =>$message
+			  "phone_no"=> $phone,
+			  "key"		=> $key,
+			  "message"	=> $message
 			);
+			$data_string = json_encode($data);
 
 			$ch = curl_init($url);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_VERBOSE, 0);
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-			  'Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA=='
-			));
+			  'Content-Type: application/json',
+			  'Content-Length: ' . strlen($data_string))
+			);
 			echo $res=curl_exec($ch);
 			curl_close($ch);
+
 		}
+		
 	}
 }

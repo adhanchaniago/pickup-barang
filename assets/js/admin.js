@@ -1,5 +1,6 @@
 let url 	        = $('#data-admin').data('url');
 let halaman_ini     = $('#data-admin').data('link');
+
 $(function() {
     navbar_active();
     datatable();
@@ -8,6 +9,9 @@ $(function() {
             user();
         break;
         case 'pickupBarang':
+            pickupBarang();
+        break;
+        case 'pickupBarang/index':
             pickupBarang();
         break;
         case 'jenisLayanan':
