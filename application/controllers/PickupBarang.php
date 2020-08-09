@@ -47,7 +47,9 @@ class PickupBarang extends CI_Controller {
 			$no++;
 			$tanggal_pemesanan 	= date('Y-m-d',strtotime($item->tanggal_pemesanan));
 			$button 	= "<div class='text-center'>";
-			$button 	.= "<a href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fab fa-fw fa-whatsapp'></i></a>";
+			if ($item->id_status == 4) {
+				$button 	.= "<a href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fab fa-fw fa-whatsapp'></i></a>";
+			}
 
 			$button 	.= "<a href='".base_url('pickupBarang/index?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.date('Y-m-d',strtotime($item->tanggal_pemesanan))) ."'' class='m-1 btn btn-secondary btn-xs'><i class='fas fa-fw fa-bars'></i></a>";
 			$button 	.= "</div>";

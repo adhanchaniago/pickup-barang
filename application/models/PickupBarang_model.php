@@ -63,7 +63,7 @@ class PickupBarang_model extends CI_Model {
 	{
 		$this->_filterDatatable();
 		$this->db->group_by('pengirim.id_pengirim');
-		$this->db->group_by('DATE(tanggal_pemesanan)');
+		$this->db->group_by('DATE(tanggal_pemesanan) DESC');
 		$length 	= $this->input->post('length');
 		$start 		= $this->input->post('start');
 		if($length != -1){
