@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="Description" CONTENT="Web site Pengiriman JNE Tangsel BSD">
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/vendor/bootstrap-4.5.0/css/bootstrap.min.css'); ?>">

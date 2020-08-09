@@ -47,9 +47,15 @@ class PickupBarang extends CI_Controller {
 			$no++;
 			$tanggal_pemesanan 	= date('Y-m-d',strtotime($item->tanggal_pemesanan));
 			$button 	= "<div class='text-center'>";
-			$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
+			$button 	.= "<a href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fab fa-fw fa-whatsapp'></i></a>";
+
 			$button 	.= "<a href='".base_url('pickupBarang/index?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.date('Y-m-d',strtotime($item->tanggal_pemesanan))) ."'' class='m-1 btn btn-secondary btn-xs'><i class='fas fa-fw fa-bars'></i></a>";
 			$button 	.= "</div>";
+
+			$warna 		= bg_status($item->id_status,'btn');
+			$icon 		= icon_status($item->id_status);
+			$status 	= '<span class="btn '.$warna.' btn-xs "><i class="fas fa-fw '.$icon.'"></i> '.$item->status.'</span>';
+			$status 	= '<div class="text-center">'.$status.'</div>';
 
 			$row 		= array();
 
@@ -58,6 +64,7 @@ class PickupBarang extends CI_Controller {
 			$row[] 		= $item->no_wa_pengirim;
 			$row[] 		= $item->alamat_pengirim;
 			$row[] 		= $tanggal_pemesanan;
+			$row[] 		= $status;
 			$row[] 		= $button;
 
 			$data[] 	= $row;
@@ -86,7 +93,7 @@ class PickupBarang extends CI_Controller {
 				if ($item->id_status == 3 ) {
 					$button 	.= "<a href='#' class='m-1 btn btn-success btn-edit-pickupBarang btn-xs' data-id='".$item->id_pickup_barang."'><i class='fas fa-fw fa-edit'></i></a>";
 				}elseif($item->id_status == 4){
-					$button 	.= "<a target='_blank' href='".base_url('pickupBarang/kirimResi?id_pickup_barang='.$item->id_pickup_barang) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fas fa-fw fa-paper-plane'></i></a>";
+					$button 	.= "<a href='".base_url('pickupBarang/kirimResi?id_pickup_barang='.$item->id_pickup_barang) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fab fa-fw fa-whatsapp'></i></a>";
 				}
 
 				$button 	.= "<a href='".base_url('pickupBarang/deletePickupBarang/'.$item->id_pickup_barang) ."'' class='m-1 btn btn-danger btn-delete btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->nama_penerima)."'><i class='fas fa-fw fa-trash'></i></a>";
@@ -94,7 +101,7 @@ class PickupBarang extends CI_Controller {
 			}
 			$warna 		= bg_status($item->id_status,'btn');
 			$icon 		= icon_status($item->id_status);
-			$status 	= '<span class="btn '.$warna.' btn-xs"><i class="fas fa-fw '.$icon.'"></i></span>';
+			$status 	= '<span class="btn '.$warna.' btn-xs d-block" style="width:140px"><i class="fas fa-fw '.$icon.' "></i> '.$item->status.'</span>';
 
 			$row 	= array();
 
@@ -103,9 +110,9 @@ class PickupBarang extends CI_Controller {
 			$row[] 	= kapital($item->nama_penerima);
 			$row[] 	= $item->no_wa_penerima;
 			$row[] 	= $item->alamat_penerima;
-			$row[] 	= 'Nama Barang: ' . '<strong>' . $item->nama_barang . '</strong>' . ' <br> ' . 
-					  'Jml: ' . '<strong>' . $item->jumlah_barang . '</strong>' . ' <br> ' .
-					  'Berat: ' . '<strong>' . $item->berat_barang . ' Kg</strong>';
+			$row[] 	= $item->nama_barang;
+			$row[] 	= $item->jumlah_barang;
+			$row[] 	= $item->berat_barang;
 			$row[] 	= $item->tanggal_pemesanan;
 			$row[] 	= $item->tanggal_penjemputan;
 			$row[] 	= $item->tanggal_masuk_logistik;
@@ -190,9 +197,10 @@ class PickupBarang extends CI_Controller {
 		foreach ($get as $key) {
 			$warna 			= bg_status($id_status);
 			$warnaText		= text_status($id_status);
-
+			// $params 		= $key["no_wa_pengirim"];
+			$params 		= $key["alamat_pengirim"];
 			$data[] 	= "<div class='col-12 col-md-6 col-lg-4 my-1'>
-			<a class='".$warna." ".$warnaText." p-3 shadow-sm d-block' href='". base_url('pickupBarang/detailPickup/'.$key["no_wa_pengirim"])."/".$id_status."'>
+			<a class='".$warna." ".$warnaText." p-3 shadow-sm d-block' href='". base_url('pickupBarang/detailPickup/?alamat_pengirim='.urlencode($params))."&&status=".$id_status."'>
 				<div class='row'>
 					<div class='col-5 text-center relative border-right border-dark'>
 						<i class='fas fa-fw fa-map-marker-alt fa-lg font'></i>
@@ -207,9 +215,11 @@ class PickupBarang extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
-	public function detailPickup($no_wa_pengirim,$status = 0)
+	public function detailPickup()
 	{
 		$this->mm->check_status_login();
+		$alamat_pengirim 	= urldecode($_GET["alamat_pengirim"]);
+		$status 			= (!empty($_GET["status"]) ? $_GET["status"] : 0);
 		if ($this->input->post('btnPending') == 1) {
 			$this->pbm->ambilPickupBarang();
 		}elseif ($this->input->post('btnPickup') == 1) {
@@ -221,7 +231,7 @@ class PickupBarang extends CI_Controller {
 			$data["title"] 			= "Detail Pickup Barang";
 			$data["statusText"]		= $statusText;
 			$data["status"]			= $status;
-			$data["pickup_barang"]	= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim, $status)->row_array();
+			$data["pickup_barang"]	= $this->pbm->getPickupBarangByAlamatAndStatus($alamat_pengirim, $status)->row_array();
 			$this->layout->view_auth('pickup_barang/kurirDetailPickup',$data);
 		}
 	}
@@ -229,8 +239,8 @@ class PickupBarang extends CI_Controller {
 	{
 		$data 				= [];
 		$id_status 			= $this->input->post('id_status');
-		$no_wa_pengirim 	= $this->input->post('no_wa_pengirim');
-		$get 				= $this->pbm->getPickupBarangByWaAndStatus($no_wa_pengirim,$id_status)->result_array();
+		$alamat_pengirim 	= $this->input->post('alamat_pengirim');
+		$get 				= $this->pbm->getPickupBarangByAlamatAndStatus($alamat_pengirim,$id_status)->result_array();
 		$data 				= [];
 		$total 				= 0;
 		$pending			= 0;
@@ -274,6 +284,12 @@ class PickupBarang extends CI_Controller {
 		// $data 	= $this->pbm->getPickupBarangById($id_pickup_barang);
 		// $text 	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
 		// redirect('https://api.whatsapp.com/send?phone='.$data['no_wa_pengirim'].'&text=' . $text);
+		echo '
+		<div id="wait" style="text-align:center;padding:20px;width:100%;font-family:sans-serif">
+		<h3>Proses Pengiriman Pesan Whatsapp Sedang Berlangsung</h3>
+		<h5>Mohon Tunggu..</h5>
+		</div>
+		';
 		$this->pbm->sendMessage();
 		redirect('pickupBarang','refresh');
 	}

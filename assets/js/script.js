@@ -87,6 +87,8 @@ $(function() {
                 dataType    : 'json',
                 data        : data,
                 success     : function(response) {
+                	$("#preloader").hide();
+                	$("#content").show();
                     let html    = '';
                     for (var i = 0; i < response.length; i++) {
                         html    += response[i];
@@ -107,12 +109,17 @@ $(function() {
             let data        = {};
             data.id_status  = $('#status').val();
             data.search     = $('#search').val();
+            $("#preloader").show();
+            $("#content").hide();
             load(data,1);
+
         })
         $('#search').on('keyup',function() {
             let data        = {};
             data.id_status  = $('#status').val();
             data.search     = $('#search').val();
+            $("#preloader").show();
+            $("#content").hide();
             load(data,1);
         })
     }
@@ -156,17 +163,19 @@ $(function() {
         })
 
         let data                = {};
-        data.no_wa_pengirim     = $('#data-detailPickup').data('wa');
+        data.alamat_pengirim    = $('#data-detailPickup').data('alamat');
         data.id_status          = $('#data-detailPickup').data('status');
         load(data);
 
         function load(data = {},reset = 0) {
             $.ajax({
                 url         : url + 'pickupBarang/detailPickupAjax',
-                method      : 'post',
+                method      : 'POST',
                 dataType    : 'json',
                 data        : data,
                 success     : function(response) {
+                	$("#preloader").hide();
+                	$("#content").show();
                     let html    = '';
                     for (var i = 0; i < response[0].length; i++) {
                         html    += response[0][i];
@@ -192,8 +201,25 @@ $(function() {
         }
 
         $('#search').on('keyup',function() {
+        	$("#preloader").show();
+			$("#content").hide();
             data.search     = $('#search').val();
             load(data,1);
+        })
+
+        $('body').on('click','#btnPending',function() {
+        	$('#preloaderAmbil').show();
+        	$(this).prop('readonly',true);
+        	$(this).addClass('disabled');
+        	$(this).parents('form').submit();
+        })
+
+        $('body').on('click','#btnPickup',function() {
+        	$('#preloaderSubmit').show();
+        	$(this).prop('readonly',true);
+        	$(this).addClass('disabled');
+        	$(this).parents('form').submit();
+
         })
     }
 

@@ -24,7 +24,7 @@ function bg_status($value,$jenis = 'bg')
 			return $jenis.'-primary';
 		break;
 		default:
-			return $jenis.'-white';
+			return $jenis.'-dark';
 		break;
 	}
 }
@@ -44,7 +44,7 @@ function text_status($value,$jenis = 'text')
 			return $jenis.'-light';
 		break;
 		default:
-			return '';
+			return $jenis.'-white';
 		break;
 	}
 }
@@ -61,7 +61,7 @@ function icon_status($value,$jenis = 'fa')
 			return $jenis.'-pallet';
 		break;
 		case 4:
-			return $jenis.'-paper-plane';
+			return $jenis.'-check';
 		break;
 		default:
 			return '';

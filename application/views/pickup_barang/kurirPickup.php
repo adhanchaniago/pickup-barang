@@ -44,5 +44,6 @@
 		</div>
 	</div>
 
+	<div id="preloader" class="loader"></div>
 	<div class="row mt-3" id="content"></div>
 </div>

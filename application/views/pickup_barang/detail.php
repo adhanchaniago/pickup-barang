@@ -44,7 +44,7 @@
         </div>
         <div class="col-md-8 col-12 pt-md-2 text-md-right text-center mb-md-0 mb-2">
           <a href="#" class="m-1 btn btn-success mt-md-4" data-toggle="modal" data-target="#importResiModal"><i class="fas fa-fw fa-file-import"></i>  Import Resi</a>
-          <a href="<?= base_url('pickupBarang/kurir') ?>" class="m-1 btn btn-danger mt-md-4"><i class="fas fa-fw fa-box"></i>  Pickup Barang</a>
+          <a href="<?= base_url('pickupBarang/kurir') ?>" class="m-1 btn btn-danger mt-md-4"><i class="fas fa-fw fa-box"></i>  Kurir Pickup Barang</a>
           <a href="<?= base_url('pickupBarang/form') ?>" class="m-1 btn btn-primary mt-md-4"><i class="fas fa-fw fa-plus"></i> Tambah</a>
         </div>
         <div class="col-12">
@@ -57,7 +57,9 @@
                   <th>Nama Penerima</th>
                   <th>No Wa Penerima</th>
                   <th>Alamat Penerima</th>
-                  <th>Keterangan Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Jumlah Barang</th>
+                  <th>Berat Barang</th>
                   <th>Tanggal Pemesanan</th>
                   <th>Tanggal Penjemputan</th>
                   <th>Tanggal Masuk Logistik</th>

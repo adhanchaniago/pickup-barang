@@ -336,15 +336,15 @@ class PickupBarang_model extends CI_Model {
 		// $this->db->limit($start,$limit);
 		return $this->db->get()->result_array();
 	}
-	public function getPickupBarangByWaAndStatus($no_wa_pengirim, $status = 0)
+	public function getPickupBarangByAlamatAndStatus($alamat_pengirim, $status = 0)
 	{
-		$this->db->select('
-			pengirim.no_wa_pengirim,
-			pengirim.alamat_pengirim
-		');
-		$this->db->join('pickup_barang', 'pickup_barang.id_pengirim = pengirim.id_pengirim');
-		$pengirim 			= $this->db->get_where('pengirim', ['no_wa_pengirim' => $no_wa_pengirim])->row_array();
-		$alamat 			= $pengirim["alamat_pengirim"];
+		// $this->db->select('
+		// 	pengirim.no_wa_pengirim,
+		// 	pengirim.alamat_pengirim
+		// ');
+		// $this->db->join('pickup_barang', 'pickup_barang.id_pengirim = pengirim.id_pengirim');
+		// $pengirim 			= $this->db->get_where('pengirim', ['pengirim.alamat_pengirim' => $alamat_pengirim])->row_array();
+		// // $alamat 			= $pengirim["alamat_pengirim"];
 		$search 			= $this->input->post('search');
 		$column_search 		= $this->column_search;
 		$this->_setDatatable();
@@ -362,8 +362,7 @@ class PickupBarang_model extends CI_Model {
 			}
 			$i++;
 		}
-
-		// $this->db->where('alamat_pengirim', $alamat);
+		$this->db->where('alamat_pengirim', $alamat_pengirim);
 		if ($status != 0) {
 			$this->db->where('pickup_barang.id_status', $status);
 		}
@@ -516,7 +515,7 @@ class PickupBarang_model extends CI_Model {
 			$data_arr				= $this->db->get()->result();
 		}else{
 			if (!empty($this->input->get('id_pickup_barang'))) {
-				$id_pickup_barang 	= $this->input->get($id_pickup_barang);
+				$id_pickup_barang 	= $this->input->get('id_pickup_barang');
 				$this->_setDatatable();
 				$this->db->where('pickup_barang.id_pickup_barang', $id_pickup_barang);
 				$this->db->where('pickup_barang.id_status', 4);
@@ -532,7 +531,6 @@ class PickupBarang_model extends CI_Model {
 				$data_arr			= $this->db->get()->result();
 			}
 		}
-		
 		foreach ($data_arr as $data) {
 			$message	= 	"Tn/Ny. " . $data->nama_pengirim . ", berikut adalah detail pengiriman anda : " . '\n' . '\n' . 
 						"No. Resi : " . $data->no_resi . '\n' . 
@@ -569,8 +567,19 @@ class PickupBarang_model extends CI_Model {
 			  'Content-Length: ' . strlen($data_string))
 			);
 			echo $res=curl_exec($ch);
+			switch ($res) {
+				case 'phone_offline':
+					$failed 	= 'Telepon Offline';
+					break;
+				
+				default:
+					break;
+			}
 			curl_close($ch);
 
+		}
+		if (!empty($failed)) {
+			$this->session->set_flashdata('message-failed', $failed);
 		}
 		
 	}

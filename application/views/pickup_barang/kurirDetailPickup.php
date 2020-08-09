@@ -25,13 +25,15 @@
 		margin: 10px auto 80px;
 	}
 </style>
+<div id="preloader" class="loader"></div>
 <form action="" method="post">
 	<div class="container pickup_barang">
-		<span id="data-detailPickup" data-status="<?= $status; ?>" data-wa="<?= $pickup_barang["no_wa_pengirim"]; ?>"></span>
+		<span id="data-detailPickup" data-status="<?= $status; ?>" data-alamat="<?= $pickup_barang["alamat_pengirim"]; ?>"></span>
         <input type="hidden" name="alamat_pengirim" value="<?= $pickup_barang["alamat_pengirim"]; ?>">
 		<a href="<?= base_url('pickupBarang/kurir') ?>" class="close"><i class="fas fa-fw fa-times"></i></a>
 		<h5>Daftar Pickup Barang</h5>
 		<h6>Status : <?= $statusText; ?></h6>
+		<h6>Alamat : <?= $pickup_barang["alamat_pengirim"]; ?></h6>
 		<div class="row">
 			<div class="col-12">
 				<div class="form-group">
@@ -48,8 +50,8 @@
 				<p id="total"></p>
 			</div>
 			<div class="col-8 text-right pl-0">
-				<button class="btn btn-danger btn-sm" type="submit" name="btnPending" value="1"><i class="fas fa-fw fa-paper-plane"></i> Ambil</button>
-				<button class="btn btn-success btn-sm" type="submit" name="btnPickup" value="1"><i class="fas fa-fw fa-paper-plane"></i> Submit (<span id="angka">0</span>)</button>
+				<button class="btn btn-danger btn-sm" id="btnPending" type="submit" name="btnPending" value="1"><i class="fas fa-fw fa-paper-plane"></i> Ambil <span id="preloaderAmbil" class="loader-small" style="display: none;"></span> </button>
+				<button class="btn btn-success btn-sm" id="btnPickup" type="submit" name="btnPickup" value="1"><i class="fas fa-fw fa-paper-plane"></i> Submit (<span id="angka">0</span>) <span id="preloaderSubmit" class="loader-small" style="display: none;"></span></button>
 			</div>
 		</div>
 	</div>	

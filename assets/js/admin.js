@@ -38,8 +38,8 @@ $(function() {
                     "targets"    : [-1],
                     "orderable" : false
                 }],
-                "responsive": true,
-                "autoWidth": true
+                // "responsive": true,
+                // "autoWidth": true
             });
         }
     }
