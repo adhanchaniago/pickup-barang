@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/vendor/datatables-1.10.21/css/dataTables.bootstrap4.min.css'); ?>">
 
     <link rel="stylesheet" href="<?= base_url('assets/datatables-responsive/css/responsive.bootstrap4.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/style.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
     
     <!-- Fancybox CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/vendor/fancybox-3.5.7/jquery.fancybox.min.css'); ?>">

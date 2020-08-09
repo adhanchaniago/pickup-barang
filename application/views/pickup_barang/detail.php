@@ -30,6 +30,21 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
+    	<table cellpadding="3"> 
+    		<tr>
+    			<td>Nama Pengirim</td>
+    			<td class="text-bold"> : <?= kapital($pengirim->nama_pengirim); ?></td>
+    		</tr>
+    		<tr>
+    			<td>Alamat Pengirim</td>
+    			<td class="text-bold"> : <?= $pengirim->alamat_pengirim; ?></td>
+    		</tr>
+    		<tr>
+    			<td>No Whatsapp</td>
+    			<td class="text-bold"> : <?= $pengirim->no_wa_pengirim; ?></td>
+    		</tr>
+    	</table>
+
       <div class="row my-2">
         <div class="col-md col-12">
           <div class="form-group">

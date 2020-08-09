@@ -26,6 +26,7 @@ class PickupBarang extends CI_Controller {
 		if ($this->form_validation->run() == false) {
 			if (!empty($this->input->get('id_pengirim'))) {
 				$data["id_pengirim"]		= $this->input->get('id_pengirim');
+				$data["pengirim"]			= $this->db->where('id_pengirim', $this->input->get('id_pengirim'))->get('pengirim')->row();
 				$data["tanggal_pemesanan"]	= $this->input->get('tanggal_pemesanan');
 				$this->layout->view_admin('pickup_barang/detail', $data);
 			}else{
@@ -48,7 +49,9 @@ class PickupBarang extends CI_Controller {
 			$tanggal_pemesanan 	= date('Y-m-d',strtotime($item->tanggal_pemesanan));
 			$button 	= "<div class='text-center'>";
 			if ($item->id_status == 4) {
-				$button 	.= "<a href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."'' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fab fa-fw fa-whatsapp'></i></a>";
+				$button 	.= "<a href='".base_url('pickupBarang/kirimResi?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.$tanggal_pemesanan) ."' class='m-1 btn btn-primary btn-kirim-resi btn-xs' data-text=' ".kapital($item->nama_pengirim)."  |  ".kapital($item->no_wa_pengirim)."'><i class='fab fa-fw fa-whatsapp'></i></a>";
+			}else{
+				$button 	.= "<a href='javascript:;' class='m-1 btn btn-primary btn-xs disabled'><i class='fab fa-fw fa-whatsapp'></i></a>";
 			}
 
 			$button 	.= "<a href='".base_url('pickupBarang/index?id_pengirim='.$item->id_pengirim.'&tanggal_pemesanan='.date('Y-m-d',strtotime($item->tanggal_pemesanan))) ."'' class='m-1 btn btn-secondary btn-xs'><i class='fas fa-fw fa-bars'></i></a>";
@@ -286,12 +289,6 @@ class PickupBarang extends CI_Controller {
 		// $data 	= $this->pbm->getPickupBarangById($id_pickup_barang);
 		// $text 	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
 		// redirect('https://api.whatsapp.com/send?phone='.$data['no_wa_pengirim'].'&text=' . $text);
-		echo '
-		<div id="wait" style="text-align:center;padding:20px;width:100%;font-family:sans-serif">
-		<h3>Proses Pengiriman Pesan Whatsapp Sedang Berlangsung</h3>
-		<h5>Mohon Tunggu..</h5>
-		</div>
-		';
 		$this->pbm->sendMessage();
 		redirect('pickupBarang','refresh');
 	}

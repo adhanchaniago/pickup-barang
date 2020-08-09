@@ -73,27 +73,6 @@ $(function() {
             $(modal + ' #label').html('Ubah Pickup Barang');
             let id_pickup_barang   = $(this).data('id');
             $(modal + ' #id_pickup_barang').val(id_pickup_barang);
-            // $.ajax({
-            //     url         : url + 'pickupBarang/getPickupBarangById',
-            //     method      : 'post',
-            //     data        : {id_pickup_barang : id_pickup_barang},
-            //     dataType    : 'json',
-            //     success     : function(response) {
-                    
-            //         $(modal + ' #no_resi').val(response.no_resi);
-            //         $(modal + ' #id_pengirim').val(response.id_pengirim).trigger('change');
-            //         $(modal + ' #id_penerima').val(response.id_penerima).trigger('change');
-            //         $(modal + ' #id_layanan_paket').val(response.id_layanan_paket).trigger('change');
-            //         $(modal + ' #nama_barang').val(response.nama_barang);
-            //         $(modal + ' #berat_barang').val(response.berat_barang);
-            //         $(modal + ' #jumlah_barang').val(response.jumlah_barang);
-            //         $(modal + ' #tanggal_pemesanan').val(response.tanggal_pemesanan);
-            //         $(modal + ' #tanggal_penjemputan').val(response.tanggal_penjemputan);
-            //         $(modal + ' #tanggal_masuk_logistik').val(response.tanggal_masuk_logistik);
-            //         $(modal + ' #id_pickup_barang').val(response.id_pickup_barang).trigger('change');
-            //         $(modal + ' #status').val(response.status);
-            //     }
-            // })
         });
 
         $('.btn-tambah-pickupBarang').on('click',function(e) {
@@ -107,6 +86,17 @@ $(function() {
             $('#table_id').DataTable().destroy();
             let data        = {id_status : val};
             datatable(data);
+        });
+        $('body').on('click','.btn-kirim-resi',function() {
+        	html 	= `
+        	<div id="preloaderSendWa" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:1500;background-color:rgba(0,0,0,.8);" class="p-5 text-center text-white">
+				<div id="wait" style="text-align:center;padding:20px;width:100%;font-family:sans-serif">
+					<h3>Proses Pengiriman Pesan Whatsapp Sedang Berlangsung</h3>
+					<h5>Mohon Tunggu..</h5>
+				</div>
+        	</div>
+        	`;
+        	$('body').append(html);
         })
     }
 
