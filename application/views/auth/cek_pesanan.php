@@ -71,9 +71,9 @@
     </div>
     <div class="not_print dropdown-divider"></div>
 	
-	<form method="post" class="not_print" action="<?= base_url('auth/cek_status_pesanan/'); ?>">
-		<?php if (isset($_POST['no_wa_pengirim'])): ?>
-			<input type="hidden" name="no_wa_pengirim" value="<?= $_POST['no_wa_pengirim']; ?>">
+	<form method="GET" class="not_print" action="<?= base_url('auth/cek_status_pesanan/'); ?>">
+		<?php if (isset($_GET['no_wa_pengirim'])): ?>
+			<input type="hidden" name="no_wa_pengirim" value="<?= $_GET['no_wa_pengirim']; ?>">
 		<?php endif ?>
 		<ul class="list-group list-group-flush rounded">
 			<li class="list-group-item active"><i class="fas fa-fw fa-filter"></i> Filter</li>
@@ -110,7 +110,15 @@
 					</div>
 				</div>
 				<button type="submit" name="btnFilter" class="btn btn-primary"><i class="fas fa-fw fa-filter"></i> Filter</button>
-				<button type="button" onclick="window.print()" class="btn btn-success"><i class="fas fa-fw fa-print"></i> Print</button>
+				<div class="dropdown " style="display: inline-block;">
+					<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-fw fa-print"></i> Print
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="#" onclick="window.print()">PDF</a>
+						<a class="dropdown-item" href="<?= base_url('auth/cek_status_pesanan/?'.$this->input->server('QUERY_STRING')) ?>&printExcel" target="_blank">Excel</a>
+					</div>
+				</div>
 			</li>
 		</ul>
 	</form>

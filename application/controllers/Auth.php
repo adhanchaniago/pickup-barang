@@ -53,15 +53,15 @@ class Auth extends CI_Controller {
 
 	public function cek_status_pesanan()
 	{
-		if (!isset($_POST['no_wa_pengirim'])) {
+		if (!isset($_GET['no_wa_pengirim'])) {
 			redirect('auth/index#tracking');
 		}
-		$data['title']	 			= 'Cek Pesanan - '.$this->input->post('no_wa_pengirim');
+		$data['title']	 			= 'Cek Pesanan - '.$this->input->get('no_wa_pengirim');
 
-		if (!isset($_POST['dari_tanggal']) AND !isset($_POST['sampai_tanggal'])) {
+		if (!isset($_GET['dari_tanggal']) AND !isset($_GET['sampai_tanggal'])) {
 			$headline 				= ' - Semua';
 			$status					= $this->status->getStatusById();
-			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
+			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_GET['no_wa_pengirim']);
 			$pesanan 				= $this->pesm->getPesananByNoWaPengirimNoSort($no_wa_pengirim);
 			$jml_status				= $this->pesm->getJmlStatusByNoWaPengirimNoSort($no_wa_pengirim);
 			$val_dari_tanggal		= date('Y-m-d');
@@ -69,12 +69,12 @@ class Auth extends CI_Controller {
 			$dari_tanggal			= '';
 			$sampai_tanggal			= '';
 		} else {
-			$dari_tanggal			= $_POST["dari_tanggal"];
-			$sampai_tanggal			= $_POST["sampai_tanggal"];
-			$id_status	 			= $_POST["id_status"];
+			$dari_tanggal			= $_GET["dari_tanggal"];
+			$sampai_tanggal			= $_GET["sampai_tanggal"];
+			$id_status	 			= $_GET["id_status"];
 			$status					= $this->status->getStatusById($id_status);
 			$headline 				= ' - '.$dari_tanggal.' s/d '.$sampai_tanggal.' - '.$status['status'];
-			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_POST['no_wa_pengirim']);
+			$no_wa_pengirim 		= $this->mm->no_telepon_validasi($_GET['no_wa_pengirim']);
 			$pesanan 				= $this->pesm->getPesananByNoWaPengirim($dari_tanggal, $sampai_tanggal, $id_status, $no_wa_pengirim);
 			$jml_status				= $this->pesm->getJmlStatusByNoWaPengirim($dari_tanggal, $sampai_tanggal, $id_status, $no_wa_pengirim);
 			$val_dari_tanggal		= $dari_tanggal;
@@ -92,21 +92,27 @@ class Auth extends CI_Controller {
 		$data["dari_tanggal"]		= $dari_tanggal;
 		$data["sampai_tanggal"]		= $sampai_tanggal;
 
-		$this->form_validation->set_rules('no_wa_pengirim', 'No. WhatsApp Pengirim', 'required|trim');
-		if ($this->form_validation->run() == false) {
-			$this->layout->view_auth('auth/index', $data);
-		} else {
-			$data['pengirim'] 			= $this->peng->getPengirimByNoWa();
-			$data['pesanan'] 			= $this->pbm->cek_status_pesanan();
-			if (count($data['pesanan']) > 0 OR $data['pengirim'] > 0) {
-				$data['berhasil'] 		= true;
-				$this->layout->view_auth('auth/cek_pesanan', $data);
-			} else {
-				// redirect('auth/index#cek_pesanan','refresh');
-				$data['error'] 			= true;
-				$this->layout->view_auth('auth/index', $data);
-			}
+		$no_wa_pengirim = $this->mm->no_telepon_validasi($this->input->get('no_wa_pengirim', true));
+		$data['pengirim'] 			= $this->peng->getPengirimByNoWa($no_wa_pengirim);
+		$data['pesanan'] 			= $this->pbm->cek_status_pesanan($no_wa_pengirim);
+		// print_r($_GET);die;
+		if (isset($_GET["printExcel"])) {
+			$filename 	= 'JNETangseLBsd'.$no_wa_pengirim.'Tgl'.$val_dari_tanggal.'-'.$val_sampai_tanggal.'.xls';
+			header("Content-type: application/vnd-ms-excel");
+			header("Content-Disposition: attachment; filename=".$filename);
+			echo $this->layout->view_auth('auth/print_excel', $data, TRUE);
+			die;
 		}
+		if (count($data['pesanan']) > 0 OR $data['pengirim'] > 0) {
+			$data['berhasil'] 		= true;
+			$this->layout->view_auth('auth/cek_pesanan', $data);
+
+		} else {
+			// redirect('auth/index#cek_pesanan','refresh');
+			$data['error'] 			= true;
+			$this->layout->view_auth('auth/index', $data);
+		}
+	
 	}
 
 

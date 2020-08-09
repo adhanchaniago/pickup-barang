@@ -371,9 +371,9 @@ class PickupBarang_model extends CI_Model {
 		return $this->db->get();
 	}
 
-	public function cek_status_pesanan()
+	public function cek_status_pesanan($no_wa_pengirim)
 	{
-		$no_wa_pengirim = $this->mm->no_telepon_validasi($this->input->post('no_wa_pengirim', true));
+		//$no_wa_pengirim = $this->mm->no_telepon_validasi($this->input->post('no_wa_pengirim', true));
 		$dari_tanggal 	= $this->input->post('dari_tanggal', true);
 		$sampai_tanggal	= $this->input->post('sampai_tanggal', true);
 		$id_status 		= $this->input->post('id_status', true);
@@ -453,6 +453,8 @@ class PickupBarang_model extends CI_Model {
 			$loadexcel			= $excelreader->load('assets/excel/'.$data_upload);
 			$sheet 			    = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
 			$numrow 			= 0;
+			$success 			= 0;
+			$failed 			= 0;
 			foreach($sheet as $row){
 				if($numrow > 0){
 					$no_resi 		  	= $row["A"];
@@ -495,12 +497,16 @@ class PickupBarang_model extends CI_Model {
 						$this->db->where('id_pickup_barang', $id_pickup_barang);
 						$this->db->update('pickup_barang', $upd);
 						$this->sendMessage($id_pickup_barang);
+						$success++;
+					}else{
+						$failed++;
 					}
 				}
+				$failed++;
 				$numrow++;
 			}
 			$dataUser 			= $this->mm->getDataUser();
-			$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' mengimport nomor resi ');
+			$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' mengimport nomor resi &nbsp;'.$success.' Sukses, '.$failed.' Gagal');
 			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' mengimport nomor resi ', $dataUser['id_user']);
 		}
 		return redirect('pickupBarang','refresh');

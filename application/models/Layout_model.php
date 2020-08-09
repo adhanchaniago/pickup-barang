@@ -17,7 +17,7 @@ class Layout_model extends CI_Model {
 		$this->load->view($url, $data);
 		$this->load->view('templates/footer-admin', $data);
 	}
-	public function view_auth($url,$data)
+	public function view_auth($url,$data,$render = false)
 	{
 		$path 							= explode('/', $this->input->server('PATH_INFO'));
 		if (count($path) == 1) {
@@ -30,12 +30,20 @@ class Layout_model extends CI_Model {
 		}
 		$data["def_link"]				= $link;
 
-		$this->load->view('templates/header-auth', $data);
-		$this->load->view($url, $data);
-		if ($this->uri->segment(2) !== 'login' AND $this->uri->segment(2) !== 'kurir' AND $this->uri->segment(2) !== 'detailPickup') {
-			$this->load->view('templates/footer-landing', $data);
+		if ($render) {
+			$html 	= $this->load->view('templates/header-auth', $data,TRUE);
+			$html 	.= $this->load->view($url, $data,TRUE);
+			$html 	.= $this->load->view('templates/footer-auth', $data,TRUE);
+			return $html;
+		}else{			
+			$this->load->view('templates/header-auth', $data);
+			$this->load->view($url, $data);
+			if ($this->uri->segment(2) !== 'login' AND $this->uri->segment(2) !== 'kurir' AND $this->uri->segment(2) !== 'detailPickup') {
+				$this->load->view('templates/footer-landing', $data);
+			}
+			$this->load->view('templates/footer-auth', $data);
 		}
-		$this->load->view('templates/footer-auth', $data);
+
 	}
 
 }
