@@ -115,7 +115,7 @@ $(function() {
                     $(modal + ' #label').html('Ubah Pengguna - ' + response.username);
                     $(modal + ' #username').val(response.username);
                     $(modal + ' #nama_lengkap').val(response.nama_lengkap);
-                    $(modal + ' #id_jabatan').val(response.id_jabatan).select();
+                    $(modal + ' #id_jabatan').val(response.id_jabatan).trigger('change');
                     $(modal + ' #id_user').val(response.id_user);
 
                     let foto    = url + 'assets/img/img_profiles/' + response.img_profile;

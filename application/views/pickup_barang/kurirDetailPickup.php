@@ -17,12 +17,12 @@
 	}
 	.boxSubmit{
 		position: fixed;
-		bottom: 0;
+		bottom: 30px;
 		left: 0;
 		right: 0;
 	}
 	.pickup_barang{
-		margin: 10px auto 80px;
+		margin: 10px auto 150px;
 	}
 </style>
 <div id="preloader" class="loader"></div>
@@ -44,12 +44,12 @@
 		</div>
 		<div class="row " id="content"></div>
 	</div>
-	<div class="bg-white p-3 boxSubmit container shadow">
+	<div class="bg-white p-3 boxSubmit container">
 		<div class="row">
-			<div class="col pr-0">
-				<p id="total"></p>
+			<div class="col-12 col-sm pr-0 mb-3">
+				Total Barang : <span id="total" class="float-right"></span>
 			</div>
-			<div class="col-8 text-right pl-0">
+			<div class="col-12 col-sm-8 text-sm-right pl-0 text-center">
 				<button class="btn btn-danger btn-sm" id="btnPending" type="submit" name="btnPending" value="1"><i class="fas fa-fw fa-paper-plane"></i> Ambil <span id="preloaderAmbil" class="loader-small" style="display: none;"></span> </button>
 				<button class="btn btn-success btn-sm" id="btnPickup" type="submit" name="btnPickup" value="1"><i class="fas fa-fw fa-paper-plane"></i> Submit (<span id="angka">0</span>) <span id="preloaderSubmit" class="loader-small" style="display: none;"></span></button>
 			</div>

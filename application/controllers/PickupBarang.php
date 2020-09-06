@@ -184,10 +184,31 @@ class PickupBarang extends CI_Controller {
 	public function kurir()
 	{
 		$this->mm->check_status_login();
-		$status 					= $this->status->getAllStatus();
+		$status_all 				= $this->status->getAllStatus();
+		$status 					= [];
+		foreach ($status_all as $row) {
+			$this->db->select('alamat_pengirim');
+			$this->db->from('pengirim');
+			$this->db->join('pickup_barang', 'pengirim.id_pengirim = pickup_barang.id_pengirim', 'inner');
+			$this->db->where('id_status', $row["id_status"]);
+			$this->db->group_by('alamat_pengirim');
+			$count 					= $this->db->get()->num_rows();
+			$row["total"]			= $count;
+			$status[] 				= $row;
+		}
+		$this->db->select('alamat_pengirim');
+		$this->db->from('pengirim');
+		$this->db->join('pickup_barang', 'pengirim.id_pengirim = pickup_barang.id_pengirim', 'inner');
+		$this->db->group_by('alamat_pengirim');
+		$count_all					= $this->db->get()->num_rows();
+
+		$warna 						= ["danger","warning",'success','primary'];
+		$data["total_semua"]		= $count_all;
+		$data['dataUser'] 			= $this->mm->getDataUser();
 		$data["title"] 				= "Pickup Barang";
 		$data["status"]				= $status;
-		$this->layout->view_auth('pickup_barang/kurirPickup',$data);
+		$data["warna"]				= $warna;
+		$this->layout->view_operator('pickup_barang/kurirPickup',$data);
 	}
 	
 	public function kurirAjax()
@@ -237,7 +258,7 @@ class PickupBarang extends CI_Controller {
 			$data["statusText"]		= $statusText;
 			$data["status"]			= $status;
 			$data["pickup_barang"]	= $this->pbm->getPickupBarangByAlamatAndStatus($alamat_pengirim, $status)->row_array();
-			$this->layout->view_auth('pickup_barang/kurirDetailPickup',$data);
+			$this->layout->view_operator('pickup_barang/kurirDetailPickup',$data);
 		}
 	}
 	public function detailPickupAjax()

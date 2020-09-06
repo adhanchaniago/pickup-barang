@@ -129,7 +129,7 @@ class User_model extends CI_Model {
 	{
 		$dataUser 				= $this->mm->getDataUser();
 		$data['user'] 			= $this->getUserById($id);
-		$this->db->set('img_profile', $data['user']['img_profile']);
+		//$this->db->set('img_profile', $data['user']['img_profile']);
 		$img_profile 			= $_FILES['img_profile']['name'];
 		if ($img_profile) {
 			$config['upload_path'] 		= './assets/img/img_profiles/';
@@ -146,9 +146,11 @@ class User_model extends CI_Model {
 		}
 		
 		$data = [
+			'username' 				=> strtolower($this->input->post('username', true)),
 			'nama_lengkap' 			=> ucwords(strtolower($this->input->post('nama_lengkap', true))),
 			'id_jabatan' 			=> $this->input->post('id_jabatan', true)
 		];
+
 
 		$this->db->where('id_user', $id);
 		$this->db->update('user', $data);

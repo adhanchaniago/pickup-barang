@@ -79,7 +79,7 @@ $(function() {
         
     }
     function kurirPickup() {
-        load({id_status : $('#status').val()});
+        // load({id_status : $('.status').data('id')});
         function load(data = {},reset = 0) {
             $.ajax({
                 url         : url + 'pickupBarang/kurirAjax',
@@ -88,7 +88,8 @@ $(function() {
                 data        : data,
                 success     : function(response) {
                 	$("#preloader").hide();
-                	$("#content").show();
+                    $("#box").show();
+                	$("#menu").hide();
                     let html    = '';
                     for (var i = 0; i < response.length; i++) {
                         html    += response[i];
@@ -102,26 +103,35 @@ $(function() {
                         html    += '<div class="text-center col-12">Data Tidak Ditemukan</div>';
                         $('#content').html(html);                        
                     }
+                    // $(window).scrollTop($("#content").offset().top - 20);
                 }
             })
         }
-        $('#status').on('change',function() {
+        $('.status').on('click',function(e) {
+            e.preventDefault();
             let data        = {};
-            data.id_status  = $('#status').val();
-            data.search     = $('#search').val();
+            let status      = $(this).find('.text').html();
+            $('#textStatus').html(status);
+            data.id_status  = $(this).data('id');
+            // data.search     = $('#search').val();
             $("#preloader").show();
-            $("#content").hide();
+            $("#box").hide();
             load(data,1);
 
+        });
+        $('#back').on('click',function(e) {
+            e.preventDefault();
+            $("#box").hide();
+            $("#menu").show();
         })
-        $('#search').on('keyup',function() {
-            let data        = {};
-            data.id_status  = $('#status').val();
-            data.search     = $('#search').val();
-            $("#preloader").show();
-            $("#content").hide();
-            load(data,1);
-        })
+        // $('#search').on('keyup',function() {
+        //     let data        = {};
+        //     data.id_status  = $('#status').val();
+        //     data.search     = $('#search').val();
+        //     $("#preloader").show();
+        //     $("#content").hide();
+        //     load(data,1);
+        // })
     }
     function kurirDetailPickup(){
         $('#content').on('change','[type=checkbox]',function() {

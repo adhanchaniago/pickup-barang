@@ -43,7 +43,20 @@ class Layout_model extends CI_Model {
 			}
 			$this->load->view('templates/footer-auth', $data);
 		}
+	}
+	public function view_operator($url,$data)
+	{
+		$path 							= explode('/', $this->input->server('PATH_INFO'));
+		if (count($path) <= 2) {
+			$link 						= $path[1];
+		}else{
+			$link 						= $path[1].'/'.$path[2];
+		}
+		$data["def_link"]				= $link;
 
+		$this->load->view('templates/header-operator', $data);
+		$this->load->view($url, $data);
+		$this->load->view('templates/footer-operator', $data);
 	}
 
 }
