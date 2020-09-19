@@ -33,8 +33,12 @@
 		<a class="navbar-brand" href="#">JNE Pickup Barang</a>
 
 			<div class="ml-auto">
+				<?php if ($this->session->userdata('id_jabatan') == 1): ?>
+				<a href="<?= base_url('pickupBarang') ?>" class="btn btn-danger bg-primary border-0"><i class="fas fa-fw fa-arrow-left"></i></a>
+				<?php else: ?>
 				<a href="<?= base_url('admin/profile') ?>" class="btn btn-danger bg-primary border-0"><i class="fas fa-fw fa-user"></i></a>
 				<a href="<?= base_url('auth/logout') ?>" class="btn btn-danger bg-primary border-0"><i class="fas fa-fw fa-sign-out-alt"></i></a>
+				<?php endif ?>
 			</div>
 		</div>
 	</nav>

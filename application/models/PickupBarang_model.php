@@ -445,8 +445,8 @@ class PickupBarang_model extends CI_Model {
 			$explode 			= explode('.', $data_upload);
 			$extension 			= end($explode);
 
-			if ($extension == 'csv') {
-				$excelreader 	= PHPExcel_IOFactory::createReader($extension);
+			if (strtolower($extension) == 'csv') {
+				$excelreader 	= PHPExcel_IOFactory::createReader("CSV");
 			}else{
 				$excelreader 	= PHPExcel_IOFactory::createReader('Excel2007');
 			}
@@ -537,6 +537,8 @@ class PickupBarang_model extends CI_Model {
 				$data_arr			= $this->db->get()->result();
 			}
 		}
+
+		$all_message 	= "";
 		foreach ($data_arr as $data) {
 			$message	= 	"Tn/Ny. " . $data->nama_pengirim . ", berikut adalah detail pengiriman anda : " . '\n' . '\n' . 
 						"No. Resi : " . $data->no_resi . '\n' . 

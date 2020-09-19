@@ -314,5 +314,7 @@ class PickupBarang extends CI_Controller {
 		redirect('pickupBarang','refresh');
 	}
 
+	
+
 
 }
