@@ -311,52 +311,11 @@ class PickupBarang extends CI_Controller {
 		// $text 	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
 		// redirect('https://api.whatsapp.com/send?phone='.$data['no_wa_pengirim'].'&text=' . $text);
 		$this->pbm->sendMessage();
+		$this->pbm->sendFile();
 		redirect('pickupBarang','refresh');
 	}
 
-	public function get_excel($id_pengirim)
-	{
-		$check = $this->db->join('penerima','penerima.id_penerima = pickup_barang.id_penerima')
-		->join('jenis_layanan','jenis_layanan.id_jenis_layanan = pickup_barang.id_jenis_layanan')
-		->where('id_pengirim',$id_pengirim)
-		->where('id_status',4)
-		->order_by('tanggal_pemesanan','DESC')
-		->get('pickup_barang')
-		->result();
-		$rows 	= [];
-		$rows[] 	= ["No Resi","Layanan","Nama Barang","Berat Barang","Jumlah Barang","Destinasi","Penerima","No Wa Penerima","Harga Pengiriman"];
-		foreach ($check as $data) {
-			$row 		= [];
-			$row[] 		= $data->no_resi;
-			$row[] 		= $data->jenis_layanan;
-			$row[] 		= $data->nama_barang;
-			$row[]		= $data->berat_barang . ' kg';
-			$row[]		= $data->jumlah_barang . ' pcs';
-			$row[]		= $data->alamat_penerima;
-			$row[]		= $data->nama_penerima;
-			$row[]		= $data->no_wa_penerima;
-			$row[]		= 'Rp ' . str_replace(',', '.', number_format($data->harga_pengiriman));
-			$rows[] 	= $row;
-		}
-		$excel 			= '<table border="1">';
-		foreach ($rows as $row) {
-			if (count($row)) {
-				$excel 	.= '<tr>';
-			}
-			foreach ($row as $key) {
-				$excel 	.= '<td>'.(is_numeric($key) ? '`': '').$key.'</td>';
-			}
-			if (count($row)) {
-				$excel 	.= '</tr>';
-			}
-		}
-		$excel 			.= '</table>';
-		$filename 		= 'csv/excel-test'.time().'.xls';
-		file_put_contents($filename, $excel);
-		$file = file_get_contents($filename);
-		unlink($filename);
-		echo $file;
-	}
+	
 
 	
 
