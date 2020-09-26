@@ -519,6 +519,7 @@ class PickupBarang_model extends CI_Model {
 			$this->db->where('pickup_barang.id_pickup_barang', $id_pickup_barang);
 			$this->db->where('pickup_barang.id_status', 4);
 			$data_arr				= $this->db->get()->result();
+			$url 		= $this->get_excel(["id_pickup_barang" => $id_pickup_barang]);
 		}else{
 			if (!empty($this->input->get('id_pickup_barang'))) {
 				$id_pickup_barang 	= $this->input->get('id_pickup_barang');
@@ -526,6 +527,7 @@ class PickupBarang_model extends CI_Model {
 				$this->db->where('pickup_barang.id_pickup_barang', $id_pickup_barang);
 				$this->db->where('pickup_barang.id_status', 4);
 				$data_arr			= $this->db->get()->result();
+				$url 				= $this->get_excel(["id_pickup_barang" => $id_pickup_barang]);
 			}else{
 				$id_pengirim 		= $this->input->get('id_pengirim');
 				$tanggal_pemesanan 	= $this->input->get('tanggal_pemesanan');
@@ -535,10 +537,14 @@ class PickupBarang_model extends CI_Model {
 				$this->db->where('DATE(pickup_barang.tanggal_pemesanan)', $tanggal_pemesanan);
 				$this->db->where('pickup_barang.id_status', 4);
 				$data_arr			= $this->db->get()->result();
+				$url 				= $this->get_excel(["id_pengirim" => $id_pengirim,"DATE(pickup_barang.tanggal_pemesanan)" => $tanggal_pemesanan]);
 			}
 		}
 
 		$all_message 	= "";
+		$key			='77a9f91954dab844a9de83b55e005dda68819542a2c77cbe';
+		$url_msg 		='http://116.203.92.59/api/send_message';
+		$url_file 		='http://116.203.92.59/api/send_file_url';
 		foreach ($data_arr as $data) {
 			$message	= 	"Tn/Ny. " . $data->nama_pengirim . ", berikut adalah detail pengiriman anda : " . '\n' . '\n' . 
 						"No. Resi : " . $data->no_resi . '\n' . 
@@ -551,9 +557,7 @@ class PickupBarang_model extends CI_Model {
 						base_url('auth');
 			$phone 		= $data->no_wa_pengirim;
 
-			// woowa
-			$key	='77a9f91954dab844a9de83b55e005dda68819542a2c77cbe';
-			$url 	='http://116.203.92.59/api/send_message';
+			// woowa Message
 			$data = array(
 			  "phone_no"=> $phone,
 			  "key"		=> $key,
@@ -561,7 +565,7 @@ class PickupBarang_model extends CI_Model {
 			);
 			$data_string = json_encode($data);
 
-			$ch = curl_init($url);
+			$ch = curl_init($url_msg);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -579,16 +583,85 @@ class PickupBarang_model extends CI_Model {
 				case 'phone_offline':
 					$failed 	= 'Telepon Offline';
 					break;
-				
-				default:
+			}
+			curl_close($ch);
+		}
+
+		
+		if (!empty($failed)) {
+			// woowa Send File
+			$data = array(
+			  "phone_no"=> $phone,
+			  "key"		=> $key,
+			  "url"		=> $url
+			);
+			$data_string = json_encode($data);
+
+			$ch = curl_init($url_file);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_VERBOSE, 0);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			  'Content-Type: application/json',
+			  'Content-Length: ' . strlen($data_string))
+			);
+			echo $res=curl_exec($ch);
+			switch ($res) {
+				case 'phone_offline':
+					$failed 	= 'Telepon Offline';
 					break;
 			}
 			curl_close($ch);
-
-		}
-		if (!empty($failed)) {
+			
 			$this->session->set_flashdata('message-failed', $failed);
 		}
-		
+	}
+
+	public function get_excel($where)
+	{
+		$this->_setDatatable();
+		foreach ($where as $column => $data) {
+			$this->db->where($column,$data);
+		}
+		$this->db->where('id_status',4);
+		$this->db->order_by('tanggal_pemesanan','DESC');
+		$check = $this->db->get()->result();
+		$rows 		= [];
+		$rows[] 	= ["No Resi","Layanan","Nama Barang","Berat Barang","Jumlah Barang","Destinasi","Penerima","No Wa Penerima","Harga Pengiriman"];
+		foreach ($check as $data) {
+			$row 		= [];
+			$row[] 		= $data->no_resi;
+			$row[] 		= $data->jenis_layanan;
+			$row[] 		= $data->nama_barang;
+			$row[]		= $data->berat_barang . ' kg';
+			$row[]		= $data->jumlah_barang . ' pcs';
+			$row[]		= $data->alamat_penerima;
+			$row[]		= $data->nama_penerima;
+			$row[]		= $data->no_wa_penerima;
+			$row[]		= 'Rp ' . str_replace(',', '.', number_format($data->harga_pengiriman));
+			$rows[] 	= $row;
+		}
+		$excel 			= '<table border="1">';
+		foreach ($rows as $row) {
+			if (count($row)) {
+				$excel 	.= '<tr>';
+			}
+			foreach ($row as $key) {
+				$excel 	.= '<td>'.(is_numeric($key) ? '`': '').$key.'</td>';
+			}
+			if (count($row)) {
+				$excel 	.= '</tr>';
+			}
+		}
+		$excel 			.= '</table>';
+		$filename 		= 'csv/DAFTAR-PENGIRIMAN-'.date('Ymd').'.xls';
+		file_put_contents($filename, $excel);
+		$file 			= base_url($filename);
+		echo $file;
 	}
 }
