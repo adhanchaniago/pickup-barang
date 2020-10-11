@@ -311,8 +311,11 @@ class PickupBarang extends CI_Controller {
 		// $text 	= "No Resi Untuk Pengiriman Kepada ". $data["nama_penerima"] . " Di Alamat ". $data["alamat_penerima"]. " Adalah ". $data["no_resi"];
 		// redirect('https://api.whatsapp.com/send?phone='.$data['no_wa_pengirim'].'&text=' . $text);
 		$this->pbm->sendMessage();
+		$this->pbm->sendFile();
 		redirect('pickupBarang','refresh');
 	}
+
+	
 
 	
 

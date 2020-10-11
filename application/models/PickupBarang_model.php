@@ -455,6 +455,7 @@ class PickupBarang_model extends CI_Model {
 			$numrow 			= 0;
 			$success 			= 0;
 			$failed 			= 0;
+			$id_pickup_barang_arr 	= [];
 			foreach($sheet as $row){
 				if($numrow > 0){
 					$no_resi 		  	= $row["A"];
@@ -497,6 +498,7 @@ class PickupBarang_model extends CI_Model {
 						$this->db->where('id_pickup_barang', $id_pickup_barang);
 						$this->db->update('pickup_barang', $upd);
 						$this->sendMessage($id_pickup_barang);
+						$id_pickup_barang_arr[] 	= $id_pickup_barang;
 						$success++;
 					}else{
 						$failed++;
@@ -504,6 +506,9 @@ class PickupBarang_model extends CI_Model {
 				}
 				$failed++;
 				$numrow++;
+			}
+			if (!empty($id_pickup_barang_arr)) {
+				$this->sendFile($id_pickup_barang_arr);
 			}
 			$dataUser 			= $this->mm->getDataUser();
 			$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' mengimport nomor resi &nbsp;'.$success.' Sukses, '.$failed.' Gagal');
@@ -539,6 +544,8 @@ class PickupBarang_model extends CI_Model {
 		}
 
 		$all_message 	= "";
+		$key			='77a9f91954dab844a9de83b55e005dda68819542a2c77cbe';
+		$url_msg 		='http://116.203.92.59/api/send_message';
 		foreach ($data_arr as $data) {
 			$message	= 	"Tn/Ny. " . $data->nama_pengirim . ", berikut adalah detail pengiriman anda : " . '\n' . '\n' . 
 						"No. Resi : " . $data->no_resi . '\n' . 
@@ -551,9 +558,7 @@ class PickupBarang_model extends CI_Model {
 						base_url('auth');
 			$phone 		= $data->no_wa_pengirim;
 
-			// woowa
-			$key	='77a9f91954dab844a9de83b55e005dda68819542a2c77cbe';
-			$url 	='http://116.203.92.59/api/send_message';
+			// woowa Message
 			$data = array(
 			  "phone_no"=> $phone,
 			  "key"		=> $key,
@@ -561,7 +566,7 @@ class PickupBarang_model extends CI_Model {
 			);
 			$data_string = json_encode($data);
 
-			$ch = curl_init($url);
+			$ch = curl_init($url_msg);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -579,16 +584,131 @@ class PickupBarang_model extends CI_Model {
 				case 'phone_offline':
 					$failed 	= 'Telepon Offline';
 					break;
-				
-				default:
-					break;
 			}
 			curl_close($ch);
-
 		}
+
+		
 		if (!empty($failed)) {
 			$this->session->set_flashdata('message-failed', $failed);
 		}
+	}
+	public function sendFile($ids = [])
+	{
+		if (!empty($this->input->get('id_pengirim')) && !empty($this->input->get('id_pengirim'))) {
+			$id_pengirim 		= $this->input->get('id_pengirim');
+			$tanggal_pemesanan 	= $this->input->get('tanggal_pemesanan');
+
+			$this->_setDatatable();
+			$this->db->where('pickup_barang.id_pengirim', $id_pengirim);
+			$this->db->where('DATE(pickup_barang.tanggal_pemesanan)', $tanggal_pemesanan);
+			$this->db->where('pickup_barang.id_status', 4);
+			$data_arr			= $this->db->get()->result();
+		}else{
+			if (!empty($ids)) {
+				$this->_setDatatable();
+				$this->db->where('pickup_barang.id_status', 4);
+				$i 	= 0;
+				foreach ($ids as $id_pickup_barang) {
+					if ($i == 0) {
+						$this->db->group_start();
+						$this->db->where('pickup_barang.id_pickup_barang', $id_pickup_barang);
+					}else{
+						$this->db->or_where('pickup_barang.id_pickup_barang', $id_pickup_barang);
+
+					}
+					if ($i == count($ids) - 1) {
+						$this->db->group_end();
+					}
+					$i++;
+				}
+				$data_arr			= $this->db->get()->result();
+			}
+		}
+		if (!count($data_arr)) {
+			exit;
+		}
+
+		$new_data_arr 				= [];
+		foreach ($data_arr as $data) {
+			$new_data_arr[$data->no_wa_pengirim][$data->id_pickup_barang] = $data;
+		}
+
+		$key			='77a9f91954dab844a9de83b55e005dda68819542a2c77cbe';
+		$url_file 		='http://116.203.92.59/api/send_file_url';
+
+		// woowa File
+		foreach ($new_data_arr as $phone => $data) {
+			$url 		= $this->get_excel($data);
+			$send = array(
+			  "phone_no"=> $phone,
+			  "key"		=> $key,
+			  "url"		=> $url
+			);
+			$data_string = json_encode($send);
+
+			$ch = curl_init($url_file);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_VERBOSE, 0);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			  'Content-Type: application/json',
+			  'Content-Length: ' . strlen($data_string))
+			);
+			echo $res=curl_exec($ch);
+			switch ($res) {
+				case 'phone_offline':
+					$failed 	= 'Telepon Offline';
+					break;
+			}
+			curl_close($ch);
+		}
 		
+
+		
+		if (!empty($failed)) {
+			$this->session->set_flashdata('message-failed', $failed);
+		}
+	}
+
+	public function get_excel($datas)
+	{
+		$rows[] 	= ["No Resi","Layanan","Nama Barang","Berat Barang","Jumlah Barang","Destinasi","Pengirim","Penerima","No Wa Penerima","Harga Pengiriman"];
+		foreach ($datas as $data) {
+			$row 		= [];
+			$row[] 		= $data->no_resi;
+			$row[] 		= $data->jenis_layanan;
+			$row[] 		= $data->nama_barang;
+			$row[]		= $data->berat_barang . ' kg';
+			$row[]		= $data->jumlah_barang . ' pcs';
+			$row[]		= $data->alamat_penerima;
+			$row[]		= $data->nama_pengirim;
+			$row[]		= $data->nama_penerima;
+			$row[]		= $data->no_wa_penerima;
+			$row[]		= 'Rp ' . str_replace(',', '.', number_format($data->harga_pengiriman));
+			$rows[] 	= $row;
+		}
+		$excel 			= '<table border="1">';
+		foreach ($rows as $row) {
+			if (count($row)) {
+				$excel 	.= '<tr>';
+			}
+			foreach ($row as $key) {
+				$excel 	.= '<td>'.(is_numeric($key) ? '`': '').$key.'</td>';
+			}
+			if (count($row)) {
+				$excel 	.= '</tr>';
+			}
+		}
+		$excel 			.= '</table>';
+		$filename 		= 'csv/DAFTAR-PENGIRIMAN-'.date('Ymd').'.xls';
+		file_put_contents($filename, $excel);
+		$file 			= base_url($filename);
+		echo $file;
 	}
 }
