@@ -118,7 +118,7 @@
 			<div class="input-group">
 				<input type="file" class="form-control" name="file" id="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
 				<div class="input-group-btn">
-					<a class="btn btn-primary" href="#"><i class="fas fa-fw fa-file-csv"></i> Template</a>
+					<a class="btn btn-primary" href="<?= base_url('assets/template/Template Input Form Pesanan.xlsx') ?>"><i class="fas fa-fw fa-file-csv"></i> Template</a>
 				</div>
 			</div>
 			<small class="text-danger">Max File Size 1024KB / 1MB</small>
