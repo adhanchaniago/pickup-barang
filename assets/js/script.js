@@ -70,7 +70,33 @@ $(function() {
             let el          = $(this).parents('.penerima');
             el[0].outerHTML    = '';
             disabledSubmit();
-        })
+        });
+
+        $('body').on('submit','form',function(e) {
+            if ($('[type=file]').val() != '') {
+                var required    = $('.pengirim .required');
+            }else{
+                var required    = $('.required');
+            }
+            var submit      = true;
+            $('.cust-alert').html('');
+            $.each(required,function(key,elemen) {
+                if ($(elemen).val() == '') {
+                    submit      = false;
+                    var name    = $(elemen).attr('name').replace('[]','').replace('_',' ');
+                    var msg     = `${name} is required.`;
+                    var message     = $('<small class="text-danger cust-alert">').text(msg);
+                    if ($(elemen).hasClass('select2-hidden-accessible')) {
+                        $(elemen).parent().find('.select2').after(message);
+                    }else{
+                        $(elemen).after(message);
+                    }
+                }
+            })
+            if (!submit) {
+                e.preventDefault();
+            }
+        });
 
         $('[type=submit]').on('dblclick',function(e) {
             e.preventDefault();

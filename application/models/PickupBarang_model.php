@@ -9,6 +9,7 @@ class PickupBarang_model extends CI_Model {
 		$this->load->model('Main_model', 'mm');
 		$this->load->model('Pengirim_model','pengirim');
 		$this->load->model('Penerima_model','penerima');
+		$this->load->model('JenisLayanan_model','jenis_layanan');
 	}
 
 	public function _setDatatable()
@@ -195,7 +196,13 @@ class PickupBarang_model extends CI_Model {
 
 		$data 		= [];
 		for ($i=0; $i < count($this->input->post('nama_penerima')); $i++) { 
-
+			$nama_penerima 		= $this->input->post('nama_penerima')[$i];
+			$alamat_penerima 	= $this->input->post('alamat_penerima')[$i];
+			$jumlah_barang 		= $this->input->post('jumlah_barang')[$i];
+			$id_jenis_layanan 	= $this->input->post('jenis_layanan')[$i];
+			if (empty($nama_penerima) || empty($$alamat_penerima) || empty($jumlah_barang) || empty($layanan)) {
+				continue;
+			}
 			// penerima
 			$penerima 			= $this->penerima->searchPenerima($i);
 			if ($penerima) {
@@ -209,6 +216,7 @@ class PickupBarang_model extends CI_Model {
 			$jumlah_barang 		= $this->input->post('jumlah_barang')[$i];
 
 			// pickup
+			$pickup 						= [];
 			$pickup["no_resi"]				= NULL;
 			$pickup["id_pengirim"]			= $id_pengirim;
 			$pickup["id_penerima"]			= $id_penerima;
@@ -224,16 +232,96 @@ class PickupBarang_model extends CI_Model {
 		if (!isset($_SESSION['id_user'])) {
 			$this->session->set_userdata(['pelanggan' => '1']);
 		}
-		$this->db->insert_batch('pickup_barang', $data);
+
+		if (!empty($_FILES["file"]["name"])) {
+			$config['upload_path'] 		= './assets/excel/';
+			$config['allowed_types'] 	= 'xls|xlsx|csv';
+			$config['max_size']  		= '1024';
+			$config['encrypt_name']  	= true;
+			
+			$this->load->library('upload', $config);
+			
+			if ( ! $this->upload->do_upload('file')){
+				$this->session->set_flashdata('message-success',  $this->upload->display_errors());
+			}
+			else{
+				$data_upload 		= $this->upload->data('file_name');
+				$explode 			= explode('.', $data_upload);
+				$extension 			= end($explode);
+
+				if (strtolower($extension) == 'csv') {
+					$excelreader 	= PHPExcel_IOFactory::createReader("CSV");
+				}else{
+					$excelreader 	= PHPExcel_IOFactory::createReader('Excel2007');
+				}
+				$loadexcel			= $excelreader->load('assets/excel/'.$data_upload);
+				$sheet 			    = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
+				$numrow 			= 0;
+				$failed 			= 0;
+
+				foreach($sheet as $row){
+					if($numrow > 0){
+
+						$nama_penerima 		  			= $row["A"];
+						$no_wa_penerima	  				= $row["B"];
+						$alamat_penerima   				= $row["C"];
+						$nama_barang   					= $row["D"];
+						$jumlah_barang 					= $row["E"];
+						$layanan 	  					= $row["F"];
+						echo "<pre>";
+
+						if (empty($nama_penerima) || empty($alamat_penerima) || empty($jumlah_barang) || empty($layanan)) {
+							continue;
+							$failed++;
+						}
+
+						$penerima 						= $this->penerima->getPenerimaByField($nama_penerima,$no_wa_penerima,$alamat_penerima);
+						$id_penerima 					= $penerima['id_penerima'];
+
+						$jenis_layanan 					= $this->jenis_layanan->getJenisLayananBySingkatan($layanan);
+						$id_jenis_layanan 				= $jenis_layanan['id_jenis_layanan'];
+
+						$pickup 						= [];
+						$pickup["no_resi"]				= NULL;
+						$pickup["id_pengirim"]			= $id_pengirim;
+						$pickup["id_penerima"]			= $id_penerima;
+						$pickup["id_jenis_layanan"]		= $id_jenis_layanan;
+						$pickup["nama_barang"]			= $nama_barang;
+						$pickup["jumlah_barang"]		= $jumlah_barang;
+						$pickup["tanggal_pemesanan"]	= date('Y-m-d H:i:s');
+						$pickup["id_status"]			= 1;
+						$data[]							= $pickup;
+					}
+					$numrow++;
+				}
+			}
+		}
+		$failed 	= true;
+		if (count($data)) {
+			if ($this->db->insert_batch('pickup_barang', $data)) {
+				$failed 	= false;
+			}
+		}
 		if ($this->session->userdata('pelanggan') == '1') {
-			$this->session->set_flashdata('message-success', 'Pelanggan ' . $nama_pengirim . ' berhasil menambahkan pesanan untuk kami kirim. Tunggu kurir kami untuk mengambil barang Anda. Terima Kasih :D');
-			$this->mm->createLog('Pelanggan ' . $nama_pengirim . ' berhasil menambahkan pesanan ', NULL);
-			$this->session->unset_userdata('pelanggan');
-			redirect('auth');
+			if ($failed) {
+				$this->session->set_flashdata('message-failed', 'Pelanggan ' . $nama_pengirim . ' gagal menambahkan pesanan');
+				$this->session->unset_userdata('pelanggan');
+				redirect('auth');
+			}else{
+				$this->session->set_flashdata('message-success', 'Pelanggan ' . $nama_pengirim . ' berhasil menambahkan pesanan untuk kami kirim. Tunggu kurir kami untuk mengambil barang Anda. Terima Kasih :D');
+				$this->mm->createLog('Pelanggan ' . $nama_pengirim . ' berhasil menambahkan pesanan ', NULL);
+				$this->session->unset_userdata('pelanggan');
+				redirect('auth');
+			}
 		} else {
-			$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil menambahkan pesanan ' . $nama_pengirim);
-			$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil menambahkan pesanan ' . $nama_pengirim, $dataUser['id_user']);
-			redirect('pickupBarang');
+			if ($failed) {
+				$this->session->set_flashdata('message-failed', 'Pengguna ' . $dataUser['username'] . ' gagal menambahkan pesanan ' . $nama_pengirim);
+				redirect('pickupBarang');
+			}else{
+				$this->session->set_flashdata('message-success', 'Pengguna ' . $dataUser['username'] . ' berhasil menambahkan pesanan ' . $nama_pengirim);
+				$this->mm->createLog('Pengguna ' . $dataUser['username'] . ' berhasil menambahkan pesanan ' . $nama_pengirim, $dataUser['id_user']);
+				redirect('pickupBarang');
+			}
 		}
 	}
 

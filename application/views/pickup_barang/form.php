@@ -20,22 +20,22 @@
   </div>
 </nav>
 
-<form class="container bg-white my-3 shadow-sm py-2" action="" method="post">
+<form class="container bg-white my-3 shadow-sm py-2" action="" method="post" enctype="multipart/form-data">
 	<h5>Formulir Pickup Barang</h5>
 	<div class="mt-2 border">
 		<h6 class="m-2">Pengirim</h6>
-		<table class="table">
+		<table class="table pengirim">
 			<tr>
 				<td width="30%">Nama Pengirim</td>
 				<td>
-					<input type="text" class="form-control" name="nama_pengirim" placeholder="Nama Pengirim" required="required" value="<?= $pengirim["nama_pengirim"]; ?>">
+					<input type="text" class="form-control required" name="nama_pengirim" placeholder="Nama Pengirim" value="<?= $pengirim["nama_pengirim"]; ?>">
             		<?= form_error('nama_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
 				</td>
 			</tr>
 			<tr>
 				<td>No Whatsapp Pengirim</td>
 				<td>
-					<input type="text" class="form-control" name="no_wa_pengirim" placeholder="+62" required="required" value="<?= $pengirim["no_wa_pengirim"]; ?>">
+					<input type="text" class="form-control required" name="no_wa_pengirim" placeholder="+62" value="<?= $pengirim["no_wa_pengirim"]; ?>">
             		<?= form_error('no_wa_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
 				</td>
 			</tr>
@@ -43,7 +43,7 @@
 				<td>Alamat Pengirim</td>
 				<td>
 					<div class="form-group">
-						<input type="text" class="form-control" name="alamat_pengirim" placeholder="Alamat pengirim sertakan nama kecamatan, kota, provinsi dan kode pos" required="required" value="<?= $pengirim["alamat_pengirim"]; ?>">
+						<input type="text" class="form-control required" name="alamat_pengirim" placeholder="Alamat pengirim sertakan nama kecamatan, kota, provinsi dan kode pos" value="<?= $pengirim["alamat_pengirim"]; ?>">
            		 		<?= form_error('alamat_pengirim', '<small class="form-text text-danger">', '</small>'); ?>
 					</div>
 				</td>
@@ -59,7 +59,7 @@
 				<tr>
 					<td width="30%">Nama Penerima</td>
 					<td>
-						<input type="text" value="<?= set_value('nama_penerima[]'); ?>" name="nama_penerima[]" class="form-control" placeholder="Nama Penerima" required="required">
+						<input type="text" value="<?= set_value('nama_penerima[]'); ?>" name="nama_penerima[]" class="form-control required" placeholder="Nama Penerima">
            		 		<?= form_error('nama_penerima[]', '<small class="form-text text-danger">', '</small>'); ?>
 					</td>
 				</tr>
@@ -73,7 +73,7 @@
 					<td>Alamat Penerima</td>
 					<td>
 						<div class="form-group">
-							<input type="text" value="<?= set_value('alamat_penerima[]'); ?>" name="alamat_penerima[]" class="form-control" placeholder="Alamat penerima sertakan nama kecamatan, kota, provinsi dan kode pos" required="required">
+							<input type="text" value="<?= set_value('alamat_penerima[]'); ?>" name="alamat_penerima[]" class="form-control required" placeholder="Alamat penerima sertakan nama kecamatan, kota, provinsi dan kode pos">
            		 			<?= form_error('alamat_penerima[]', '<small class="form-text text-danger">', '</small>'); ?>
 						</div>
 					</td>
@@ -90,7 +90,7 @@
 					<td>Jumlah Barang</td>
 					<td>
 						<div class="form-group">
-							<input type="number" min="1" value="<?= set_value('jumlah_barang[]'); ?>" name="jumlah_barang[]" class="form-control" placeholder="Masukkan Jumlah Barang" required="required">
+							<input type="number" min="1" value="<?= set_value('jumlah_barang[]'); ?>" name="jumlah_barang[]" class="form-control required" placeholder="Masukkan Jumlah Barang">
            		 			<?= form_error('jumlah_barang[]', '<small class="form-text text-danger">', '</small>'); ?>
 						</div>
 					</td>
@@ -98,7 +98,7 @@
 				<tr>
 					<td>Layanan</td>
 					<td>
-						<select name="jenis_layanan[]" class="form-control  jenis_layanan" required="required">
+						<select name="jenis_layanan[]" class="form-control required jenis_layanan">
 							<option value="">-- Pilih --</option>
 							<?php foreach ($jenis_layanan as $key): ?>
 								<option value="<?= $key["id_jenis_layanan"]; ?>"><?= $key["jenis_layanan"]; ?></option>
@@ -112,9 +112,21 @@
 	</div>
 	<a class="btn btn-success btn-sm mt-2 tambahPenerima" href="#"><i class="fas fa-fw fa-plus "></i> Tambah Penerima</a>
 
+	<div class="upload py-5">
+		<div class="form-group">
+			<label for="file">Import CSV/Excel</label>
+			<div class="input-group">
+				<input type="file" class="form-control" name="file" id="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+				<div class="input-group-btn">
+					<a class="btn btn-primary" href="#"><i class="fas fa-fw fa-file-csv"></i> Template</a>
+				</div>
+			</div>
+			<small class="text-danger">Max File Size 1024KB / 1MB</small>
+		</div>
+	</div>
+
 	<div class="text-right mt-3 button">
 		<a class="btn btn-secondary btn-sm" href="#" onclick="history.go(-1)"><i class="fas fa-fw fa-arrow-left "></i> Kembali</a>
 		<button class="btn btn-primary btn-sm" type="submit" name="submit" value="1"><i class="fas fa-fw fa-paper-plane "></i> Simpan</button>
 	</div>
 </form>
-

@@ -90,6 +90,13 @@ class JenisLayanan_model extends CI_Model {
 		return $this->db->get()->row_array();
 	}
 
+	public function getJenisLayananBySingkatan($prefix)
+	{
+		$this->_setDatatable();
+		$this->db->like('jenis_layanan', $prefix,'after');
+		return $this->db->get()->row_array();
+	}
+
 	public function addJenisLayanan()
 	{
 		$dataUser 					= $this->mm->getDataUser();

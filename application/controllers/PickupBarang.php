@@ -156,6 +156,7 @@ class PickupBarang extends CI_Controller {
 
 	public function form()
 	{
+		require_once APPPATH.'/third_party/PHPExcel/PHPExcel.php';
 		$pengirim 							= $this->pengirim->getPengirimByIp();
 		$dataUser 							= $this->mm->getDataUser();
 		if (empty($pengirim) || $dataUser !== NULL) {
@@ -170,10 +171,11 @@ class PickupBarang extends CI_Controller {
 		$this->form_validation->set_rules('nama_pengirim', 'Nama Pengirim', 'required|trim');
 		$this->form_validation->set_rules('no_wa_pengirim', 'No. Whatsapp Pengirim', 'required|trim');
 		$this->form_validation->set_rules('alamat_pengirim', 'Alamat Pengirim', 'required|trim');
-		$this->form_validation->set_rules('nama_penerima[]', 'Nama Penerima', 'required|trim');
+
+		//$this->form_validation->set_rules('nama_penerima[]', 'Nama Penerima', 'required|trim');
 		//$this->form_validation->set_rules('no_wa_penerima[]', 'No. Whatsapp Penerima', 'required|trim');
-		$this->form_validation->set_rules('alamat_penerima[]', 'Alamat Penerima', 'required|trim');
-		$this->form_validation->set_rules('jenis_layanan[]', 'Jenis Layanan', 'required|trim');
+		//$this->form_validation->set_rules('alamat_penerima[]', 'Alamat Penerima', 'required|trim');
+		//$this->form_validation->set_rules('jenis_layanan[]', 'Jenis Layanan', 'required|trim');
 		if ($this->form_validation->run() == false) {
 			$this->layout->view_auth('pickup_barang/form',$data);
 		} else {
