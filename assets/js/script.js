@@ -216,12 +216,19 @@ $(function() {
                     for (var i = 0; i < response[0].length; i++) {
                         html    += response[0][i];
                     }
+                    $('#total').html(response[1] + response[2]);
                     if (response[1] == 0) {
                         $('[name=btnPending]').attr('disabled','disabled');
                     }
                     let jml = $('input:checked').length;
+                    if (response[2] == 0) {
+                        $('#btnSelectAll').attr('disabled','disabled');
+                    }
                     if (response[2] == 0 || jml == 0) {
                         $('[name=btnPickup]').attr('disabled','disabled');
+                    }
+                    if (response[2] > 0) {
+                        $('[name=btnPickup] #angka').html('0 / '+ response[2]);
                     }
                     if (reset == 0) {
                         $('#content').append(html);
@@ -249,6 +256,24 @@ $(function() {
         	$(this).addClass('disabled');
         	$(this).parents('form').submit();
         })
+
+        $('body').on('click','#btnSelectAll',function(e) {
+            e.preventDefault();
+            if ($('[type=checkbox]:checked').length == 0) {
+                $('[type=checkbox]').prop('checked',true);
+            }else{
+                $('[type=checkbox]').prop('checked',false);
+            }
+            let jml = $('input:checked').length;
+            let all = $('[type=checkbox]').length;
+            if (jml > 0) {
+                $('[name=btnPickup]').removeAttr('disabled');
+            }else{
+                $('[name=btnPickup]').attr('disabled','disabled');
+            }
+            $('#angka').html(jml+' / '+all);
+            //$('[type=checkbox]').click();
+        });
 
         $('body').on('click','#btnPickup',function() {
         	$('#preloaderSubmit').show();

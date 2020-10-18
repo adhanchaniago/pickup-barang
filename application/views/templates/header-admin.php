@@ -39,14 +39,19 @@
     
     <title><?= $title; ?></title>
   </head>
-  <body class="hold-transition sidebar-mini layout-fixed">
+  <body class="hold-transition <?= $this->session->userdata('id_jabatan') == 1 ? 'sidebar-mini' : 'sidebar-collapse'  ?> layout-fixed">
+    
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
           <!-- Left navbar links -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+              <?php if ($this->session->userdata('id_jabatan') == 1): ?>
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+              <?php else: ?>
+                <a class="nav-link" href="<?= base_url('pickupBarang/kurir') ?>" role="button">Beranda</a>
+              <?php endif ?>
             </li>
           </ul>
 

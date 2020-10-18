@@ -12,10 +12,14 @@ class Admin extends CI_Controller {
 		$this->load->model('Pesanan_model', 'pesm');
 		$this->load->model('Status_model', 'status');
 		$this->mm->check_status_login();
+		
 	}
 
 	public function index()
 	{
+		if ($this->session->userdata('id_jabatan') == 2) {
+			redirect('pickupBarang/kurir','refresh');
+		}
 		$data['dataUser'] 			= $this->mm->getDataUser();
 		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['id_status'])) {
 			$dari_tanggal			= $_GET["dari_tanggal"];
@@ -55,6 +59,9 @@ class Admin extends CI_Controller {
 
 	public function detail()
 	{	
+		if ($this->session->userdata('id_jabatan') == 2) {
+			redirect('pickupBarang/kurir','refresh');
+		}
 		if (isset($_GET['dari_tanggal']) AND isset($_GET['sampai_tanggal']) AND isset($_GET['id_status']) AND isset($_GET['id_pengirim'])) {
 			$data['dataUser'] 			= $this->mm->getDataUser();
 			$dari_tanggal				= $this->input->get('dari_tanggal');
